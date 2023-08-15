@@ -1,8 +1,6 @@
 # ui
-
 The TypeScript code powering the TEDective UI
 
-# TEDective UI
 - Next.js (https://github.com/vercel/next.js)
 - React-force-graph (https://github.com/vasturiano/react-force-graph)
 - Leva GUI (https://github.com/pmndrs/leva)
