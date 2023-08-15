@@ -1,0 +1,17 @@
+/* Graph component */
+.graph {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+
+.graphWrapper, .graphWrapper .scene-container canvas{
+  /*mix-blend-mode: luminosity;*/
+  width: 100vw;
+  height: 100vh;
+}
+
+.force-graph-container {
+  width: 100vw;
+  height: 100vh;
+}

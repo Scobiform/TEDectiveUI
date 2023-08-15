@@ -1,0 +1,16 @@
+/* Search components */
+.Search{
+    z-index: 1001;
+    position: fixed;
+    bottom: 0;
+}
+
+.Search input[type=text]{
+    width: 100vw;
+    border: 0;
+    color: white;
+    outline: none;
+    padding:0.14rem;
+    background-color: var(--tertiary);
+    opacity: var(--opacity);
+}

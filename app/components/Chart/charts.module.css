@@ -1,0 +1,20 @@
+/* Doughnut chart */
+.doughnutChart{
+	color: white;
+	padding: 0.42rem;
+	margin: 0.42rem 0 0 0.42rem;
+}
+
+/* Bar chart */
+.barChart{
+	color: white;
+	padding: 0.42rem;
+	margin: 0.42rem 0 0 0.42rem;
+}
+
+/* RadarChart */
+.radarChart{
+	color: white;
+	padding: 0.42rem;
+	margin: 0.42rem 0 0 0.42rem;
+}

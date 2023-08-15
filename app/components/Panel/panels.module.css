@@ -1,0 +1,181 @@
+
+.nodePanel {
+	position: absolute;
+	top: 2.8rem;
+	left: 0;
+}
+
+.nodePanelMenuButton{
+	cursor: pointer;
+    color: white;
+    /* margin: 1vw; */
+    border: none;
+    font-size: 4.2vh;
+    display: flex;
+    background: none;
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+}
+
+.nodePanelMenuButton svg{
+	margin-top: 0.42rem;
+	margin-left: 0.42rem;
+	color: var(--pigment-green);
+}
+
+.nodePanelContent{
+	min-width: 300px;
+	overflow-x: hidden;
+	padding: 0.42rem;
+	font-size: 1em;
+	padding-bottom: 7vh;
+	opacity: var(--opacity);
+	min-height: 320px;
+}
+
+.nodePanelContent li{
+	list-style-type: none;
+	font-size: 0.42em;
+	margin-bottom: 0.14rem;
+}
+
+.nodePanelContent h1{
+	font-size: 0.91em;
+	margin-bottom: 0.42rem;
+}
+
+.nodePanelContent h2{
+	font-size: 0.84em;
+	margin-bottom: 0.42rem;
+}
+
+.nodePanelContent h3{
+	font-size: 0.77em;
+	margin-bottom: 0.42rem;
+}
+
+.nodePanelContent h4{
+	font-size: 0.70em;
+	margin-bottom: 0.42rem;
+}
+
+/* Panel view */
+.panelView {
+	width: 28vw;
+	min-width: 300px;
+	height: var(--windowHeight);
+	overflow-y: scroll;
+	overflow-x: hidden;
+    transition: height 250ms ease 0s;
+    color: var(--leva-colors-highlight3);
+	opacity: var(--opacity);
+	margin: 4.2px;
+}
+
+/* Top Panel */
+.topPanel{
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+}
+
+/* Main Menu */
+.nodePanelSettingsButton{
+	cursor: pointer;
+	color: violet;
+	border: none;
+	font-size: 4.2vh;
+	display: inline-grid;
+}
+
+
+/* Settings Panel */
+.settingsPanel{
+	width:28vw;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 1001;
+}
+
+
+@media (prefers-color-scheme: light) {
+
+	.panelView{
+		background: var(--primary);
+	}
+
+	.nodePanelContent{
+		color: var(--teritaryInvert);
+		opacity: var(--opacity);
+	}
+
+	.nodePanelContent button{
+		width: 100%;
+		color: var(--primary);
+		background-color: var(--tertiary);
+		border: 1px solid rgba(0,0,0,0.14);
+		cursor: pointer;
+	}
+
+	.nodePanelContent button:hover{
+		width: 100%;
+		color: var(--secondary);
+		background-color: var(--teritary);
+	}
+
+	.nodePanelContent hr{
+		color: white;
+		margin-bottom: 0.77rem;
+		border: rgba(0,0,0,0.14) 1px solid;
+	}
+
+	.nodePanelContent h2{
+		font-size: 0.84em;
+		margin-bottom: 0.42rem;
+		background: var(--cerulean);
+		color: var(--primary);
+		padding: 0.42em;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+
+	.panelView{
+		background: var(--tertiary);
+	}
+
+	.nodePanelContent{
+		color: var(--primary);
+		opacity: var(--opacity);
+	}
+
+	.nodePanelContent button{
+		width: 100%;
+		color: var(--primary);
+		background-color: var(--tertiary);
+		border: 1px solid rgba(255,255,255,0.14);
+		cursor: pointer;
+	}
+
+	.nodePanelContent button:hover{
+		width: 100%;
+		color: var(--primary);
+		background-color: var(--secondary);
+	}
+
+	.nodePanelContent hr{
+		color: white;
+		margin-bottom: 0.77rem;
+		border: rgba(255,255,255,0.14) 1px solid;
+	}
+
+	.nodePanelContent h2{
+		font-size: 0.84em;
+		margin-bottom: 0.42rem;
+		background: var(--cerulean);
+		color: var(--primary);
+		padding: 0.42em;
+	}
+}
