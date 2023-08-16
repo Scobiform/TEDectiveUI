@@ -80,6 +80,7 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     document.documentElement.style.setProperty('--windowWidth', newWidth);
     document.documentElement.style.setProperty('--windowHeight', newHeight);
 
+    // TODO: Make use of css var variables for this region
     // T
     const guiPanel = Array.from(
         document.getElementsByClassName('leva-c-hBtFDW') as HTMLCollectionOf<HTMLElement>,
@@ -134,6 +135,7 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     
     // *****************************************************************************/
     // Site Colors
+    // TODO: Move to helpers components
     function hexToRgb(hex: string) {
         // @ts-ignore
         const bigint = parseInt(hex.replace('#', ''), 16);
