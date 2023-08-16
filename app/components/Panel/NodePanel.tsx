@@ -204,7 +204,7 @@ const NodePanel = ({previewNode}: NodePanelProps) => {
                   <p>base.contactPoint</p>
                   
                   <h3>Statistics</h3>
-                  <p>Information about the base Organization based on the perspective "Buyer" / "Seller"</p>
+                  <p>Information about the base Organization based on the perspective Buyer / Seller</p>
 
                   <h3>Charts displaying organization statistics</h3>
                   <DoughnutChart data={doughnutData}/>
