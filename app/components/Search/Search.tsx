@@ -4,7 +4,7 @@ import styles from './search.module.css'
 //react-instantsearch-hooks-web
 //https://github.com/algolia/instantsearch
 
-
+// TODO: Rebuild the search component
 export interface SearchBoxProps {
     setSearchedOrg: any
 }
@@ -27,7 +27,6 @@ export interface SearchHitProps {
 export interface SearchbarProps {
     setSearchedOrg: any
 }
-
 
 const Search = () => {
     return (

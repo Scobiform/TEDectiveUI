@@ -1,9 +1,9 @@
 'use client'
 import styles from './page.module.css'
-import Header from './components/Header';
+import Header from './components/Static/Header';
 import GraphWrapper from './components/Graph/GraphWrapper';
 import OrganizationSearch from './components/Search/Search';
-import LoadingSpinner from './components/LoadingSpinner';
+import LoadingSpinner from './components/Static/LoadingSpinner';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
