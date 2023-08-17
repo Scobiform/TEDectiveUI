@@ -4,10 +4,6 @@ import Chart from 'chart.js/auto';
 import { getRelativePosition } from 'chart.js/helpers';
 import ts from "typescript";
 
-
-/****************************************************************************************/
-// Line chart component
-
 const LineChart = (props: any) => {
     
     useEffect(() => {
@@ -35,4 +31,5 @@ const LineChart = (props: any) => {
         </>
     )
 }
+
 export default LineChart;

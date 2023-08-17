@@ -1,13 +1,14 @@
 import './globals.css'
 import React from 'react';
 import type { Metadata } from 'next'
+// TODO: Move a free and open source font to public folder
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'TEDectiveUI',
-  description: 'using react-force-graph and next.js',
+  description: 'TEDective makes European public procurement data explorable for non-experts',
 }
 
 export default function RootLayout({

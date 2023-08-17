@@ -73,33 +73,6 @@
 	margin: 4.2px;
 }
 
-/* Top Panel */
-.topPanel{
-	display: flex;
-	justify-content: space-between;
-	flex-direction: column;
-}
-
-/* Main Menu */
-.nodePanelSettingsButton{
-	cursor: pointer;
-	color: violet;
-	border: none;
-	font-size: 4.2vh;
-	display: inline-grid;
-}
-
-
-/* Settings Panel */
-.settingsPanel{
-	width:28vw;
-	position: absolute;
-	right: 0;
-	top: 0;
-	z-index: 1001;
-}
-
-
 @media (prefers-color-scheme: light) {
 
 	.panelView{

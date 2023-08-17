@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import styles from './charts.module.css'
 import Chart from 'chart.js/auto';
 
-/****************************************************************************************/
-// Doughnut chart component
 const DoughnutChart = (props: any) => {
-    
+
     useEffect(() => {
         //@ts-ignore
         let ctx: any = document.getElementById('doughnutChart').getContext('2d');
@@ -35,4 +33,5 @@ const DoughnutChart = (props: any) => {
         </>
     )
 }
+
 export default DoughnutChart;

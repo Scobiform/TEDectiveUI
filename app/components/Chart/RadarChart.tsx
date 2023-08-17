@@ -4,9 +4,6 @@ import { useEffect, useState } from "react";
 import styles from './charts.module.css'
 import Chart from 'chart.js/auto';
 
-/****************************************************************************************/
-// RadarChart component
-// Show a radar chart with the given data
 const RadarChart = (props: any) => {
     useEffect(() => {
         // @ts-ignore

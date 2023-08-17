@@ -15,3 +15,5 @@ The TypeScript code powering the TEDective UI
 - docker build -t tedectiveui .
 - docker run -p 3000:3000 tedectiveui
 
+
+

@@ -3,9 +3,6 @@ import styles from './charts.module.css'
 import Chart from 'chart.js/auto';
 import { getRelativePosition } from 'chart.js/helpers';
 
-/****************************************************************************************/
-// BarChart component
-
 const BarChart = (props: any) => {  
     useEffect(() => {
         //@ts-ignore
