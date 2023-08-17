@@ -13,7 +13,6 @@ import { initialFilter, initialPhysics, initialVisuals } from './config'
 import styles from './graph.module.css'
 import { useWindowSize } from "@react-hook/window-size";
 
-// Interface for graph data
 export interface GraphProps {
   graphData: GraphData | null; 
   physics: typeof initialPhysics
