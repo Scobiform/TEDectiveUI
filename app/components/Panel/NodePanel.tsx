@@ -8,6 +8,8 @@ import { GraphData, NodeObject } from "react-force-graph-2d";
 // Interface for node panel props
 export interface NodePanelProps {
   previewNode: NodeObject | null | undefined;
+  isOpen: boolean;
+  setOpen: any;
 }
 
 // Radar chart mockup data
@@ -98,10 +100,11 @@ const lineChartData = {
 };
 
 // NodePanel component with NodePanelProps **********************************************/
-const NodePanel = ({previewNode}: NodePanelProps) => {
-  const [isOpen, setOpen] = useState(false);
+const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
+ 
   const toggleMenu = () => setOpen(!isOpen);
 
+  //console.log(isOpen);
   console.log(previewNode);
 
   // UseEffect hook
