@@ -3,7 +3,7 @@
 
 [![License](https://img.shields.io/badge/License-AGPL--3.0--or--later-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.html)
 
-This project houses the TypeScript code that powers the TEDective UI, an interactive visualization tool for exploring graph data fetched from the [TEDective API](https://git.fsfe.org/TEDective/api/). The UI leverages the capabilities of various libraries to create a compelling user experience.
+This project houses the TypeScript code that powers the TEDective UI, an interactive visualization tool for exploring graph data fetched from the [TEDective API](https://git.fsfe.org/TEDective/api/). The UI leverages the capabilities of various libraries to create a compelling user experience. Part of [TEDective Project](https://tedective.org).
 
 This project is implemented using [Next.js](https://github.com/vercel/next.js), [react-force-graph](https://github.com/vasturiano/react-force-graph), [d3-force](https://github.com/d3/d3-force), [Leva GUI](https://github.com/pmndrs/leva), and [Chart.js](https://github.com/chartjs/Chart.js).
 
