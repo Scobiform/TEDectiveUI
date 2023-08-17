@@ -14,6 +14,8 @@ This project is implemented using [Next.js](https://github.com/vercel/next.js), 
 - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Install with Docker](#install-with-docker)
+- [Usage](#usage)
+- [Maintainer](#maintainer)
 - [Contributing](#contributing)
 - [License](#license)
 
