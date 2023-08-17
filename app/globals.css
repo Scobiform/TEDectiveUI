@@ -121,6 +121,46 @@
   }
 }
 
+@media (prefers-color-scheme: light) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+
+    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
+    --secondary-glow: linear-gradient(
+      to bottom right,
+      rgba(1, 65, 255, 0),
+      rgba(1, 65, 255, 0),
+      rgba(1, 65, 255, 0.3)
+    );
+
+    --tile-start-rgb: 2, 13, 46;
+    --tile-end-rgb: 2, 5, 19;
+    --tile-border: conic-gradient(
+      #ffffff80,
+      #ffffff40,
+      #ffffff30,
+      #ffffff20,
+      #ffffff10,
+      #ffffff10,
+      #ffffff80
+    );
+
+    --callout-rgb: 20, 20, 20;
+    --callout-border-rgb: 108, 108, 108;
+    --card-rgb: 100, 100, 100;
+    --card-border-rgb: 200, 200, 200;
+
+    --primary: rgba(8, 8, 8, 1);
+    --primaryInvert: rgba(8, 8, 8, 1);
+    --secondary: rgba(0, 165, 53, 1);
+    --tertiary: rgba(255, 255, 255, 1);;
+    --tertiaryInvert: rgb(0, 0, 0, 1);
+    --opacity: 0.91;
+  }
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -178,6 +218,17 @@ main {
     color-scheme: dark;
   }
 
+  /* Header component*/
+  header{
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    width: 100vw;
+    height: 2.8rem;
+    background-color: var(--tertiary);
+    opacity: var(--opacity);
+  }
+
   header svg {
     fill: rgb(var(--primary));
     height: 1.65rem;
@@ -229,6 +280,17 @@ main {
     color-scheme: light;
     color: var(--primary);
   }
+  /* Header component*/
+  header{
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    width: 100vw;
+    height: 2.8rem;
+    background-color: var(--tertiary);
+    opacity: var(--opacity);
+  }
+
   header svg {
     fill: rgb(var(--primary));
     height: 1.65rem;
@@ -239,12 +301,12 @@ main {
   }
 
   p,h1,h2,h3,h4,h5,h6{
-    color: var(--tertiary);
+    color: var(--primary);
   }
 
   li{
     margin-bottom: 0.42em;
-    color: var(--tertiary);
+    color: var(--primary);
   }
 
   /* Scrollbars */
@@ -274,17 +336,6 @@ main {
   background-color: var(--tertiary);
 }
  
-}
-
-/* Header component*/
-header{
-  position: fixed;
-  top: 0;
-  z-index: 999;
-  width: 100vw;
-  height: 2.8rem;
-  background-color: var(--tertiary);
-  opacity: var(--opacity);
 }
 
 /* Loading component */

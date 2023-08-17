@@ -50,9 +50,6 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
         linkDirectionalParticleWidth: { value: visuals.linkDirectionalParticleWidth, min: 0, max: 42, step: 0.01, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticleWidth: v }) },
         mixBlendMode: { value: visuals.blendMode, options: ["normal","multiply","screen","overlay","darken","lighten","color-dodge","color-burn","hard-light","soft-light","difference","exclusion","hue","saturation","color","luminosity"], onChange: (v) => setVisualsCallback({ ...visuals, blendMode: v }) },
         bodyImageUrl: { value: visuals.bodyImageUrl, onChange: (v) => setVisualsCallback({ ...visuals, bodyImageUrl: v }) },
-        primaryColor: { value: visuals.primaryColor, onChange: (v) => setVisualsCallback({ ...visuals, primaryColor: v })},
-        secondaryColor: { value: visuals.secondaryColor, onChange: (v) => setVisualsCallback({ ...visuals, secondaryColor: v }), transient: false },
-        tertiaryColor: { value: visuals.tertiaryColor, onChange: (v) => setVisualsCallback({ ...visuals, tertiaryColor: v }), transient: false },
         opacity: { value: visuals.opacity, min: 0, max: 1, step: 0.01, onChange: (v) => setVisualsCallback({ ...visuals, opacity: v }) },
         },
         { collapsed: true},
@@ -106,11 +103,6 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
         gui.style.opacity = 'var(--opacity)';
     });
 
-    guiPanel.forEach(gui => {
-        gui.style.background = 'var(--tertiary)';
-        gui.style.maxHeight = newHeight;
-    },);
-
     guiPanel1.forEach(gui => {
         gui.style.fontFamily = 'var(--font-mono)';
         gui.style.overflowY = 'scroll';
@@ -133,40 +125,6 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
         main.style.backgroundImage = `url(${visuals.bodyImageUrl})`;
     });
     
-    // *****************************************************************************/
-    // Site Colors
-    // TODO: Move to helpers components
-    function hexToRgb(hex: string) {
-        // @ts-ignore
-        const bigint = parseInt(hex.replace('#', ''), 16);
-        const r = (bigint >> 16) & 255;
-        const g = (bigint >> 8) & 255;
-        const b = bigint & 255;
-        return 'rgba('+ r + ','+ g + ','+ b + ',' + visuals.opacity.toString() + ')'; 
-    }
-    React.useMemo(() => {
-        if (typeof visuals.primaryColor === 'string') {
-        return hexToRgb(visuals.primaryColor)
-        }
-    }, [visuals.primaryColor]);
-    // Set Primary
-    document.documentElement.style.setProperty('--primary', visuals.primaryColor);
-    React.useMemo(() => {
-        if (typeof visuals.secondaryColor === 'string') {
-        return hexToRgb(visuals.secondaryColor)
-        }
-    }
-    , [visuals.secondaryColor]);
-    // Set Secondary
-    document.documentElement.style.setProperty('--secondary', visuals.secondaryColor);
-    React.useMemo(() => {
-        if (typeof visuals.tertiaryColor === 'string') {
-        return hexToRgb(visuals.tertiaryColor)
-        }
-    }
-    , [visuals.tertiaryColor]);
-    // Set Tertiary
-    document.documentElement.style.setProperty('--tertiary', visuals.tertiaryColor);
     // Set Opacity
     document.documentElement.style.setProperty('--opacity', visuals.opacity.toString());
     

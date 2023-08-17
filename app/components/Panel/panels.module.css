@@ -76,11 +76,11 @@
 @media (prefers-color-scheme: light) {
 
 	.panelView{
-		background: var(--primary);
+		background-color: var(--tertiary);
 	}
 
 	.nodePanelContent{
-		color: var(--teritaryInvert);
+		color: var(--primary);
 		opacity: var(--opacity);
 	}
 
@@ -108,7 +108,7 @@
 		font-size: 0.84em;
 		margin-bottom: 0.42rem;
 		background: var(--cerulean);
-		color: var(--primary);
+		color: var(--tertiary);
 		padding: 0.42em;
 	}
 }
