@@ -15,7 +15,7 @@ This project is implemented using [Next.js](https://github.com/vercel/next.js), 
   - [Installation](#installation)
   - [Install with Docker](#install-with-docker)
 - [Usage](#usage)
-- [Maintainer](#maintainer)
+- [Maintainers](#maintainers)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -59,7 +59,7 @@ For detailed instructions please refer to the [TEDective documentation](https://
 ## Usage
 :construction: TODO: (probably put the reference to documentation)
 
-## Maintainer
+## Maintainers
 @siemer
 
 ## Contributing
