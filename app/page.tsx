@@ -7,14 +7,19 @@ import LoadingSpinner from './components/Static/LoadingSpinner';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
+  
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
 
   // Releases per Buyer Graph
-  //let apiUrl = 'http://0.0.0.0:9000/latest/graphql/releases_per_buyer/1623e936-cdd6-522e-a5ed-54bce68301f2';
+  //let apiUrl = '/latest/graphql/releases_per_buyer/1623e936-cdd6-522e-a5ed-54bce68301f2';
   // Awards per Organization Graph
-  //let apiUrl = 'http://0.0.0.0:9000/latest/graphql/award_per_org/f7fef1d1-8088-59d0-baf1-2afa825458ad';
+  //let apiUrl = '/latest/graphql/award_per_org/f7fef1d1-8088-59d0-baf1-2afa825458ad';
   let apiUrl = 'initial.json';
+
+  // TODO: - Make own component for fetching data 
+  //       - fetch graph data based on search and dynamic routes
+  //       - fetch graph data based on  view perspective
 
   // Fetch json from API
   const [graphData, setGraphData] = useState({nodes: [], links: []});
