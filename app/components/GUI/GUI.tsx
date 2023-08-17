@@ -112,7 +112,7 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     },);
 
     guiPanel1.forEach(gui => {
-        gui.style.fontFamily = '__Inter_20951f';
+        gui.style.fontFamily = 'var(--font-mono)';
         gui.style.overflowY = 'scroll';
         gui.style.maxHeight = newHeight;
     });

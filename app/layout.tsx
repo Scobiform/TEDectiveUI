@@ -1,10 +1,6 @@
 import './globals.css'
 import React from 'react';
 import type { Metadata } from 'next'
-// TODO: Move a free and open source font to public folder
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'TEDectiveUI',
@@ -18,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
           {children}
       </body>
     </html>
