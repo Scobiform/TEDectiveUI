@@ -3,14 +3,24 @@
     z-index: 1001;
     position: fixed;
     bottom: 0;
+    display: flex;
+    width: 100vw;
+    opacity: var(--opacity);
 }
 
 .Search input[type=text]{
-    width: 100vw;
     border: 0;
+    width: 100%;
     color: white;
     outline: none;
-    padding:0.14rem;
+    padding:0.42rem;
     background-color: var(--tertiary);
-    opacity: var(--opacity);
+}
+
+.Search button{
+    border: 0;
+    background-color: var(--tertiary);
+    color: white;
+    padding: 0.21rem;
+    outline: none;
 }
