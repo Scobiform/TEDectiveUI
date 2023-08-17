@@ -2,11 +2,16 @@
 import styles from './page.module.css'
 import Header from './components/Static/Header';
 import GraphWrapper from './components/Graph/GraphWrapper';
-import OrganizationSearch from './components/Search/Search';
+import Search from './components/Search/Search';
 import LoadingSpinner from './components/Static/LoadingSpinner';
 import { useEffect, useState } from 'react';
 
-export default function Home() {
+interface SearchResult {
+  id: string;
+  name: string;
+}
+
+const Home: React.FC = () => {
 
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
@@ -34,6 +39,20 @@ export default function Home() {
     );
   }, []);
 
+  // Search state
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+
+  const handleSearch = async (query: string) => {
+    // Make an API request to fetch data based on the query
+    try {
+      const response = await fetch(`/api/search?q=${query}`);
+      const data: SearchResult[] = await response.json();
+      setSearchResults(data);
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -45,8 +64,15 @@ export default function Home() {
         {isLoading ? <LoadingSpinner /> : 
           <p>TEDective makes European public procurement data explorable for non-experts</p>}
         {/* Mock up search for now */}
-        <OrganizationSearch />
+        <Search onSearch={handleSearch} />
+        <ul>
+          {searchResults.map((result) => (
+            <li key={result.id}>{result.name}</li>
+          ))}
+        </ul>
       </main>
     </>
   )
 }
+
+export default Home;
