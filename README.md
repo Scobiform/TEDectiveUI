@@ -60,7 +60,7 @@ For detailed instructions please refer to the [TEDective documentation](https://
 :construction: TODO: (probably put the reference to documentation)
 
 ## Maintainer
-[@siemer]https://git.fsfe.org/siemer
+@siemer
 
 ## Contributing
 PRs are accepted.
