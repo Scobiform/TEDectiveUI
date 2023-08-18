@@ -143,6 +143,7 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
       <div className={styles.nodePanel}>
           <button
           onClick={toggleMenu}
+          className={styles.nodePanelMenuButton}
           >
           <IconSVG />
           </button>
