@@ -5,14 +5,17 @@ import styles from './search.module.css'
 interface SearchResult {
   id: string;
   name: string;
+  apiPath: string;
 }
 
 interface SearchProps {
   id: string;
   setId: any;
+  apiPath: string;
+  setApiPath: any;
 }
 
-const Search = ({id, setId}: SearchProps) => {
+const Search = ({id, setId, apiPath, setApiPath}: SearchProps) => {
 
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
@@ -40,6 +43,7 @@ const Search = ({id, setId}: SearchProps) => {
 
   const handleClick = (result: SearchResult) => {
     setId(result.id);
+    setApiPath(result.apiPath);
   };
 
   return (
