@@ -5,7 +5,7 @@
 	left: 0;
 }
 
-.nodePanelMenuButton{
+.nodePanel button{
 	cursor: pointer;
     color: white;
     /* margin: 1vw; */
@@ -16,6 +16,7 @@
 	position: fixed;
 	z-index: 1000;
 	top: 0;
+	width: fit-content
 }
 
 .nodePanelMenuButton svg{
