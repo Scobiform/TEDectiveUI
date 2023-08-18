@@ -22,7 +22,7 @@ const Search: React.FC = () => {
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 300));
-      const response = await fetch('mockSearch.json');
+      const response = await fetch('mockSearch.json'); // search?q=${query}
       const data: SearchResult[] = await response.json();
       setSearchResults(data);
     } catch (error) {
@@ -51,7 +51,7 @@ const Search: React.FC = () => {
                 <a href="#" >
                   {result.name}
                 </a>
-                </li>
+              </li>
             ))}
           </ul>
         )}
