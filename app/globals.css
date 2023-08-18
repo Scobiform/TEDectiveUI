@@ -269,69 +269,96 @@ main {
   ::-webkit-scrollbar-thumb:hover {
     background-color: var(--tertiary);
   }
+
+  button{
+		width: 100%;
+		color: var(--primary);
+		background-color: var(--tertiary);
+		border: 1px solid rgba(255,255,255,0.14);
+		cursor: pointer;
+	}
+
+	button:hover{
+		width: 100%;
+		color: var(--primary);
+		background-color: var(--secondary);
+	}
 }
 
 @media (prefers-color-scheme: light) {
-  html {
-    color-scheme: light;
-    color: var(--primary);
+    html {
+      color-scheme: light;
+      color: var(--primary);
+    }
+    /* Header component*/
+    header{
+      position: fixed;
+      top: 0;
+      z-index: 999;
+      width: 100vw;
+      height: 2.8rem;
+      background-color: var(--tertiary);
+      opacity: var(--opacity);
+    }
+
+    header svg {
+      fill: rgb(var(--primary));
+      height: 1.65rem;
+      margin-left: 0rem;
+      margin-bottom: 0;
+      margin-top: 0.63rem;
+      color: var(--primary);
+    }
+
+    p,h1,h2,h3,h4,h5,h6{
+      color: var(--primary);
+    }
+
+    li{
+      margin-bottom: 0.42em;
+      color: var(--primary);
+    }
+
+    /* Scrollbars */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary) var(--primary);
   }
-  /* Header component*/
-  header{
-    position: fixed;
-    top: 0;
-    z-index: 999;
-    width: 100vw;
-    height: 2.8rem;
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 2.1px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: var(--primary);
+    border-radius: 1.4px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 14px;
+    border: 3px solid var(--secondary);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
     background-color: var(--tertiary);
-    opacity: var(--opacity);
   }
 
-  header svg {
-    fill: rgb(var(--primary));
-    height: 1.65rem;
-    margin-left: 0rem;
-    margin-bottom: 0;
-    margin-top: 0.63rem;
+  button{
+    width: 100%;
     color: var(--primary);
+    background-color: var(--tertiary);
+    border: 1px solid rgba(0,0,0,0.14);
+    cursor: pointer;
   }
 
-  p,h1,h2,h3,h4,h5,h6{
-    color: var(--primary);
-  }
-
-  li{
-    margin-bottom: 0.42em;
-    color: var(--primary);
-  }
-
-  /* Scrollbars */
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--secondary) var(--primary);
-}
-
-/* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 2.1px;
-}
-
-*::-webkit-scrollbar-track {
-  background: var(--primary);
-  border-radius: 1.4px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
-  border-radius: 14px;
-  border: 3px solid var(--secondary);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--tertiary);
-}
- 
+  button:hover{
+    width: 100%;
+    color: var(--secondary);
+    background-color: var(--teritary);
+  } 
 }
 
 /* Loading component */

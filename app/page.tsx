@@ -6,7 +6,16 @@ import Search from './components/Search/Search';
 import LoadingSpinner from './components/Static/LoadingSpinner';
 import { useEffect, useState } from 'react';
 
-const Home = () => {
+export interface HomeProps {
+  id: string;
+  setId: any;
+}
+
+const Home = ({id, setId}: HomeProps) => {
+
+  // id use state
+  [id, setId] = useState('initial.json');
+
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
 
@@ -15,23 +24,21 @@ const Home = () => {
   // Awards per Organization Graph
   //let apiUrl = '/latest/graphql/award_per_org/f7fef1d1-8088-59d0-baf1-2afa825458ad';
   let apiUrl = 'initial.json';
-
-  // TODO: - Make own component for fetching data 
-  //       - fetch graph data based on search and dynamic routes
-  //       - fetch graph data based on view perspective
+  console.log(id);
 
   // Fetch json from API
   const [graphData, setGraphData] = useState({nodes: [], links: []});
   useEffect(() => {
-    fetch(apiUrl)
+    fetch(id)
       .then(response => response.json())
       .then(data => {
         //console.log(data);
         setGraphData(data);
         setIsLoading(false);
-      }
-    );
-  }, []);
+        }
+      );
+    },[id]
+  );
 
   return (
     <>
@@ -43,7 +50,7 @@ const Home = () => {
         {/* Loading spinner CSS in globals*/}
         {isLoading ? <LoadingSpinner /> : 
           <p>TEDective makes European public procurement data explorable for non-experts</p>}
-        <Search />
+        <Search id={id} setId={setId}/>
       </main>
     </>
   )

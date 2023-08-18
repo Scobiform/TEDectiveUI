@@ -1,5 +1,5 @@
-'use client'
 import { useEffect, useState } from "react";
+import Link from 'next/link';
 import styles from './search.module.css'
 
 interface SearchResult {
@@ -7,7 +7,13 @@ interface SearchResult {
   name: string;
 }
 
-const Search: React.FC = () => {
+interface SearchProps {
+  id: string;
+  setId: any;
+}
+
+const Search = ({id, setId}: SearchProps) => {
+
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -31,40 +37,39 @@ const Search: React.FC = () => {
       setLoading(false);
     }
   };
-  
-    return (
-      <>
-        <div className={styles.search}>
-            <input
-              type="text"
-              placeholder="Search for an organization..."
-              onChange={(e) => handleSearch(e.target.value)}
-            />
-        </div>
-        {/*Could be nice to have horizontal scroll for organization cards here - flex-direction*/}
-        {loading ? (
-          <p>Loading...</p>
-        ) : searchResults.length > 0 && (
-          <>
-            <ul className={styles.searchResults}>
-              {searchResults.map((result) => (
-                <li key={result.id}>
-                  {/* TODO: On organization click request organization graph or use dynamic route*/}
-                  <a href="#" >
-                    {result.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          {/*
-          <div className={styles.advancedSearch}>
-            <button>Advanced search</button>
-          </div>
-          */}
-          </>
-        )}
-      </>
-    );
+
+  const handleClick = (result: SearchResult) => {
+    setId(result.id);
   };
+
+  return (
+    <>
+      <div className={styles.search}>
+        <input
+          type="text"
+          placeholder="Search for an organization..."
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+      </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : searchResults.length > 0 && (
+        <>
+          <ul className={styles.searchResults}>
+            {searchResults.map((result) => (
+              <li key={result.id}>
+                {/* Use next/link to navigate to dynamic route 
+                or prop GraphWrapper on home with id */}
+                <button onClick={() => handleClick(result)}>
+                  {result.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </>
+  );
+};
 
 export default Search;
