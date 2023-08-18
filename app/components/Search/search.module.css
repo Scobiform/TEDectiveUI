@@ -3,8 +3,9 @@
     position: fixed;
     bottom: 0;
     display: flex;
-    width: 100vw;
+    right: 0;
     opacity: var(--opacity);
+    width: 42vw;
 }
 
 .search input[type=text]{
@@ -28,7 +29,8 @@
 .searchResults{
 	position: fixed;
 	bottom: 1.91rem;
-	width: 91vw;
+	width: 42vw;
+    right: 0;
 	max-height: 14vh;
 	background-color: var(--tertiary);
 	opacity: var(--opacity);

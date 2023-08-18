@@ -15,8 +15,8 @@ export interface HomeProps {
 
 const Home = ({id, setId, apiPath, setApiPath}: HomeProps) => {
 
-  // id use state for search
-  [id, setId] = useState('initial.json');
+  // Id use state
+  [id, setId] = useState('blocks.json');
 
   // apiPath
   [apiPath, setApiPath] = useState('/latest/graphql/');
@@ -24,14 +24,14 @@ const Home = ({id, setId, apiPath, setApiPath}: HomeProps) => {
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
 
-  let apiUrl = 'initial.json';
+  let apiUrl = 'blocks.json';
   console.log(id);
 
   // Fetch json from API
   const [graphData, setGraphData] = useState({nodes: [], links: []});
   useEffect(() => {
-    if(id !== 'initial.json') {
-      apiUrl = `${apiPath}${id}`;
+    if(id !== 'blocks.json') {
+      apiUrl = `${apiPath}${id}`; // ${host}:${apiPort}
     }
     fetch(apiUrl)
       .then(response => response.json())

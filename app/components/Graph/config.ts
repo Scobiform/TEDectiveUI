@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-// TODO: MOve to app folder or create new Config folder
+// TODO: env variables
 
 export const initialFilter = {
     dateRange: [NaN, NaN],

@@ -4,6 +4,7 @@ import styles from './search.module.css'
 
 interface SearchResult {
   id: string;
+  orgId: string;
   name: string;
   apiPath: string;
 }
@@ -42,7 +43,7 @@ const Search = ({id, setId, apiPath, setApiPath}: SearchProps) => {
   };
 
   const handleClick = (result: SearchResult) => {
-    setId(result.id);
+    setId(result.orgId);
     setApiPath(result.apiPath);
   };
 
