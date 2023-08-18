@@ -1,30 +1,37 @@
 [
     {
         "id": "f7fef1d1-8088-59d0-baf1-2afa825458ad",
-        "name": "Organization A"
+        "name": "Organization A",
+        "apiPath": "/latest/graphql/releases_per_buyer/"
     },
     {
         "id": "623e936-cdd6-522e-a5ed-54bce68301f2",
-        "name": "Organization B"
+        "name": "Organization B",
+        "apiPath": "/latest/graphql/releases_per_seller"
     },
     {
         "id": "f4f72069-0b6f-5863-9942-6aabed7a595c",
-        "name": "Organization C"
+        "name": "Organization C",
+        "apiPath": "/latest/graphql/releases_per_buyer/"
     },
     {
         "id": "5410c11d-647b-560d-996b-10ad91e70ea9",
-        "name": "Organization D"
+        "name": "Organization D",
+        "apiPath": "/latest/graphql/releases_per_buyer/"
     },
     {
         "id": "1623e936-cdd6-522e-a5ed-54bce68301f2",
-        "name": "Organization E"
+        "name": "Organization E",
+        "apiPath": "/latest/graphql/releases_per_buyer/"
     },
     {
         "id": "7ba45eb6-2c2f-5ad8-abac-9710008909b7",
-        "name": "Organization F"
+        "name": "Organization F",
+        "apiPath": "/latest/graphql/releases_per_buyer/"
     },
     {
         "id": "d42bc15e-2da5-5644-be67-27da5e5a8cda",
-        "name": "Organization G"
+        "name": "Organization G",
+        "apiPath": "/latest/graphql/"
     }
 ]

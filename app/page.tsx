@@ -9,12 +9,17 @@ import { useEffect, useState } from 'react';
 export interface HomeProps {
   id: string;
   setId: any;
+  apiPath: string;
+  setApiPath: any;
 }
 
-const Home = ({id, setId}: HomeProps) => {
+const Home = ({id, setId, apiPath, setApiPath}: HomeProps) => {
 
   // id use state for search
   [id, setId] = useState('initial.json');
+
+  // apiPath
+  [apiPath, setApiPath] = useState('/latest/graphql/');
 
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +31,7 @@ const Home = ({id, setId}: HomeProps) => {
   const [graphData, setGraphData] = useState({nodes: [], links: []});
   useEffect(() => {
     if(id !== 'initial.json') {
-      apiUrl = `api/latest/graphql/releases_per_buyer/${id}`;
+      apiUrl = `${apiPath}${id}`;
     }
     fetch(apiUrl)
       .then(response => response.json())
@@ -49,7 +54,7 @@ const Home = ({id, setId}: HomeProps) => {
         {/* Loading spinner CSS in globals*/}
         {isLoading ? <LoadingSpinner /> : 
           <p>TEDective makes European public procurement data explorable for non-experts</p>}
-        <Search id={id} setId={setId}/>
+        <Search id={id} setId={setId} apiPath={apiPath} setApiPath={setApiPath}/>
       </main>
     </>
   )
