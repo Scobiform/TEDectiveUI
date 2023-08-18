@@ -47,7 +47,7 @@ const Search: React.FC = () => {
           <ul className={styles.SearchResults}>
             {searchResults.map((result) => (
               <li key={result.id}>
-                {/* TODO: On organization click request organization graph */}
+                {/* TODO: On organization click request organization graph or use dynamic route*/}
                 <a href="#" >
                   {result.name}
                 </a>

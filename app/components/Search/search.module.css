@@ -1,4 +1,4 @@
-/* Search components */
+/* Search component */
 .Search{
     z-index: 1001;
     position: fixed;
@@ -29,7 +29,7 @@
 .SearchResults{
 	position: fixed;
 	bottom: 1.91rem;
-	width: 100vw;
+	width: 91vw;
 	max-height: 14vh;
 	background-color: var(--tertiary);
 	opacity: var(--opacity);
@@ -37,6 +37,7 @@
 	display: list-item;
 	overflow-y: scroll;
     padding: 0.42rem;
+    z-index: 10001;
 }
 
 .SearchResults li{
