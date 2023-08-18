@@ -3,13 +3,10 @@ import styles from './page.module.css'
 import Header from './components/Static/Header';
 import GraphWrapper from './components/Graph/GraphWrapper';
 import Search from './components/Search/Search';
-import searchStyles from './components/Search/search.module.css'
 import LoadingSpinner from './components/Static/LoadingSpinner';
 import { useEffect, useState } from 'react';
 
-
 const Home = () => {
-
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
 

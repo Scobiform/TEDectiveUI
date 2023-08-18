@@ -46,7 +46,12 @@ const Search: React.FC = () => {
         ) : searchResults.length > 0 && (
           <ul className={styles.SearchResults}>
             {searchResults.map((result) => (
-              <li key={result.id}>{result.name}</li>
+              <li key={result.id}>
+                {/* TODO: On organization click request organization graph */}
+                <a href="#" >
+                  {result.name}
+                </a>
+                </li>
             ))}
           </ul>
         )}
