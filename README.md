@@ -54,7 +54,7 @@ To run the TEDective UI using Docker, use the following commands:
 1. Build the Docker image: `docker build -t tedectiveui .`
 2. Run the Docker container: `docker run -p 3000:3000 tedectiveui`
 
-For detailed instructions please refer to the [TEDective documentation](https://docs.tedective.org/ui/quickstart.mdx).
+For detailed instructions please refer to the [TEDective documentation](https://docs.tedective.org/self-host/ui/).
 
 ## Usage
 :construction: TODO: (probably put the reference to documentation)
