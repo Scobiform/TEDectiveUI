@@ -1,5 +1,4 @@
-/* Search component */
-.Search{
+.search{
     z-index: 1001;
     position: fixed;
     bottom: 0;
@@ -8,7 +7,7 @@
     opacity: var(--opacity);
 }
 
-.Search input[type=text]{
+.search input[type=text]{
     border: 0;
     width: 100%;
     color: white;
@@ -18,7 +17,7 @@
     color: var(--primary);
 }
 
-.Search button{
+.search button{
     border: 0;
     background-color: var(--tertiary);
     color: white;
@@ -26,7 +25,7 @@
     outline: none;
 }
 
-.SearchResults{
+.searchResults{
 	position: fixed;
 	bottom: 1.91rem;
 	width: 91vw;
@@ -40,7 +39,34 @@
     z-index: 10001;
 }
 
-.SearchResults li{
+.searchResults li{
     list-style: none;
     padding: 0.07rem;
+}
+
+.advancedSearch{
+    position: fixed;
+	bottom: 21vh;
+}
+
+@media (prefers-color-scheme: dark)
+{
+    .advancedSearch button{
+        border: 0;
+        background-color: var(--tertiary);
+        color: var(--primary);
+        padding: 0.21rem;
+        outline: none;
+    }
+}
+
+@media (prefers-color-scheme: light)
+{
+    .advancedSearch button{
+        border: 0;
+        background-color: var(--tertiary);
+        color: var(--primary);
+        padding: 0.21rem;
+        outline: none;
+    }
 }

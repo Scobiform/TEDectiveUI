@@ -34,26 +34,34 @@ const Search: React.FC = () => {
   
     return (
       <>
-        <div className={styles.Search}>
+        <div className={styles.search}>
             <input
               type="text"
               placeholder="Search for an organization..."
               onChange={(e) => handleSearch(e.target.value)}
             />
         </div>
+        {/*Could be nice to have horizontal scroll for organization cards here - flex-direction*/}
         {loading ? (
           <p>Loading...</p>
         ) : searchResults.length > 0 && (
-          <ul className={styles.SearchResults}>
-            {searchResults.map((result) => (
-              <li key={result.id}>
-                {/* TODO: On organization click request organization graph or use dynamic route*/}
-                <a href="#" >
-                  {result.name}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <>
+            <ul className={styles.searchResults}>
+              {searchResults.map((result) => (
+                <li key={result.id}>
+                  {/* TODO: On organization click request organization graph or use dynamic route*/}
+                  <a href="#" >
+                    {result.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          {/*
+          <div className={styles.advancedSearch}>
+            <button>Advanced search</button>
+          </div>
+          */}
+          </>
         )}
       </>
     );
