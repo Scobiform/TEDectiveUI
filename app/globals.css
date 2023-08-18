@@ -10,18 +10,13 @@
 
   black
   #000000
-
+s
 */
-
-@font-face {
-  font-family: "Liberation Mono";
-  src: url('/fonts/liberation-fonts-ttf-2.1.5/LiberationMono-Regular.ttf') format('truetype');
-}
 
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: "Liberation Mono", monospace;
+  --font-mono: 'Inter', sans-serif;
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
