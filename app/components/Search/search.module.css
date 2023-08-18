@@ -25,3 +25,15 @@
     padding: 0.21rem;
     outline: none;
 }
+
+.SearchResults{
+	position: fixed;
+	bottom: 2.1rem;
+	width: 100vw;
+	height: 8.2rem;
+	background-color: var(--tertiary);
+	opacity: var(--opacity);
+	z-index: 1000;
+	display: list-item;
+	overflow-y: scroll;
+}

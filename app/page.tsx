@@ -3,15 +3,12 @@ import styles from './page.module.css'
 import Header from './components/Static/Header';
 import GraphWrapper from './components/Graph/GraphWrapper';
 import Search from './components/Search/Search';
+import searchStyles from './components/Search/search.module.css'
 import LoadingSpinner from './components/Static/LoadingSpinner';
 import { useEffect, useState } from 'react';
 
-interface SearchResult {
-  id: string;
-  name: string;
-}
 
-const Home: React.FC = () => {
+const Home = () => {
 
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
@@ -39,20 +36,6 @@ const Home: React.FC = () => {
     );
   }, []);
 
-  // Search state
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-
-  const handleSearch = async (query: string) => {
-    // Make an API request to fetch data based on the query
-    try {
-      const response = await fetch(`/api/search?q=${query}`);
-      const data: SearchResult[] = await response.json();
-      setSearchResults(data);
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-    }
-  };
-
   return (
     <>
       <Header />
@@ -63,13 +46,7 @@ const Home: React.FC = () => {
         {/* Loading spinner CSS in globals*/}
         {isLoading ? <LoadingSpinner /> : 
           <p>TEDective makes European public procurement data explorable for non-experts</p>}
-        {/* Mock up search for now */}
-        <Search onSearch={handleSearch} />
-        <ul>
-          {searchResults.map((result) => (
-            <li key={result.id}>{result.name}</li>
-          ))}
-        </ul>
+        <Search />
       </main>
     </>
   )
