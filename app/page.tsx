@@ -13,23 +13,22 @@ export interface HomeProps {
 
 const Home = ({id, setId}: HomeProps) => {
 
-  // id use state
+  // id use state for search
   [id, setId] = useState('initial.json');
 
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
 
-  // Releases per Buyer Graph
-  //let apiUrl = '/latest/graphql/releases_per_buyer/1623e936-cdd6-522e-a5ed-54bce68301f2';
-  // Awards per Organization Graph
-  //let apiUrl = '/latest/graphql/award_per_org/f7fef1d1-8088-59d0-baf1-2afa825458ad';
   let apiUrl = 'initial.json';
   console.log(id);
 
   // Fetch json from API
   const [graphData, setGraphData] = useState({nodes: [], links: []});
   useEffect(() => {
-    fetch(id)
+    if(id !== 'initial.json') {
+      apiUrl = `api/latest/graphql/releases_per_buyer/${id}`;
+    }
+    fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
         //console.log(data);
