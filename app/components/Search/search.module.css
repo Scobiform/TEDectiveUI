@@ -5,7 +5,7 @@
     display: flex;
     right: 0;
     opacity: var(--opacity);
-    width: 42vw;
+    width: 100vw;
 }
 
 .search input[type=text]{
@@ -31,7 +31,7 @@
 	bottom: 1.91rem;
 	width: 42vw;
     right: 0;
-	max-height: 14vh;
+	max-height: 21vh;
 	background-color: var(--tertiary);
 	opacity: var(--opacity);
 	z-index: 1000;
