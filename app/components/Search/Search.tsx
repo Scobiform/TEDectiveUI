@@ -3,20 +3,17 @@ import Link from 'next/link';
 import styles from './search.module.css'
 
 interface SearchResult {
-  id: string;
   orgId: string;
   name: string;
   apiPath: string;
 }
 
 interface SearchProps {
-  id: string;
-  setId: any;
   apiPath: string;
   setApiPath: any;
 }
 
-const Search = ({id, setId, apiPath, setApiPath}: SearchProps) => {
+const Search = ({apiPath, setApiPath}: SearchProps) => {
 
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
@@ -43,7 +40,6 @@ const Search = ({id, setId, apiPath, setApiPath}: SearchProps) => {
   };
 
   const handleClick = (result: SearchResult) => {
-    setId(result.orgId);
     setApiPath(result.apiPath);
   };
 
@@ -61,8 +57,8 @@ const Search = ({id, setId, apiPath, setApiPath}: SearchProps) => {
       ) : searchResults.length > 0 && (
         <>
           <ul className={styles.searchResults}>
-            {searchResults.map((result) => (
-              <li key={result.id}>
+            {searchResults.map((result: SearchResult, index) => (
+              <li key={index}>
                 {/* Use next/link to navigate to dynamic route 
                 or prop GraphWrapper on home with id */}
                 <button onClick={() => handleClick(result)}>

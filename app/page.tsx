@@ -6,42 +6,29 @@ import Search from './components/Search/Search';
 import LoadingSpinner from './components/Static/LoadingSpinner';
 import { useEffect, useState } from 'react';
 
-export interface HomeProps {
-  id: string;
-  setId: any;
+interface PageProps {
   apiPath: string;
   setApiPath: any;
 }
 
-const Home = ({id, setId, apiPath, setApiPath}: HomeProps) => {
+const Page = ({apiPath, setApiPath}: PageProps) => {
 
-  // Id use state
-  [id, setId] = useState('blocks.json');
-
-  // apiPath
-  [apiPath, setApiPath] = useState('/latest/graphql/');
+  [apiPath, setApiPath] = useState('blocks.json');
 
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
 
-  let apiUrl = 'blocks.json';
-  console.log(id);
-
   // Fetch json from API
   const [graphData, setGraphData] = useState({nodes: [], links: []});
   useEffect(() => {
-    if(id !== 'blocks.json') {
-      apiUrl = `${apiPath}${id}`; // ${host}:${apiPort}
-    }
-    fetch(apiUrl)
+    fetch(apiPath+'')
       .then(response => response.json())
       .then(data => {
-        //console.log(data);
         setGraphData(data);
         setIsLoading(false);
         }
       );
-    },[id]
+    },[apiPath]
   );
 
   return (
@@ -54,10 +41,10 @@ const Home = ({id, setId, apiPath, setApiPath}: HomeProps) => {
         {/* Loading spinner CSS in globals*/}
         {isLoading ? <LoadingSpinner /> : 
           <p>TEDective makes European public procurement data explorable for non-experts</p>}
-        <Search id={id} setId={setId} apiPath={apiPath} setApiPath={setApiPath}/>
+        <Search apiPath={apiPath} setApiPath={setApiPath}/>
       </main>
     </>
   )
 }
 
-export default Home;
+export default Page;

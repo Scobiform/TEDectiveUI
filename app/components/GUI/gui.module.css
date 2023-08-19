@@ -1,7 +1,7 @@
 
 .levaWrapper{
     position: fixed;
-    top: 2.8rem;
+    top: 0;
     right: 0;
     z-index: 1001;
     width: 175px;
