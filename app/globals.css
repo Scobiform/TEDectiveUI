@@ -76,7 +76,6 @@ s
 
 --windowWidth: 100vw;
 --windowHeight: 100vh;
-
 }
 
 @media (prefers-color-scheme: dark) {
@@ -407,4 +406,12 @@ display: none;
   font-size: 0.7em;
   margin-bottom: 0.42em;
   color: #000000;
+}
+
+.leva-c-hBtFDW-lbFLlY-isRoot-false::after{
+  display: none !important;
+}
+
+.leva-c-hBtFDW-lbFLlY-isRoot-false{
+  padding: 0.07rem !important;
 }

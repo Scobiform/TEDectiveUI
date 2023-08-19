@@ -74,6 +74,21 @@
       --leva-fontWeights-button: normal;
   }
   
+
+
+  .leva-c-hBtFDW-lbFLlY-isRoot-false::after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: var(--leva-borderWidths-folder);
+    height: 100%;
+    background-color: var(--leva-colors-folderWidgetColor);
+    opacity: 0.4;
+    transform: translateX(-50%);
+}
+
+
   */
   
   
