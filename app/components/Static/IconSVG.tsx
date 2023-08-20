@@ -2,7 +2,7 @@ import React from 'react';
 
 const IconSVG = () => {
     return (        
-        <svg width="32px" height="32px"
+        <svg width="28px" height="28px"
         viewBox="0 0 3500 3500"
         fill="currentColor">
         <g>
