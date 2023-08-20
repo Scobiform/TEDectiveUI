@@ -1,16 +1,15 @@
 /* TEDective icon colors 
-
+----
   green
   #3fa535
   rgba(63, 165, 53, 1);
-
+----
   blue
   #006a87
   rgba(0, 106, 135, 1);
-
+----
   black
   #000000
-s
 */
 
 :root {
@@ -226,7 +225,7 @@ main {
 
   header svg {
     fill: rgb(var(--primary));
-    height: 1.65rem;
+    height: 1.4rem;
     margin-left: 0rem;
     margin-bottom: 0;
     margin-top: 0.63rem;
@@ -288,7 +287,7 @@ main {
 
     header svg {
       fill: rgb(var(--primary));
-      height: 1.65rem;
+      height: 1.4rem;
       margin-left: 0rem;
       margin-bottom: 0;
       margin-top: 0.63rem;
@@ -373,14 +372,6 @@ main {
   }
 }
 
-.bezier-animated {
-  height: 10px;
-  width: 168px;
-  background: indianred;
-  transform-origin: left;
-  animation: bezierStoryScale 1000ms infinite alternate both;
-}
-
 /* Common reusable classes */
 .scrollable{
   overflow-y: scroll;
@@ -408,10 +399,17 @@ display: none;
   color: #000000;
 }
 
+/* Leva component */
+/* override leva styles */
 .leva-c-hBtFDW-lbFLlY-isRoot-false::after{
   display: none !important;
 }
 
 .leva-c-hBtFDW-lbFLlY-isRoot-false{
   padding: 0.07rem !important;
+}
+
+.leva-c-dmsJDs-hXSjjU-isRoot-true > .leva-c-PJLV:not(:first-of-type) {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
 }

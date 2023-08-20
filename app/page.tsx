@@ -13,6 +13,7 @@ interface PageProps {
 
 const Page = ({apiPath, setApiPath}: PageProps) => {
 
+  // API path state
   [apiPath, setApiPath] = useState('blocks.json');
 
   // Loading state

@@ -1,9 +1,4 @@
-import React from 'react';
-
-const Logo = () =>
-{
-    return (
-    <svg version="1.0" width="191" viewBox="0 0 2900 600">
+<svg version="1.0" width="191" viewBox="0 0 2900 600">
        <g
           transform="matrix(0.1,0,0,-0.1,-667.66165,651.52702)"
           fill="currentColor"
@@ -41,7 +36,3 @@ const Logo = () =>
             id="path20" />
        </g>
     </svg>
-    );
-};
-
-export default Logo;

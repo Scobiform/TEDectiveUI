@@ -1,4 +1,4 @@
-
+/* TODO: Fully integrate Leva*/
 .levaWrapper{
     position: fixed;
     top: 0;
@@ -6,7 +6,6 @@
     z-index: 1001;
     width: 175px;
     opacity: var(--opacity);
-    margin: 4.2px;
   }
   
   @media screen and (max-width: 480px) {
