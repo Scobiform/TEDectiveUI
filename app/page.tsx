@@ -34,8 +34,8 @@ const Page = ({apiPath, setApiPath}: PageProps) => {
 
   return (
     <>
-      <Header />
       <main className={styles.main}>
+        <Header />
         {/* The GraphWrapper takes GraphData 
         @ts-ignore                           */}
         <GraphWrapper graphData={graphData} />

@@ -76,7 +76,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           //@ts-ignore
           graphData={graphData}
           nodeLabel="label"
-          nodeAutoColorBy="label"
+          nodeAutoColorBy="indexColor"
           onNodeClick={handleClick}
           nodeRelSize={visuals.nodeRel}
           nodeVal={(node) => (node.size * visuals.awardNodeSizeMult)}

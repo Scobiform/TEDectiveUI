@@ -8,9 +8,10 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
+// use env variables to set title and description
 export const metadata: Metadata = {
-  title: 'TEDectiveUI',
-  description: 'TEDective makes European public procurement data explorable for non-experts',
+  title: process.env.NEXT_PUBLIC_SITE_NAME || 'TEDectiveUI1',
+  description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || 'TEDective makes European public procurement data explorable for non-experts',
 }
 
 export default function RootLayout({

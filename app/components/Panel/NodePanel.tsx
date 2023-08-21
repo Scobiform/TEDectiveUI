@@ -71,20 +71,14 @@ const barData = {
 };
 // Doughnut chart mockup data
 const doughnutData = {
-  labels: ["Accepted", "Pending", "Rejected"],
+  labels: ["Buyer", "Seller"],
   datasets: [{
-      data: [70, 10, 6],
-      borderColor: [
-          "rgb(75, 192, 192)",
-          "rgb(255, 205, 86)",
-          "rgb(255, 99, 132)",
-      ],
+      data: [900, 100],
       backgroundColor: [
-          "rgb(75, 192, 192 )",
-          "rgb(255, 205, 86)",
-          "rgb(255, 99, 132)",
+        "rgba(63, 165, 53, 1)",
+        "rgba(0, 106, 135, 1)",
       ],
-      borderWidth: 2,
+      borderWidth: 0,
   }]
 };
 // Line chart mockup data
@@ -107,6 +101,9 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
   //console.log(isOpen);
   console.log(previewNode);
 
+  // Convert node object to string
+  const objectString = JSON.stringify(previewNode);
+
   // UseEffect hook
   // https://legacy.reactjs.org/docs/hooks-effect.html
   useEffect(() => {
@@ -122,13 +119,20 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
           <button
           onClick={toggleMenu}
           className={styles.nodePanelMenuButton}
+          aria-label="Open node panel"
+          tabIndex={0}
           >
           <IconSVG />
           </button>
           {isOpen && (
               <div className={styles.panelView}>
                 <div className={styles.nodePanelContent}>               
-                  {/* TODO: Show loading spinner*/}                 
+                  {/* TODO: 
+                    - Show loading spinner
+                    - Show guided TOUR
+                    - Show welcome message
+                    - Show help message
+                  */}
                 </div>
               </div>
             )
@@ -151,7 +155,7 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
               <div className={styles.panelView}>
                 <div className={styles.nodePanelContent}>               
                   <h2>Award Title</h2>
-                  <p>Award description</p>
+                  <p>Award description - {previewNode.description}</p>
                                  
                   <h3>Contracts</h3>
                   <p>Array of contracts</p>
@@ -211,6 +215,7 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
 
                   <h3>Charts displaying organization statistics</h3>
                   <DoughnutChart data={doughnutData}/>
+                  {objectString}
                 </div>
               </div>
             )

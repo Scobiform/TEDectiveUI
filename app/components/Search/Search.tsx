@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import Link from 'next/link';
+import { useEffect, useRef, useState } from "react";
 import styles from './search.module.css'
 
 interface SearchResult {
@@ -15,20 +14,24 @@ interface SearchProps {
 
 const Search = ({apiPath, setApiPath}: SearchProps) => {
 
+  // Search results state
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  // Loading state
   const [loading, setLoading] = useState(false);
 
+  // Fetch search results
   const handleSearch = async (query: string) => {
     // Prevent fetching if the query is empty
     if (query.trim() === '') {
       setSearchResults([]);
+      setLoading(false);
       return;
     }
 
     setLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 300));
+      await new Promise((resolve) => setTimeout(resolve, 280));
       const response = await fetch('mockSearch.json'); // search?q=${query}
       const data: SearchResult[] = await response.json();
       setSearchResults(data);
@@ -39,6 +42,7 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
     }
   };
 
+  // Set the API path when a search result is clicked
   const handleClick = (result: SearchResult) => {
     setApiPath(result.apiPath);
   };
@@ -50,25 +54,26 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
           type="text"
           placeholder="Search for an organization..."
           onChange={(e) => handleSearch(e.target.value)}
+          autoFocus
+          aria-label="Search for an organization"
+          tabIndex={0}
         />
+        {loading ? (
+          <p>Loading...</p>
+        ) : searchResults.length > 0 && (
+          <>
+            <ul id={styles.SearchResults}>
+              {searchResults.map((result: SearchResult, index) => (
+                <li key={index}>
+                  <button onClick={() => handleClick(result)} tabIndex={0} aria-label={result.name}>
+                    {result.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : searchResults.length > 0 && (
-        <>
-          <ul className={styles.searchResults}>
-            {searchResults.map((result: SearchResult, index) => (
-              <li key={index}>
-                {/* Use next/link to navigate to dynamic route 
-                or prop GraphWrapper on home with id */}
-                <button onClick={() => handleClick(result)}>
-                  {result.name}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
     </>
   );
 };

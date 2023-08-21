@@ -1,11 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
-
-module.exports = nextConfig
-
-// next.config.js
-module.exports = {
-    // ... rest of the configuration.
+const nextConfig = {
+    // Configure pageExtensions to include md and mdx
+    pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+    // Optionally, add any other Next.js config below
+    reactStrictMode: true,
     output: 'standalone',
     typescript: {
         // !! WARN !!
@@ -15,3 +13,4 @@ module.exports = {
         ignoreBuildErrors: true,
     },
 }
+module.exports = nextConfig
