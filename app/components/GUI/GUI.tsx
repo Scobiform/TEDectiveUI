@@ -1,6 +1,6 @@
 'use client'
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
-import { initialPhysics, initialVisuals } from "../Graph/config";
+import { initialPhysics, initialVisuals } from "../../config";
 import React from "react";
 import { Leva, useControls, useCreateStore, folder, LevaPanel, monitor, button } from "leva";
 /* Styles */

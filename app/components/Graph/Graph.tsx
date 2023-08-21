@@ -8,20 +8,20 @@ import ForceGraph2D, { ForceGraphMethods, ForceGraphProps } from "react-force-gr
 import NodePanel from '../../components/Panel/NodePanel';
 import GUI from '../GUI/GUI';
 /* Config */
-import { initialFilter, initialPhysics, initialVisuals } from './config'
+import { initialFilter, initialPhysics, initialVisuals } from '../../config'
 /* Component styles */
 import styles from './graph.module.css'
 import { useWindowSize } from "@react-hook/window-size";
 
 export interface GraphProps {
   graphData: GraphData | null; 
-  physics: typeof initialPhysics
-  setPhysics: any
-  visuals: typeof initialVisuals
-  setVisuals: any
-  previewNode: NodeObject | null | undefined;
+  physics?: typeof initialPhysics;
+  setPhysics?: any;
+  visuals?: typeof initialVisuals;
+  setVisuals?: any;
+  previewNode?: NodeObject | null | undefined;
   setPreviewNode: any;
-  isOpen: boolean;
+  isOpen?: boolean;
   setOpen: any;
 }
 
@@ -56,6 +56,11 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   // D3 simulation settings
   // https://github.com/d3/d3-force
   useEffect(() => {
+
+    if (!physics || !visuals || !graphData) {
+      return; // Do nothing if physics, visuals, or graphData is undefined
+    }
+
     const simulation = d3.forceSimulation(graphData!.nodes)
     .force("center", d3.forceCenter())
     .alphaDecay(physics.alphaDecay)
@@ -65,7 +70,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     .force("Charge", d3.forceManyBody().strength(physics.charge))
     .force("Radial", d3.forceRadial(10))
     ;
-  }, [physics])
+  }, [physics, visuals, graphData])
 
   // Return the ForceGraph2D
   return (
@@ -79,9 +84,9 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeAutoColorBy="indexColor"
           onNodeClick={handleClick}
           nodeRelSize={visuals.nodeRel}
-          nodeVal={(node) => (node.size * visuals.awardNodeSizeMult)}
+          nodeVal={(node) => (node.size * visuals!.awardNodeSizeMult || 1 )}
           linkWidth={visuals.linkWidth}
-          linkColor={() => visuals.linkColor}
+          linkColor={() => visuals!.linkColor}
           d3AlphaDecay={physics.alphaDecay}
           d3VelocityDecay={physics.velocityDecay}
           d3AlphaMin={physics.alphaMin}
