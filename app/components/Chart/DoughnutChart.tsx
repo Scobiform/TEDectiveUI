@@ -4,7 +4,6 @@ import Chart from 'chart.js/auto';
 
 const DoughnutChart = (props: any) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    let doughnutChart: any = null;
 
     useEffect(() => {
         // Get the canvas element and its context
@@ -20,11 +19,7 @@ const DoughnutChart = (props: any) => {
             return; // Exit the effect if context is null
         }
 
-        // Destroy the existing chart if it exists
-        if (doughnutChart) {
-            doughnutChart.destroy();
-        }
-        doughnutChart = new Chart(ctx, {
+        let myChart = new Chart(ctx, {
             type: 'doughnut',
             data: props.data,
             options: {
@@ -38,8 +33,8 @@ const DoughnutChart = (props: any) => {
 
         // Clean up by destroying the chart when the component unmounts
         return () => {
-            if (doughnutChart) {
-                doughnutChart.destroy();
+            if (myChart) {
+                myChart.destroy();
             }
         };
     }, [props.data]); // Run this effect when props.data changes

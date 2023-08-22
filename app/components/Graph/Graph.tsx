@@ -48,10 +48,8 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     (node: NodeObject) => {
       setPreviewNode(node);
       setOpen(true);
-      console.log(isOpen);
-      console.log(previewNode);
     },
-    [isOpen, previewNode, graphData]
+    [setPreviewNode, setOpen]
   );
 
   // D3 simulation settings
@@ -71,7 +69,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     .force("Charge", d3.forceManyBody().strength(physics.charge))
     .force("Radial", d3.forceRadial(10))
     ;
-  }, [physics, visuals, graphData])
+  }, [physics, visuals,graphData])
 
   // Return the ForceGraph2D
   return (
