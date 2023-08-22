@@ -1,38 +1,53 @@
-// https://www.chartjs.org/docs/latest/charts/radar.html
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import styles from './charts.module.css'
 import Chart from 'chart.js/auto';
 
 const RadarChart = (props: any) => {
+    const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    let radarChart: any = null;
+
     useEffect(() => {
-        // @ts-ignore
-        let ctx: any = document.getElementById('radarChart').getContext('2d');
-        let myChart: any = new Chart(ctx, {
-            type: 'radar',
+        // Get the canvas element and its context
+        const canvas = canvasRef.current;
+
+        if (!canvas) {
+            return; // Exit the effect if canvas is null
+        }
+
+        const ctx = canvas.getContext('2d');
+
+        if (!ctx) {
+            return; // Exit the effect if context is null
+        }
+
+        // Destroy the existing chart if it exists
+        if (radarChart) {
+            radarChart.destroy();
+        }
+
+        radarChart = new Chart(ctx, {
+            type: 'line',
             data: props.data,
-            options: {
-                elements: {
-                line: {
-                    borderWidth: 3
-                }
-                }
-            },
         });
-    }, [])
+
+        // Clean up by destroying the chart when the component unmounts
+        return () => {
+            if (radarChart) {
+                radarChart.destroy();
+            }
+        };
+    }, [props.data]); // Run this effect when props.data changes
 
     return (
-        <>
-            <div className={styles.radarChart}>
-                {/* Stacked chart */}
+        <div className={styles.lineChart}>
+            {/* Stacked chart */}
+            <div className="">
                 <div className="">
-                    <div className="">
-                        <canvas id='radarChart'></canvas>
-                    </div>
+                    <canvas ref={canvasRef} />
                 </div>
             </div>
-        </>
-    )
+        </div>
+    );
 }
 
 export default RadarChart;

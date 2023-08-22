@@ -98,9 +98,6 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
  
   const toggleMenu = () => setOpen(!isOpen);
 
-  //console.log(isOpen);
-  console.log(previewNode);
-
   // Convert node object to string
   const objectString = JSON.stringify(previewNode);
 
@@ -132,6 +129,7 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
                     - Show guided TOUR
                     - Show welcome message
                     - Show help message
+                    - link docs
                   */}
                 </div>
               </div>

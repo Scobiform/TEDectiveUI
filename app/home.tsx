@@ -33,6 +33,9 @@ const Home = ({apiPath,
               setOpen 
             }: HomeProps) => {
 
+  // API URL
+  const apiURL = process.env.NEXT_PUBLIC_API_URL;
+
   // API path state
   [apiPath, setApiPath] = useState('blocks.json');
 

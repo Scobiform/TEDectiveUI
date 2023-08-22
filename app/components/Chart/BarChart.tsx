@@ -1,37 +1,53 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import styles from './charts.module.css'
 import Chart from 'chart.js/auto';
-import { getRelativePosition } from 'chart.js/helpers';
 
-const BarChart = (props: any) => {  
+const BarChart = (props: any) => {
+    const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    let barChart: any = null;
+
     useEffect(() => {
-        //@ts-ignore
-        var ctx = document.getElementById('barChart').getContext('2d');
-        var myChart = new Chart(ctx, {
+        // Get the canvas element and its context
+        const canvas = canvasRef.current;
+
+        if (!canvas) {
+            return; // Exit the effect if canvas is null
+        }
+
+        const ctx = canvas.getContext('2d');
+
+        if (!ctx) {
+            return; // Exit the effect if context is null
+        }
+
+        // Destroy the existing chart if it exists
+        if (barChart) {
+            barChart.destroy();
+        }
+
+        barChart = new Chart(ctx, {
             type: 'bar',
             data: props.data,
-            options: {
-                elements: {
-                line: {
-                    borderWidth: 3
-                }
-                }
-            },
         });
-    }, [])
 
-      return (
-        <>
-            <div className={styles.barChart}>
-                {/* line chart */}
+        // Clean up by destroying the chart when the component unmounts
+        return () => {
+            if (barChart) {
+                barChart.destroy();
+            }
+        };
+    }, [props.data]); // Run this effect when props.data changes
+
+    return (
+        <div className={styles.barChart}>
+            {/* Stacked chart */}
+            <div className="">
                 <div className="">
-                    <div className="">
-                    <canvas id='barChart'></canvas>
-                    </div>
+                    <canvas ref={canvasRef} />
                 </div>
             </div>
-        </>
-      )
-    }
+        </div>
+    );
+}
 
 export default BarChart;

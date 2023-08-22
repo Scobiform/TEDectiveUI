@@ -1,30 +1,26 @@
 [
     {
         "name": "Organization A",
-        "apiPath": "blocks.json"
+        "apiPath": "https://api.tedective.org/latest/graphql/releases_per_seller/623e936-cdd6-522e-a5ed-54bce68301f2"
     },
     {
         "name": "Organization B",
-        "apiPath": "/latest/graphql/releases_per_seller/623e936-cdd6-522e-a5ed-54bce68301f2"
+        "apiPath": "https://api.tedective.org/latest/graphql/releases_per_buyer/623e936-cdd6-522e-a5ed-54bce68301f2"
     },
     {
         "name": "Organization C",
-        "apiPath": "/latest/graphql/releases_per_buyer/623e936-cdd6-522e-a5ed-54bce68301f2"
+        "apiPath": "https://api.tedective.org/latest/graphql/releases_per_buyer/5410c11d-647b-560d-996b-10ad91e70ea9"
     },
     {
         "name": "Organization D",
-        "apiPath": "/latest/graphql/releases_per_buyer/5410c11d-647b-560d-996b-10ad91e70ea9"
+        "apiPath": "https://api.tedective.org/latest/graphql/releases_per_buyer/1623e936-cdd6-522e-a5ed-54bce68301f2"
     },
     {
         "name": "Organization E",
-        "apiPath": "/latest/graphql/releases_per_buyer/1623e936-cdd6-522e-a5ed-54bce68301f2"
+        "apiPath": "https://api.tedective.org/latest/graphql/releases_per_buyer/7ba45eb6-2c2f-5ad8-abac-9710008909b7"
     },
     {
         "name": "Organization F",
-        "apiPath": "/latest/graphql/releases_per_buyer/7ba45eb6-2c2f-5ad8-abac-9710008909b7"
-    },
-    {
-        "name": "Organization G",
-        "apiPath": "/latest/graphql/releases_per_buyer/f7fef1d1-8088-59d0-baf1-2afa825458ad"
+        "apiPath": "https://api.tedective.org/latest/graphql/releases_per_buyer/f7fef1d1-8088-59d0-baf1-2afa825458ad"
     }
 ]

@@ -48,10 +48,11 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     (node: NodeObject) => {
       setPreviewNode(node);
       setOpen(true);
+      console.log(isOpen);
+      console.log(previewNode);
     },
-    [isOpen]
+    [isOpen, previewNode, graphData]
   );
-  //console.log(isOpen);
 
   // D3 simulation settings
   // https://github.com/d3/d3-force
