@@ -36,6 +36,7 @@
 	padding-bottom: 7vh;
 	opacity: var(--opacity);
 	min-height: 320px;
+	font-weight: var(--fontWeight);
 }
 
 .nodePanelContent li{
