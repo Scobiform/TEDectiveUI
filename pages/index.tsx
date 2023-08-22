@@ -1,11 +1,11 @@
 'use client'
-import styles from './page.module.css'
-import Header from './components/Static/Header';
-import GraphWrapper from './components/Graph/GraphWrapper';
-import Search from './components/Search/Search';
-import LoadingSpinner from './components/Static/LoadingSpinner';
+import styles from '../styles/Home.module.css'
+import Header from '../components/Static/Header';
+import GraphWrapper from '../components/Graph/GraphWrapper';
+import Search from '../components/Search/Search';
+import LoadingSpinner from '../components/Static/LoadingSpinner';
 import { useEffect, useState } from 'react';
-import { initialFilter, initialPhysics, initialVisuals } from './config'
+import { initialPhysics, initialVisuals } from '../components/config'
 import { NodeObject } from 'react-force-graph-2d';
 
 interface HomeProps {

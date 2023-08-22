@@ -8,7 +8,7 @@ import ForceGraph2D, { ForceGraphMethods, ForceGraphProps } from "react-force-gr
 import NodePanel from '../../components/Panel/NodePanel';
 import GUI from '../GUI/GUI';
 /* Config */
-import { initialFilter, initialPhysics, initialVisuals } from '../../config'
+import { initialPhysics, initialVisuals } from './../config'
 /* Component styles */
 import styles from './graph.module.css'
 import { useWindowSize } from "@react-hook/window-size";

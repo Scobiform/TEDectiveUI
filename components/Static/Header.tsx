@@ -1,6 +1,4 @@
 import React from 'react';
-import Logo from './Logo';
-import { stringify } from 'querystring';
 
 const Header = () =>
 {
