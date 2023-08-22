@@ -98,10 +98,10 @@ main {
 /* Header component */
 header p{
 	color: var(--primary);
-  font-size: 1.19em;
+  font-size: 1.4em;
   left: 2.52rem;
   position: absolute;
-  top: 0.49rem;
+  top: 0.42rem;
 }
 
 @media (prefers-color-scheme: dark) {
