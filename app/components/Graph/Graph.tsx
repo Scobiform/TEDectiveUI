@@ -56,7 +56,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   // https://github.com/d3/d3-force
   useEffect(() => {
 
-    if (!physics || !visuals || !graphData) {
+    if (!physics) {
       return; // Do nothing if physics, visuals, or graphData is undefined
     }
 
@@ -65,11 +65,10 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     .alphaDecay(physics.alphaDecay)
     .alphaMin(physics.alphaMin)
     .velocityDecay(physics.velocityDecay)
-    .force("Collide", d3.forceCollide().radius(visuals.nodeRel))
     .force("Charge", d3.forceManyBody().strength(physics.charge))
     .force("Radial", d3.forceRadial(10))
     ;
-  }, [physics, visuals,graphData])
+  },[physics, graphData]);
 
   // Return the ForceGraph2D
   return (

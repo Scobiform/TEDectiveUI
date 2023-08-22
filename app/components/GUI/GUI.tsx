@@ -18,10 +18,10 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
     
     // Callback to set physics
-    const setPhysicsCallback = useCallback((val: any) => setPhysics(val), [])
+    const setPhysicsCallback = useCallback((val: any) => setPhysics(val), [setPhysics])
 
     // Callback to set visuals
-    const setVisualsCallback = useCallback((val: any) => setVisuals(val), [])
+    const setVisualsCallback = useCallback((val: any) => setVisuals(val), [setVisuals])
 
     // Physics GUI panel
     const physicsData = useControls('Physics', {
