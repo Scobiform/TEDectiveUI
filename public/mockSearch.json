@@ -1,7 +1,7 @@
 [
     {
         "name": "Organization A",
-        "apiPath": "blocks.json"
+        "apiPath": "initial.json"
     },
     {
         "name": "Organization B",
@@ -9,6 +9,6 @@
     },
     {
         "name": "Organization C",
-        "apiPath": "initial.json"
+        "apiPath": "blocks.json"
     }
 ]
