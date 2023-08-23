@@ -63,8 +63,8 @@ To get started with the TEDective UI locally, follow these steps:
 
 1. Clone this repository
 2. Navigate to the project directory
-3. Install the dependencies: `npm install`
-4. Start the development server: `npm run dev`
+3. Install the dependencies: `pnpm install`
+4. Start the development server: `pnpm run dev`
 5. Access the UI in your browser at `http://localhost:3000`
 
 ### Install with Docker
