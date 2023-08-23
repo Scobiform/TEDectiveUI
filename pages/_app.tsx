@@ -31,13 +31,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" type="image/x-icon" href="favicon.ico"></link>
         <link
-          href="/icons/favicon-16x16.png"
+          href="/icons/icon-16x16.png"
           rel="icon"
           type="image/png"
           sizes="16x16"
         />
         <link
-          href="/icons/favicon-32x32.png"
+          href="/icons/icon-32x32.png"
           rel="icon"
           type="image/png"
           sizes="32x32"
