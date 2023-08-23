@@ -57,7 +57,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   const simulation = d3.forceSimulation(graphData!.nodes)
   useEffect(() => {
 
-    if (!physics || !simulation || !visuals) {
+    if (!physics || !simulation || !fgRef.current) {
       return; // Do nothing if physics is undefined
     }
 
@@ -66,11 +66,14 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     .alphaMin(physics.alphaMin)
     .velocityDecay(physics.velocityDecay)
     // enable centering force around the center of the canvas
-    .force("center", d3.forceCenter())
+    //.force("center", d3.forceCenter())
     // enable collision detection between nodes
-    .force("collide", d3.forceCollide().radius(visuals.nodeRel))
+    //.force("collide", d3.forceCollide().radius(physics.collideRadius))
+    // enable charge force between nodes
+    //.force("charge", d3.forceManyBody().strength(physics.chargeStrength))
     ;
-  },[physics, visuals, simulation]);
+  },[physics, simulation]);
+
 
   // Return the ForceGraph2D
   return (
