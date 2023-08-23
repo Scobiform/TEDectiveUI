@@ -2,8 +2,6 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-// TODO: env variables
-
 export const initialFilter = {
     dateRange: [NaN, NaN],
     minMaxYears: [NaN, NaN],
@@ -26,6 +24,7 @@ export const initialPhysics = {
   set the decay rate to zero; alternatively, set a target alpha greater than the minimum alpha.*/
   alphaDecay: 0.042,
   alphaMin: 0,
+  alphaTarget: 0,
   /* 
   If decay is specified, sets the velocity decay factor to the specified number in the range [0,1] 
   and returns this simulation. If decay is not specified, returns the current velocity decay factor, 
@@ -41,7 +40,8 @@ export const initialPhysics = {
   y: 0,
   stopAnimation: false,
   enablePanInteraction: true,
-  // charge needs useEffect to update?
+  enableZoomInteraction: true,
+  enablePointerInteraction: true,
   charge: -700,
   // Not supported by react force graph, but by D3
   gravity: 0.1,

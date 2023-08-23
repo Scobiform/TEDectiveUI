@@ -30,6 +30,8 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
         velocityDecay: { value: physics.velocityDecay, min: 0, max: 1, step: 0.001, onChange: (v) => setPhysicsCallback({ ...physics, velocityDecay: v }) },
         dagMode: { value: 'zout', options: ["td","bu","lr","rl","radialin","zin","zout","radialout"], onChange: (v) => setPhysicsCallback({ ...physics, dagMode: v }) },
         enablePanInteraction: { value: true, onChange: (v) => setPhysicsCallback({ ...physics, enablePanInteraction: v }) },
+        enableZoomInteraction: { value: true, onChange: (v) => setPhysicsCallback({ ...physics, enableZoomInteraction: v }) },
+        enablePointerInteraction: { value: true, onChange: (v) => setPhysicsCallback({ ...physics, enablePointerInteraction: v }) },
         },
         { collapsed: true},
         [physics]

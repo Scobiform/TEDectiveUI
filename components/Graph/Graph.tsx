@@ -57,13 +57,16 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   useEffect(() => {
 
     if (!physics) {
-      return; // Do nothing if physics, visuals, or graphData is undefined
+      return; // Do nothing if physics is undefined
     }
 
     const simulation = d3.forceSimulation(graphData!.nodes)
+    .force("center", d3.forceCenter())
     .alphaDecay(physics.alphaDecay)
     .alphaMin(physics.alphaMin)
     .velocityDecay(physics.velocityDecay)
+    .force("Charge", d3.forceManyBody().strength(physics.charge))
+    .force("Radial", d3.forceRadial(10))
     ;
   },[physics, graphData]);
 
@@ -90,6 +93,8 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeVisibility={visuals.nodeVisibility}
           linkDirectionalParticles={visuals.linkDirectionalParticles}
           linkDirectionalParticleWidth={visuals.linkDirectionalParticleWidth}
+          enableZoomInteraction={physics.enableZoomInteraction}
+          enablePointerInteraction={physics.enablePointerInteraction}
           //@ts-ignore
           dagMode={physics.dagMode}
           enablePanInteraction={physics.enablePanInteraction}
