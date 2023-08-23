@@ -31,7 +31,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   
   const [width, height] = useWindowSize();
   
-  // State variable to store the filter parameters
+  // State variable to store the physics parameters
   [physics, setPhysics] = useState(initialPhysics);
   // State variable to store the visual parameters
   [visuals, setVisuals] = useState(initialVisuals);
@@ -61,12 +61,9 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     }
 
     const simulation = d3.forceSimulation(graphData!.nodes)
-    .force("center", d3.forceCenter())
     .alphaDecay(physics.alphaDecay)
     .alphaMin(physics.alphaMin)
     .velocityDecay(physics.velocityDecay)
-    .force("Charge", d3.forceManyBody().strength(physics.charge))
-    .force("Radial", d3.forceRadial(10))
     ;
   },[physics, graphData]);
 
