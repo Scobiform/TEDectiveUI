@@ -8,9 +8,9 @@ import ForceGraph2D, { ForceGraphMethods, ForceGraphProps } from "react-force-gr
 import NodePanel from '../../components/Panel/NodePanel';
 import GUI from '../GUI/GUI';
 /* Config */
-import { initialPhysics, initialVisuals } from './../config'
+import { initialPhysics, initialVisuals } from './../config';
 /* Component styles */
-import styles from './graph.module.css'
+import styles from './graph.module.css';
 import { useWindowSize } from "@react-hook/window-size";
 
 export interface GraphProps {
@@ -74,9 +74,10 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   // Handle linkClick events
   const handleLinkClick = useCallback(
     (link: LinkObject) => {
-      console.log(link);
+      //console.log(link);
+      setOpen(false);
     }
-  ,[]);
+  ,[setOpen]);
 
   useEffect(() => {
 
