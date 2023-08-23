@@ -44,41 +44,6 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   // State variable to store whether the node panel is open or not
   [isOpen, setOpen] = useState(false);
 
-  // D3 simulation settings
-  // https://github.com/d3/d3-force
-  const simulation = d3.forceSimulation(graphData!.nodes)
-  useEffect(() => {
-
-    if (!physics || !simulation || !fgRef.current) {
-      return; // Do nothing if physics is undefined
-    }
-
-    simulation
-    .alphaDecay(physics.alphaDecay)
-    .alphaMin(physics.alphaMin)
-    .velocityDecay(physics.velocityDecay)
-    // enable centering force around the center of the canvas
-    //.force("center", d3.forceCenter())
-    // enable collision detection between nodes
-    //.force("collide", d3.forceCollide().radius(physics.collideRadius))
-    // enable charge force between nodes
-    //.force("charge", d3.forceManyBody().strength(physics.chargeStrength))
-    ;
-
-    // Get the ForceGraph2D component
-    const fg: any = fgRef.current;
-
-    // Deactivate existing forces
-    fg.d3Force('center', null);
-    fg.d3Force('charge', null);
-
-    // Add collision and bounding box forces
-    fg.d3Force('collide', d3.forceCollide().radius(physics.collideRadius));
-    fg.d3Force('box', d3.forceManyBody().strength(physics.chargeStrength));
-
-
-  },[physics, simulation]);
-
   // Callback function that will be called when a node is clicked
   const handleClick = useCallback(
     (node: NodeObject) => {
@@ -102,10 +67,9 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     (node: NodeObject | null) => {
       if (node) {
         console.log(node);
-        simulation.stop();
       }
     }
-  ,[simulation]);
+  ,[]);
 
   // Handle linkClick events
   const handleLinkClick = useCallback(
@@ -113,6 +77,26 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
       console.log(link);
     }
   ,[]);
+
+  
+  useEffect(() => {
+
+    if (!physics ) {
+      return; // Do nothing if physics is undefined
+    }
+
+    // Get the ForceGraph2D instance
+    const fgInstance = fgRef.current as unknown as ForceGraphMethods;
+
+    // Set the ForceGraph2D instance's d3Force
+    fgInstance.d3Force('charge', d3.forceManyBody().strength(physics.chargeStrength));
+    fgInstance.d3Force('center', d3.forceCenter(width / 2, height / 2));
+    fgInstance.d3Force('collide', d3.forceCollide(physics.collideRadius));
+    fgInstance.d3Force('link', d3.forceLink().id((d: any) => d.id).distance(physics.linkDistance));
+    fgInstance.d3Force('x', d3.forceX(width / 2).strength(physics.xStrength));
+    fgInstance.d3Force('y', d3.forceY(height / 2).strength(physics.yStrength));
+
+  },[physics, fgRef, width, height]);
   
   // Return the ForceGraph2D
   return (
@@ -130,6 +114,8 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeRelSize={visuals.nodeRel}
           nodeVal={(node) => (node.size * visuals!.awardNodeSizeMult || 1 )}
           onLinkClick={handleLinkClick}
+          onDagError={() => console.log('dag error')}
+          onEngineStop={() => console.log('engine stopped')}
           linkWidth={visuals.linkWidth}
           linkColor={() => visuals!.linkColor}
           linkCurvature={visuals.linkCurvature}
@@ -143,7 +129,9 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           enablePanInteraction={physics.enablePanInteraction}
           onBackgroundClick={() => setOpen(false)}
           onBackgroundRightClick={() => setOpen(false)}
-          cooldownTime={Infinity}
+          d3AlphaDecay={physics.alphaDecay}
+          d3AlphaMin={physics.alphaMin}
+          d3VelocityDecay={physics.velocityDecay}
           width={width}
           height={height}
         />

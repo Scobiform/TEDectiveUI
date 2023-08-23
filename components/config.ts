@@ -22,9 +22,9 @@ export const initialPhysics = {
   but risk getting stuck in a local minimum; lower values cause the simulation to take longer to run, 
   but typically converge on a better layout. To have the simulation run forever at the current alpha, 
   set the decay rate to zero; alternatively, set a target alpha greater than the minimum alpha.*/
-  alphaDecay: 0,
+  alphaDecay: 0.0042,
   alphaMin: 0,
-  alphaTarget: 0,
+  alphaTarget: 1,
   /* 
   If decay is specified, sets the velocity decay factor to the specified number in the range [0,1] 
   and returns this simulation. If decay is not specified, returns the current velocity decay factor, 
@@ -52,6 +52,8 @@ export const initialPhysics = {
   linkStrength: 0.3,
   linkDistance: 42,
   linkIts: 1,
+  xStrength: 0.1,
+  yStrength: 0.1,
 }
 
 // TODO: use node colors
