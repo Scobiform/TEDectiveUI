@@ -29,6 +29,10 @@ export interface GraphProps {
 const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   previewNode, setPreviewNode, isOpen, setOpen }: GraphProps) => {
   
+  // Create a reference to the graph
+  const fgRef = useRef();
+
+  // Get the window size
   const [width, height] = useWindowSize();
   
   // State variable to store the physics parameters
@@ -39,18 +43,6 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   [previewNode, setPreviewNode] = useState<NodeObject | null | undefined>(null);
   // State variable to store whether the node panel is open or not
   [isOpen, setOpen] = useState(false);
-
-  // Create a reference to the forceGraphMethods
-  const fgRef = useRef();
-
-  // Callback function that will be called when a node is clicked
-  const handleClick = useCallback(
-    (node: NodeObject) => {
-      setPreviewNode(node);
-      setOpen(true);
-    },
-    [setPreviewNode, setOpen]
-  );
 
   // D3 simulation settings
   // https://github.com/d3/d3-force
@@ -72,9 +64,56 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     // enable charge force between nodes
     //.force("charge", d3.forceManyBody().strength(physics.chargeStrength))
     ;
+
+    // Get the ForceGraph2D component
+    const fg: any = fgRef.current;
+
+    // Deactivate existing forces
+    fg.d3Force('center', null);
+    fg.d3Force('charge', null);
+
+    // Add collision and bounding box forces
+    fg.d3Force('collide', d3.forceCollide().radius(physics.collideRadius));
+    fg.d3Force('box', d3.forceManyBody().strength(physics.chargeStrength));
+
+
   },[physics, simulation]);
 
+  // Callback function that will be called when a node is clicked
+  const handleClick = useCallback(
+    (node: NodeObject) => {
+      setPreviewNode(node);
+      setOpen(true);
+    },
+    [setPreviewNode, setOpen]
+  );
 
+  // Handle nodeHover events
+  const handleNodeHover = useCallback(
+    (node: NodeObject | null) => {
+      if (node) {
+        console.log(node);
+      }
+    }
+  ,[]);
+
+  // Handle nodeDrag events
+  const handleNodeDrag = useCallback(
+    (node: NodeObject | null) => {
+      if (node) {
+        console.log(node);
+        simulation.stop();
+      }
+    }
+  ,[simulation]);
+
+  // Handle linkClick events
+  const handleLinkClick = useCallback(
+    (link: LinkObject) => {
+      console.log(link);
+    }
+  ,[]);
+  
   // Return the ForceGraph2D
   return (
     <>
@@ -86,8 +125,11 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeLabel="label"
           nodeAutoColorBy="indexColor"
           onNodeClick={handleClick}
+          onNodeHover={handleNodeHover}
+          onNodeDrag={handleNodeDrag}
           nodeRelSize={visuals.nodeRel}
           nodeVal={(node) => (node.size * visuals!.awardNodeSizeMult || 1 )}
+          onLinkClick={handleLinkClick}
           linkWidth={visuals.linkWidth}
           linkColor={() => visuals!.linkColor}
           linkCurvature={visuals.linkCurvature}
@@ -101,6 +143,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           enablePanInteraction={physics.enablePanInteraction}
           onBackgroundClick={() => setOpen(false)}
           onBackgroundRightClick={() => setOpen(false)}
+          cooldownTime={Infinity}
           width={width}
           height={height}
         />
