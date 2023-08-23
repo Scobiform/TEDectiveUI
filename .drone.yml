@@ -1,0 +1,40 @@
+---
+kind: pipeline
+name: default
+type: docker
+
+steps:
+  # TODO Ensure REUSE compliance
+  # - name: reuse
+  #   image: fsfe/reuse:latest
+
+  - name: deploy
+    image: docker:24
+    environment:
+      # Environment variables necessary for rootless Docker
+      XDG_RUNTIME_DIR: "/run/user/1001"
+      DOCKER_HOST: "unix:///run/user/1001/docker.sock"
+    volumes:
+      # Mounting Docker socket of rootless docker user
+      - name: dockersock
+        path: /run/user/1001/docker.sock
+    commands:
+      - docker compose pull --ignore-buildable --include-deps
+      - docker compose -p tedective-ui up --build -d
+    when:
+      branch:
+        - main
+      event:
+        - push
+        - tag
+        - deployment
+
+# Define the docker host ("drone runner node") on which this will be executed
+node:
+  cont2: noris
+
+volumes:
+  # Define Docker socket of rootless docker user
+  - name: dockersock
+    host:
+      path: /run/user/1001/docker.sock

@@ -1,0 +1,15 @@
+version: "3"
+services:
+  tedective-docs:
+    container_name: tedective-ui
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tedective-ui
+    restart: unless-stopped
+    ports:
+      - "23484:3000"
+    labels:
+      proxy.host: "app.tedective.org"
+      proxy.port: "23484"
+      proxy.host_alias: "www.app.tedective.org,app.tedective.eu,www.app.tedective.eu"
