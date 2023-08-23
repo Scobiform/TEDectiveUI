@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import styles from './charts.module.css'
 import Chart from 'chart.js/auto';
 
+// TODO: Make this a generic Chart.js component
 const DoughnutChart = (props: any) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -20,7 +21,9 @@ const DoughnutChart = (props: any) => {
         }
 
         let myChart = new Chart(ctx, {
+            // The type of chart we want to create
             type: 'doughnut',
+            // The data for our dataset
             data: props.data,
             options: {
                 elements: {
