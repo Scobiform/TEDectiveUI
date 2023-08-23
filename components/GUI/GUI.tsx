@@ -32,6 +32,7 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
         enablePanInteraction: { value: true, onChange: (v) => setPhysicsCallback({ ...physics, enablePanInteraction: v }) },
         enableZoomInteraction: { value: true, onChange: (v) => setPhysicsCallback({ ...physics, enableZoomInteraction: v }) },
         enablePointerInteraction: { value: true, onChange: (v) => setPhysicsCallback({ ...physics, enablePointerInteraction: v }) },
+        enableNodeDrag: { value: true, onChange: (v) => setPhysicsCallback({ ...physics, enableNodeDrag: v }) },
         },
         { collapsed: true},
         [physics]

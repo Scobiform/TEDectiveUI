@@ -24,7 +24,7 @@ export const initialPhysics = {
   set the decay rate to zero; alternatively, set a target alpha greater than the minimum alpha.*/
   alphaDecay: 0.042,
   alphaMin: 0,
-  alphaTarget: 0,
+  alphaTarget: 1,
   /* 
   If decay is specified, sets the velocity decay factor to the specified number in the range [0,1] 
   and returns this simulation. If decay is not specified, returns the current velocity decay factor, 
@@ -42,8 +42,8 @@ export const initialPhysics = {
   enablePanInteraction: true,
   enableZoomInteraction: true,
   enablePointerInteraction: true,
+  enableNodeDrag: true,
   charge: -700,
-  // Not supported by react force graph, but by D3
   gravity: 0.1,
   gravityOn: true,
   collision: true,
