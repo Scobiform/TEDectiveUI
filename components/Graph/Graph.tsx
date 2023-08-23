@@ -54,18 +54,23 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
 
   // D3 simulation settings
   // https://github.com/d3/d3-force
+  const simulation = d3.forceSimulation(graphData!.nodes)
   useEffect(() => {
 
-    if (!physics) {
+    if (!physics || !simulation || !visuals) {
       return; // Do nothing if physics is undefined
     }
 
-    const simulation = d3.forceSimulation(graphData!.nodes)
+    simulation
     .alphaDecay(physics.alphaDecay)
     .alphaMin(physics.alphaMin)
     .velocityDecay(physics.velocityDecay)
+    // enable centering force around the center of the canvas
+    .force("center", d3.forceCenter())
+    // enable collision detection between nodes
+    .force("collide", d3.forceCollide().radius(visuals.nodeRel))
     ;
-  },[physics, graphData]);
+  },[physics, visuals, simulation]);
 
   // Return the ForceGraph2D
   return (
@@ -82,9 +87,6 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeVal={(node) => (node.size * visuals!.awardNodeSizeMult || 1 )}
           linkWidth={visuals.linkWidth}
           linkColor={() => visuals!.linkColor}
-          d3AlphaDecay={physics.alphaDecay}
-          d3VelocityDecay={physics.velocityDecay}
-          d3AlphaMin={physics.alphaMin}
           linkCurvature={visuals.linkCurvature}
           linkVisibility={visuals.linkVisibility}
           nodeVisibility={visuals.nodeVisibility}
@@ -93,9 +95,9 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           enableZoomInteraction={physics.enableZoomInteraction}
           enablePointerInteraction={physics.enablePointerInteraction}
           enableNodeDrag={physics.enableNodeDrag}
-          //@ts-ignore
-          dagMode={physics.dagMode}
           enablePanInteraction={physics.enablePanInteraction}
+          onBackgroundClick={() => setOpen(false)}
+          onBackgroundRightClick={() => setOpen(false)}
           width={width}
           height={height}
         />
