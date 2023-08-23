@@ -133,6 +133,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           d3AlphaMin={physics.alphaMin}
           d3AlphaTarget={physics.alphaTarget}
           d3VelocityDecay={physics.velocityDecay}
+          cooldownTime={Infinity}
           width={width}
           height={height}
         />

@@ -40,7 +40,12 @@ export const initialPhysics = {
   enablePointerInteraction: true,
   enableNodeDrag: true,
   enableNavigationControls: true,
-  /* sets the strength accessor to the specified number or function, re-evaluates the strength accessor for each node, and returns this force. A positive value causes nodes to attract each other, similar to gravity, while a negative value causes nodes to repel each other, similar to electrostatic charge. The strength accessor is invoked for each node in the simulation, being passed the node and its zero-based index. The resulting number is then stored internally, such that the strength of each node is only recomputed when the force is initialized or when this method is called with a new strength, and not on every application of the force. */
+  /* sets the strength accessor to the specified number or function, re-evaluates the strength 
+  accessor for each node, and returns this force. A positive value causes nodes to attract each other,
+   similar to gravity, while a negative value causes nodes to repel each other, similar to electrostatic charge. The strength accessor is invoked for each node in the simulation, 
+   being passed the node and its zero-based index. The resulting number is then stored internally, 
+   such that the strength of each node is only recomputed when the force is initialized or 
+   when this method is called with a new strength, and not on every application of the force. */
   chargeStrength: -700,
   enableGravity: true,
   gravityStrength: 0.1,
