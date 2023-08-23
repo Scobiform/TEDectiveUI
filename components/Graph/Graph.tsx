@@ -131,6 +131,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           onBackgroundRightClick={() => setOpen(false)}
           d3AlphaDecay={physics.alphaDecay}
           d3AlphaMin={physics.alphaMin}
+          d3AlphaTarget={physics.alphaTarget}
           d3VelocityDecay={physics.velocityDecay}
           width={width}
           height={height}
