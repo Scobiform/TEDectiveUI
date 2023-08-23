@@ -78,7 +78,6 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     }
   ,[]);
 
-  
   useEffect(() => {
 
     if (!physics ) {

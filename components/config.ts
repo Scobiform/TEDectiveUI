@@ -33,7 +33,7 @@ export const initialPhysics = {
   As with lowering the alpha decay rate, less velocity decay may converge on a better solution, 
   but risks numerical instabilities and oscillation.
   */
-  velocityDecay: 0.042,
+  velocityDecay: 0.42,
   stopAnimation: false,
   enablePanInteraction: true,
   enableZoomInteraction: true,
