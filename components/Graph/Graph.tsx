@@ -8,9 +8,9 @@ import ForceGraph2D, { ForceGraphMethods, ForceGraphProps } from "react-force-gr
 import NodePanel from '../../components/Panel/NodePanel';
 import GUI from '../GUI/GUI';
 /* Config */
-import { initialPhysics, initialVisuals } from './../config'
+import { initialPhysics, initialVisuals } from './../config';
 /* Component styles */
-import styles from './graph.module.css'
+import styles from './graph.module.css';
 import { useWindowSize } from "@react-hook/window-size";
 
 export interface GraphProps {
@@ -29,9 +29,13 @@ export interface GraphProps {
 const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   previewNode, setPreviewNode, isOpen, setOpen }: GraphProps) => {
   
+  // Create a reference to the graph
+  const fgRef = useRef();
+
+  // Get the window size
   const [width, height] = useWindowSize();
   
-  // State variable to store the filter parameters
+  // State variable to store the physics parameters
   [physics, setPhysics] = useState(initialPhysics);
   // State variable to store the visual parameters
   [visuals, setVisuals] = useState(initialVisuals);
@@ -39,9 +43,6 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   [previewNode, setPreviewNode] = useState<NodeObject | null | undefined>(null);
   // State variable to store whether the node panel is open or not
   [isOpen, setOpen] = useState(false);
-
-  // Create a reference to the forceGraphMethods
-  const fgRef = useRef();
 
   // Callback function that will be called when a node is clicked
   const handleClick = useCallback(
@@ -52,24 +53,51 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     [setPreviewNode, setOpen]
   );
 
-  // D3 simulation settings
-  // https://github.com/d3/d3-force
+  // Handle nodeHover events
+  const handleNodeHover = useCallback(
+    (node: NodeObject | null) => {
+      if (node) {
+        console.log(node);
+      }
+    }
+  ,[]);
+
+  // Handle nodeDrag events
+  const handleNodeDrag = useCallback(
+    (node: NodeObject | null) => {
+      if (node) {
+        console.log(node);
+      }
+    }
+  ,[]);
+
+  // Handle linkClick events
+  const handleLinkClick = useCallback(
+    (link: LinkObject) => {
+      //console.log(link);
+      setOpen(false);
+    }
+  ,[setOpen]);
+
   useEffect(() => {
 
-    if (!physics) {
-      return; // Do nothing if physics, visuals, or graphData is undefined
+    if (!physics ) {
+      return; // Do nothing if physics is undefined
     }
 
-    const simulation = d3.forceSimulation(graphData!.nodes)
-    .force("center", d3.forceCenter())
-    .alphaDecay(physics.alphaDecay)
-    .alphaMin(physics.alphaMin)
-    .velocityDecay(physics.velocityDecay)
-    .force("Charge", d3.forceManyBody().strength(physics.charge))
-    .force("Radial", d3.forceRadial(10))
-    ;
-  },[physics, graphData]);
+    // Get the ForceGraph2D instance
+    const fgInstance = fgRef.current as unknown as ForceGraphMethods;
 
+    // Set the ForceGraph2D instance's d3Force
+    fgInstance.d3Force('charge', d3.forceManyBody().strength(physics.chargeStrength));
+    fgInstance.d3Force('center', d3.forceCenter(width / 2, height / 2));
+    fgInstance.d3Force('collide', d3.forceCollide(physics.collideRadius));
+    fgInstance.d3Force('link', d3.forceLink().id((d: any) => d.id).distance(physics.linkDistance));
+    fgInstance.d3Force('x', d3.forceX(width / 2).strength(physics.xStrength));
+    fgInstance.d3Force('y', d3.forceY(height / 2).strength(physics.yStrength));
+
+  },[physics, fgRef, width, height]);
+  
   // Return the ForceGraph2D
   return (
     <>
@@ -81,21 +109,31 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeLabel="label"
           nodeAutoColorBy="indexColor"
           onNodeClick={handleClick}
+          onNodeHover={handleNodeHover}
+          onNodeDrag={handleNodeDrag}
           nodeRelSize={visuals.nodeRel}
           nodeVal={(node) => (node.size * visuals!.awardNodeSizeMult || 1 )}
+          onLinkClick={handleLinkClick}
+          onDagError={() => console.log('dag error')}
+          onEngineStop={() => console.log('engine stopped')}
           linkWidth={visuals.linkWidth}
           linkColor={() => visuals!.linkColor}
-          d3AlphaDecay={physics.alphaDecay}
-          d3VelocityDecay={physics.velocityDecay}
-          d3AlphaMin={physics.alphaMin}
           linkCurvature={visuals.linkCurvature}
           linkVisibility={visuals.linkVisibility}
           nodeVisibility={visuals.nodeVisibility}
           linkDirectionalParticles={visuals.linkDirectionalParticles}
           linkDirectionalParticleWidth={visuals.linkDirectionalParticleWidth}
-          //@ts-ignore
-          dagMode={physics.dagMode}
+          enableZoomInteraction={physics.enableZoomInteraction}
+          enablePointerInteraction={physics.enablePointerInteraction}
+          enableNodeDrag={physics.enableNodeDrag}
           enablePanInteraction={physics.enablePanInteraction}
+          onBackgroundClick={() => setOpen(false)}
+          onBackgroundRightClick={() => setOpen(false)}
+          d3AlphaDecay={physics.alphaDecay}
+          d3AlphaMin={physics.alphaMin}
+          d3AlphaTarget={physics.alphaTarget}
+          d3VelocityDecay={physics.velocityDecay}
+          cooldownTime={Infinity}
           width={width}
           height={height}
         />

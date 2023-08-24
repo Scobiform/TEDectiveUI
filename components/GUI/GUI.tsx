@@ -27,9 +27,16 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     const physicsData = useControls('Physics', {
         alphaDecay: { value: physics.alphaDecay, min: 0, max: 1, step: 0.0001, onChange: (v) => setPhysicsCallback({ ...physics, alphaDecay: v }) },
         alphaMin: { value: physics.alphaMin, min: 0, max: 1, step: 0.0001, onChange: (v) => setPhysicsCallback({ ...physics, alphaMin: v }) },
+        alphaTarget: { value: physics.alphaTarget, min: 0, max: 1, step: 0.0001, onChange: (v) => setPhysicsCallback({ ...physics, alphaTarget: v }) },
         velocityDecay: { value: physics.velocityDecay, min: 0, max: 1, step: 0.001, onChange: (v) => setPhysicsCallback({ ...physics, velocityDecay: v }) },
-        dagMode: { value: 'zout', options: ["td","bu","lr","rl","radialin","zin","zout","radialout"], onChange: (v) => setPhysicsCallback({ ...physics, dagMode: v }) },
+        enableGravity: { value: physics.enableGravity, onChange: (v) => setPhysicsCallback({ ...physics, enableGravity: v }) },
+        enableCollision: { value: physics.enableCollision, onChange: (v) => setPhysicsCallback({ ...physics, enableCollision: v }) },
+        enableCentering: { value: physics.enableCentering, onChange: (v) => setPhysicsCallback({ ...physics, enableCentering: v }) },
         enablePanInteraction: { value: true, onChange: (v) => setPhysicsCallback({ ...physics, enablePanInteraction: v }) },
+        enableZoomInteraction: { value: true, onChange: (v) => setPhysicsCallback({ ...physics, enableZoomInteraction: v }) },
+        enablePointerInteraction: { value: true, onChange: (v) => setPhysicsCallback({ ...physics, enablePointerInteraction: v }) },
+        enableNodeDrag: { value: true, onChange: (v) => setPhysicsCallback({ ...physics, enableNodeDrag: v }) },
+        enableNavigationControls: { value: true, onChange: (v) => setPhysicsCallback({ ...physics, enableNavigationControls: v }) },
         },
         { collapsed: true},
         [physics]
@@ -37,14 +44,13 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
 
     // Visuals GUI panel
     const visualsStore = useCreateStore() ;
-    // TODO: move min and max to config
     const visualsData = useControls('Visuals', {
         nodeVisibility: { value: visuals.nodeVisibility, onChange: (v) => setVisualsCallback({ ...visuals, nodeVisibility: v }) },
         nodeRelSize: { value: visuals.nodeRel, min: 0, max: 42, step: 0.1, onChange: (v) => setVisualsCallback({ ...visuals, nodeRel: v }) },
         awardSizeMultiplier: { value: visuals.awardNodeSizeMult, min: 0.001, max: 1, step: 0.001, onChange: (v) => setVisualsCallback({ ...visuals, awardNodeSizeMult: v }) },
         linkVisibility: { value: visuals.linkVisibility, onChange: (v) => setVisualsCallback({ ...visuals, linkVisibility: v }) },
         linkColor: { value: visuals.linkColor, onChange: (v) => setVisualsCallback({ ...visuals, linkColor: v }) },
-        linkWith: { value: visuals.linkWidth, min: 0, max: 4.2, step: 0.001, onChange: (v) => setVisualsCallback({ ...visuals, linkWidth: v }) },
+        linkWitdh: { value: visuals.linkWidth, min: 0, max: 7, step: 0.1, onChange: (v) => setVisualsCallback({ ...visuals, linkWidth: v }) },
         linkCurvature: { value: visuals.linkCurvature, min: 0, max: 70, step: 0.1, onChange: (v) => setVisualsCallback({ ...visuals, linkCurvature: v }) },
         linkDirectionalParticles: { value: visuals.linkDirectionalParticles, min: 0, max: 14, step: 0.001, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticles: v }) },
         linkDirectionalParticleWidth: { value: visuals.linkDirectionalParticleWidth, min: 0, max: 42, step: 0.01, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticleWidth: v }) },

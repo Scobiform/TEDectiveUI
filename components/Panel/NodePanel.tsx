@@ -28,16 +28,11 @@ const doughnutData = {
 // NodePanel component with NodePanelProps **********************************************/
 const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
  
+  // Toggle menu
   const toggleMenu = () => setOpen(!isOpen);
 
   // Convert node object to string
   const objectString = JSON.stringify(previewNode);
-
-  // UseEffect hook
-  // https://legacy.reactjs.org/docs/hooks-effect.html
-  useEffect(() => {
-    const closeMenu = () => isOpen && setOpen(false);
-  }, [isOpen, setOpen]);
 
   // TODO: Build switch case for template display based on node type
   if(previewNode === null || previewNode === undefined)
@@ -74,6 +69,7 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
     return (
       <>
       {/* Award based organization view with switch for buyer / seller perspective */}
+      {console.log(isOpen)}
       <div className={styles.nodePanel}>
           <button
           onClick={toggleMenu}
