@@ -14,5 +14,13 @@
     {
         "name": "Generate random graph",
         "apiPath": "random"
+    },
+    {
+        "name": "Gesellschaft für internationale Zusammenarbeit",
+        "apiPath": "https://api.tedective.org/latest/graphql/releases_per_supplier/c85f969c-f516-5e13-b1bd-3df7abe48531"
+    },
+    {
+        "name": "Bundesministerium für Wirtschaft und Energie",
+        "apiPath": "https://api.tedective.org/latest/graphql/releases_per_supplier/5410c11d-647b-560d-996b-10ad91e70ea9"
     }
 ]
