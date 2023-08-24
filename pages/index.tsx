@@ -21,7 +21,6 @@ interface HomeProps {
   setApiPath: any;
 }
 
-
 function genRandomTree(N = 420, reverse = false) {
   const nodes = Array.from({ length: N }, (_, i) => ({ id: i }));
   
@@ -55,12 +54,12 @@ const Home = ({apiPath,
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
   // API path state
-  [apiPath, setApiPath] = useState('blocks.json');
+  [apiPath, setApiPath] = useState('random');
 
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch json from API
+  // State for graph data
   const [graphData, setGraphData] = useState({
     nodes: [], 
     links: []
@@ -68,7 +67,7 @@ const Home = ({apiPath,
   
   useEffect(() => {
     // Generate random number
-    const randomNumber = Math.floor(Math.random() * 4200);
+    const randomNumber = Math.floor(Math.random() * 420);
     // Generate random tree for testing
     const randomTree = genRandomTree(randomNumber, true);
     // If apiPath is 'random', set graphData to randomTree
