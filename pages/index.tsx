@@ -21,6 +21,24 @@ interface HomeProps {
   setApiPath: any;
 }
 
+
+function genRandomTree(N = 420, reverse = false) {
+  const nodes = Array.from({ length: N }, (_, i) => ({ id: i }));
+  
+  const links = Array.from({ length: N - 1 }, (_, id) => ({
+    [reverse ? 'target' : 'source']: id + 1,
+    [reverse ? 'source' : 'target']: Math.round(Math.random() * id)
+  }));
+  
+  // Convert the links to a format compatible with React Force Graph
+  const formattedLinks = links.map(link => ({
+    source: nodes[link.source],
+    target: nodes[link.target]
+  }));
+  
+  return { nodes, links: formattedLinks };
+}
+
 const Home = ({apiPath, 
               setApiPath, 
               physics, 
@@ -43,8 +61,23 @@ const Home = ({apiPath,
   const [isLoading, setIsLoading] = useState(true);
 
   // Fetch json from API
-  const [graphData, setGraphData] = useState({nodes: [], links: []});
+  const [graphData, setGraphData] = useState({
+    nodes: [], 
+    links: []
+  });
+  
   useEffect(() => {
+    // Generate random number
+    const randomNumber = Math.floor(Math.random() * 4200);
+    // Generate random tree for testing
+    const randomTree = genRandomTree(randomNumber, true);
+    // If apiPath is 'random', set graphData to randomTree
+    if (apiPath == 'random') {
+      //@ts-ignore -- debug
+      setGraphData(randomTree);
+      setIsLoading(false);
+      return;
+    }
     fetch(apiPath+'')
       .then(response => response.json())
       .then(data => {

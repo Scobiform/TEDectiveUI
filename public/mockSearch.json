@@ -10,5 +10,9 @@
     {
         "name": "Organization C",
         "apiPath": "blocks.json"
+    },
+    {
+        "name": "Generate random graph",
+        "apiPath": "random"
     }
 ]
