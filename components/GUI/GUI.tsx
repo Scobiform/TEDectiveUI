@@ -54,8 +54,6 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
         linkCurvature: { value: visuals.linkCurvature, min: 0, max: 70, step: 0.1, onChange: (v) => setVisualsCallback({ ...visuals, linkCurvature: v }) },
         linkDirectionalParticles: { value: visuals.linkDirectionalParticles, min: 0, max: 14, step: 0.001, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticles: v }) },
         linkDirectionalParticleWidth: { value: visuals.linkDirectionalParticleWidth, min: 0, max: 42, step: 0.01, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticleWidth: v }) },
-        mixBlendMode: { value: visuals.blendMode, options: ["normal","multiply","screen","overlay","darken","lighten","color-dodge","color-burn","hard-light","soft-light","difference","exclusion","hue","saturation","color","luminosity"], onChange: (v) => setVisualsCallback({ ...visuals, blendMode: v }) },
-        bodyImageUrl: { value: visuals.bodyImageUrl, onChange: (v) => setVisualsCallback({ ...visuals, bodyImageUrl: v }) },
         opacity: { value: visuals.opacity, min: 0, max: 1, step: 0.01, onChange: (v) => setVisualsCallback({ ...visuals, opacity: v }) },
         },
         { collapsed: true},
@@ -113,22 +111,6 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
         gui.style.fontFamily = 'var(--font-inter)';
         gui.style.overflowY = 'scroll';
         gui.style.maxHeight = newHeight;
-    });
-
-    // MixBlendMode
-    //@ts-ignore
-    const mainDiv = Array.from(
-        document.getElementsByClassName('page_main__nw1Wk') as HTMLCollectionOf<HTMLElement>,
-    );
-    mainDiv.forEach(main => {
-        main.style.mixBlendMode = visuals.blendMode;
-    });
-
-    const mainBody = Array.from(
-        document.getElementsByClassName('__className_20951f') as HTMLCollectionOf<HTMLElement>,
-    );
-    mainBody.forEach(main => {
-        main.style.backgroundImage = `url(${visuals.bodyImageUrl})`;
     });
     
     // Set Opacity

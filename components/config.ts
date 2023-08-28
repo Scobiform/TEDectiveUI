@@ -33,7 +33,7 @@ export const initialPhysics = {
   As with lowering the alpha decay rate, less velocity decay may converge on a better solution, 
   but risks numerical instabilities and oscillation.
   */
-  velocityDecay: 0.42,
+  velocityDecay: 0.91,
   stopAnimation: false,
   enablePanInteraction: true,
   enableZoomInteraction: true,
@@ -61,14 +61,15 @@ export const initialPhysics = {
   yStrength: 0.1,
 }
 
-// TODO: use node colors
 export let initialVisuals = {
   // Node colors
   orgNodeColor: 'green.500',
   awardNodeColor: 'orange.500',
   tenderNodeColor: 'yellow.500',
   planningNodeColor: 'gray.500',
+  // Node labels
   labels: 2,
+  labelRel: 2.2,
   nodeRel: 4.2,
   labelFontSize: 8,
   labelLength: 40,
@@ -77,29 +78,31 @@ export let initialVisuals = {
   labelTextColor: 'black',
   awardNodeSizeMult: 0.7,
   nodeZoomSize: 1.2,
+  // Node config
+  nodeVisibility: true,
+  nodeDistanceMin: 0.42,
+  nodeDistanceMax: 70,
+  nodeStrength: 100,
+  // Node sizes
   orgNodeSize: 2,
   awardNodeSize: 2,
   tenderNodeSize: 2,
   planningNodeSize: 2,
-  linkWidth: 0.1,
-  linkDistance: 42,
+  // Link config
+  linkVisibility: true,
+  linkCurvature: 0.1,
+  linkWidth: 0.01,
+  linkDistance: 0.42,
   linkColor: '#3fa535',
+  linkDirectionalParticles: 0.1,
+  linkDirectionalParticleWidth: 0.1,
+  linkLineDash: 0.1,
+  // Highlight config
   highlightAnim: true,
   highlightFade: 0.8,
   highlightLinkSize: 1.4,
   highlightNodeSize: 2.2,
   highlightLabelFontSize: 1.4,
-  linkCurvature: 0,
-  linkVisibility: true,
-  nodeVisibility: true,
-  nodeDistanceMin: 0.42,
-  nodeDistanceMax: 70,
-  nodeStrength: -100,
-  linkDirectionalParticles: 0,
-  linkDirectionalParticleWidth: 0.1,
-  linkLineDash: 0,
-  blendMode: 'normal',
-  bodyImageUrl: '',
   opacity: 0.91,
   windowWidth: 640,
   windowHeight: 320,

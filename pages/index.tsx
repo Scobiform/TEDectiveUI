@@ -54,7 +54,7 @@ const Home = ({apiPath,
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
   // API path state
-  [apiPath, setApiPath] = useState('random');
+  [apiPath, setApiPath] = useState('initial.json');
 
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
@@ -67,7 +67,7 @@ const Home = ({apiPath,
   
   useEffect(() => {
     // Generate random number
-    const randomNumber = Math.floor(Math.random() * 420);
+    const randomNumber = Math.floor(Math.random() * 4200);
     // Generate random tree for testing
     const randomTree = genRandomTree(randomNumber, true);
     // If apiPath is 'random', set graphData to randomTree

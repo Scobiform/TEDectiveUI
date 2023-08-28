@@ -1,6 +1,6 @@
 'use client';
 import React, { useCallback, useEffect, useLayoutEffect, useReducer, useRef, useState } from "react";
-import { GraphData, NodeObject, LinkObject } from 'force-graph'
+import { GraphData, NodeObject, LinkObject,  } from 'force-graph'
 import * as d3 from 'd3-force';
 /* Use 2d graph */
 import ForceGraph2D, { ForceGraphMethods, ForceGraphProps } from "react-force-graph-2d";
@@ -57,7 +57,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   const handleNodeHover = useCallback(
     (node: NodeObject | null) => {
       if (node) {
-        console.log(node);
+        //console.log(node);
       }
     }
   ,[]);
@@ -66,7 +66,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   const handleNodeDrag = useCallback(
     (node: NodeObject | null) => {
       if (node) {
-        console.log(node);
+        //console.log(node);
       }
     }
   ,[]);
@@ -108,6 +108,29 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           graphData={graphData}
           nodeLabel="label"
           nodeAutoColorBy="indexColor"
+          nodeCanvasObject={(node, ctx, globalScale) => {
+            const label = node.description || node.label || '❇';
+            const fontSize = 14/globalScale;
+            ctx.font = `${fontSize}px Sans-Serif`;
+            const textWidth = ctx.measureText(label).width;
+            const bckgDimensions = [textWidth, fontSize].map(n => n); // some padding
+
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = node.color;
+
+            ctx.fillText(label, node.x || 1, node.y || 1);
+
+            node.__bckgDimensions = bckgDimensions; // to re-use in nodePointerAreaPaint
+          }}
+          nodePointerAreaPaint={(node, color, ctx) => {
+            ctx.fillStyle = color;
+            const bckgDimensions = node.__bckgDimensions;
+            if (bckgDimensions) {
+              const [width, height] = bckgDimensions;
+              ctx.fillRect(node.x || 1 - width / 2, node.y || 1 - height / 2, width, height);
+            }
+          }}
           onNodeClick={handleClick}
           onNodeHover={handleNodeHover}
           onNodeDrag={handleNodeDrag}
@@ -123,6 +146,10 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeVisibility={visuals.nodeVisibility}
           linkDirectionalParticles={visuals.linkDirectionalParticles}
           linkDirectionalParticleWidth={visuals.linkDirectionalParticleWidth}
+          linkPointerAreaPaint={(link, color, ctx) => {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 0;
+          }}
           enableZoomInteraction={physics.enableZoomInteraction}
           enablePointerInteraction={physics.enablePointerInteraction}
           enableNodeDrag={physics.enableNodeDrag}
