@@ -69,7 +69,6 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
     return (
       <>
       {/* Award based organization view with switch for buyer / seller perspective */}
-      {console.log(isOpen)}
       <div className={styles.nodePanel}>
           <button
           onClick={toggleMenu}

@@ -110,18 +110,29 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeCanvasObject={(node, ctx, globalScale) => {
             
             let label = '🟩';
+            let fontSize = 14*visuals!.nodeRel;
 
+            // Award icon
             if(node.awardID !== undefined) {
               label = '💰';
+              if(node.value !== undefined)
+              {
+                fontSize = 14*visuals!.nodeRel*node.value.amount/1000000*visuals!.awardNodeSizeMult;
+              }
             }
 
+            // Tender icon
             if(node.tag !== undefined) {
               if(node.tag[0] === 'tender') {
                 label = '🔺';
               }
             }
 
-            const fontSize = 14*visuals!.nodeRel*visuals!.awardNodeSizeMult;
+            // Organization icon
+            if(node.name !== undefined) {
+              label = '🏢';
+            }
+
             ctx.font = `${fontSize}px Sans-Serif`;
             const textWidth = ctx.measureText(label).width;
             const bckgDimensions = [textWidth, fontSize].map(n => n); // some padding
