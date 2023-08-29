@@ -81,12 +81,12 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
 
   useEffect(() => {
 
+    // Get the ForceGraph2D instance
+    const fgInstance = fgRef.current as unknown as ForceGraphMethods;
+
     if (!physics ) {
       return; // Do nothing if physics is undefined
     }
-
-    // Get the ForceGraph2D instance
-    const fgInstance = fgRef.current as unknown as ForceGraphMethods;
 
     // Set the ForceGraph2D instance's d3Force
     fgInstance.d3Force('charge', d3.forceManyBody().strength(physics.chargeStrength));
@@ -108,8 +108,20 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeLabel="label"
           nodeAutoColorBy="indexColor"
           nodeCanvasObject={(node, ctx, globalScale) => {
-            const label = '🟩';
-            const fontSize = 14/globalScale;
+            
+            let label = '🟩';
+
+            if(node.awardID !== undefined) {
+              label = '💰';
+            }
+
+            if(node.tag !== undefined) {
+              if(node.tag[0] === 'tender') {
+                label = '🔺';
+              }
+            }
+
+            const fontSize = 14*visuals!.nodeRel*visuals!.awardNodeSizeMult;
             ctx.font = `${fontSize}px Sans-Serif`;
             const textWidth = ctx.measureText(label).width;
             const bckgDimensions = [textWidth, fontSize].map(n => n); // some padding
