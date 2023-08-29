@@ -14,7 +14,7 @@ import styles from './graph.module.css';
 import { useWindowSize } from "@react-hook/window-size";
 
 export interface GraphProps {
-  graphData: GraphData | null; 
+  graphData: GraphData | undefined; 
   physics?: typeof initialPhysics;
   setPhysics?: any;
   visuals?: typeof initialVisuals;
@@ -90,12 +90,12 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
 
     // Set the ForceGraph2D instance's d3Force
     fgInstance.d3Force('charge', d3.forceManyBody().strength(physics.chargeStrength));
-    fgInstance.d3Force('center', d3.forceCenter(width / 2, height / 2));
+    fgInstance.d3Force('center', d3.forceCenter(0, 0));
     fgInstance.d3Force('collide', d3.forceCollide(physics.collideRadius));
     fgInstance.d3Force('link', d3.forceLink().id((d: any) => d.id).distance(physics.linkDistance));
     fgInstance.d3Force('x', d3.forceX(width / 2).strength(physics.xStrength));
     fgInstance.d3Force('y', d3.forceY(height / 2).strength(physics.yStrength));
-
+    fgInstance.d3Force('radial', d3.forceRadial(physics.radialRadius, width / 2, height / 2));
   },[physics, fgRef, width, height]);
   
   // Return the ForceGraph2D
@@ -104,19 +104,18 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
       <div className={styles.graphWrapper}>
         <ForceGraph2D
           ref={fgRef}
-          //@ts-ignore
           graphData={graphData}
           nodeLabel="label"
           nodeAutoColorBy="indexColor"
           nodeCanvasObject={(node, ctx, globalScale) => {
-            const label = node.description || node.label || '❇';
+            const label = '🟩';
             const fontSize = 14/globalScale;
             ctx.font = `${fontSize}px Sans-Serif`;
             const textWidth = ctx.measureText(label).width;
             const bckgDimensions = [textWidth, fontSize].map(n => n); // some padding
 
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
             ctx.fillStyle = node.color;
 
             ctx.fillText(label, node.x || 1, node.y || 1);
@@ -158,7 +157,6 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           onBackgroundRightClick={() => setOpen(false)}
           d3AlphaDecay={physics.alphaDecay}
           d3AlphaMin={physics.alphaMin}
-          d3AlphaTarget={physics.alphaTarget}
           d3VelocityDecay={physics.velocityDecay}
           cooldownTime={Infinity}
           width={width}

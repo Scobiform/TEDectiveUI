@@ -54,6 +54,7 @@ export const initialPhysics = {
   collideRadius: 10,
   enableCentering: true,
   centeringStrength: 0.2,
+  radialRadius: 140,
   linkStrength: 0.3,
   linkDistance: 42,
   linkIts: 1,
@@ -90,8 +91,8 @@ export let initialVisuals = {
   planningNodeSize: 2,
   // Link config
   linkVisibility: true,
-  linkCurvature: 0.1,
-  linkWidth: 0.01,
+  linkCurvature: 0,
+  linkWidth: 0.1,
   linkDistance: 0.42,
   linkColor: '#3fa535',
   linkDirectionalParticles: 0.1,

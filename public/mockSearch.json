@@ -1,15 +1,19 @@
 [
     {
-        "name": "Organization A",
-        "apiPath": "initial.json"
+        "name": "Gemeinde Unterföhring",
+        "apiPath": "/initial/1623e936-cdd6-522e-a5ed-54bce68301f2.json"
     },
     {
-        "name": "Organization B",
-        "apiPath": "miserables.json"
+        "name": "Deutsche Gesellschaft für internationale Zusammenarbeit",
+        "apiPath": "/initial/c85f969c-f516-5e13-b1bd-3df7abe48531.json"
     },
     {
-        "name": "Organization C",
-        "apiPath": "blocks.json"
+        "name": "Stadt Würzburg",
+        "apiPath": "/initial/d42bc15e-2da5-5644-be67-27da5e5a8cda.json"
+    },
+    {
+        "name": "Stadt Schweinfurt",
+        "apiPath": "/initial/4bdd017b-de61-54b4-9728-45c0fe2b1ff2.json"
     },
     {
         "name": "Generate random graph",
