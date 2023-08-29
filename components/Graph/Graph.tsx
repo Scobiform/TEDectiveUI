@@ -112,12 +112,16 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
             let label = '🟩';
             let fontSize = 14*visuals!.nodeRel;
 
+            if(node.color === undefined) {
+              node.color = 'grey';
+            }
+
             // Award icon
             if(node.awardID !== undefined) {
               label = '💰';
               if(node.value !== undefined)
               {
-                fontSize = 14*visuals!.nodeRel*node.value.amount/1000000*visuals!.awardNodeSizeMult;
+                fontSize = Math.floor(14*visuals!.nodeRel*(node.value.amount/1000000)*visuals!.awardNodeSizeMult);
               }
             }
 

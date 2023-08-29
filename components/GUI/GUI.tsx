@@ -47,7 +47,7 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     const visualsData = useControls('Visuals', {
         nodeVisibility: { value: visuals.nodeVisibility, onChange: (v) => setVisualsCallback({ ...visuals, nodeVisibility: v }) },
         nodeRelSize: { value: visuals.nodeRel, min: 0, max: 42, step: 0.1, onChange: (v) => setVisualsCallback({ ...visuals, nodeRel: v }) },
-        awardSizeMultiplier: { value: visuals.awardNodeSizeMult, min: 0.001, max: 1, step: 0.001, onChange: (v) => setVisualsCallback({ ...visuals, awardNodeSizeMult: v }) },
+        awardSizeMultiplier: { value: visuals.awardNodeSizeMult, min: 0.01, max: 7, step: 0.01, onChange: (v) => setVisualsCallback({ ...visuals, awardNodeSizeMult: v }) },
         linkVisibility: { value: visuals.linkVisibility, onChange: (v) => setVisualsCallback({ ...visuals, linkVisibility: v }) },
         linkColor: { value: visuals.linkColor, onChange: (v) => setVisualsCallback({ ...visuals, linkColor: v }) },
         linkWitdh: { value: visuals.linkWidth, min: 0, max: 7, step: 0.1, onChange: (v) => setVisualsCallback({ ...visuals, linkWidth: v }) },
