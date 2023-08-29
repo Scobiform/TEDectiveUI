@@ -1,6 +1,6 @@
 'use client';
 import React, { useCallback, useEffect, useLayoutEffect, useReducer, useRef, useState } from "react";
-import { GraphData, NodeObject, LinkObject } from 'force-graph'
+import { GraphData, NodeObject, LinkObject,  } from 'force-graph'
 import * as d3 from 'd3-force';
 /* Use 2d graph */
 import ForceGraph2D, { ForceGraphMethods, ForceGraphProps } from "react-force-graph-2d";
@@ -14,7 +14,7 @@ import styles from './graph.module.css';
 import { useWindowSize } from "@react-hook/window-size";
 
 export interface GraphProps {
-  graphData: GraphData | null; 
+  graphData: GraphData | undefined; 
   physics?: typeof initialPhysics;
   setPhysics?: any;
   visuals?: typeof initialVisuals;
@@ -57,7 +57,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   const handleNodeHover = useCallback(
     (node: NodeObject | null) => {
       if (node) {
-        console.log(node);
+        //console.log(node);
       }
     }
   ,[]);
@@ -66,7 +66,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   const handleNodeDrag = useCallback(
     (node: NodeObject | null) => {
       if (node) {
-        console.log(node);
+        //console.log(node);
       }
     }
   ,[]);
@@ -90,12 +90,12 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
 
     // Set the ForceGraph2D instance's d3Force
     fgInstance.d3Force('charge', d3.forceManyBody().strength(physics.chargeStrength));
-    fgInstance.d3Force('center', d3.forceCenter(width / 2, height / 2));
+    fgInstance.d3Force('center', d3.forceCenter(0, 0));
     fgInstance.d3Force('collide', d3.forceCollide(physics.collideRadius));
     fgInstance.d3Force('link', d3.forceLink().id((d: any) => d.id).distance(physics.linkDistance));
     fgInstance.d3Force('x', d3.forceX(width / 2).strength(physics.xStrength));
     fgInstance.d3Force('y', d3.forceY(height / 2).strength(physics.yStrength));
-
+    fgInstance.d3Force('radial', d3.forceRadial(physics.radialRadius, width / 2, height / 2));
   },[physics, fgRef, width, height]);
   
   // Return the ForceGraph2D
@@ -104,10 +104,32 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
       <div className={styles.graphWrapper}>
         <ForceGraph2D
           ref={fgRef}
-          //@ts-ignore
           graphData={graphData}
           nodeLabel="label"
           nodeAutoColorBy="indexColor"
+          nodeCanvasObject={(node, ctx, globalScale) => {
+            const label = '🟩';
+            const fontSize = 14/globalScale;
+            ctx.font = `${fontSize}px Sans-Serif`;
+            const textWidth = ctx.measureText(label).width;
+            const bckgDimensions = [textWidth, fontSize].map(n => n); // some padding
+
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
+            ctx.fillStyle = node.color;
+
+            ctx.fillText(label, node.x || 1, node.y || 1);
+
+            node.__bckgDimensions = bckgDimensions; // to re-use in nodePointerAreaPaint
+          }}
+          nodePointerAreaPaint={(node, color, ctx) => {
+            ctx.fillStyle = color;
+            const bckgDimensions = node.__bckgDimensions;
+            if (bckgDimensions) {
+              const [width, height] = bckgDimensions;
+              ctx.fillRect(node.x || 1 - width / 2, node.y || 1 - height / 2, width, height);
+            }
+          }}
           onNodeClick={handleClick}
           onNodeHover={handleNodeHover}
           onNodeDrag={handleNodeDrag}
@@ -123,6 +145,10 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeVisibility={visuals.nodeVisibility}
           linkDirectionalParticles={visuals.linkDirectionalParticles}
           linkDirectionalParticleWidth={visuals.linkDirectionalParticleWidth}
+          linkPointerAreaPaint={(link, color, ctx) => {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 0;
+          }}
           enableZoomInteraction={physics.enableZoomInteraction}
           enablePointerInteraction={physics.enablePointerInteraction}
           enableNodeDrag={physics.enableNodeDrag}
@@ -131,7 +157,6 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           onBackgroundRightClick={() => setOpen(false)}
           d3AlphaDecay={physics.alphaDecay}
           d3AlphaMin={physics.alphaMin}
-          d3AlphaTarget={physics.alphaTarget}
           d3VelocityDecay={physics.velocityDecay}
           cooldownTime={Infinity}
           width={width}
