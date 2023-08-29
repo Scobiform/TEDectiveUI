@@ -54,7 +54,7 @@ const Home = ({apiPath,
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
   // API path state
-  [apiPath, setApiPath] = useState('/initial/c85f969c-f516-5e13-b1bd-3df7abe48531.json');
+  [apiPath, setApiPath] = useState('initial');
 
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
@@ -75,6 +75,10 @@ const Home = ({apiPath,
       //@ts-ignore -- debug
       setGraphData(randomTree);
       setIsLoading(false);
+      return;
+    }
+    if (apiPath == 'initial') {
+      setApiPath('/initial/c85f969c-f516-5e13-b1bd-3df7abe48531.json');
       return;
     }
     fetch(apiPath+'')
