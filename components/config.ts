@@ -74,7 +74,7 @@ export let initialVisuals = {
   // Link config
   linkVisibility: true,
   linkCurvature: 0,
-  linkWidth: 0.21,
+  linkWidth: 0.14,
   linkDistance: 0.42,
   linkColor: '#3fa535',
   linkDirectionalParticles: 0.1,
