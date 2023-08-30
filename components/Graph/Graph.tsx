@@ -180,7 +180,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
             // Tender icon
             if(node.tag !== undefined) {
               if(node.tag[0] === 'tender') {
-                label = '⭐';
+                label = '📥';
               }
               if(node.tag[0] === 'planning') {
                 label = '📅';

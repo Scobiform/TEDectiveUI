@@ -65,7 +65,7 @@ export const initialPhysics = {
 export let initialVisuals = {
   // Node size
   nodeRel: 4.2,
-  awardNodeSizeMult: 0.7,
+  awardNodeSizeMult: 0.77,
   // Node config
   nodeVisibility: true,
   nodeDistanceMin: 0.42,
