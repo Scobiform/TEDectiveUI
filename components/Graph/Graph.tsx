@@ -133,9 +133,17 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
                 {
                   fontSize = Math.floor(2.8*visuals!.nodeRel*(node.value.amount/100000*visuals!.awardNodeSizeMult));
                 }
+                else if(node.value.amount < 10000000)
+                {
+                  fontSize = Math.floor(1.4*visuals!.nodeRel*(node.value.amount/100000*visuals!.awardNodeSizeMult));
+                }
+                else if(node.value.amount < 100000000)
+                {
+                  fontSize = Math.floor(0.7*visuals!.nodeRel*(node.value.amount/1000000*visuals!.awardNodeSizeMult));
+                }
                 else
                 {
-                  fontSize = Math.floor(10*visuals!.nodeRel*(node.value.amount/1000000*visuals!.awardNodeSizeMult));
+                  fontSize = Math.floor(2.1*visuals!.nodeRel*(node.value.amount/1000000*visuals!.awardNodeSizeMult*2));
                 }
               }
             }
