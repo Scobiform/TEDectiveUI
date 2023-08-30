@@ -95,7 +95,6 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     fgInstance.d3Force('link', d3.forceLink().id((d: any) => d.id).distance(physics.linkDistance));
     fgInstance.d3Force('x', d3.forceX(width / 2).strength(physics.xStrength));
     fgInstance.d3Force('y', d3.forceY(height / 2).strength(physics.yStrength));
-    fgInstance.d3Force('radial', d3.forceRadial(physics.radialRadius, width / 2, height / 2));
   },[physics, fgRef, width, height]);
   
   // Return the ForceGraph2D
@@ -162,19 +161,19 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
                 label = '🟢';
               }
               if(node.status === 'cancelled') {
-                label = '🔴';
+                label = '🚫';
               }
               if(node.status === 'unsuccessful') {
-                label = '🟠';
+                label = '❌';
               }
               if(node.status === 'complete') {
                 label = '✅';
               }
               if(node.status === 'withdrawn') {
-                label = '🟡';
+                label = '✖️';
               }
               if(node.status === 'planned') {
-                label = '🟤';
+                label = '📝';
               }
             }
 
