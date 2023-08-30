@@ -121,7 +121,14 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
               label = '💰';
               if(node.value !== undefined && node.value !== null)
               {
-                fontSize = Math.floor(10*visuals!.nodeRel*(node.value.amount/1000000*visuals!.awardNodeSizeMult));
+                if(node.value.amount < 10)
+                {
+                  fontSize = Math.floor(10*visuals!.nodeRel*visuals!.awardNodeSizeMult);
+                }
+                else
+                {
+                  fontSize = Math.floor(10*visuals!.nodeRel*(node.value.amount/1000000*visuals!.awardNodeSizeMult));
+                }
               }
             }
 
