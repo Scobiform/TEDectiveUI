@@ -116,12 +116,42 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
               node.color = 'grey';
             }
 
-            // Award icon
+            // Award value icon
             if(node.awardID !== undefined) {
               label = '💰';
               if(node.value !== undefined && node.value !== null)
               {
-                fontSize = Math.floor(14*visuals!.nodeRel*(node.value.amount/1000000)*visuals!.awardNodeSizeMult);
+                fontSize = Math.floor(14*visuals!.nodeRel*(node.value.amount/1000000*visuals!.awardNodeSizeMult));
+              }
+            }
+
+            // Award icon
+            if(node.tag !== undefined) {
+              if(node.tag[0] === 'award')
+              {
+                label = '🏆';
+              }
+            }
+
+            // Status icon
+            if(node.status !== undefined) {
+              if(node.status === 'active') {
+                label = '🟢';
+              }
+              if(node.status === 'cancelled') {
+                label = '🔴';
+              }
+              if(node.status === 'unsuccessful') {
+                label = '🟠';
+              }
+              if(node.status === 'complete') {
+                label = '✅';
+              }
+              if(node.status === 'withdrawn') {
+                label = '🟡';
+              }
+              if(node.status === 'planned') {
+                label = '🟤';
               }
             }
 
@@ -129,6 +159,9 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
             if(node.tag !== undefined) {
               if(node.tag[0] === 'tender') {
                 label = '🔺';
+              }
+              if(node.tag[0] === 'planning') {
+                label = '📅';
               }
             }
 
