@@ -123,11 +123,19 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
               {
                 if(node.value.amount < 10)
                 {
-                  fontSize = Math.floor(10*visuals!.nodeRel*visuals!.awardNodeSizeMult);
+                  fontSize = Math.floor(4.2*visuals!.nodeRel*visuals!.awardNodeSizeMult);
+                }
+                if(node.value.amount < 100000)
+                {
+                  fontSize = Math.floor(4.2*visuals!.nodeRel*(node.value.amount/10000*visuals!.awardNodeSizeMult));
                 }
                 else
                 {
                   fontSize = Math.floor(10*visuals!.nodeRel*(node.value.amount/1000000*visuals!.awardNodeSizeMult));
+                  if(fontSize > 100)
+                  {
+                    fontSize = Math.floor(42*visuals!.nodeRel*visuals!.awardNodeSizeMult);
+                  }
                 }
               }
             }
