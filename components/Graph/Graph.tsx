@@ -110,7 +110,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeCanvasObject={(node, ctx, globalScale) => {
             
             let label = '🟩';
-            let fontSize = 14*visuals!.nodeRel;
+            let fontSize = 10*visuals!.nodeRel;
 
             if(node.color === undefined) {
               node.color = 'grey';
@@ -121,15 +121,15 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
               label = '💰';
               if(node.value !== undefined && node.value !== null)
               {
-                fontSize = Math.floor(14*visuals!.nodeRel*(node.value.amount/1000000*visuals!.awardNodeSizeMult));
+                fontSize = Math.floor(10*visuals!.nodeRel*(node.value.amount/1000000*visuals!.awardNodeSizeMult));
               }
             }
 
             // Award icon
             if(node.tag !== undefined) {
-              if(node.tag[0] === 'award')
+              if(node.tag[1] === 'contract')
               {
-                label = '🏆';
+                label = '📄';
               }
             }
 
@@ -158,7 +158,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
             // Tender icon
             if(node.tag !== undefined) {
               if(node.tag[0] === 'tender') {
-                label = '🔺';
+                label = '⭐';
               }
               if(node.tag[0] === 'planning') {
                 label = '📅';
