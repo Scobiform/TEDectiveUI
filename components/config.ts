@@ -63,32 +63,14 @@ export const initialPhysics = {
 }
 
 export let initialVisuals = {
-  // Node colors
-  orgNodeColor: 'green.500',
-  awardNodeColor: 'orange.500',
-  tenderNodeColor: 'yellow.500',
-  planningNodeColor: 'gray.500',
-  // Node labels
-  labels: 2,
-  labelRel: 2.2,
+  // Node size
   nodeRel: 4.2,
-  labelFontSize: 8,
-  labelLength: 40,
-  labelWordWrap: 25,
-  labelLineSpace: 1,
-  labelTextColor: 'black',
   awardNodeSizeMult: 0.7,
-  nodeZoomSize: 1.2,
   // Node config
   nodeVisibility: true,
   nodeDistanceMin: 0.42,
   nodeDistanceMax: 70,
   nodeStrength: 100,
-  // Node sizes
-  orgNodeSize: 2,
-  awardNodeSize: 2,
-  tenderNodeSize: 2,
-  planningNodeSize: 2,
   // Link config
   linkVisibility: true,
   linkCurvature: 0,
@@ -104,6 +86,7 @@ export let initialVisuals = {
   highlightLinkSize: 1.4,
   highlightNodeSize: 2.2,
   highlightLabelFontSize: 1.4,
+  // Viewport config
   opacity: 0.91,
   windowWidth: 640,
   windowHeight: 320,
