@@ -50,7 +50,7 @@ const Home = ({apiPath,
   
   useEffect(() => {
     if (apiPath == 'initial') {
-      setApiPath('https://api.tedective.org/latest/graph/releases/buyer/c85f969c-f516-5e13-b1bd-3df7abe48531');
+      setApiPath('https://api.tedective.org/latest/graph/releases/buyer/5e444975-2bb4-5484-9dbf-29e8581cf054');
       return;
     }
     setIsLoading(true); // Set loading to true before the fetch call
