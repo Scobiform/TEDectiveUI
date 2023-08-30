@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from './search.module.css'
 
 interface SearchResult {
-  orgId: string;
+  id: string;
   name: string;
   apiPath: string;
 }
@@ -19,6 +19,11 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
   // Loading state
   const [loading, setLoading] = useState(false);
 
+  // Buyer & supplier state
+  // TODO: Implent a switch to toggle between buyer and supplier
+  // TODO: Use API Path from .env everywhere
+  const buyerAPIPath = 'https://api.tedective.org/latest/graph/releases/buyer/';
+
   // Fetch search results
   const handleSearch = async (query: string) => {
     // Prevent fetching if the query is empty
@@ -32,7 +37,7 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 280));
-      const response = await fetch('mockSearch.json'); // search?q=${query}
+      const response = await fetch('https://api.tedective.org/latest/entities/organization/search/' + query); // ${query}
       const data: SearchResult[] = await response.json();
       setSearchResults(data);
     } catch (error) {
@@ -44,7 +49,7 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
 
   // Set the API path when a search result is clicked
   const handleClick = (result: SearchResult) => {
-    setApiPath(result.apiPath);
+    setApiPath(buyerAPIPath+result.id);
   };
 
   return (

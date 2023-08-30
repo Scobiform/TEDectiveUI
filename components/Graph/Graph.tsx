@@ -119,7 +119,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
             // Award icon
             if(node.awardID !== undefined) {
               label = '💰';
-              if(node.value !== undefined)
+              if(node.value !== undefined && node.value !== null)
               {
                 fontSize = Math.floor(14*visuals!.nodeRel*(node.value.amount/1000000)*visuals!.awardNodeSizeMult);
               }

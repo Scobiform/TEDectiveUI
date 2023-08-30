@@ -81,6 +81,7 @@ const Home = ({apiPath,
       setApiPath('/initial/c85f969c-f516-5e13-b1bd-3df7abe48531.json');
       return;
     }
+    setIsLoading(true); // Set loading to true before the fetch call
     fetch(apiPath+'')
       .then(response => response.json())
       .then(data => {
@@ -88,7 +89,7 @@ const Home = ({apiPath,
         setIsLoading(false);
         }
       );
-    },[apiPath]
+    },[apiPath, setApiPath]
   );
 
   return (
