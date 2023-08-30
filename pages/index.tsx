@@ -21,23 +21,6 @@ interface HomeProps {
   setApiPath: any;
 }
 
-function genRandomTree(N = 420, reverse = false) {
-  const nodes = Array.from({ length: N }, (_, i) => ({ id: i }));
-  
-  const links = Array.from({ length: N - 1 }, (_, id) => ({
-    [reverse ? 'target' : 'source']: id + 1,
-    [reverse ? 'source' : 'target']: Math.round(Math.random() * id)
-  }));
-  
-  // Convert the links to a format compatible with React Force Graph
-  const formattedLinks = links.map(link => ({
-    source: nodes[link.source],
-    target: nodes[link.target]
-  }));
-  
-  return { nodes, links: formattedLinks };
-}
-
 const Home = ({apiPath, 
               setApiPath, 
               physics, 
@@ -66,19 +49,8 @@ const Home = ({apiPath,
   });
   
   useEffect(() => {
-    // Generate random number
-    const randomNumber = Math.floor(Math.random() * 4200);
-    // Generate random tree for testing
-    const randomTree = genRandomTree(randomNumber, true);
-    // If apiPath is 'random', set graphData to randomTree
-    if (apiPath == 'random') {
-      //@ts-ignore -- debug
-      setGraphData(randomTree);
-      setIsLoading(false);
-      return;
-    }
     if (apiPath == 'initial') {
-      setApiPath('/initial/c85f969c-f516-5e13-b1bd-3df7abe48531.json');
+      setApiPath('https://api.tedective.org/latest/graph/releases/buyer/c85f969c-f516-5e13-b1bd-3df7abe48531');
       return;
     }
     setIsLoading(true); // Set loading to true before the fetch call
