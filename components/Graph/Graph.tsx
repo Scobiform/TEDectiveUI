@@ -107,103 +107,96 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeLabel="label"
           nodeAutoColorBy="indexColor"
           nodeCanvasObject={(node, ctx, globalScale) => {
-            
             let label = '🟩';
-            let fontSize = 10*visuals!.nodeRel;
-
-            if(node.color === undefined) {
-              node.color = 'grey';
+            let fontSize = 10 * visuals!.nodeRel;
+        
+            if (node.color === undefined) {
+                node.color = 'grey';
             }
-
-            // Award value icon
-            if(node.awardID !== undefined) {
-              label = '💰';
-              if(node.value !== undefined && node.value !== null)
-              {
-                if(node.value.amount < 10)
-                {
-                  fontSize = Math.floor(7*visuals!.nodeRel*visuals!.awardNodeSizeMult);
-                }
-                else if(node.value.amount < 100000)
-                {
-                  fontSize = Math.floor(3.5*visuals!.nodeRel*(node.value.amount/10000*visuals!.awardNodeSizeMult));
-                }
-                else if(node.value.amount < 1000000)
-                {
-                  fontSize = Math.floor(2.8*visuals!.nodeRel*(node.value.amount/100000*visuals!.awardNodeSizeMult));
-                }
-                else if(node.value.amount < 10000000)
-                {
-                  fontSize = Math.floor(1.4*visuals!.nodeRel*(node.value.amount/100000*visuals!.awardNodeSizeMult));
-                }
-                else if(node.value.amount < 100000000)
-                {
-                  fontSize = Math.floor(0.7*visuals!.nodeRel*(node.value.amount/1000000*visuals!.awardNodeSizeMult));
-                }
-                else
-                {
-                  fontSize = Math.floor(2.1*visuals!.nodeRel*(node.value.amount/1000000*visuals!.awardNodeSizeMult*2));
-                }
-              }
+        
+            switch (true) {
+                case (node.awardID !== undefined):
+                    label = '💰';
+                    if (node.value !== undefined && node.value !== null) {
+                        const amount = node.value.amount;
+                        switch (true) {
+                          case amount < 10:
+                              fontSize = Math.floor(7 * visuals!.nodeRel * visuals!.awardNodeSizeMult);
+                              break;
+                          case amount < 100000:
+                              fontSize = Math.floor(3.5 * visuals!.nodeRel * (amount / 10000 * visuals!.awardNodeSizeMult));
+                              break;
+                          case amount < 1000000:
+                              fontSize = Math.floor(2.8 * visuals!.nodeRel * (amount / 100000 * visuals!.awardNodeSizeMult));
+                              break;
+                          case amount < 10000000:
+                              fontSize = Math.floor(1.4 * visuals!.nodeRel * (amount / 100000 * visuals!.awardNodeSizeMult));
+                              break;
+                          case amount < 100000000:
+                              fontSize = Math.floor(0.7 * visuals!.nodeRel * (amount / 1000000 * visuals!.awardNodeSizeMult));
+                              break;
+                          default:
+                              fontSize = Math.floor(2.1 * visuals!.nodeRel * (amount / 1000000 * visuals!.awardNodeSizeMult * 2));
+                              break;
+                      }             
+                    }
+                    break;
+        
+                case (node.tag !== undefined && node.tag[1] === 'contract'):
+                    label = '📄';
+                    break;
+        
+                case (node.status !== undefined):
+                    switch (node.status) {
+                        case 'active':
+                            label = '🟢';
+                            break;
+                        case 'cancelled':
+                            label = '🚫';
+                            break;
+                        case 'unsuccessful':
+                            label = '❌';
+                            break;
+                        case 'complete':
+                            label = '✅';
+                            break;
+                        case 'withdrawn':
+                            label = '✖️';
+                            break;
+                        case 'planned':
+                            label = '📝';
+                            break;
+                    }
+                    break;
+        
+                case (node.tag !== undefined):
+                    switch (node.tag[0]) {
+                        case 'tender':
+                            label = '⚖️';
+                            break;
+                        case 'planning':
+                            label = '📅';
+                            break;
+                    }
+                    break;
+        
+                case (node.name !== undefined):
+                    label = '🏢';
+                    break;
             }
-
-            // Award icon
-            if(node.tag !== undefined) {
-              if(node.tag[1] === 'contract')
-              {
-                label = '📄';
-              }
-            }
-
-            // Status icon
-            if(node.status !== undefined) {
-              if(node.status === 'active') {
-                label = '🟢';
-              }
-              if(node.status === 'cancelled') {
-                label = '🚫';
-              }
-              if(node.status === 'unsuccessful') {
-                label = '❌';
-              }
-              if(node.status === 'complete') {
-                label = '✅';
-              }
-              if(node.status === 'withdrawn') {
-                label = '✖️';
-              }
-              if(node.status === 'planned') {
-                label = '📝';
-              }
-            }
-
-            // Tender icon
-            if(node.tag !== undefined) {
-              if(node.tag[0] === 'tender') {
-                label = '📥';
-              }
-              if(node.tag[0] === 'planning') {
-                label = '📅';
-              }
-            }
-
-            // Organization icon
-            if(node.name !== undefined) {
-              label = '🏢';
-            }
-
+        
             ctx.font = `${fontSize}px Sans-Serif`;
             const textWidth = ctx.measureText(label).width;
             const bckgDimensions = [textWidth, fontSize].map(n => n); // some padding
-
+        
             ctx.textAlign = 'left';
             ctx.textBaseline = 'top';
             ctx.fillStyle = node.color;
-
+        
             ctx.fillText(label, node.x || 1, node.y || 1);
-
+        
             node.__bckgDimensions = bckgDimensions; // to re-use in nodePointerAreaPaint
-          }}
+        }}
           nodePointerAreaPaint={(node, color, ctx) => {
             ctx.fillStyle = color;
             const bckgDimensions = node.__bckgDimensions;
