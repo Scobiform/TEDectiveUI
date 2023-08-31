@@ -107,6 +107,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeLabel="label"
           nodeAutoColorBy="indexColor"
           nodeCanvasObject={(node, ctx, globalScale) => {
+            // This section defines the node labels
             let label = '🟩';
             let fontSize = 10 * visuals!.nodeRel;
         
