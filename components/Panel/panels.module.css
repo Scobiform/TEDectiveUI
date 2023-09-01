@@ -37,6 +37,7 @@
 	opacity: var(--opacity);
 	min-height: 320px;
 	font-weight: var(--fontWeight);
+	word-wrap: break-word;
 }
 
 .nodePanelContent li{
