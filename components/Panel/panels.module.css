@@ -33,10 +33,11 @@
 	overflow-x: hidden;
 	padding: 0.42rem;
 	font-size: 1em;
-	padding-bottom: 7vh;
+	/*padding-bottom: 7vh;*/
 	opacity: var(--opacity);
-	min-height: 320px;
+	max-height: 320px;
 	font-weight: var(--fontWeight);
+	word-wrap: break-word;
 }
 
 .nodePanelContent li{
@@ -69,7 +70,7 @@
 .panelView {
 	width: 28vw;
 	min-width: 300px;
-	height: var(--windowHeight);
+	/*height: var(--windowHeight);*/
 	overflow-y: scroll;
 	overflow-x: hidden;
     transition: height 250ms ease 0s;

@@ -50,14 +50,7 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
           </button>
           {isOpen && (
               <div className={styles.panelView}>
-                <div className={styles.nodePanelContent}>               
-                  {/* TODO: 
-                    - Show loading spinner
-                    - Show guided TOUR
-                    - Show welcome message
-                    - Show help message
-                    - link docs
-                  */}
+                <div className={styles.nodePanelContent}>
                 </div>
               </div>
             )
@@ -68,7 +61,6 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
   } else {
     return (
       <>
-      {/* Award based organization view with switch for buyer / seller perspective */}
       <div className={styles.nodePanel}>
           <button
           onClick={toggleMenu}
@@ -78,69 +70,13 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
           </button>
           {isOpen && (
               <div className={styles.panelView}>
-                <div className={styles.nodePanelContent}>               
-                  <h2>Award Title</h2>
-                  <p>Award description - {previewNode.description}</p>
-                                 
-                  <h3>Contracts</h3>
-                  <p>Array of contracts</p>
-                  <ul>
-                    <li>
-                      contract.title
-                      contract.value
-                    </li>
-                    <li>
-                      contract.title
-                      contract.value
-                    </li>
-                    <li>
-                      contract.title
-                      contract.value
-                    </li>
-                    <li>
-                      contract.title
-                      contract.value
-                    </li>
-                  </ul>
+                <div className={styles.nodePanelContent}>
+                  {/* Switch case for node type */}  
+                  {renderContentBasedOnNodeType(previewNode)}
 
-                  <h4>Suppliers</h4>
-                  <p>Array of suppliers</p>
-                  <ul>
-                    <li>
-                      <button>supplier.name</button>
-                    </li>
-                  </ul>
+                  {/*objectString*/}
 
-                  <h4>Parties</h4>
-                  <p>Array of parties</p>
-                  <ul>
-                    <li>
-                      <button>party.name</button>
-                    </li>
-                  </ul>
-
-                  <h4>Tender</h4>
-                  <button>tender.id</button>
-                  <p>tender.title</p>
-                  <p>tender.description</p>
-
-                  <h4>Date:</h4>
-                  <p>{previewNode.date}</p>
-                  <h4>Open contracting data standard identifier:</h4>
-                  <button>-{previewNode.ocid}-</button> 
-                  <hr />
-                  <h1>base.name</h1>
-                  <p>base.id</p>
-                  <p>base.description</p>
-                  <p>base.address</p>
-                  <p>base.contactPoint</p>
-                  
-                  <h3>Statistics</h3>
-                  <p>Information about the base Organization based on the perspective Buyer / Seller</p>
-
-                  <h3>Charts displaying organization statistics</h3>
-                  <DoughnutChart data={doughnutData}/>
-                  {objectString}
+                  {/* <DoughnutChart data={doughnutData} /> */}
                 </div>
               </div>
             )
@@ -152,3 +88,96 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
 };
 
 export default NodePanel;
+
+// Function to render content based on node type
+function renderContentBasedOnNodeType(previewNode: any) {
+  // TODO: Build switch case for template display based on node type
+  // Make the detail view for each node type a component
+
+  // Fetch award
+  if(previewNode.awardID !== undefined){
+    return <div> {/* FETCH AWARD */}
+              <h2>💰 {previewNode.label}</h2>
+              <p>{previewNode.value.amount} {previewNode.value.currency}</p>
+              <button>{previewNode.id}</button>
+           </div>;
+  }
+
+  // Fetch contract
+  if(previewNode.tag !== undefined && previewNode.tag[1] === 'contract') {
+    return <div> {/* FETCH CONTRACT */}
+              <button>{previewNode.id}</button>
+           </div>;
+  }
+
+  // Fetch tender
+  if(previewNode.tag !== undefined ) {
+    switch (previewNode.tag[0]) {
+      case 'tender':
+          return <div> 
+                    {/* FETCH TENDER*/}
+                    <button>{previewNode.id}</button>
+                </div>;
+          break;
+      case 'planning':
+          return <div> 
+                    {/* FETCH PLANNING*/}
+                    <button>{previewNode.id}</button>
+                </div>;
+          break;
+    }
+  }
+
+  // Fetch organization
+  // TODO: Make organizationDetails component
+  if(previewNode.name !== undefined) {
+    return <div> {/* FETCH ORGANIZATION*/}
+              <h2>🏢 {previewNode.name}</h2>
+              <p>ID: {previewNode.id}</p>
+              <p>Legal Name: {previewNode.identifier.legalName}</p>
+              <p>Country Code: {previewNode.address.countryCode}</p>
+              <p>Locality: {previewNode.address.locality}</p>
+              <p>Postal Code: {previewNode.address.postalCode}</p>
+              <p>Region: {previewNode.address.region}</p>
+              <p>Street Address: {previewNode.address.streetAddress}</p>
+           </div>;
+  }
+
+  // Return content based on node status
+  if(previewNode.status !== undefined)
+  {
+    switch (previewNode.status) {
+      case 'active':
+        return <div>
+                  <h2>🟢 {previewNode.label}</h2>
+                  <button>{previewNode.id}</button>
+                </div>;
+      case 'cancelled':
+        return <div>Content for type 2</div>;
+      case 'unsuccessful':
+        return <div>
+                  <h2>❌ {previewNode.label}</h2>
+                  <button>{previewNode.id}</button>
+               </div>;
+      case 'complete':
+        return <div>
+                  <h2>✅ {previewNode.label}</h2>
+                  <p>{previewNode.description}</p>
+                  <button>{previewNode.id}</button>
+               </div>;
+      case 'withdrawn':
+        return <div>Content for type 5</div>;
+      case 'planned':
+        return <div>
+                  <h2>📝 {previewNode.label}</h2>
+                  <p>{previewNode.description}</p>
+                  <button>{previewNode.id}</button>
+               </div>;      
+      default:
+        return <div>
+          <h2>{previewNode.titla}</h2>
+          <p>{previewNode.description}</p>
+        </div>;
+    }
+  }
+}
