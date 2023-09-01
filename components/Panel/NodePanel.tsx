@@ -91,91 +91,95 @@ export default NodePanel;
 function renderContentBasedOnNodeType(previewNode: any) {
   // TODO: Build switch case for template display based on node type
   // Make the detail view for each node type a component
+  try {
+    // Fetch award
+    if(previewNode.awardID !== undefined){
+      return <div> {/* FETCH AWARD */}
+                <h2>💰 {previewNode.label}</h2>
+                <p>{previewNode.value.amount} {previewNode.value.currency}</p>
+                <button>{previewNode.id}</button>
+            </div>;
+    }
 
-  // Fetch award
-  if(previewNode.awardID !== undefined && previewNode.value !== undefined && previewNode.value.amount !== null){
-    return <div> {/* FETCH AWARD */}
-              <h2>💰 {previewNode.label}</h2>
-              <p>{previewNode.value.amount} {previewNode.value.currency}</p>
-              <button>{previewNode.id}</button>
-           </div>;
-  }
+    // Fetch contract
+    if(previewNode.tag !== undefined && previewNode.tag[1] === 'contract') {
+      return <div> {/* FETCH CONTRACT */}
+                <button>{previewNode.id}</button>
+            </div>;
+    }
 
-  // Fetch contract
-  if(previewNode.tag !== undefined && previewNode.tag[1] === 'contract') {
-    return <div> {/* FETCH CONTRACT */}
-              <button>{previewNode.id}</button>
-           </div>;
-  }
+    // Fetch tender
+    if(previewNode.tag !== undefined ) {
+      switch (previewNode.tag[0]) {
+        case 'tender':
+            return <div> 
+                      {/* FETCH TENDER*/}
+                      <button>{previewNode.id}</button>
+                  </div>;
+            break;
+        case 'planning':
+            return <div> 
+                      {/* FETCH PLANNING*/}
+                      <button>{previewNode.id}</button>
+                  </div>;
+            break;
+      }
+    }
 
-  // Fetch tender
-  if(previewNode.tag !== undefined ) {
-    switch (previewNode.tag[0]) {
-      case 'tender':
-          return <div> 
-                    {/* FETCH TENDER*/}
+    // Fetch organization
+    // TODO: Make organizationDetails component
+    if(previewNode.name !== undefined) {
+      return <div> {/* FETCH ORGANIZATION*/}
+                <h2>🏢 {previewNode.name}</h2>
+                <p>ID: {previewNode.id}</p>
+                <p>Legal Name: {previewNode.identifier.legalName}</p>
+                <p>Country Code: {previewNode.address.countryCode}</p>
+                <p>Locality: {previewNode.address.locality}</p>
+                <p>Postal Code: {previewNode.address.postalCode}</p>
+                <p>Region: {previewNode.address.region}</p>
+                <p>Street Address: {previewNode.address.streetAddress}</p>
+            </div>;
+    }
+
+    // Return content based on node status
+    if(previewNode.status !== undefined)
+    {
+      switch (previewNode.status) {
+        case 'active':
+          return <div>
+                    <h2>🟢 {previewNode.label}</h2>
+                    <button>{previewNode.id}</button>
+                  </div>;
+        case 'cancelled':
+          return <div>Content for type 2</div>;
+        case 'unsuccessful':
+          return <div>
+                    <h2>❌ {previewNode.label}</h2>
                     <button>{previewNode.id}</button>
                 </div>;
-          break;
-      case 'planning':
-          return <div> 
-                    {/* FETCH PLANNING*/}
+        case 'complete':
+          return <div>
+                    <h2>✅ {previewNode.label}</h2>
+                    <p>{previewNode.description}</p>
                     <button>{previewNode.id}</button>
                 </div>;
-          break;
+        case 'withdrawn':
+          return <div>Content for type 5</div>;
+        case 'planned':
+          return <div>
+                    <h2>📝 {previewNode.label}</h2>
+                    <p>{previewNode.description}</p>
+                    <button>{previewNode.id}</button>
+                </div>;      
+        default:
+          return <div>
+            <h2>{previewNode.titla}</h2>
+            <p>{previewNode.description}</p>
+          </div>;
+      }
     }
   }
-
-  // Fetch organization
-  // TODO: Make organizationDetails component
-  if(previewNode.name !== undefined) {
-    return <div> {/* FETCH ORGANIZATION*/}
-              <h2>🏢 {previewNode.name}</h2>
-              <p>ID: {previewNode.id}</p>
-              <p>Legal Name: {previewNode.identifier.legalName}</p>
-              <p>Country Code: {previewNode.address.countryCode}</p>
-              <p>Locality: {previewNode.address.locality}</p>
-              <p>Postal Code: {previewNode.address.postalCode}</p>
-              <p>Region: {previewNode.address.region}</p>
-              <p>Street Address: {previewNode.address.streetAddress}</p>
-           </div>;
-  }
-
-  // Return content based on node status
-  if(previewNode.status !== undefined)
-  {
-    switch (previewNode.status) {
-      case 'active':
-        return <div>
-                  <h2>🟢 {previewNode.label}</h2>
-                  <button>{previewNode.id}</button>
-                </div>;
-      case 'cancelled':
-        return <div>Content for type 2</div>;
-      case 'unsuccessful':
-        return <div>
-                  <h2>❌ {previewNode.label}</h2>
-                  <button>{previewNode.id}</button>
-               </div>;
-      case 'complete':
-        return <div>
-                  <h2>✅ {previewNode.label}</h2>
-                  <p>{previewNode.description}</p>
-                  <button>{previewNode.id}</button>
-               </div>;
-      case 'withdrawn':
-        return <div>Content for type 5</div>;
-      case 'planned':
-        return <div>
-                  <h2>📝 {previewNode.label}</h2>
-                  <p>{previewNode.description}</p>
-                  <button>{previewNode.id}</button>
-               </div>;      
-      default:
-        return <div>
-          <h2>{previewNode.titla}</h2>
-          <p>{previewNode.description}</p>
-        </div>;
-    }
+  catch (error) {
+    //console.log(error);
   }
 }
