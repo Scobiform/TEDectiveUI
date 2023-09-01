@@ -71,7 +71,7 @@
 	width: 28vw;
 	min-width: 300px;
 	/*height: var(--windowHeight);*/
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
     transition: height 250ms ease 0s;
     color: var(--leva-colors-highlight3);
