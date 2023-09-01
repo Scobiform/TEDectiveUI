@@ -35,7 +35,7 @@
 	font-size: 1em;
 	/*padding-bottom: 7vh;*/
 	opacity: var(--opacity);
-	max-height: 320px;
+	max-height: var(--windowHeight);
 	font-weight: var(--fontWeight);
 	word-wrap: break-word;
 }
