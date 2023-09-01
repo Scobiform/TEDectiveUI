@@ -144,7 +144,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
                     break;
         
                 case (node.tag !== undefined && node.tag[1] === 'contract'):
-                    label = '📄';
+                    label = '📜';
                     break;
         
                 case (node.status !== undefined):
@@ -173,7 +173,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
                 case (node.tag !== undefined):
                     switch (node.tag[0]) {
                         case 'tender':
-                            label = '⚖️';
+                            label = '🗂';
                             break;
                         case 'planning':
                             label = '📅';
