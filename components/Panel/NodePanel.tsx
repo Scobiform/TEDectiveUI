@@ -49,9 +49,7 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
           <IconSVG />
           </button>
           {isOpen && (
-              <div className={styles.panelView}>
-                <div className={styles.nodePanelContent}>
-                </div>
+              <div>
               </div>
             )
           }
