@@ -93,7 +93,7 @@ function renderContentBasedOnNodeType(previewNode: any) {
   // Make the detail view for each node type a component
 
   // Fetch award
-  if(previewNode.awardID !== undefined){
+  if(previewNode.awardID !== undefined && previewNode.value !== undefined){
     return <div> {/* FETCH AWARD */}
               <h2>💰 {previewNode.label}</h2>
               <p>{previewNode.value.amount} {previewNode.value.currency}</p>
