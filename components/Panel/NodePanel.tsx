@@ -1,38 +1,33 @@
 'use client';
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styles from './panels.module.css'
 import IconSVG  from '../Static/IconSVG'
-import DoughnutChart from '../Chart/DoughnutChart'
-import { GraphData, NodeObject } from "react-force-graph-2d";
+import { NodeObject } from "react-force-graph-2d";
 
 // Interface for node panel props
 export interface NodePanelProps {
   previewNode: NodeObject | null | undefined;
   isOpen: boolean;
   setOpen: any;
+  apiPath: string;
+  setApiPath: any; 
 }
 
-// Doughnut chart mockup data
-const doughnutData = {
-  labels: ["Buyer", "Seller"],
-  datasets: [{
-      data: [900, 100],
-      backgroundColor: [
-        "rgba(63, 165, 53, 1)",
-        "rgba(0, 106, 135, 1)",
-      ],
-      borderWidth: 0,
-  }]
-};
-
 // NodePanel component with NodePanelProps **********************************************/
-const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
+const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath}: NodePanelProps) => {
  
   // Toggle menu
   const toggleMenu = () => setOpen(!isOpen);
 
   // Convert node object to string
   const objectString = JSON.stringify(previewNode);
+
+  const handleClick = useCallback(
+    (apiPath: string) => {  
+      setApiPath(apiPath);
+    }
+  , [setApiPath]);
+
 
   // TODO: Build switch case for template display based on node type
   if(previewNode === null || previewNode === undefined)
@@ -69,12 +64,13 @@ const NodePanel = ({previewNode, isOpen, setOpen}: NodePanelProps) => {
           {isOpen && (
               <div className={styles.panelView}>
                 <div className={styles.nodePanelContent}>
-                  {/* Switch case for node type */}  
+                  {/* Switch case for node type */} 
                   {renderContentBasedOnNodeType(previewNode)}
-
-                  {/*objectString*/}
-
-                  {/* <DoughnutChart data={doughnutData} /> */}
+                  
+                  {previewNode.name !== undefined && (
+                    <button onClick={() => handleClick('https://api.tedective.org/latest/graph/releases/buyer/'+previewNode.id)}>Load organization graph</button>
+                  )}
+                  {objectString}
                 </div>
               </div>
             )
@@ -89,22 +85,23 @@ export default NodePanel;
 
 // Function to render content based on node type
 function renderContentBasedOnNodeType(previewNode: any) {
+
   // TODO: Build switch case for template display based on node type
   // Make the detail view for each node type a component
   try {
+
     // Fetch award
     if(previewNode.awardID !== undefined){
       return <div> {/* FETCH AWARD */}
                 <h2>💰 {previewNode.label}</h2>
                 <p>{previewNode.value.amount} {previewNode.value.currency}</p>
-                <button>{previewNode.id}</button>
             </div>;
     }
 
     // Fetch contract
     if(previewNode.tag !== undefined && previewNode.tag[1] === 'contract') {
       return <div> {/* FETCH CONTRACT */}
-                <button>{previewNode.id}</button>
+                <h2>📜 {previewNode.label}</h2>
             </div>;
     }
 
@@ -114,13 +111,11 @@ function renderContentBasedOnNodeType(previewNode: any) {
         case 'tender':
             return <div> 
                       {/* FETCH TENDER*/}
-                      <button>{previewNode.id}</button>
                   </div>;
             break;
         case 'planning':
             return <div> 
                       {/* FETCH PLANNING*/}
-                      <button>{previewNode.id}</button>
                   </div>;
             break;
       }
@@ -148,20 +143,17 @@ function renderContentBasedOnNodeType(previewNode: any) {
         case 'active':
           return <div>
                     <h2>🟢 {previewNode.label}</h2>
-                    <button>{previewNode.id}</button>
                   </div>;
         case 'cancelled':
           return <div>Content for type 2</div>;
         case 'unsuccessful':
           return <div>
                     <h2>❌ {previewNode.label}</h2>
-                    <button>{previewNode.id}</button>
                 </div>;
         case 'complete':
           return <div>
                     <h2>✅ {previewNode.label}</h2>
                     <p>{previewNode.description}</p>
-                    <button>{previewNode.id}</button>
                 </div>;
         case 'withdrawn':
           return <div>Content for type 5</div>;
@@ -169,7 +161,6 @@ function renderContentBasedOnNodeType(previewNode: any) {
           return <div>
                     <h2>📝 {previewNode.label}</h2>
                     <p>{previewNode.description}</p>
-                    <button>{previewNode.id}</button>
                 </div>;      
         default:
           return <div>

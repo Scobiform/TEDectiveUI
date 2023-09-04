@@ -3,7 +3,7 @@ import styles from './charts.module.css'
 import Chart from 'chart.js/auto';
 
 // TODO: Make this a generic Chart.js component
-const DoughnutChart = (props: any) => {
+const ChartJS = (props: any) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     useEffect(() => {
@@ -25,13 +25,6 @@ const DoughnutChart = (props: any) => {
             type: 'doughnut',
             // The data for our dataset
             data: props.data,
-            options: {
-                elements: {
-                    line: {
-                        borderWidth: 3
-                    }
-                }
-            }
         });
 
         // Clean up by destroying the chart when the component unmounts
@@ -54,4 +47,4 @@ const DoughnutChart = (props: any) => {
     );
 }
 
-export default DoughnutChart;
+export default ChartJS;
