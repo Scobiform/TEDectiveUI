@@ -23,13 +23,11 @@ export interface GraphProps {
   setPreviewNode: any;
   isOpen?: boolean;
   setOpen: any;
-  apiPath: string;
-  setApiPath: any; 
 }
 
 // Create a component that will render the graph
 const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
-  previewNode, setPreviewNode, isOpen, setOpen, apiPath, setApiPath }: GraphProps) => {
+  previewNode, setPreviewNode, isOpen, setOpen }: GraphProps) => {
   
   // Create a reference to the graph
   const fgRef = useRef();
@@ -113,6 +111,10 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
             let label = '🟩';
             let fontSize = 10 * visuals!.nodeRel;
         
+            if (node.color === undefined) {
+                node.color = 'grey';
+            }
+
             switch (true) {
                 case (node.awardID !== undefined):
                     label = '💰';
@@ -237,7 +239,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           height={height}
         />
       </div>
-      <NodePanel previewNode={previewNode} isOpen={isOpen} setOpen={setOpen} apiPath={apiPath} setApiPath={setApiPath}/>
+      <NodePanel previewNode={previewNode} isOpen={isOpen} setOpen={setOpen}/>
       <GUI physics={physics} setPhysics={setPhysics} visuals={visuals} setVisuals={setVisuals}/>
     </>
   );

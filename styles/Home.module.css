@@ -201,30 +201,6 @@
   }
 }
 
-/* Stats Bar -- make own component */
-.statsBar {
-  display: grid;
-  grid-template-columns: 1fr auto; /* One column for text, one for the chart */
-  grid-gap: 16px; /* Adjust the gap as needed */
-  justify-content: flex-end; /* Align the grid to the right */
-  align-items: flex-end; /* Align items to the bottom */
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  padding: 16px; /* Add padding for spacing */
-  background-color: var(--tertiary); /* Adjust the background color as needed */
-  border: 1px solid #ccc; /* Add borders if desired */
-  border-radius: 8px; /* Add border radius if desired */
-  color: var(--primary);
-}
-
-.boughtSold{
-  display: grid;
-  grid-template-columns: repeat(2, 50%);
-  justify-content: center;
-}
-
-
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
