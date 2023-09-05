@@ -19,11 +19,6 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
   // Loading state
   const [loading, setLoading] = useState(false);
 
-  // Buyer & supplier state
-  // TODO: Implent a switch to toggle between buyer and supplier
-  // TODO: Use API Path from .env everywhere
-  const buyerAPIPath = 'https://api.tedective.org/latest/graph/releases/buyer/';
-
   // Fetch search results
   const handleSearch = async (query: string) => {
     // Prevent fetching if the query is empty
@@ -49,7 +44,7 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
 
   // Set the API path when a search result is clicked
   const handleClick = (result: SearchResult) => {
-    setApiPath(buyerAPIPath+result.id);
+    setApiPath(result.id);
   };
 
   return (

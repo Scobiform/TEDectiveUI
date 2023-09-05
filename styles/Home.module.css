@@ -201,6 +201,15 @@
   }
 }
 
+/* Stats Bar -- make own component */
+.statsBar {
+  display: grid;
+  position: fixed;
+  bottom: 2.1rem;
+  right: 0;
+  color: var(--primary);
+}
+
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {

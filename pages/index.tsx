@@ -17,11 +17,16 @@ interface HomeProps {
   setPreviewNode: any;
   isOpen?: boolean;
   setOpen: any;
-  apiPath?: string;
+  apiPath? : string;
   setApiPath: any;
 }
 
-const Home = ({apiPath, 
+type GraphData = {
+  nodes: any[]; // Replace 'any' with the actual type of your nodes
+  links: any[]; // Replace 'any' with the actual type of your links
+};
+
+const Home = ({apiPath,
               setApiPath, 
               physics, 
               setPhysics, 
@@ -36,33 +41,68 @@ const Home = ({apiPath,
   // API URL
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
+  const initialGraphId = process.env.NEXT_PUBLIC_INITIAL_GPAPH_ID;
+
+  // Graph paths
+  const buyerGraphPath = apiURL+'graph/releases/buyer/';
+  const supplierGraphPath = apiURL+'graph/releases/supplier/';
+
   // API path state
-  [apiPath, setApiPath] = useState('initial');
+  [apiPath, setApiPath] = useState(initialGraphId+'');
 
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
 
   // State for graph data
-  const [graphData, setGraphData] = useState({
+  const [mergedGraphData, setMergedGraphData] = useState<GraphData>({ 
     nodes: [], 
-    links: []
+    links: [] 
   });
-  
+
+  // Fetch graph data
   useEffect(() => {
-    if (apiPath == 'initial') {
-      setApiPath('https://api.tedective.org/latest/graph/releases/buyer/1778f0d1-545c-5fcb-bf80-7c0512bbd0be');
+
+    if(apiPath === undefined) {
       return;
     }
+
     setIsLoading(true); // Set loading to true before the fetch call
-    fetch(apiPath+'')
-      .then(response => response.json())
-      .then(data => {
-        setGraphData(data);
+
+    // Fetch buyer data and supplier data in parallel
+    Promise.all([
+      fetch(buyerGraphPath + apiPath).then((response) => response.json()),
+      fetch(supplierGraphPath + apiPath).then((response) => response.json()),
+    ])
+      .then(([buyerData, supplierData]) => {
+
+        // Add the 'type' property to buyer nodes and set the 'ratio' property
+        buyerData.nodes.forEach((node: { type: string }, index: number) => {
+          if (index === 1) {
+            node.type = 'baseOrganization';
+          } else {
+            node.type = 'buyer';
+          }
+        });
+
+        // Add the 'type' property to supplier nodes
+        supplierData.nodes.forEach((node: { type: string }, index: number) => {
+          if (index === 1) {
+            node.type = 'baseOrganization';
+          } else {
+            node.type = 'supplier';
+          }
+        });
+
+        // Merge the nodes and links arrays from both graphs
+        const mergedData = {
+          nodes: [...buyerData.nodes, ...supplierData.nodes],
+          links: [...buyerData.links, ...supplierData.links],
+        };
+
+        setMergedGraphData(mergedData);
         setIsLoading(false);
-        }
-      );
-    },[apiPath, setApiPath]
-  );
+      });
+  },[apiPath, buyerGraphPath, supplierGraphPath]);
 
   return (
     <>
@@ -70,7 +110,7 @@ const Home = ({apiPath,
         <Header />
         {/* The GraphWrapper takes GraphData */}
         <GraphWrapper 
-          graphData={graphData}
+          graphData={mergedGraphData} 
           physics={physics} 
           setPhysics={setPhysics} 
           visuals={visuals} 
@@ -79,6 +119,8 @@ const Home = ({apiPath,
           setOpen={setOpen} 
           previewNode={previewNode} 
           setPreviewNode={setPreviewNode}
+          apiPath={apiPath}
+          setApiPath={setApiPath}
         />
         {/* Loading spinner CSS in globals*/}
         {isLoading ? <LoadingSpinner /> : 
