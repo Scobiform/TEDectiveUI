@@ -7,6 +7,7 @@ const ChartJS = (props: any) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     useEffect(() => {
+        
         // Get the canvas element and its context
         const canvas = canvasRef.current;
 
@@ -33,7 +34,7 @@ const ChartJS = (props: any) => {
                 myChart.destroy();
             }
         };
-    }, [props.data, props.type]); // Run this effect when props.data changes
+    }, [props.data, props.type]);
 
     return (
         <div className={styles.doughnutChart}>

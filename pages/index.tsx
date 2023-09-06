@@ -22,8 +22,8 @@ interface HomeProps {
 }
 
 type GraphData = {
-  nodes: any[]; // Replace 'any' with the actual type of your nodes
-  links: any[]; // Replace 'any' with the actual type of your links
+  nodes: any[];
+  links: any[];
 };
 
 const Home = ({apiPath,
@@ -41,6 +41,7 @@ const Home = ({apiPath,
   // API URL
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
+  // Initial graph id
   const initialGraphId = process.env.NEXT_PUBLIC_INITIAL_GPAPH_ID;
 
   // Graph paths
@@ -75,7 +76,7 @@ const Home = ({apiPath,
     ])
       .then(([buyerData, supplierData]) => {
 
-        // Add the 'type' property to buyer nodes and set the 'ratio' property
+        // Add the 'type' property to buyer nodes
         buyerData.nodes.forEach((node: { type: string }, index: number) => {
           if (index === 1) {
             node.type = 'baseOrganization';
@@ -108,7 +109,7 @@ const Home = ({apiPath,
     <>
       <main className={styles.main}>
         <Header />
-        {/* The GraphWrapper takes GraphData */}
+        {/* The GraphWrapper */}
         <GraphWrapper 
           graphData={mergedGraphData} 
           physics={physics} 
@@ -125,6 +126,7 @@ const Home = ({apiPath,
         {/* Loading spinner CSS in globals*/}
         {isLoading ? <LoadingSpinner /> : 
           <p>TEDective makes European public procurement data explorable for non-experts</p>}
+        {/* The Search component */}
         <Search apiPath={apiPath} setApiPath={setApiPath}/>
       </main>
     </>
