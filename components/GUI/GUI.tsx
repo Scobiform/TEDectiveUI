@@ -62,7 +62,6 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
 
     // **************************************************************************** //
     // Container resize
-    // TODO: Make own component
     const handleSize = () => {
         setWindowSize({
         width: window.innerWidth,
@@ -82,10 +81,6 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     document.documentElement.style.setProperty('--windowHeight', newHeight);
 
     // TODO: Make use of css var variables for this region
-    // T
-    const guiPanel = Array.from(
-        document.getElementsByClassName('leva-c-hBtFDW') as HTMLCollectionOf<HTMLElement>,
-    );
     // leva-c-kWgxhW
     const guiPanel1 = Array.from(
         document.getElementsByClassName('leva-c-kWgxhW') as HTMLCollectionOf<HTMLElement>,
@@ -116,7 +111,9 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     // Set Opacity
     document.documentElement.style.setProperty('--opacity', visuals.opacity.toString());
     
-    /* GUI COLORS ******************************************************************/
+    /* GUI Settings ******************************************************************/
+    // TODO: Move values to config.ts
+    // GUI Theme Store
     const colorsStore = useCreateStore();
     const radiiStore = useCreateStore()
     const spaceStore = useCreateStore()
