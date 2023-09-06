@@ -12,6 +12,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   const appName = process.env.NEXT_PUBLIC_SITE_NAME;
   const appDescription = process.env.NEXT_PUBLIC_SITE_DESCRIPTION;
+  const appKeywords = process.env.NEXT_PUBLIC_SITE_KEYWORDS;
 
   const title = `${appName} - ${appDescription}`;
 
@@ -22,10 +23,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta
           name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+          content="width=device-width,initial-scale=1"
         />
-        <meta name="description" content="Description" />
-        <meta name="keywords" content="Keywords" />
+        <meta name="description" content={appDescription} />
+        <meta name="keywords" content={appKeywords} />
         <title>{title}</title>
 
         <link rel="manifest" href="/manifest.json" />
@@ -43,7 +44,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           sizes="32x32"
         />
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>
-        <meta name="theme-color" content="#317EFB" />
+        <meta name="theme-color" content="#00A535" />
       </Head>
       <Component {...pageProps} />
     </>

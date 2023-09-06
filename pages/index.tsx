@@ -124,8 +124,7 @@ const Home = ({apiPath,
           setApiPath={setApiPath}
         />
         {/* Loading spinner CSS in globals*/}
-        {isLoading ? <LoadingSpinner /> : 
-          <p>TEDective makes European public procurement data explorable for non-experts</p>}
+        {isLoading ? <LoadingSpinner /> : null}
         {/* The Search component */}
         <Search apiPath={apiPath} setApiPath={setApiPath}/>
       </main>
