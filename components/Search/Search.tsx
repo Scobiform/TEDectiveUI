@@ -51,12 +51,13 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
     <>
       <div className={styles.search}>
         <input
-          type="text"
+          type="search"
           placeholder="Search for an organization..."
           onChange={(e) => handleSearch(e.target.value)}
           autoFocus
-          aria-label="Search for an organization"
+          aria-label="Search for an organization (S)"
           tabIndex={0}
+          accessKey="S"
         />
         {loading ? (
           <p>Loading...</p>

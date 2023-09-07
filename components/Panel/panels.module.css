@@ -18,6 +18,14 @@
 	top: 0;
 }
 
+.nodePanelMenuButton:focus{
+	outline: none;
+}
+
+.nodePanelMenuButton:focus-visible{
+	outline: none;
+}
+
 .nodePanelMenuButton svg{
 	margin-top: 0.42rem;
 	margin-left: 0.42rem;

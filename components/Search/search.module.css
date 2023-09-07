@@ -9,8 +9,28 @@
     min-width: 300px;
 }
 
-.search input[type=text]{
+.search input[type=search]{
     border: 0;
+    width: 100%;
+    color: var(--primary);
+    outline: none;
+    padding:0.42rem;
+    background-color: var(--tertiary);
+    color: var(--primary);
+}
+
+.search input[type=search]:focus{
+    border: 1px soild var(--primary);
+    width: 100%;
+    color: var(--primary);
+    outline: none;
+    padding:0.42rem;
+    background-color: var(--tertiary);
+    color: var(--primary);
+}
+
+.search input[type=search]:focus-visible{
+    border: 1px soild var(--primary);
     width: 100%;
     color: var(--primary);
     outline: none;

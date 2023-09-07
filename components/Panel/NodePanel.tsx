@@ -57,7 +57,9 @@ const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath}: NodePane
       <div className={styles.nodePanel}>
           <button
           onClick={toggleMenu}
-          className={styles.nodePanelMenuButton} aria-label="Open node panel"
+          className={styles.nodePanelMenuButton} 
+          aria-label="Open node panel (N)"
+          accessKey="N"
           >
           <IconSVG />
           </button>
