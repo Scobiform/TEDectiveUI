@@ -57,7 +57,7 @@ const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath}: NodePane
       <div className={styles.nodePanel}>
           <button
           onClick={toggleMenu}
-          className={styles.nodePanelMenuButton}
+          className={styles.nodePanelMenuButton} aria-label="Open node panel"
           >
           <IconSVG />
           </button>
@@ -68,7 +68,7 @@ const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath}: NodePane
                   {renderContentBasedOnNodeType(previewNode)}
                   
                   {previewNode.name !== undefined && (
-                    <button onClick={() => handleClick(previewNode.id+'')}>Load organization graph</button>
+                    <button onClick={() => handleClick(previewNode.id+'')} aria-label="Load organization graph">Load organization graph</button>
                   )}
                   {/*objectString*/}
                 </div>
