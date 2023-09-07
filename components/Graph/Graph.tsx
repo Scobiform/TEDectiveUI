@@ -12,7 +12,6 @@ import { initialPhysics, initialVisuals } from './../config';
 /* Component styles */
 import styles from './graph.module.css';
 import { useWindowSize } from "@react-hook/window-size";
-import ChartJS from "../Chart/ChartJS";
 
 export interface GraphProps {
   graphData: GraphData | undefined; 
@@ -31,7 +30,7 @@ export interface GraphProps {
 // Create a component that will render the graph
 const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   previewNode, setPreviewNode, isOpen, setOpen, apiPath, setApiPath }: GraphProps) => {
-  
+
   // Create a reference to the graph
   const fgRef = useRef();
 
@@ -46,35 +45,6 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   [previewNode, setPreviewNode] = useState<NodeObject | null | undefined>(null);
   // State variable to store whether the node panel is open or not
   [isOpen, setOpen] = useState(false);
-  // Chart visibility
-  const [chartVisible, setChartVisible] = useState(false);
-  
-  // Handle the toggle chart button click event
-  const handleToggleChart = () => {
-    setChartVisible(!chartVisible); // Toggle chart visibility
-  };
-
-  // Mockup doughnut chart data
-  const doughnutData = {
-    labels: ['Contracts', 'Tenders', 'Awards'],
-    datasets: [
-      {
-        label: 'Dataset 1',
-        data: [300, 50, 100],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.8)',
-          'rgba(54, 162, 235, 0.8)',
-          'rgba(255, 206, 86, 0.8)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 0.8)',
-          'rgba(54, 162, 235, 0.8)',
-          'rgba(255, 206, 86, 0.8)',
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
 
   // Callback function that will be called when a node is clicked
   const handleClick = useCallback(
@@ -159,6 +129,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeLabel="label"
           nodeAutoColorBy="indexColor"
           nodeCanvasObject={(node, ctx, globalScale) => {
+
             // This section defines the node labels
             let label = '🟩';
             let fontSize = 10 * visuals!.nodeRel;
@@ -288,11 +259,6 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
         />
       </div>
       <div className={styles.interactionBar}>
-        <div className={styles.actionButtons}>
-          <button onClick={handleToggleChart}>
-            📊
-          </button>
-        </div>
         <div className={styles.zoomButtons}>
           <button onClick={handleZoomIn}>
             ➕
@@ -304,8 +270,6 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
       </div>
       <NodePanel previewNode={previewNode} isOpen={isOpen} setOpen={setOpen} apiPath={apiPath} setApiPath={setApiPath}/>
       <GUI physics={physics} setPhysics={setPhysics} visuals={visuals} setVisuals={setVisuals}/>
-      {/* Conditionally render the chart based on chartVisible state */}
-      {chartVisible && <ChartJS data={doughnutData} type="doughnut" />}
     </>
   );
 };

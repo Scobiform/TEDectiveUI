@@ -34,7 +34,7 @@ const ChartJS = (props: any) => {
                 myChart.destroy();
             }
         };
-    }, [props.data, props.type]);
+    }, [props.data, props.type, props.labels]);
 
     return (
         <div className={styles.doughnutChart}>
