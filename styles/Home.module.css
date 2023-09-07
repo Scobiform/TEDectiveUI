@@ -239,6 +239,15 @@
   color: var(--primary)
 }
 
+/* OrganizationDetails */
+.organizationDetails {
+  position: absolute;
+  bottom: 14rem;
+  left: 2.8rem;
+  display: grid;
+  color: var(--primary)
+}
+
 /* ####################################### */
 
 /* Tablet and Smaller Desktop */

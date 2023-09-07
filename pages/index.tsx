@@ -237,15 +237,21 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
           </div>
         </div>
         {/* Conditionally render the chart based on chartVisible state */}
-        {chartVisible && <><ChartJS data={getCombinedChart(
-          buyerCounts.contracts, buyerCounts.awards, buyerCounts.tenders,
-          supplierCounts.contracts, supplierCounts.awards, supplierCounts.tenders
-          )} type="bar" />
+        {chartVisible && 
+        <>
+          <div className={styles.organizationDetails}>
+            
+          </div>
+          <ChartJS data={getCombinedChart(
+            buyerCounts.contracts, buyerCounts.awards, buyerCounts.tenders,
+            supplierCounts.contracts, supplierCounts.awards, supplierCounts.tenders
+            )} type="bar" 
+          />
           <div className={styles.money}>
             <p>Overall spent: {buyerCounts.value}</p>
             <p>Overall earned: {supplierCounts.value}</p>
           </div>
-          </>
+        </>
         }
       </main>
     </>
