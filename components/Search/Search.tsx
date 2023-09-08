@@ -22,14 +22,11 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
   // Fetch search results
   const handleSearch = async (query: string) => {
     // Prevent fetching if the query is empty
-    if (query.trim() === '') {
+    if (query.trim() === '' || query.length < 3) {
       setSearchResults([]);
       setLoading(false);
       return;
     }
-
-    // Convert query to lowercase
-    query = query.toLowerCase();
     
     // Set loading state
     setLoading(true);
