@@ -41,9 +41,9 @@ const NutsMap = ({ data }: any) => {
                     </Popup>
                   </Marker>
                 );
-              }
+            }
             } catch (error) {
-              console.error('Error fetching geocoding data:', error);
+              //console.error('Error fetching geocoding data:', error);
             }
           }
           return null;
