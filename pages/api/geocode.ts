@@ -5,23 +5,20 @@ const cache: any = {};
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   // Get the query parameter from the request
-  const { q } = req.query;
+  const { q } = req.query as { q: string };
 
-  if (!q || !Array.isArray(q)) {
-    return res.status(400).json({ error: 'Missing or invalid query parameter' });
+  if (!q) {
+    return res.status(400).json({ error: 'Missing query parameter' });
   }
 
-  // Extract the first element of the array (assuming it's a single string query)
-  const query = q[0];
-
   // Check if the response is already cached
-  if (cache[query]) {
-    console.log('Using cached response for', query);
-    return res.status(200).json(cache[query]);
+  if (cache[q]) {
+    console.log('Using cached response for', q);
+    return res.status(200).json(cache[q]);
   }
 
   // Make a fetch request to an external API using the query parameter
-  fetch(`https://geocode.maps.co/search?q=${query}`)
+  fetch(`https://geocode.maps.co/search?q=${q}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`Failed to fetch data: ${response.status}`);
@@ -29,9 +26,9 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       return response.json();
     })
     .then((data) => {
-      console.log('Fetched data for', query);
+      console.log('Fetched data for', q);
       // Cache the response
-      cache[query] = data;
+      cache[q] = data;
       // Respond with the fetched data
       res.status(200).json(data);
     })
