@@ -74,18 +74,12 @@ export let initialVisuals = {
   // Link config
   linkVisibility: true,
   linkCurvature: 0,
-  linkWidth: 0.14,
+  linkWidth: 0.01,
   linkDistance: 0.42,
   linkColor: '#3fa535',
   linkDirectionalParticles: 0.1,
   linkDirectionalParticleWidth: 0.1,
   linkLineDash: 0.1,
-  // Highlight config
-  highlightAnim: true,
-  highlightFade: 0.8,
-  highlightLinkSize: 1.4,
-  highlightNodeSize: 2.2,
-  highlightLabelFontSize: 1.4,
   // Viewport config
   opacity: 0.91,
   windowWidth: 640,

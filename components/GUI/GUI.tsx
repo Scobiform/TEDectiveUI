@@ -46,15 +46,15 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     const visualsStore = useCreateStore() ;
     const visualsData = useControls('Visuals', {
         nodeVisibility: { value: visuals.nodeVisibility, onChange: (v) => setVisualsCallback({ ...visuals, nodeVisibility: v }) },
-        nodeRelSize: { value: visuals.nodeRel, min: 0, max: 42, step: 0.1, onChange: (v) => setVisualsCallback({ ...visuals, nodeRel: v }) },
-        awardSizeMultiplier: { value: visuals.awardNodeSizeMult, min: 0.01, max: 7, step: 0.01, onChange: (v) => setVisualsCallback({ ...visuals, awardNodeSizeMult: v }) },
+        nodeRelSize: { value: visuals.nodeRel, onChange: (v) => setVisualsCallback({ ...visuals, nodeRel: v }) },
+        awardSizeMultiplier: { value: visuals.awardNodeSizeMult, onChange: (v) => setVisualsCallback({ ...visuals, awardNodeSizeMult: v }) },
         linkVisibility: { value: visuals.linkVisibility, onChange: (v) => setVisualsCallback({ ...visuals, linkVisibility: v }) },
         linkColor: { value: visuals.linkColor, onChange: (v) => setVisualsCallback({ ...visuals, linkColor: v }) },
-        linkWitdh: { value: visuals.linkWidth, min: 0, max: 7, step: 0.1, onChange: (v) => setVisualsCallback({ ...visuals, linkWidth: v }) },
-        linkCurvature: { value: visuals.linkCurvature, min: 0, max: 70, step: 0.1, onChange: (v) => setVisualsCallback({ ...visuals, linkCurvature: v }) },
-        linkDirectionalParticles: { value: visuals.linkDirectionalParticles, min: 0, max: 14, step: 0.001, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticles: v }) },
-        linkDirectionalParticleWidth: { value: visuals.linkDirectionalParticleWidth, min: 0, max: 42, step: 0.01, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticleWidth: v }) },
-        opacity: { value: visuals.opacity, min: 0, max: 1, step: 0.01, onChange: (v) => setVisualsCallback({ ...visuals, opacity: v }) },
+        linkWitdh: { value: visuals.linkWidth, onChange: (v) => setVisualsCallback({ ...visuals, linkWidth: v }) },
+        linkLineDash : { value: visuals.linkLineDash, onChange: (v) => setVisualsCallback({ ...visuals, linkLineDash: v }) },
+        linkCurvature: { value: visuals.linkCurvature, onChange: (v) => setVisualsCallback({ ...visuals, linkCurvature: v }) },
+        linkDirectionalParticles: { value: visuals.linkDirectionalParticles, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticles: v }) },
+        linkDirectionalParticleWidth: { value: visuals.linkDirectionalParticleWidth, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticleWidth: v }) },
         },
         { collapsed: true},
         [visuals, visualsStore]
