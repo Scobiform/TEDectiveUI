@@ -16,10 +16,11 @@
     background-color: var(--tertiary);
     color: var(--primary);
     text-align: center;
-    height: 2.45rem;
-    font-weight: 700;
+    height: 2.42rem;
+    font-weight: 420;
     border: 0;
     padding-top: 0.42rem;
+    font-family: 'Inter';
 }
 
 .search input[type=search]:focus{
