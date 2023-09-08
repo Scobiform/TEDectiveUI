@@ -4,7 +4,6 @@ import styles from './panels.module.css'
 import IconSVG  from '../Static/IconSVG'
 import { NodeObject } from "react-force-graph-2d";
 
-// Interface for node panel props
 export interface NodePanelProps {
   previewNode: NodeObject | null | undefined;
   isOpen: boolean;
@@ -13,7 +12,6 @@ export interface NodePanelProps {
   setApiPath: any; 
 }
 
-// NodePanel component with NodePanelProps **********************************************/
 const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath}: NodePanelProps) => {
  
   // Toggle menu
@@ -106,7 +104,6 @@ function renderContentBasedOnNodeType(previewNode: any) {
     }
 
     // Fetch organization
-    // TODO: Make organizationDetails component
     if(previewNode.name !== undefined) {
       return <div> {/* FETCH ORGANIZATION*/}
                 <h2>🏢 {previewNode.name}</h2>

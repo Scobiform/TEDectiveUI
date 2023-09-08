@@ -45,6 +45,7 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
   // Set the API path when a search result is clicked
   const handleClick = (result: SearchResult) => {
     setApiPath(result.id);
+    setSearchResults([]);
   };
 
   return (

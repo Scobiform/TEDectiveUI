@@ -97,8 +97,10 @@ const NutsMap = ({ data }: any) => {
         />
         {markers}
         <div className={styles.interactionBar}>
+        <div className={styles.zoomButtons}>
           <ZoomInButton />
           <ZoomOutButton />
+        </div>
         </div>
       </MapContainer>
     </div>

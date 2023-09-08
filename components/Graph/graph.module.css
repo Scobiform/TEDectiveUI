@@ -19,7 +19,7 @@
 /* interactionBar */
 .interactionBar {
   position: absolute;
-  bottom: 2.1rem;
+  bottom: 0;
   left: 0.14rem;
 }
 
