@@ -5,10 +5,10 @@
     right: 175px;
     opacity: var(--opacity);
     margin: 0 auto;
-    max-width: 42vw;
-    left: 5.6rem;
-    min-width: 235px;
+    max-width: 77vw;
     color: var(--primary);
+    left: 7.7rem;
+    min-width: 210px;
 }
 
 .search input[type=search]{
