@@ -55,7 +55,6 @@
     right: 0;
 	max-height: 21vh;
 	background-color: var(--tertiary);
-	opacity: var(--opacity);
 	z-index: 1000;
 	display: list-item;
 	overflow-y: scroll;

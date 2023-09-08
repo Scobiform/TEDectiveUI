@@ -322,6 +322,8 @@ display: none;
 .leaflet-popup-content-wrapper, .leaflet-popup-tip{
   background-color: var(--tertiary) !important;
   color: var(--primary) !important;
+  border-radius: 0 !important;
+  opacity: var(--opacity);
 }
 
 /* Leva component */
