@@ -9,6 +9,7 @@ import { initialPhysics, initialVisuals } from '../components/config'
 import { NodeObject } from 'react-force-graph-2d';
 import ChartJS from "../components/Chart/ChartJS";
 import dynamic from 'next/dynamic';
+import IconSVG from '../components/Static/IconSVG';
 
 interface HomeProps {
   physics?: typeof initialPhysics;
@@ -283,6 +284,9 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
         {isLoading ? <LoadingSpinner /> : null}
         {/* The Search component */}
         <Search apiPath={apiPath} setApiPath={setApiPath}/>
+        <button className={styles.tedectveLogo}>
+              <IconSVG />
+            </button>
         <div className={styles.interactionBar}>
           <div className={styles.actionButtons}>
             {/* NUTS component toggle */}

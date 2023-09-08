@@ -28,21 +28,11 @@ const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath}: NodePane
     }
   , [setApiPath]);
 
-
-  // TODO: Build switch case for template display based on node type
   if(previewNode === null || previewNode === undefined)
   {
     return (
       <>
         <div className={styles.nodePanel}>
-          <button
-          onClick={toggleMenu}
-          className={styles.nodePanelMenuButton}
-          aria-label="Open node panel"
-          tabIndex={0}
-          >
-          <IconSVG />
-          </button>
           {isOpen && (
               <div>
               </div>
@@ -55,14 +45,6 @@ const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath}: NodePane
     return (
       <>
       <div className={styles.nodePanel}>
-          <button
-          onClick={toggleMenu}
-          className={styles.nodePanelMenuButton} 
-          aria-label="Open node panel (N)"
-          accessKey="N"
-          >
-          <IconSVG />
-          </button>
           {isOpen && (
               <div className={styles.panelView}>
                 <div className={styles.nodePanelContent}>

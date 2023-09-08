@@ -255,6 +255,36 @@
   z-index: 1002;
 }
 
+.tedectveLogo{
+	cursor: pointer;
+  color: white;
+  border: none;
+  display: flex;
+  background: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+}
+
+.tedectveLogo:focus{
+	outline: none;
+}
+
+.tedectveLogo:focus-visible{
+	outline: none;
+}
+
+.tedectveLogo svg{
+	margin-top: 0.42rem;
+	margin-left: 0.42rem;
+	color: var(--secondary);
+}
+
+.tedectveLogo svg:hover{
+	color: var(--secondary);
+}
+
 /* ####################################### */
 
 
