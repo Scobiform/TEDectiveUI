@@ -8,5 +8,5 @@
 
 .map li{
     list-style: none;
-    color: var(--tertiary);
+    color: var(--primary);
 }

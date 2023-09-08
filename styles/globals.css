@@ -318,6 +318,12 @@ display: none;
   color: #000000;
 }
 
+/* NutsMap component */
+.leaflet-popup-content-wrapper, .leaflet-popup-tip{
+  background-color: var(--tertiary) !important;
+  color: var(--primary) !important;
+}
+
 /* Leva component */
 /* override leva styles */
 .leva-c-hBtFDW-lbFLlY-isRoot-false::after{
