@@ -1,13 +1,12 @@
 .search{
     z-index: 1001;
     position: fixed;
-    display: grid;
     right: 175px;
     opacity: var(--opacity);
     margin: 0 auto;
     max-width: 77vw;
     color: var(--primary);
-    left: 7.7rem;
+    left: 8.7rem;
     min-width: 175px;
 }
 
@@ -15,11 +14,10 @@
     border: 0;
     width: 100%;
     outline: none;
-    padding: 0.35rem;
     background-color: var(--tertiary);
     color: var(--primary);
-    margin: 0.49rem;
     text-align: center;
+    height: 2.52rem;
 }
 
 .search input[type=search]:focus{

@@ -25,10 +25,10 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
 
     // Physics GUI panel
     const physicsData = useControls('Physics', {
-        alphaDecay: { value: physics.alphaDecay, min: 0, max: 1, step: 0.0001, onChange: (v) => setPhysicsCallback({ ...physics, alphaDecay: v }) },
-        alphaMin: { value: physics.alphaMin, min: 0, max: 1, step: 0.0001, onChange: (v) => setPhysicsCallback({ ...physics, alphaMin: v }) },
-        alphaTarget: { value: physics.alphaTarget, min: 0, max: 1, step: 0.0001, onChange: (v) => setPhysicsCallback({ ...physics, alphaTarget: v }) },
-        velocityDecay: { value: physics.velocityDecay, min: 0, max: 1, step: 0.001, onChange: (v) => setPhysicsCallback({ ...physics, velocityDecay: v }) },
+        alphaDecay: { value: physics.alphaDecay, onChange: (v) => setPhysicsCallback({ ...physics, alphaDecay: v }) },
+        alphaMin: { value: physics.alphaMin, onChange: (v) => setPhysicsCallback({ ...physics, alphaMin: v }) },
+        alphaTarget: { value: physics.alphaTarget, onChange: (v) => setPhysicsCallback({ ...physics, alphaTarget: v }) },
+        velocityDecay: { value: physics.velocityDecay, onChange: (v) => setPhysicsCallback({ ...physics, velocityDecay: v }) },
         enableGravity: { value: physics.enableGravity, onChange: (v) => setPhysicsCallback({ ...physics, enableGravity: v }) },
         enableCollision: { value: physics.enableCollision, onChange: (v) => setPhysicsCallback({ ...physics, enableCollision: v }) },
         enableCentering: { value: physics.enableCentering, onChange: (v) => setPhysicsCallback({ ...physics, enableCentering: v }) },

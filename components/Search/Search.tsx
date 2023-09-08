@@ -28,6 +28,10 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
       return;
     }
 
+    // Convert query to lowercase
+    query = query.toLowerCase();
+    
+    // Set loading state
     setLoading(true);
 
     try {

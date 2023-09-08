@@ -102,10 +102,10 @@ main {
 /* Header component */
 header p {
   color: var(--primary);
-  font-size: 1em;
-  left: 2.52rem;
+  font-size: 1.21rem;
+  left: 2.42rem;
   position: absolute;
-  top: 0.63rem;
+  top: 0.56rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -339,17 +339,22 @@ display: none;
 /* Keyframes for flash animation */
 @keyframes flash {
   0%, 100% {
-    fill: var(--secondary); /* White color when visible */
+    fill: Var(--secondary)
   }
-  50%, 75% {
-    fill: var(--tedectiveBlue); /* Black color when blinking */
+  10% {
+    fill: var(--secondary) 
+  }
+  99% {
+    fill: var(--tertiary) 
   }
 }
 
+
 /* Apply the animation to the green shape */
 #path218 {
-  animation: flash 7s steps(1, end) infinite, fadeOut 4.2s linear 7s infinite; /* Flash for 7ms, then stay calm for 7 seconds */
+  animation: flash 14s steps(1, end) infinite, ease-in 0.042s linear 1s infinite; /* Flash for 7ms, then stay calm for 7 seconds */
 }
+
 
 /* Keyframes for rotate animation */
 @keyframes rotate {
