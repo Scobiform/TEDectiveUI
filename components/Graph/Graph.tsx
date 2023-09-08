@@ -30,7 +30,7 @@ export interface GraphProps {
 // Create a component that will render the graph
 const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   previewNode, setPreviewNode, isOpen, setOpen, apiPath, setApiPath }: GraphProps) => {
-  
+
   // Create a reference to the graph
   const fgRef = useRef();
 
@@ -81,6 +81,26 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     }
   ,[setOpen]);
 
+  const handleZoomIn = () => {
+    const fgInstance = fgRef.current as unknown as ForceGraphMethods;
+    if (fgInstance) {
+      // Increase the zoom level (adjust the scale factor as needed)
+      fgInstance.zoom(1.2);
+      // Set the camera position to (0, 0)
+      fgInstance.centerAt(0, 0);
+    }
+  };
+
+  const handleZoomOut = () => {
+    const fgInstance = fgRef.current as unknown as ForceGraphMethods;
+    if (fgInstance) {
+      // Decrease the zoom level (adjust the scale factor as needed)
+      fgInstance.zoom(0.14);
+      // Set the camera position to (0, 0)
+      fgInstance.centerAt(0, 0);
+    }
+  };
+
   useEffect(() => {
 
     // Get the ForceGraph2D instance
@@ -89,6 +109,10 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     if (!physics ) {
       return; // Do nothing if physics is undefined
     }
+
+    // Zoom out to the initial zoom level
+    fgInstance.zoom(0.21, 7);
+
 
     // Set the ForceGraph2D instance's d3Force
     fgInstance.d3Force('charge', d3.forceManyBody().strength(physics.chargeStrength));
@@ -109,6 +133,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           nodeLabel="label"
           nodeAutoColorBy="indexColor"
           nodeCanvasObject={(node, ctx, globalScale) => {
+
             // This section defines the node labels
             let label = '🟩';
             let fontSize = 10 * visuals!.nodeRel;
@@ -236,6 +261,16 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           width={width}
           height={height}
         />
+      </div>
+      <div className={styles.interactionBar}>
+        <div className={styles.zoomButtons}>
+          <button onClick={handleZoomIn}>
+            ➕
+            </button>
+          <button onClick={handleZoomOut}>
+            ➖
+          </button>
+        </div>
       </div>
       <NodePanel previewNode={previewNode} isOpen={isOpen} setOpen={setOpen} apiPath={apiPath} setApiPath={setApiPath}/>
       <GUI physics={physics} setPhysics={setPhysics} visuals={visuals} setVisuals={setVisuals}/>

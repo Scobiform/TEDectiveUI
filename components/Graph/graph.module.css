@@ -15,3 +15,23 @@
   width: 100vw;
   height: 100vh;
 }
+
+/* interactionBar */
+.interactionBar {
+  position: absolute;
+  bottom: 2.1rem;
+  left: 0.14rem;
+}
+
+.zoomButtons {
+  display: grid;
+}
+
+.zoomButtons button {
+  background-color: transparent;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 1.4rem;
+  padding: 0.14rem;
+}

@@ -1,22 +1,26 @@
 /* Doughnut chart */
 .doughnutChart{
-	color: white;
+	color: var(--primary);
+	position: absolute;
+	bottom:2.1rem;
+	left: 1.82rem;
 	padding: 0.42rem;
 	margin: 0.42rem 0 0 0.42rem;
-	height: 7vh;
-	width:  7vw;
+	opacity: var(--opacity);
 }
 
 /* Bar chart */
 .barChart{
-	color: white;
+	color: var(--primary);
 	padding: 0.42rem;
 	margin: 0.42rem 0 0 0.42rem;
+	background-color: var(--tertiary);
+	opacity: var(--opacity);
 }
 
 /* RadarChart */
 .radarChart{
-	color: white;
+	color: var(--primary);
 	padding: 0.42rem;
 	margin: 0.42rem 0 0 0.42rem;
 }
