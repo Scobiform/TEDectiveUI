@@ -26,7 +26,7 @@ const NutsMap = ({ data }: any) => {
 
               if (response.ok) {
                 const geoData = await response.json();
-                console.log(geoData);
+                //console.log(geoData);
                 return (
                   <Marker key={item.id} position={[geoData[0].lat, geoData[0].lon]}>
                     <Popup>
