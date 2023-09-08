@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { LatLngTuple } from 'leaflet';
 import styles from './nutsMap.module.css';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
@@ -63,6 +63,32 @@ const NutsMap = ({ data }: any) => {
 
   const [markers, setMarkers] = useState<JSX.Element[]>([]);
 
+  const ZoomInButton = () => {
+    const map = useMap();
+    const handleZoomIn = () => {
+      map.setZoom(map.getZoom() + 1);
+    };
+
+    return (
+      <button onClick={handleZoomIn} className={styles.customZoomButton}>
+        ➕
+      </button>
+    );
+  };
+
+  const ZoomOutButton = () => {
+    const map = useMap();
+    const handleZoomOut = () => {
+      map.setZoom(map.getZoom() - 1);
+    };
+
+    return (
+      <button onClick={handleZoomOut} className={styles.customZoomButton}>
+        ➖
+      </button>
+    );
+  };
+
   return (
     <div className={styles.map}>
       <MapContainer center={europeCenter} zoom={4} style={mapStyle} minZoom={2} attributionControl={false} zoomControl={false}>
@@ -70,6 +96,10 @@ const NutsMap = ({ data }: any) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {markers}
+        <div className={styles.interactionBar}>
+          <ZoomInButton />
+          <ZoomOutButton />
+        </div>
       </MapContainer>
     </div>
   );
