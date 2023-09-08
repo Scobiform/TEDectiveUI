@@ -241,8 +241,6 @@ header p {
 }
 
 .spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #3498db;
   border-radius: 50%;
   width: 24px;
   height: 24px;
@@ -337,3 +335,34 @@ display: none;
   padding-top: 0 !important;
   margin-top: 0 !important;
 }
+
+/* Keyframes for flash animation */
+@keyframes flash {
+  0%, 100% {
+    fill: var(--secondary); /* White color when visible */
+  }
+  50%, 75% {
+    fill: var(--tedectiveBlue); /* Black color when blinking */
+  }
+}
+
+/* Apply the animation to the green shape */
+#path218 {
+  animation: flash 7s steps(1, end) infinite, fadeOut 4.2s linear 7s infinite; /* Flash for 7ms, then stay calm for 7 seconds */
+}
+
+/* Keyframes for rotate animation */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Apply the animation to the SVG */
+#rotating-svg {
+  animation: rotate 1s linear infinite; /* Rotate for 1 second infinitely */
+}
+

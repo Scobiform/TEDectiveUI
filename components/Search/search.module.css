@@ -8,7 +8,7 @@
     max-width: 77vw;
     color: var(--primary);
     left: 7.7rem;
-    min-width: 210px;
+    min-width: 175px;
 }
 
 .search input[type=search]{
