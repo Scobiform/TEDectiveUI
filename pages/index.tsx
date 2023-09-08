@@ -4,10 +4,11 @@ import Header from '../components/Static/Header';
 import GraphWrapper from '../components/Graph/GraphWrapper';
 import Search from '../components/Search/Search';
 import LoadingSpinner from '../components/Static/LoadingSpinner';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { initialPhysics, initialVisuals } from '../components/config'
 import { NodeObject } from 'react-force-graph-2d';
 import ChartJS from "../components/Chart/ChartJS";
+import dynamic from 'next/dynamic';
 
 interface HomeProps {
   physics?: typeof initialPhysics;
@@ -55,15 +56,19 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
     setChartVisible(!chartVisible); // Toggle chart visibility
   };
 
+  // State for counts
   const [supplierCounts, setSupplierCounts] = useState({ contracts: 0, tenders: 0, awards: 0, value: 0 });
   const [buyerCounts, setBuyerCounts] = useState({ contracts: 0, tenders: 0, awards: 0, value: 0 });
 
-  // Organization details visibility
-  const [organizationsVisible, setOrganizationsVisible] = useState(false);
+  // State for status counts
+  const [statusCounts, setStatusCounts] = useState({ active: 0, cancelled: 0, complete: 0, unsuccessful: 0, withdrawn: 0, planned: 0 });
 
-  // Handle the toggle organization details button click event
-  const handleToggleOrganizationDetails = () => {
-    setOrganizationsVisible(!organizationsVisible); // Toggle chart visibility
+  // Organization details visibility
+  const [nutsVisible, setNutsVisible] = useState(false);
+
+  // Handle the toggle NUTS map button click event
+  const handleToggleNuts = () => {
+    setNutsVisible(!nutsVisible); // Toggle NUTS map visibility
   };
 
   // State for graph data
@@ -127,6 +132,15 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
           value: 0,
         };
 
+        const statusCounts = {
+          active: 0,
+          cancelled: 0,
+          complete: 0,
+          unsuccessful: 0,
+          withdrawn: 0,
+          planned: 0,
+        };
+
         supplierData.nodes.forEach((node: any) => {
           if (node.tag) {
             if (node.tag.includes('contract')) {
@@ -141,6 +155,26 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
           }
           if (node.value !== undefined && node.value !== null) {
             supplierCounts.value += node.value.amount;
+          }
+          if(node.status) {
+            if(node.status.includes('active')) {
+              statusCounts.active++;
+            }
+            if(node.status.includes('cancelled')) {
+              statusCounts.cancelled++;
+            }
+            if(node.status.includes('complete')) {
+              statusCounts.complete++;
+            }
+            if(node.status.includes('unsuccessful')) {
+              statusCounts.unsuccessful++;
+            }
+            if(node.status.includes('withdrawn')) {
+              statusCounts.withdrawn++;
+            }
+            if(node.status.includes('planned')) {
+              statusCounts.planned++;
+            }
           }
         });
 
@@ -159,53 +193,73 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
           if (node.value !== undefined && node.value !== null) {
             buyerCounts.value += node.value.amount;
           }
+          if(node.status) {
+            if(node.status.includes('active')) {
+              statusCounts.active++;
+            }
+            if(node.status.includes('cancelled')) {
+              statusCounts.cancelled++;
+            }
+            if(node.status.includes('complete')) {
+              statusCounts.complete++;
+            }
+            if(node.status.includes('unsuccessful')) {
+              statusCounts.unsuccessful++;
+            }
+            if(node.status.includes('withdrawn')) {
+              statusCounts.withdrawn++;
+            }
+            if(node.status.includes('planned')) {
+              statusCounts.planned++;
+            }
+          }
         });
 
         setBuyerCounts(buyerCounts);
         setSupplierCounts(supplierCounts);
+        setStatusCounts(statusCounts);
 
         setMergedGraphData(mergedData);
         setIsLoading(false);
       });
   },[apiPath, buyerGraphPath, supplierGraphPath]);
 
-  const getCombinedChart = (buyerContracts: any, buyerAwards: any, buyerTenders:any , supplierContracts: any, supplierAwards: any, supplierTenders: any) => {
+  const getStatusChart = (statusCounts: any) => {
     return {
-      labels: ['Contracts', 'Awards', 'Tenders'],
+      labels: Object.keys(statusCounts),
       datasets: [
         {
-          label: 'Buyer Data',
-          data: [buyerContracts, buyerAwards, buyerTenders],
+          label: 'Status Data',
+          data: Object.values(statusCounts),
           backgroundColor: [
-            'rgba(255, 99, 132, 0.5)', // Buyer Contracts color
-            'rgba(75, 192, 192, 0.5)', // Buyer Awards color
-            'rgba(255, 205, 86, 0.5)', // Buyer Tenders color
+            'rgba(255, 99, 132, 0.5)',  // Active color
+            'rgba(255, 205, 86, 0.5)',  // Cancelled color
+            'rgba(75, 192, 192, 0.5)',  // Complete color
+            'rgba(153, 102, 255, 0.5)', // Unsuccessful color
+            'rgba(255, 159, 64, 0.5)',  // Withdrawn color
+            'rgba(54, 162, 235, 0.5)',  // Planned color
           ],
           borderColor: [
             'rgba(255, 99, 132, 1)',
-            'rgba(75, 192, 192, 1)',
             'rgba(255, 205, 86, 1)',
-          ],
-          borderWidth: 1,
-        },
-        {
-          label: 'Supplier Data',
-          data: [supplierContracts, supplierAwards, supplierTenders],
-          backgroundColor: [
-            'rgba(54, 162, 235, 0.5)', // Supplier Contracts color
-            'rgba(255, 159, 64, 0.5)', // Supplier Awards color
-            'rgba(153, 102, 255, 0.5)', // Supplier Tenders color
-          ],
-          borderColor: [
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 159, 64, 1)',
+            'rgba(75, 192, 192, 1)',
             'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(54, 162, 235, 1)',
           ],
           borderWidth: 1,
         },
       ],
     };
   };
+
+  const NutsMap = useMemo(() => dynamic(
+    () => import('./../components/NutsMap/NutsMap'),
+    { 
+      loading: () => <p>A map is loading</p>,
+      ssr: false
+    }
+  ), [])
 
   return (
     <>
@@ -231,6 +285,11 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
         <Search apiPath={apiPath} setApiPath={setApiPath}/>
         <div className={styles.interactionBar}>
           <div className={styles.actionButtons}>
+            {/* NUTS component toggle */}
+            <button onClick={handleToggleNuts}>
+              📍
+            </button>
+            {/* Chart component toggle */}
             <button onClick={handleToggleChart}>
               📊
             </button>
@@ -240,18 +299,17 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
         {chartVisible && 
         <>
           <div className={styles.organizationDetails}>
-            
-          </div>
-          <ChartJS data={getCombinedChart(
-            buyerCounts.contracts, buyerCounts.awards, buyerCounts.tenders,
-            supplierCounts.contracts, supplierCounts.awards, supplierCounts.tenders
-            )} type="bar" 
-          />
-          <div className={styles.money}>
-            <p>Overall spent: {buyerCounts.value}</p>
-            <p>Overall earned: {supplierCounts.value}</p>
+            <ChartJS data={getStatusChart(statusCounts)} type="bar" />
+            <div className={styles.money}>
+              <p>Overall spent: {buyerCounts.value}</p>
+              <p>Overall earned: {supplierCounts.value}</p>
+            </div>
           </div>
         </>
+        }
+        {/* Conditionally render the NUTS map based on nutsVisible state */}
+        {nutsVisible &&
+          <NutsMap data={mergedGraphData.nodes}/>
         }
       </main>
     </>

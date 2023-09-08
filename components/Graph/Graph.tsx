@@ -86,6 +86,8 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     if (fgInstance) {
       // Increase the zoom level (adjust the scale factor as needed)
       fgInstance.zoom(1.2);
+      // Set the camera position to (0, 0)
+      fgInstance.centerAt(0, 0);
     }
   };
 
@@ -94,6 +96,8 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     if (fgInstance) {
       // Decrease the zoom level (adjust the scale factor as needed)
       fgInstance.zoom(0.14);
+      // Set the camera position to (0, 0)
+      fgInstance.centerAt(0, 0);
     }
   };
 

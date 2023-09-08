@@ -14,6 +14,8 @@
 	color: var(--primary);
 	padding: 0.42rem;
 	margin: 0.42rem 0 0 0.42rem;
+	background-color: var(--tertiary);
+	opacity: var(--opacity);
 }
 
 /* RadarChart */

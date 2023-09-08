@@ -26,6 +26,33 @@ const ChartJS = (props: any) => {
             type: props.type,
             // The data for our dataset
             data: props.data,
+            // Configuration options go here
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: false,
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        ticks: {
+                            display: true
+                        }
+                    },
+                    y: {
+                        stacked: true,
+                        ticks: {
+                            display: true
+                        }
+                    }
+                }
+            }
         });
 
         // Clean up by destroying the chart when the component unmounts
@@ -37,7 +64,7 @@ const ChartJS = (props: any) => {
     }, [props.data, props.type, props.labels]);
 
     return (
-        <div className={styles.doughnutChart}>
+        <div className={styles.barChart}>
             {/* Stacked chart */}
             <div className="">
                 <div className="">
