@@ -13,9 +13,8 @@ of [TEDective Project](https://tedective.org).
 
 This project is implemented using [Next.js](https://github.com/vercel/next.js),
 [react-force-graph](https://github.com/vasturiano/react-force-graph),
-[d3-force](https://github.com/d3/d3-force), [Leva
-GUI](https://github.com/pmndrs/leva), and
-[Chart.js](https://github.com/chartjs/Chart.js).
+[d3-force](https://github.com/d3/d3-force), [Leva GUI](https://github.com/pmndrs/leva),
+[Chart.js](https://github.com/chartjs/Chart.js), and [Leaflet](https://leafletjs.com/).
 
 ## Table of Contents
 
@@ -46,6 +45,7 @@ The TEDective UI boasts the following features:
   graphical user interface to tweak parameters
 - Incorporates [Chart.js](https://github.com/chartjs/Chart.js) for generating
   data-driven charts
+- Includes [Leaflet](https://leafletjs.com/) for interactive maps
 
 ## Background
 

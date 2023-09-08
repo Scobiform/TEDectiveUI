@@ -234,9 +234,6 @@ header p{
 
 /* Loading component */
 .loading-spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: fixed;
   top:50vh;
   left: 50vw;
