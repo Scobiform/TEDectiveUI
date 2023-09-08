@@ -19,6 +19,9 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
   // Loading state
   const [loading, setLoading] = useState(false);
 
+  // API URL
+  const apiURL = process.env.NEXT_PUBLIC_API_URL;
+
   // Fetch search results
   const handleSearch = async (query: string) => {
     // Prevent fetching if the query is empty
@@ -32,8 +35,8 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
     setLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 280));
-      const response = await fetch('https://api.tedective.org/latest/entities/organization/search/' + query); // ${query}
+      await new Promise((resolve) => setTimeout(resolve, 420));
+      const response = await fetch(apiURL+'entities/organization/search/' + query); // ${query}
       const data: SearchResult[] = await response.json();
       setSearchResults(data);
     } catch (error) {
