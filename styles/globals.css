@@ -25,6 +25,7 @@
     --primaryInvert: rgba(0, 0, 0, 1);
     --tertiary: rgb(0, 0, 0, 1);;
     --tertiaryInvert: rgb(255, 255, 255, 1);
+    --backgroundColor: rgb(7, 7, 7);
 }
 
 :root[data-theme='light'] {
@@ -32,6 +33,7 @@
     --primaryInvert: rgba(8, 8, 8, 1);
     --tertiary: rgba(255, 255, 255, 1);
     --tertiaryInvert: rgb(0, 0, 0, 1);
+    --backgroundColor: rgb(255, 255, 255);
 }
 
 * {
@@ -46,16 +48,8 @@ html, body{
   max-width: 100vw;
   max-height: 100vh;
   font-family: 'Inter', sans-serif;
-}
-
-body[data-theme='light'] {
   color: rgb(var(--primary));
-  background-color: var(--tertiary);
-}
-
-body[data-theme='dark'] {
-  color: rgb(var(--primary));
-  background-color: none;
+  background-color: var(--backgroundColor);
 }
 
 a {
@@ -120,7 +114,7 @@ header p {
 }
 
 @media (prefers-color-scheme: dark) {
-  html[data-theme='dark'] {
+  html{
     color-scheme: dark;
   }
 
@@ -162,7 +156,7 @@ header p {
 }
 
 @media (prefers-color-scheme: light) {
-    html[data-theme='light']{
+    html{
       color-scheme: light;
     }
     

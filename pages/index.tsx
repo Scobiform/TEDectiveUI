@@ -92,155 +92,161 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
 
     setIsLoading(true); // Set loading to true before the fetch call
 
-    // Fetch buyer data and supplier data in parallel
-    Promise.all([
-      fetch(buyerGraphPath + apiPath).then((response) => response.json()),
-      fetch(supplierGraphPath + apiPath).then((response) => response.json()),
-    ])
-      .then(([buyerData, supplierData]) => {
+    try{
+      // Fetch buyer data and supplier data in parallel
+      Promise.all([
+        fetch(buyerGraphPath + apiPath).then((response) => response.json()),
+        fetch(supplierGraphPath + apiPath).then((response) => response.json()),
+      ])
+        .then(([buyerData, supplierData]) => {
 
-        // Add the 'type' property to buyer nodes
-        buyerData.nodes.forEach((node: { type: string }, index: number) => {
-          if (index === 1) {
-            node.type = 'baseOrganization';
-          } else {
-            node.type = 'buyer';
-          }
+          // Add the 'type' property to buyer nodes
+          buyerData.nodes.forEach((node: { type: string }, index: number) => {
+            if (index === 1) {
+              node.type = 'baseOrganization';
+            } else {
+              node.type = 'buyer';
+            }
+          });
+
+          // Add the 'type' property to supplier nodes
+          supplierData.nodes.forEach((node: { type: string }, index: number) => {
+            if (index === 1) {
+              node.type = 'baseOrganization';
+            } else {
+              node.type = 'supplier';
+            }
+          });
+
+          // Extract dates from both buyer and supplier nodes
+          const allNodes = [...buyerData.nodes, ...supplierData.nodes];
+          const allDates = allNodes.map((node) => node.date).filter(Boolean); // Filter out null or undefined dates
+
+          // Find the first and last dates
+          const sortedDates = allDates.sort();
+          const first = sortedDates[0];
+          const last = sortedDates[sortedDates.length - 1];
+
+          // Set the firstDate and lastDate state variables
+          setFirstDate(first);
+          setLastDate(last);
+
+          // Merge the nodes and links arrays from both graphs
+          const mergedData = {
+            nodes: [...buyerData.nodes, ...supplierData.nodes],
+            links: [...buyerData.links, ...supplierData.links],
+          };
+
+          // Count contracts, tenders, and awards
+          const supplierCounts = {
+            contracts: 0,
+            tenders: 0,
+            awards: 0,
+            value: 0,
+          };
+
+          const buyerCounts = {
+            contracts: 0,
+            tenders: 0,
+            awards: 0,
+            value: 0,
+          };
+
+          const statusCounts = {
+            active: 0,
+            cancelled: 0,
+            complete: 0,
+            unsuccessful: 0,
+            withdrawn: 0,
+            planned: 0,
+          };
+
+          supplierData.nodes.forEach((node: any) => {
+            if (node.tag) {
+              if (node.tag.includes('contract')) {
+                supplierCounts.contracts++;
+              }
+              if (node.tag.includes('tender')) {
+                supplierCounts.tenders++;
+              }
+              if (node.tag.includes('award')) {
+                supplierCounts.awards++;
+              }
+            }
+            if (node.value !== undefined && node.value !== null) {
+              supplierCounts.value += node.value.amount;
+            }
+            if(node.status) {
+              if(node.status.includes('active')) {
+                statusCounts.active++;
+              }
+              if(node.status.includes('cancelled')) {
+                statusCounts.cancelled++;
+              }
+              if(node.status.includes('complete')) {
+                statusCounts.complete++;
+              }
+              if(node.status.includes('unsuccessful')) {
+                statusCounts.unsuccessful++;
+              }
+              if(node.status.includes('withdrawn')) {
+                statusCounts.withdrawn++;
+              }
+              if(node.status.includes('planned')) {
+                statusCounts.planned++;
+              }
+            }
+          });
+
+          buyerData.nodes.forEach((node: any) => {
+            if (node.tag) {
+              if (node.tag.includes('contract')) {
+                buyerCounts.contracts++;
+              }
+              if (node.tag.includes('tender')) {
+                buyerCounts.tenders++;
+              }
+              if (node.tag.includes('award')) {
+                buyerCounts.awards++;
+              }
+            }
+            if (node.value !== undefined && node.value !== null) {
+              buyerCounts.value += node.value.amount;
+            }
+            if(node.status) {
+              if(node.status.includes('active')) {
+                statusCounts.active++;
+              }
+              if(node.status.includes('cancelled')) {
+                statusCounts.cancelled++;
+              }
+              if(node.status.includes('complete')) {
+                statusCounts.complete++;
+              }
+              if(node.status.includes('unsuccessful')) {
+                statusCounts.unsuccessful++;
+              }
+              if(node.status.includes('withdrawn')) {
+                statusCounts.withdrawn++;
+              }
+              if(node.status.includes('planned')) {
+                statusCounts.planned++;
+              }
+            }
+          });
+
+          setBuyerCounts(buyerCounts);
+          setSupplierCounts(supplierCounts);
+          setStatusCounts(statusCounts);
+
+          setMergedGraphData(mergedData);
+          setIsLoading(false);
         });
-
-        // Add the 'type' property to supplier nodes
-        supplierData.nodes.forEach((node: { type: string }, index: number) => {
-          if (index === 1) {
-            node.type = 'baseOrganization';
-          } else {
-            node.type = 'supplier';
-          }
-        });
-
-        // Extract dates from both buyer and supplier nodes
-        const allNodes = [...buyerData.nodes, ...supplierData.nodes];
-        const allDates = allNodes.map((node) => node.date).filter(Boolean); // Filter out null or undefined dates
-
-        // Find the first and last dates
-        const sortedDates = allDates.sort();
-        const first = sortedDates[0];
-        const last = sortedDates[sortedDates.length - 1];
-
-        // Set the firstDate and lastDate state variables
-        setFirstDate(first);
-        setLastDate(last);
-
-        // Merge the nodes and links arrays from both graphs
-        const mergedData = {
-          nodes: [...buyerData.nodes, ...supplierData.nodes],
-          links: [...buyerData.links, ...supplierData.links],
-        };
-
-        // Count contracts, tenders, and awards
-        const supplierCounts = {
-          contracts: 0,
-          tenders: 0,
-          awards: 0,
-          value: 0,
-        };
-
-        const buyerCounts = {
-          contracts: 0,
-          tenders: 0,
-          awards: 0,
-          value: 0,
-        };
-
-        const statusCounts = {
-          active: 0,
-          cancelled: 0,
-          complete: 0,
-          unsuccessful: 0,
-          withdrawn: 0,
-          planned: 0,
-        };
-
-        supplierData.nodes.forEach((node: any) => {
-          if (node.tag) {
-            if (node.tag.includes('contract')) {
-              supplierCounts.contracts++;
-            }
-            if (node.tag.includes('tender')) {
-              supplierCounts.tenders++;
-            }
-            if (node.tag.includes('award')) {
-              supplierCounts.awards++;
-            }
-          }
-          if (node.value !== undefined && node.value !== null) {
-            supplierCounts.value += node.value.amount;
-          }
-          if(node.status) {
-            if(node.status.includes('active')) {
-              statusCounts.active++;
-            }
-            if(node.status.includes('cancelled')) {
-              statusCounts.cancelled++;
-            }
-            if(node.status.includes('complete')) {
-              statusCounts.complete++;
-            }
-            if(node.status.includes('unsuccessful')) {
-              statusCounts.unsuccessful++;
-            }
-            if(node.status.includes('withdrawn')) {
-              statusCounts.withdrawn++;
-            }
-            if(node.status.includes('planned')) {
-              statusCounts.planned++;
-            }
-          }
-        });
-
-        buyerData.nodes.forEach((node: any) => {
-          if (node.tag) {
-            if (node.tag.includes('contract')) {
-              buyerCounts.contracts++;
-            }
-            if (node.tag.includes('tender')) {
-              buyerCounts.tenders++;
-            }
-            if (node.tag.includes('award')) {
-              buyerCounts.awards++;
-            }
-          }
-          if (node.value !== undefined && node.value !== null) {
-            buyerCounts.value += node.value.amount;
-          }
-          if(node.status) {
-            if(node.status.includes('active')) {
-              statusCounts.active++;
-            }
-            if(node.status.includes('cancelled')) {
-              statusCounts.cancelled++;
-            }
-            if(node.status.includes('complete')) {
-              statusCounts.complete++;
-            }
-            if(node.status.includes('unsuccessful')) {
-              statusCounts.unsuccessful++;
-            }
-            if(node.status.includes('withdrawn')) {
-              statusCounts.withdrawn++;
-            }
-            if(node.status.includes('planned')) {
-              statusCounts.planned++;
-            }
-          }
-        });
-
-        setBuyerCounts(buyerCounts);
-        setSupplierCounts(supplierCounts);
-        setStatusCounts(statusCounts);
-
-        setMergedGraphData(mergedData);
-        setIsLoading(false);
-      });
+      }
+      catch(error)
+      {
+        //
+      }
   },[apiPath, buyerGraphPath, supplierGraphPath]);
 
   const getStatusChart = (statusCounts: any) => {
