@@ -5,8 +5,7 @@ const withPWA = require('next-pwa')({
 
 module.exports = withPWA({
   // config
-  // Configure pageExtensions to include md and mdx
-  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx'],
   // Optionally, add any other Next.js config below
   reactStrictMode: true,
   output: 'standalone',
