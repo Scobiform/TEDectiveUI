@@ -72,6 +72,10 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
     setNutsVisible(!nutsVisible); // Toggle NUTS map visibility
   };
 
+  // Initialize firstDate and lastDate as null or default values
+  const [firstDate, setFirstDate] = useState(null);
+  const [lastDate, setLastDate] = useState(null);
+
   // State for graph data
   const [mergedGraphData, setMergedGraphData] = useState<GraphData>({ 
     nodes: [], 
@@ -111,6 +115,19 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
             node.type = 'supplier';
           }
         });
+
+        // Extract dates from both buyer and supplier nodes
+        const allNodes = [...buyerData.nodes, ...supplierData.nodes];
+        const allDates = allNodes.map((node) => node.date).filter(Boolean); // Filter out null or undefined dates
+
+        // Find the first and last dates
+        const sortedDates = allDates.sort();
+        const first = sortedDates[0];
+        const last = sortedDates[sortedDates.length - 1];
+
+        // Set the firstDate and lastDate state variables
+        setFirstDate(first);
+        setLastDate(last);
 
         // Merge the nodes and links arrays from both graphs
         const mergedData = {
@@ -262,6 +279,15 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
     }
   ), [])
 
+    // Function to format a date as "yyyy-mm-dd"
+  function formatDate(date: Date) {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0'); // Add leading zero if needed
+    const day = String(d.getDate()).padStart(2, '0'); // Add leading zero if needed
+    return `${year}-${month}-${day}`;
+  }
+
   return (
     <>
       <main className={styles.main}>
@@ -303,17 +329,21 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
         {chartVisible && 
         <>
           <div className={styles.organizationDetails}>
-            <ChartJS data={getStatusChart(statusCounts)} type="bar" />
-            <div className={styles.money}>
-              <p>Overall spent: {buyerCounts.value}</p>
-              <p>Overall earned: {supplierCounts.value}</p>
+            <div className={styles.dates}>
+              <p>{firstDate ? formatDate(firstDate) : "No Date"}</p>
+              <p>{lastDate ? formatDate(lastDate) : "No Date"}</p>
             </div>
+            <div className={styles.money}>
+              <p>{buyerCounts.value.toFixed()}</p>
+              <p>{supplierCounts.value.toFixed()}</p>
+            </div>
+            <ChartJS data={getStatusChart(statusCounts)} type="bar" />
           </div>
         </>
         }
         {/* Conditionally render the NUTS map based on nutsVisible state */}
         {nutsVisible &&
-          <NutsMap data={mergedGraphData.nodes}/>
+          <NutsMap data={mergedGraphData.nodes} apiPath={apiPath} setApiPath={setApiPath}/>
         }
       </main>
     </>

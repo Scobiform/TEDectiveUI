@@ -73,7 +73,7 @@ a {
 }
 
 h1,h2,h3,h4,h5,h6{
-  font-size: 0.7em;
+  font-size: 1.4em;
   margin-bottom: 0.42rem;
   margin-top: 0.42rem;
   font-weight: var(--fontWeight);
@@ -249,23 +249,10 @@ header p {
 
 @keyframes spin {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(0deg) scale(0.56);
   }
   100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Bezier component */
-@keyframes bezierStoryScale {
-  0% {
-    transform: scaleX(0);
-    filter: invert(0);
-  }
-
-  100% {
-    transform: scaleX(1);
-    filter: invert(1);
+    transform: rotate(360deg) scale(0.84);
   }
 }
 
@@ -349,25 +336,8 @@ display: none;
   }
 }
 
-
 /* Apply the animation to the green shape */
 #path218 {
   animation: flash 14s steps(1, end) infinite, ease-in 0.042s linear 1s infinite; /* Flash for 7ms, then stay calm for 7 seconds */
-}
-
-
-/* Keyframes for rotate animation */
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Apply the animation to the SVG */
-#rotating-svg {
-  animation: rotate 1s linear infinite; /* Rotate for 1 second infinitely */
 }
 

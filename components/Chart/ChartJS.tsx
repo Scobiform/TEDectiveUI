@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styles from './charts.module.css'
 import Chart from 'chart.js/auto';
+import { Leva } from "leva";
 
 // TODO: Make this a generic Chart.js component
 const ChartJS = (props: any) => {
@@ -40,15 +41,15 @@ const ChartJS = (props: any) => {
                 },
                 scales: {
                     x: {
-                        stacked: true,
+                        stacked: false,
                         ticks: {
-                            display: true
+                            display: false
                         }
                     },
                     y: {
-                        stacked: true,
+                        stacked: false,
                         ticks: {
-                            display: true
+                            display: false
                         }
                     }
                 }
@@ -64,14 +65,16 @@ const ChartJS = (props: any) => {
     }, [props.data, props.type, props.labels]);
 
     return (
-        <div className={styles.barChart}>
-            {/* Stacked chart */}
-            <div className="">
+        <>
+            <div className={styles.barChart}>
+                {/* Stacked chart */}
                 <div className="">
-                    <canvas ref={canvasRef} />
+                    <div className="">
+                        <canvas ref={canvasRef} />
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

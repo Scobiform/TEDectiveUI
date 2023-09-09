@@ -2,7 +2,6 @@
 .barChart{
 	color: var(--primary);
     opacity: var(--opacity);
-    min-width: 175px;
 }
 
 /* RadarChart */

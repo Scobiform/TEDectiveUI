@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { LatLngTuple } from 'leaflet';
 import styles from './nutsMap.module.css';
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
@@ -6,7 +6,13 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 
-const NutsMap = ({ data }: any) => {
+export interface NutsMapProps {
+  apiPath: string;
+  setApiPath: any;
+  data: any;
+}
+
+const NutsMap = ({ data, apiPath, setApiPath }: NutsMapProps) => {
   const europeCenter: LatLngTuple = [51.505, 10.09]; // Centered on Europe
 
   const mapStyle = {
@@ -14,6 +20,12 @@ const NutsMap = ({ data }: any) => {
     height: '100%',
     top: '2.8rem',
   };
+
+  const handleClick = useCallback(
+    (apiPath: string) => {  
+      setApiPath(apiPath);
+    }
+  , [setApiPath]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,12 +43,19 @@ const NutsMap = ({ data }: any) => {
                   <Marker key={item.id} position={[geoData[0].lat, geoData[0].lon]}>
                     <Popup>
                       <>
-                        <ul>
-                          <li>{item.name}</li>
-                          <li>{item.address.locality}</li>
-                          <li>{item.address.postalCode}</li>
-                          <li>{item.address.streetAddress}</li>
-                        </ul>
+                        <div className={styles.popup}>
+                          <h2>{item.name}</h2>
+                          <ul>
+                            <li>{item.address.locality}</li>
+                            <li>{item.address.postalCode}</li>
+                            <li>{item.address.streetAddress}</li>
+                            <li>{item.address.region}</li>
+                          </ul>
+
+                          {item.name !== undefined && (
+                          <button onClick={() => handleClick(item.id+'')} aria-label="Load organization graph">Load organization graph</button>
+                          )}
+                        </div>
                       </>
                     </Popup>
                   </Marker>
@@ -59,7 +78,7 @@ const NutsMap = ({ data }: any) => {
 
     // Fetch data initially
     fetchData();
-  }, [data]);
+  }, [data, setApiPath, handleClick]);
 
   const [markers, setMarkers] = useState<JSX.Element[]>([]);
 
