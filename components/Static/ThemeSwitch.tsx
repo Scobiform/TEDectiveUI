@@ -1,8 +1,13 @@
-'use client'
 import React, { useEffect, useState } from 'react';
 
 const ThemeSwitch = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const preferredColorScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      return preferredColorScheme.matches;
+    }
+    return false; // Default to dark mode if the window object is not available
+  });
   const [buttonKey, setButtonKey] = useState(0);
 
   const toggleTheme = () => {
