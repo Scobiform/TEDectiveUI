@@ -24,7 +24,7 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
 
   // Fetch search results
   const handleSearch = async (query: string) => {
-    // Prevent fetching if the query is empty
+    // Prevent fetching if the query is empty or less than 3 characters
     if (query.trim() === '' || query.length < 3) {
       setSearchResults([]);
       setLoading(false);
@@ -36,7 +36,7 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 420));
-      const response = await fetch(apiURL+'entities/organization/search/' + query); // ${query}
+      const response = await fetch(apiURL+'entities/organization/search/' + query);
       const data: SearchResult[] = await response.json();
       setSearchResults(data);
     } catch (error) {

@@ -74,12 +74,11 @@ export let initialVisuals = {
   // Link config
   linkVisibility: true,
   linkCurvature: 0,
-  linkWidth: 0.01,
+  linkWidth: 0.07,
   linkDistance: 0.42,
   linkColor: '#3fa535',
   linkDirectionalParticles: 0.1,
   linkDirectionalParticleWidth: 0.1,
-  linkLineDash: 0.1,
   // Viewport config
   opacity: 0.91,
   windowWidth: 640,

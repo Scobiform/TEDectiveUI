@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import styles from './charts.module.css'
 import Chart from 'chart.js/auto';
-import { Leva } from "leva";
 
 // TODO: Make this a generic Chart.js component
 const ChartJS = (props: any) => {

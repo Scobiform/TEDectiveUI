@@ -13,7 +13,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
 
   // Check if the response is already cached
   if (cache[q]) {
-    console.log('Using cached response for', q);
+    //console.log('Using cached response for', q);
     return res.status(200).json(cache[q]);
   }
 
@@ -26,14 +26,14 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       return response.json();
     })
     .then((data) => {
-      console.log('Fetched data for', q);
+      //console.log('Fetched data for', q);
       // Cache the response
       cache[q] = data;
       // Respond with the fetched data
       res.status(200).json(data);
     })
     .catch((error) => {
-      console.error('Error fetching data:', error);
+      //console.error('Error fetching data:', error);
       res.status(500).json({ error: 'Internal server error' });
     });
 };

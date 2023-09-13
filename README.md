@@ -39,8 +39,7 @@ The TEDective UI boasts the following features:
 - Displays an interactive 2D force graph using
   [react-force-graph](https://github.com/vasturiano/react-force-graph#input-json-syntax)
   and [d3-force](https://github.com/d3/d3-force)
-- Utilizes [Next.js](https://github.com/vercel/next.js) for best practice client-side
-  experience
+- Utilizes [Next.js](https://github.com/vercel/next.js) for server-side rendering and enhanced performance
 - Integrates [Leva GUI](https://github.com/pmndrs/leva) for a user-friendly
   graphical user interface to tweak parameters
 - Incorporates [Chart.js](https://github.com/chartjs/Chart.js) for generating

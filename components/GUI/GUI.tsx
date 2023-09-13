@@ -51,7 +51,6 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
         linkVisibility: { value: visuals.linkVisibility, onChange: (v) => setVisualsCallback({ ...visuals, linkVisibility: v }) },
         linkColor: { value: visuals.linkColor, onChange: (v) => setVisualsCallback({ ...visuals, linkColor: v }) },
         linkWitdh: { value: visuals.linkWidth, onChange: (v) => setVisualsCallback({ ...visuals, linkWidth: v }) },
-        linkLineDash : { value: visuals.linkLineDash, onChange: (v) => setVisualsCallback({ ...visuals, linkLineDash: v }) },
         linkCurvature: { value: visuals.linkCurvature, onChange: (v) => setVisualsCallback({ ...visuals, linkCurvature: v }) },
         linkDirectionalParticles: { value: visuals.linkDirectionalParticles, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticles: v }) },
         linkDirectionalParticleWidth: { value: visuals.linkDirectionalParticleWidth, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticleWidth: v }) },
@@ -80,7 +79,7 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     document.documentElement.style.setProperty('--windowWidth', newWidth);
     document.documentElement.style.setProperty('--windowHeight', newHeight);
 
-    // TODO: Make use of css var variables for this region
+    // TODO: Make use of css var variables for this region?
     // leva-c-kWgxhW
     const guiPanel1 = Array.from(
         document.getElementsByClassName('leva-c-kWgxhW') as HTMLCollectionOf<HTMLElement>,
@@ -112,7 +111,6 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     document.documentElement.style.setProperty('--opacity', visuals.opacity.toString());
     
     /* GUI Settings ******************************************************************/
-    // TODO: Move values to config.ts
     // GUI Theme Store
     const colorsStore = useCreateStore();
     const radiiStore = useCreateStore()
