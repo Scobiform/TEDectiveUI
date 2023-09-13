@@ -211,14 +211,23 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
         
             ctx.font = `${fontSize}px Sans-Serif`;
             const textWidth = ctx.measureText(label).width;
+
+            // Calculate the center coordinates of the node
+            const centerX = node.x || 0;
+            const centerY = node.y || 0;
+
+            // Calculate the text position to center it on the node
+            const textX = centerX - textWidth / 2;
+            const textY = centerY - fontSize / 2;
+
             const bckgDimensions = [textWidth, fontSize].map(n => n); // some padding
-        
+
             ctx.textAlign = 'left';
             ctx.textBaseline = 'top';
             ctx.fillStyle = node.color;
-        
-            ctx.fillText(label, node.x || 1, node.y || 1);
-        
+
+            ctx.fillText(label, textX, textY);
+
             node.__bckgDimensions = bckgDimensions; // to re-use in nodePointerAreaPaint
         }}
           nodePointerAreaPaint={(node, color, ctx) => {
@@ -226,7 +235,12 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
             const bckgDimensions = node.__bckgDimensions;
             if (bckgDimensions) {
               const [width, height] = bckgDimensions;
-              ctx.fillRect(node.x || 1 - width / 2, node.y || 1 - height / 2, width, height);
+          
+              // Calculate the x and y positions based on the center of the text label
+              const x = (node.x || 0) - width / 2;
+              const y = (node.y || 0) - height / 2;
+          
+              ctx.fillRect(x, y, width, height);
             }
           }}
           onNodeClick={handleClick}
