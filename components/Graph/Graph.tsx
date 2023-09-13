@@ -102,26 +102,35 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   };
 
   useEffect(() => {
-
     // Get the ForceGraph2D instance
     const fgInstance = fgRef.current as unknown as ForceGraphMethods;
-
-    if (!physics ) {
+  
+    if (!physics) {
       return; // Do nothing if physics is undefined
+    }
+  
+    if (!visuals) {
+      return; // Do nothing if visuals is undefined
     }
 
     // Zoom out to the initial zoom level
     fgInstance.zoom(0.21, 7);
 
-
+    // Create a repulsion force to enforce a minimum distance between nodes
+    const repulsionForce = d3
+      .forceManyBody()
+      .strength(physics.chargeStrength) // Adjust the repulsion strength as needed
+      .distanceMin(visuals.nodeDistanceMin) // Set the minimum distance between nodes
+      .distanceMax(visuals.nodeDistanceMax); // Set the maximum distance between nodes
+  
     // Set the ForceGraph2D instance's d3Force
-    fgInstance.d3Force('charge', d3.forceManyBody().strength(physics.chargeStrength));
+    fgInstance.d3Force('charge', repulsionForce); // Set the charge force with repulsion
     fgInstance.d3Force('center', d3.forceCenter(0, 0));
     fgInstance.d3Force('collide', d3.forceCollide(physics.collideRadius));
-    fgInstance.d3Force('link', d3.forceLink().id((d: any) => d.id).distance(physics.linkDistance));
+    fgInstance.d3Force('link', d3.forceLink().id((d: any) => d.id).distance(visuals.linkDistance));
     fgInstance.d3Force('x', d3.forceX(width / 2).strength(physics.xStrength));
     fgInstance.d3Force('y', d3.forceY(height / 2).strength(physics.yStrength));
-  },[physics, fgRef, width, height]);
+  }, [physics, fgRef, width, height, visuals]);
   
   // Return the ForceGraph2D
   return (
@@ -131,64 +140,64 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           ref={fgRef}
           graphData={graphData}
           nodeLabel="label"
-          nodeAutoColorBy="indexColor"
           nodeCanvasObject={(node, ctx, globalScale) => {
-
+            // TODO: Move icons to config.ts
             // This section defines the node labels
-            let label = '🟩';
+            let label = visuals!.iconDefault;
             let fontSize = 10 * visuals!.nodeRel;
         
             switch (true) {
                 case (node.awardID !== undefined):
-                    label = '💰';
-                    if (node.value !== undefined && node.value !== null) {
-                        const amount = node.value.amount;
-                        switch (true) {
-                          case amount < 10:
-                              fontSize = Math.floor(7 * visuals!.nodeRel * visuals!.awardNodeSizeMult);
-                              break;
-                          case amount < 100000:
-                              fontSize = Math.floor(3.5 * visuals!.nodeRel * (amount / 10000 * visuals!.awardNodeSizeMult));
-                              break;
-                          case amount < 1000000:
-                              fontSize = Math.floor(2.8 * visuals!.nodeRel * (amount / 100000 * visuals!.awardNodeSizeMult));
-                              break;
-                          case amount < 10000000:
-                              fontSize = Math.floor(1.4 * visuals!.nodeRel * (amount / 100000 * visuals!.awardNodeSizeMult));
-                              break;
-                          case amount < 100000000:
-                              fontSize = Math.floor(0.7 * visuals!.nodeRel * (amount / 1000000 * visuals!.awardNodeSizeMult));
-                              break;
-                          default:
-                              fontSize = Math.floor(2.1 * visuals!.nodeRel * (amount / 1000000 * visuals!.awardNodeSizeMult * 2));
-                              break;
-                      }             
+                  if (node.value !== undefined && node.value !== null) {
+                    const amount: any = node.value.amount;
+                    const minFontSize = 14;
+                    const maxFontSize = 210;
+                    const linearThreshold = 100000000; // Values below this threshold will use linear scaling
+                    const minAmount = 1; // Minimum value of amount
+                    const maxAmount = 100000000000; // Maximum value of amount
+                
+                    if (amount < linearThreshold) {
+                        // Linear scaling for values below 1 million
+                        fontSize = minFontSize + ((amount - minAmount) / (linearThreshold - minAmount)) * (maxFontSize - minFontSize);
+                    } else {
+                        // Logarithmic scaling for values above or equal to threshold
+                        fontSize = minFontSize + (Math.log(amount) / Math.log(maxAmount)) * (maxFontSize - minFontSize);
                     }
+                
+                    fontSize = fontSize * visuals!.nodeRel * visuals!.awardNodeSizeMult;
+                
+                    if (visuals!.drawAmountValues === true) {
+                        label = visuals!.iconAward + amount + ' ' + fontSize;
+                    } else {
+                        label = visuals!.iconAward;
+                    }
+                }
+                
                     break;
         
                 case (node.tag !== undefined && node.tag[1] === 'contract'):
-                    label = '📜';
+                    label = visuals!.iconContract;
                     break;
         
                 case (node.status !== undefined):
                     switch (node.status) {
                         case 'active':
-                            label = '🟢';
+                            label = visuals!.iconActive;
                             break;
                         case 'cancelled':
-                            label = '🚫';
+                            label = visuals!.iconCancelled;
                             break;
                         case 'unsuccessful':
-                            label = '❌';
+                            label = visuals!.iconUnsuccessful;
                             break;
                         case 'complete':
-                            label = '✅';
+                            label = visuals!.iconComplete;
                             break;
                         case 'withdrawn':
-                            label = '✖️';
+                            label = visuals!.iconWithdrawn;
                             break;
                         case 'planned':
-                            label = '📝';
+                            label = visuals!.iconPlanned;
                             break;
                     }
                     break;
@@ -196,16 +205,21 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
                 case (node.tag !== undefined):
                     switch (node.tag[0]) {
                         case 'tender':
-                            label = '🗂';
+                            label = visuals!.iconTender;
                             break;
                         case 'planning':
-                            label = '📅';
+                            label = visuals!.iconPlanning;
                             break;
                     }
                     break;
         
                 case (node.name !== undefined):
-                    label = '🏢';
+                    if(node.roles !== undefined && node.roles.includes('buyer')){
+                      label = visuals!.iconOrganization;
+                    }
+                    if(node.roles !== undefined && node.roles.includes('supplier')){
+                      label = visuals!.iconOrganizationSupplier;
+                    }
                     break;
             }
         
@@ -224,7 +238,12 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
 
             ctx.textAlign = 'left';
             ctx.textBaseline = 'top';
-            ctx.fillStyle = node.color;
+
+            if(node.color !== undefined){
+              ctx.fillStyle = node.color;
+            } else {
+              ctx.fillStyle = '#3fa535';
+            }
 
             ctx.fillText(label, textX, textY);
 

@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+/* Config */
+import { initialPhysics, initialVisuals } from './../config';
 
 const Legend = () => {
+
+    // State variable to store the visual parameters
+  const [visuals, setVisuals] = useState(initialVisuals);
+
   // Define the icons and their labels
   const legendItems = [
-    { icon: '🟩', label: 'Default' },
-    { icon: '💰', label: 'Award' },
-    { icon: '📜', label: 'Contract' },
-    { icon: '🟢', label: 'Active' },
-    { icon: '🚫', label: 'Cancelled' },
-    { icon: '❌', label: 'Unsuccessful' },
-    { icon: '✅', label: 'Complete' },
-    { icon: '✖️', label: 'Withdrawn' },
-    { icon: '📝', label: 'Planned' },
-    { icon: '🗂', label: 'Tender' },
-    { icon: '📅', label: 'Planning' },
-    { icon: '🏢', label: 'Organization' },
+    { icon: visuals.iconDefault, label: 'Default'},
+    { icon: visuals.iconAward, label: 'Award'},
+    { icon: visuals.iconContract, label: 'Contract'},
+    { icon: visuals.iconActive, label: 'Active'},
+    { icon: visuals.iconCancelled, label: 'Cancelled'},
+    { icon: visuals.iconUnsuccessful, label: 'Unsuccessful'},
+    { icon: visuals.iconComplete, label: 'Complete' },
+    { icon: visuals.iconWithdrawn, label: 'Withdrawn'},
+    { icon: visuals.iconPlanned, label: 'Planned'},
+    { icon: visuals.iconTender, label: 'Tender' },
+    { icon: visuals.iconPlanning, label: 'Planning'},
+    { icon: visuals.iconOrganization, label: 'Organization'},
+    { icon: visuals.iconOrganizationSupplier, label: 'Supplier' },
   ];
 
   return (
