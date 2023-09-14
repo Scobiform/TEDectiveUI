@@ -36,7 +36,7 @@ const Search = ({ apiPath, setApiPath }: SearchProps) => {
     // Set a new timeout for the search
     searchTimeout.current = setTimeout(() => {
       handleSearch(query);
-    }, 200); // Adjust the delay time (in milliseconds) as needed
+    }, 280); // Adjust the delay time (in milliseconds) as needed
   };
 
   // Fetch search results
