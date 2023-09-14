@@ -7,6 +7,7 @@ import ForceGraph2D, { ForceGraphMethods, ForceGraphProps } from "react-force-gr
 /* Components */
 import NodePanel from '../../components/Panel/NodePanel';
 import GUI from '../GUI/GUI';
+import Legend from '../../components/Static/Legend';
 /* Config */
 import { initialPhysics, initialVisuals } from './../config';
 /* Component styles */
@@ -297,6 +298,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
       </div>
       <div className={styles.interactionBar}>
         <div className={styles.zoomButtons}>
+          <Legend visuals={visuals} setVisuals={setVisuals} />
           <button onClick={handleZoomIn}>
             ➕
             </button>
