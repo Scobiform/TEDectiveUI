@@ -15,7 +15,7 @@ const Legend = ({visuals, setVisuals}: LegendProps) => {
   [visuals, setVisuals] = useState(initialVisuals);
 
   // State variable to store the legend visibility
-  const [showLegend, setShowLegend] = useState(true); 
+  const [showLegend, setShowLegend] = useState(false); 
 
   // Define the icons and their labels
   const legendItems = [
