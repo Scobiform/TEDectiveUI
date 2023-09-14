@@ -250,6 +250,9 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
       }
   },[apiPath, buyerGraphPath, supplierGraphPath]);
 
+  // Define an array of background colors corresponding to your icons
+  const backgroundColors = ['green', 'red', 'green', 'red', 'black', 'white'];
+
   const getStatusChart = (statusCounts: any) => {
     return {
       labels: Object.keys(statusCounts),
@@ -257,14 +260,7 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
         {
           label: 'Status Data',
           data: Object.values(statusCounts),
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.5)',  // Active color
-            'rgba(255, 205, 86, 0.5)',  // Cancelled color
-            'rgba(75, 192, 192, 0.5)',  // Complete color
-            'rgba(153, 102, 255, 0.5)', // Unsuccessful color
-            'rgba(255, 159, 64, 0.5)',  // Withdrawn color
-            'rgba(54, 162, 235, 0.5)',  // Planned color
-          ],
+          backgroundColor: backgroundColors,
           borderColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(255, 205, 86, 1)',

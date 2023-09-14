@@ -26,6 +26,10 @@ const ChartJS = ({data, type, visuals, setVisuals}: ChartJSProps) => {
             return; // Exit the effect if canvas is null
         }
 
+        if (!visuals) {
+            return; // Exit the effect if visuals is null
+        }
+
         const ctx = canvas.getContext('2d');
 
         if (!ctx) {
@@ -60,17 +64,17 @@ const ChartJS = ({data, type, visuals, setVisuals}: ChartJSProps) => {
                               // Render the HTML labels with icons
                               switch(value) {
                                 case 0:
-                                    return visuals.iconActive;
+                                    return visuals!.iconActive;
                                 case 1:
-                                    return visuals.iconCancelled;
+                                    return visuals!.iconCancelled;
                                 case 2:
-                                    return visuals.iconUnsuccessful;
+                                    return visuals!.iconComplete;
                                 case 3:
-                                    return visuals.iconComplete;
+                                    return visuals!.iconUnsuccessful;
                                 case 4:
-                                    return visuals.iconWithdrawn;
+                                    return visuals!.iconWithdrawn;
                                 case 5:
-                                    return visuals.iconPlanned;
+                                    return visuals!.iconPlanned;
                                 }
                             },
                         },
