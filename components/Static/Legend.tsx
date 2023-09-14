@@ -49,8 +49,7 @@ const Legend = ({visuals, setVisuals}: LegendProps) => {
           <ul>
             {legendItems.map((item, index) => (
               <li key={index}>
-                <span className="legend-icon">{item.icon}</span>
-                <span className="legend-label">{item.label}</span>
+                {item.icon} = {item.label}
               </li>
             ))}
           </ul>
