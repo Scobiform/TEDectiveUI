@@ -33,6 +33,15 @@ const ChartJS = ({data, type, visuals = initialVisuals, setVisuals}: ChartJSProp
             return; // Exit the effect if context is null
         }
 
+        const iconMappings: Record<number, string> = {
+            0: visuals.iconActive,
+            1: visuals.iconCancelled,
+            2: visuals.iconComplete,
+            3: visuals.iconUnsuccessful,
+            4: visuals.iconWithdrawn,
+            5: visuals.iconPlanned,
+        };
+
         let myChart = new Chart(ctx, {
             // The type of chart we want to create
             type: type,
@@ -59,20 +68,7 @@ const ChartJS = ({data, type, visuals = initialVisuals, setVisuals}: ChartJSProp
                         ticks: {
                             callback: (value: any, index: number, values: any) => {
                               // Render the HTML labels with icons
-                              switch(value) {
-                                case 0:
-                                    return visuals!.iconActive;
-                                case 1:
-                                    return visuals!.iconCancelled;
-                                case 2:
-                                    return visuals!.iconComplete;
-                                case 3:
-                                    return visuals!.iconUnsuccessful;
-                                case 4:
-                                    return visuals!.iconWithdrawn;
-                                case 5:
-                                    return visuals!.iconPlanned;
-                                }
+                              return iconMappings[value] || value;
                             },
                         },
                     },
