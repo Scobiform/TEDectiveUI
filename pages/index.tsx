@@ -11,6 +11,7 @@ import ChartJS from "../components/Chart/ChartJS";
 import dynamic from 'next/dynamic';
 import IconSVG from '../components/Static/IconSVG';
 import ThemeSwitch from '../components/Static/ThemeSwitch';
+import Legend from '../components/Static/Legend';
 
 interface HomeProps {
   physics?: typeof initialPhysics;
@@ -249,6 +250,9 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
       }
   },[apiPath, buyerGraphPath, supplierGraphPath]);
 
+  // Define an array of background colors corresponding to your icons
+  const backgroundColors = ['green', 'red', 'green', 'red', 'black', 'white'];
+
   const getStatusChart = (statusCounts: any) => {
     return {
       labels: Object.keys(statusCounts),
@@ -256,14 +260,7 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
         {
           label: 'Status Data',
           data: Object.values(statusCounts),
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.5)',  // Active color
-            'rgba(255, 205, 86, 0.5)',  // Cancelled color
-            'rgba(75, 192, 192, 0.5)',  // Complete color
-            'rgba(153, 102, 255, 0.5)', // Unsuccessful color
-            'rgba(255, 159, 64, 0.5)',  // Withdrawn color
-            'rgba(54, 162, 235, 0.5)',  // Planned color
-          ],
+          backgroundColor: backgroundColors,
           borderColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(255, 205, 86, 1)',
@@ -319,7 +316,8 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
         <Search apiPath={apiPath} setApiPath={setApiPath}/>
         <button className={styles.tedectveLogo}>
               <IconSVG />
-            </button>
+        </button>
+        {/* Interaction bar - may convert to component */}
         <div className={styles.interactionBar}>
           <div className={styles.actionButtons}>
             {/* NUTS component toggle */}
@@ -330,6 +328,7 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
             <button onClick={handleToggleChart}>
               📊
             </button>
+            <Legend visuals={visuals} setVisuals={setVisuals} />
             <ThemeSwitch />
           </div>
         </div>
@@ -345,7 +344,7 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
               <p>{buyerCounts.value.toFixed()}</p>
               <p>{supplierCounts.value.toFixed()}</p>
             </div>
-            <ChartJS data={getStatusChart(statusCounts)} type="bar" />
+            <ChartJS data={getStatusChart(statusCounts)} type="bar" visuals={visuals} setVisuals={setVisuals} />
           </div>
         </>
         }

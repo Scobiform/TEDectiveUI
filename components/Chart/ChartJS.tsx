@@ -1,10 +1,21 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from './charts.module.css'
 import Chart from 'chart.js/auto';
+/* Config */
+import { initialPhysics, initialVisuals } from './../config';
 
-// TODO: Make this a generic Chart.js component
-const ChartJS = (props: any) => {
+export interface ChartJSProps {
+    type: any;
+    data: any;
+    visuals?: typeof initialVisuals;
+    setVisuals?: any;
+}
+
+const ChartJS = ({data, type, visuals, setVisuals}: ChartJSProps) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+    // State variable to store the visual parameters
+    [visuals, setVisuals] = useState(initialVisuals);
 
     useEffect(() => {
         
@@ -15,6 +26,10 @@ const ChartJS = (props: any) => {
             return; // Exit the effect if canvas is null
         }
 
+        if (!visuals) {
+            return; // Exit the effect if visuals is null
+        }
+
         const ctx = canvas.getContext('2d');
 
         if (!ctx) {
@@ -23,16 +38,19 @@ const ChartJS = (props: any) => {
 
         let myChart = new Chart(ctx, {
             // The type of chart we want to create
-            type: props.type,
+            type: type,
             // The data for our dataset
-            data: props.data,
+            data: data,
             // Configuration options go here
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        display: false
+                        labels: {
+                            usePointStyle: false, // Use icons as legend points
+                        },
+                        display: false,
                     },
                     title: {
                         display: false,
@@ -42,8 +60,24 @@ const ChartJS = (props: any) => {
                     x: {
                         stacked: false,
                         ticks: {
-                            display: false
-                        }
+                            callback: (value: any, index: number, values: any) => {
+                              // Render the HTML labels with icons
+                              switch(value) {
+                                case 0:
+                                    return visuals!.iconActive;
+                                case 1:
+                                    return visuals!.iconCancelled;
+                                case 2:
+                                    return visuals!.iconComplete;
+                                case 3:
+                                    return visuals!.iconUnsuccessful;
+                                case 4:
+                                    return visuals!.iconWithdrawn;
+                                case 5:
+                                    return visuals!.iconPlanned;
+                                }
+                            },
+                        },
                     },
                     y: {
                         stacked: false,
@@ -61,7 +95,7 @@ const ChartJS = (props: any) => {
                 myChart.destroy();
             }
         };
-    }, [props.data, props.type, props.labels]);
+    }, [data, type, visuals]);
 
     return (
         <>
