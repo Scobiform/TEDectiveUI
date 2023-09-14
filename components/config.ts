@@ -88,7 +88,7 @@ export let initialVisuals = {
   viewBoxHeight: '42vh',
   // Icons
   iconDefault: '🟩',
-  iconAward: '💰',
+  iconAward: '💶',
   iconContract: '📜',
   iconActive: '🟢',
   iconCancelled: '🚫',

@@ -11,11 +11,8 @@ export interface ChartJSProps {
     setVisuals?: any;
 }
 
-const ChartJS = ({data, type, visuals, setVisuals}: ChartJSProps) => {
+const ChartJS = ({data, type, visuals = initialVisuals, setVisuals}: ChartJSProps) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-    // State variable to store the visual parameters
-    [visuals, setVisuals] = useState(initialVisuals);
 
     useEffect(() => {
         
