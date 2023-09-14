@@ -348,7 +348,7 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
               <p>{buyerCounts.value.toFixed()}</p>
               <p>{supplierCounts.value.toFixed()}</p>
             </div>
-            <ChartJS data={getStatusChart(statusCounts)} type="bar" />
+            <ChartJS data={getStatusChart(statusCounts)} type="bar" visuals={visuals} setVisuals={setVisuals} />
           </div>
         </>
         }

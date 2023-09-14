@@ -45,7 +45,6 @@ const Legend = ({visuals, setVisuals}: LegendProps) => {
       </button>
       {showLegend && (
         <div className={styles.legend}>
-          <h2>Legend</h2>
           <ul>
             {legendItems.map((item, index) => (
               <li key={index}>
