@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import styles from './search.module.css'
+import styles from './search.module.css';
 
 interface SearchResult {
   id: string;
@@ -12,8 +12,7 @@ interface SearchProps {
   setApiPath: any;
 }
 
-const Search = ({apiPath, setApiPath}: SearchProps) => {
-
+const Search = ({ apiPath, setApiPath }: SearchProps) => {
   // Search results state
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   // Loading state
@@ -21,6 +20,24 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
 
   // API URL
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
+
+  // Ref to store the search timeout
+  const searchTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  // Modify the input change handler to debounce the search
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+
+    // Cancel the previous search request if it exists
+    if (searchTimeout.current) {
+      clearTimeout(searchTimeout.current);
+    }
+
+    // Set a new timeout for the search
+    searchTimeout.current = setTimeout(() => {
+      handleSearch(query);
+    }, 200); // Adjust the delay time (in milliseconds) as needed
+  };
 
   // Fetch search results
   const handleSearch = async (query: string) => {
@@ -30,13 +47,12 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
       setLoading(false);
       return;
     }
-    
+
     // Set loading state
     setLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 420));
-      const response = await fetch(apiURL+'entities/organization/search/' + query);
+      const response = await fetch(apiURL + 'entities/organization/search/' + query);
       const data: SearchResult[] = await response.json();
       setSearchResults(data);
     } catch (error) {
@@ -58,7 +74,7 @@ const Search = ({apiPath, setApiPath}: SearchProps) => {
         <input
           type="search"
           placeholder="Search for an organization..."
-          onChange={(e) => handleSearch(e.target.value)}
+          onChange={handleInputChange}
           autoFocus
           aria-label="Search for an organization (S)"
           tabIndex={0}
