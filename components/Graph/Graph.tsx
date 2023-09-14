@@ -167,7 +167,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
                     fontSize = fontSize * visuals!.nodeRel * visuals!.awardNodeSizeMult;
                 
                     if (visuals!.drawAmountValues === true) {
-                        label = visuals!.iconAward + amount + ' ' + fontSize;
+                        label = visuals!.iconAward + ' ' + amount;
                     } else {
                         label = visuals!.iconAward;
                     }
