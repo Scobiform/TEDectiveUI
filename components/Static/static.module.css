@@ -1,0 +1,10 @@
+.legend {
+    position: absolute;
+width: 42vw;
+height: 42vw;
+bottom: 28vh;
+left: 2.8rem;
+color: var(--primary);
+background: var(--tertiary);
+padding: 0.42rem;
+}

@@ -11,6 +11,7 @@ import ChartJS from "../components/Chart/ChartJS";
 import dynamic from 'next/dynamic';
 import IconSVG from '../components/Static/IconSVG';
 import ThemeSwitch from '../components/Static/ThemeSwitch';
+import Legend from '../components/Static/Legend';
 
 interface HomeProps {
   physics?: typeof initialPhysics;
@@ -319,7 +320,8 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
         <Search apiPath={apiPath} setApiPath={setApiPath}/>
         <button className={styles.tedectveLogo}>
               <IconSVG />
-            </button>
+        </button>
+        {/* Interaction bar - may convert to component */}
         <div className={styles.interactionBar}>
           <div className={styles.actionButtons}>
             {/* NUTS component toggle */}
@@ -330,6 +332,7 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
             <button onClick={handleToggleChart}>
               📊
             </button>
+            <Legend visuals={visuals} setVisuals={setVisuals} />
             <ThemeSwitch />
           </div>
         </div>

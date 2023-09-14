@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
 /* Config */
 import { initialPhysics, initialVisuals } from './../config';
+/* Styles */
+import styles from './static.module.css';
 
-const Legend = () => {
+export interface LegendProps {
+  visuals?: typeof initialVisuals;
+  setVisuals?: any;
+}
 
-    // State variable to store the visual parameters
-  const [visuals, setVisuals] = useState(initialVisuals);
+const Legend = ({visuals, setVisuals}: LegendProps) => {
+
+  // State variable to store the visual parameters
+  [visuals, setVisuals] = useState(initialVisuals);
+
+  // State variable to store the legend visibility
+  const [showLegend, setShowLegend] = useState(true); 
 
   // Define the icons and their labels
   const legendItems = [
@@ -24,18 +34,29 @@ const Legend = () => {
     { icon: visuals.iconOrganizationSupplier, label: 'Supplier' },
   ];
 
+  const toggleLegend = () => {
+    setShowLegend(!showLegend);
+  };
+
   return (
-    <div className="legend">
-      <h2>Legend</h2>
-      <ul>
-        {legendItems.map((item, index) => (
-          <li key={index}>
-            <span className="legend-icon">{item.icon}</span>
-            <span className="legend-label">{item.label}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <button onClick={toggleLegend}>
+        {showLegend ? 'ℹ️' : 'ℹ️'}
+      </button>
+      {showLegend && (
+        <div className={styles.legend}>
+          <h2>Legend</h2>
+          <ul>
+            {legendItems.map((item, index) => (
+              <li key={index}>
+                <span className="legend-icon">{item.icon}</span>
+                <span className="legend-label">{item.label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </>
   );
 };
 
