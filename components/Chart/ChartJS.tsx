@@ -33,6 +33,7 @@ const ChartJS = ({data, type, visuals = initialVisuals, setVisuals}: ChartJSProp
             return; // Exit the effect if context is null
         }
 
+        // TODO: THis is not generic approach
         const iconMappings: Record<number, string> = {
             0: visuals.iconActive,
             1: visuals.iconCancelled,
@@ -48,6 +49,7 @@ const ChartJS = ({data, type, visuals = initialVisuals, setVisuals}: ChartJSProp
             // The data for our dataset
             data: data,
             // Configuration options go here
+            // TODO; This is not generic approach
             options: {
                 responsive: true,
                 maintainAspectRatio: false,

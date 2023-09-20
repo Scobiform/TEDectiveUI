@@ -35,6 +35,9 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   // Create a reference to the graph
   const fgRef = useRef();
 
+  // Create a ref to store whether the zoom has been set
+  const zoomHasBeenSet = useRef(false);
+
   // Get the window size
   const [width, height] = useWindowSize();
   
@@ -114,8 +117,12 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
       return; // Do nothing if visuals is undefined
     }
 
-    // Zoom out to the initial zoom level
-    fgInstance.zoom(0.21, 7);
+    // Check if the zoom has already been set
+    if (!zoomHasBeenSet.current) {
+      // Zoom out to the initial zoom level
+      fgInstance.zoom(0.21, 7);
+      zoomHasBeenSet.current = true; // Set a flag to indicate that zoom has been set
+    }
 
     // Create a repulsion force to enforce a minimum distance between nodes
     const repulsionForce = d3
