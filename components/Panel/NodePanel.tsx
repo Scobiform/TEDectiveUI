@@ -76,7 +76,7 @@ function renderContentBasedOnNodeType(previewNode: any) {
     if(previewNode.awardID !== undefined){
       return <div> {/* FETCH AWARD */}
                 <h2>💰 {previewNode.label}</h2>
-                <p>{previewNode.value.amount} {previewNode.value.currency}</p>
+                <p>{previewNode.value.amount.toLocaleString()} {previewNode.value.currency}</p>
             </div>;
     }
 
