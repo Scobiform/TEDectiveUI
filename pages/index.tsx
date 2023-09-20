@@ -313,7 +313,7 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
           <div className={styles.actionButtons}>
             {/* NUTS component toggle */}
             <button onClick={handleToggleNuts}>
-              📍
+              {nutsVisible ? '🔙' : '📍'}
             </button>
             {/* Chart component toggle */}
             <button onClick={handleToggleChart}>
