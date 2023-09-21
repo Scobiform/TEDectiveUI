@@ -8,11 +8,9 @@ export interface ChartJSProps {
     type: any;
     data: any;
     iconMappings: any;
-    visuals?: typeof initialVisuals;
-    setVisuals?: any;
 }
 
-const ChartJS = ({data, type, iconMappings, visuals = initialVisuals, setVisuals}: ChartJSProps) => {
+const ChartJS = ({data, type, iconMappings}: ChartJSProps) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     useEffect(() => {
@@ -22,10 +20,6 @@ const ChartJS = ({data, type, iconMappings, visuals = initialVisuals, setVisuals
 
         if (!canvas) {
             return; // Exit the effect if canvas is null
-        }
-
-        if (!visuals) {
-            return; // Exit the effect if visuals is null
         }
 
         const ctx = canvas.getContext('2d');
@@ -80,7 +74,7 @@ const ChartJS = ({data, type, iconMappings, visuals = initialVisuals, setVisuals
                 myChart.destroy();
             }
         };
-    }, [data, type, visuals, iconMappings]);
+    }, [data, type, iconMappings]);
 
     return (
         <>

@@ -30,7 +30,7 @@ type GraphData = {
   links: any[];
 };
 
-const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, previewNode, 
+const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisuals, setVisuals, previewNode, 
               setPreviewNode, isOpen, setOpen 
             }: HomeProps) => {
 
@@ -285,12 +285,12 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
 
   // Define an object of icon mappings for the chart
   const iconMappings: Record<number, string> = {
-    0: visuals?.iconActive || 'Active',
-    1: visuals?.iconCancelled || 'Cancelled',
-    2: visuals?.iconComplete || 'Complete',
-    3: visuals?.iconUnsuccessful || 'Unsuccessful',
-    4: visuals?.iconWithdrawn || 'Withdrawn',
-    5: visuals?.iconPlanned || 'Planned',
+    0: visuals.iconActive || 'Active',
+    1: visuals.iconCancelled || 'Cancelled',
+    2: visuals.iconComplete || 'Complete',
+    3: visuals.iconUnsuccessful || 'Unsuccessful',
+    4: visuals.iconWithdrawn || 'Withdrawn',
+    5: visuals.iconPlanned || 'Planned',
   };
 
   return (
@@ -336,15 +336,20 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
         {chartVisible && 
         <>
           <div className={styles.organizationDetails}>
-            <div className={styles.dates}>
-              <p>{firstDate ? formatDate(firstDate) : "No Date"}</p>
-              <p>{lastDate ? formatDate(lastDate) : "No Date"}</p>
+            <div className={styles.gridContainer}>
+              <div className={styles.label}>First release:</div>
+              <div className={styles.value}>{firstDate ? formatDate(firstDate) : "No Date"}</div>
+              
+              <div className={styles.label}>Last release:</div>
+              <div className={styles.value}>{lastDate ? formatDate(lastDate) : "No Date"}</div>
+              
+              <div className={styles.label}>Overall spent:</div>
+              <div className={styles.value}>{buyerCounts.value.toLocaleString()}</div>
+              
+              <div className={styles.label}>Overall earned:</div>
+              <div className={styles.value}>{supplierCounts.value.toLocaleString()}</div>
             </div>
-            <div className={styles.money}>
-              <p>{buyerCounts.value.toFixed()}</p>
-              <p>{supplierCounts.value.toFixed()}</p>
-            </div>
-            <ChartJS data={getStatusChart(statusCounts)} type="bar" iconMappings={iconMappings} visuals={visuals} setVisuals={setVisuals} />
+            <ChartJS data={getStatusChart(statusCounts)} type="bar" iconMappings={iconMappings} />
           </div>
         </>
         }
