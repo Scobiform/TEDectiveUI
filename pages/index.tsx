@@ -337,7 +337,7 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
           <>
             <div className={styles.organizationDetails}>
               <div className={styles.gridContainer}>
-                <div className={styles.label}>Organization:</div>
+                <div className={styles.label}>Buyer Organization:</div>
                 <div className={styles.value}>{mergedGraphData.nodes[1]?.name || "N/A"}</div>
 
                 <div className={styles.label}>Country:</div>
