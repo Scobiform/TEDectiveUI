@@ -285,12 +285,12 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
 
   // Define an object of icon mappings for the chart
   const iconMappings: Record<number, string> = {
-    0: visuals.iconActive || 'Active',
-    1: visuals.iconCancelled || 'Cancelled',
-    2: visuals.iconComplete || 'Complete',
-    3: visuals.iconUnsuccessful || 'Unsuccessful',
-    4: visuals.iconWithdrawn || 'Withdrawn',
-    5: visuals.iconPlanned || 'Planned',
+    0: visuals.iconActive + " Active" || 'Active',
+    1: visuals.iconCancelled + " Cancelled" || 'Cancelled',
+    2: visuals.iconComplete + " Complete" || 'Complete',
+    3: visuals.iconUnsuccessful + " Unsuccessful" || 'Unsuccessful',
+    4: visuals.iconWithdrawn + " Withdrawn" || 'Withdrawn',
+    5: visuals.iconPlanned + " Planned" || 'Planned',
   };
 
   return (
