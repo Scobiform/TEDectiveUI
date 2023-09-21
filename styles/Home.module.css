@@ -65,11 +65,15 @@
   color: var(--secondary);
   position: absolute;
   bottom: 0;
-  right: 0.42rem;
+  right: 0;
   max-width: var(--windowWidth);
   z-index: 1002;
   opacity: var(--opacity);
-  max-height: var(--windowHeight);
+  height: var(--windowHeight);
+  overflow-y: scroll;
+  background: var(--tertiary);
+  top: 2.52rem;
+  padding: 0.42rem;
 }
 
 .tedectveLogo{

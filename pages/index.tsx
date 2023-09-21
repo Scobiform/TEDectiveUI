@@ -333,26 +333,46 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
           </div>
         </div>
         {/* Conditionally render the chart based on chartVisible state */}
-        {chartVisible && 
-        <>
-          <div className={styles.organizationDetails}>
-            <div className={styles.gridContainer}>
-              <div className={styles.label}>First release:</div>
-              <div className={styles.value}>{firstDate ? formatDate(firstDate) : "No Date"}</div>
+        {chartVisible && (
+          <>
+            <div className={styles.organizationDetails}>
+              <div className={styles.gridContainer}>
+                <div className={styles.label}>Organization:</div>
+                <div className={styles.value}>{mergedGraphData.nodes[1]?.name || "N/A"}</div>
+
+                <div className={styles.label}>Country:</div>
+                <div className={styles.value}>{mergedGraphData.nodes[1]?.address?.countryCode || "N/A"}</div>
+
+                <div className={styles.label}>City:</div>
+                <div className={styles.value}>{mergedGraphData.nodes[1]?.address?.locality || "N/A"}</div>
+
+                <div className={styles.label}>Postal code:</div>
+                <div className={styles.value}>{mergedGraphData.nodes[1]?.address?.postalCode || "N/A"}</div>
+
+                <div className={styles.label}>Street address:</div>
+                <div className={styles.value}>{mergedGraphData.nodes[1]?.address?.streetAddress || "N/A"}</div>
+
+                <div className={styles.label}>First release:</div>
+                <div className={styles.value}>{firstDate ? formatDate(firstDate) : "No Date"}</div>
+                
+                <div className={styles.label}>Last release:</div>
+                <div className={styles.value}>{lastDate ? formatDate(lastDate) : "No Date"}</div>
+                
+                <div className={styles.label}>Overall spent:</div>
+                <div className={styles.value}>{buyerCounts.value.toLocaleString()}</div>
+                
+                <div className={styles.label}>Overall earned:</div>
+                <div className={styles.value}>{supplierCounts.value.toLocaleString()}</div>
               
-              <div className={styles.label}>Last release:</div>
-              <div className={styles.value}>{lastDate ? formatDate(lastDate) : "No Date"}</div>
-              
-              <div className={styles.label}>Overall spent:</div>
-              <div className={styles.value}>{buyerCounts.value.toLocaleString()}</div>
-              
-              <div className={styles.label}>Overall earned:</div>
-              <div className={styles.value}>{supplierCounts.value.toLocaleString()}</div>
+                <div className={styles.label}>Tender status:</div>
+                <div className={styles.value}>
+                  <ChartJS data={getStatusChart(statusCounts)} type="bar" iconMappings={iconMappings} />
+                </div>
+              </div>
             </div>
-            <ChartJS data={getStatusChart(statusCounts)} type="bar" iconMappings={iconMappings} />
-          </div>
-        </>
-        }
+          </>
+        )}
+
         {/* Conditionally render the NUTS map based on nutsVisible state */}
         {nutsVisible &&
           <NutsMap data={mergedGraphData.nodes} apiPath={apiPath} setApiPath={setApiPath}/>
