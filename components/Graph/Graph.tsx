@@ -7,12 +7,12 @@ import ForceGraph2D, { ForceGraphMethods, ForceGraphProps } from "react-force-gr
 /* Components */
 import NodePanel from '../../components/Panel/NodePanel';
 import GUI from '../GUI/GUI';
-import Legend from '../../components/Static/Legend';
 /* Config */
 import { initialPhysics, initialVisuals } from './../config';
 /* Component styles */
 import styles from './graph.module.css';
 import { useWindowSize } from "@react-hook/window-size";
+import ThemeSwitch from "../Static/ThemeSwitch";
 
 export interface GraphProps {
   graphData: GraphData | undefined; 
@@ -304,7 +304,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
       </div>
       <div className={styles.interactionBar}>
         <div className={styles.zoomButtons}>
-          <Legend visuals={visuals} setVisuals={setVisuals} />
+          <ThemeSwitch />
           <button onClick={handleZoomIn}>
             ➕
             </button>
