@@ -283,6 +283,16 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
     return `${year}-${month}-${day}`;
   }
 
+  // Define an object of icon mappings for the chart
+  const iconMappings: Record<number, string> = {
+    0: visuals?.iconActive || 'Active',
+    1: visuals?.iconCancelled || 'Cancelled',
+    2: visuals?.iconComplete || 'Complete',
+    3: visuals?.iconUnsuccessful || 'Unsuccessful',
+    4: visuals?.iconWithdrawn || 'Withdrawn',
+    5: visuals?.iconPlanned || 'Planned',
+  };
+
   return (
     <>
       <main className={styles.main}>
@@ -334,7 +344,7 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals, setVisuals, pr
               <p>{buyerCounts.value.toFixed()}</p>
               <p>{supplierCounts.value.toFixed()}</p>
             </div>
-            <ChartJS data={getStatusChart(statusCounts)} type="bar" visuals={visuals} setVisuals={setVisuals} />
+            <ChartJS data={getStatusChart(statusCounts)} type="bar" iconMappings={iconMappings} visuals={visuals} setVisuals={setVisuals} />
           </div>
         </>
         }

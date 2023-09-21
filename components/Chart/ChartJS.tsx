@@ -7,11 +7,12 @@ import { initialPhysics, initialVisuals } from './../config';
 export interface ChartJSProps {
     type: any;
     data: any;
+    iconMappings: any;
     visuals?: typeof initialVisuals;
     setVisuals?: any;
 }
 
-const ChartJS = ({data, type, visuals = initialVisuals, setVisuals}: ChartJSProps) => {
+const ChartJS = ({data, type, iconMappings, visuals = initialVisuals, setVisuals}: ChartJSProps) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     useEffect(() => {
@@ -33,23 +34,12 @@ const ChartJS = ({data, type, visuals = initialVisuals, setVisuals}: ChartJSProp
             return; // Exit the effect if context is null
         }
 
-        // TODO: THis is not generic approach
-        const iconMappings: Record<number, string> = {
-            0: visuals.iconActive,
-            1: visuals.iconCancelled,
-            2: visuals.iconComplete,
-            3: visuals.iconUnsuccessful,
-            4: visuals.iconWithdrawn,
-            5: visuals.iconPlanned,
-        };
-
         let myChart = new Chart(ctx, {
             // The type of chart we want to create
             type: type,
             // The data for our dataset
             data: data,
             // Configuration options go here
-            // TODO; This is not generic approach
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -90,7 +80,7 @@ const ChartJS = ({data, type, visuals = initialVisuals, setVisuals}: ChartJSProp
                 myChart.destroy();
             }
         };
-    }, [data, type, visuals]);
+    }, [data, type, visuals, iconMappings]);
 
     return (
         <>
