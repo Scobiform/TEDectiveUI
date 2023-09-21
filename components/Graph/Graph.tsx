@@ -7,12 +7,12 @@ import ForceGraph2D, { ForceGraphMethods, ForceGraphProps } from "react-force-gr
 /* Components */
 import NodePanel from '../../components/Panel/NodePanel';
 import GUI from '../GUI/GUI';
-import Legend from '../../components/Static/Legend';
 /* Config */
 import { initialPhysics, initialVisuals } from './../config';
 /* Component styles */
 import styles from './graph.module.css';
 import { useWindowSize } from "@react-hook/window-size";
+import ThemeSwitch from "../Static/ThemeSwitch";
 
 export interface GraphProps {
   graphData: GraphData | undefined; 
@@ -25,7 +25,7 @@ export interface GraphProps {
   isOpen?: boolean;
   setOpen: any;
   apiPath: string;
-  setApiPath: any; 
+  setApiPath: any;
 }
 
 // Create a component that will render the graph
@@ -149,7 +149,6 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           graphData={graphData}
           nodeLabel="label"
           nodeCanvasObject={(node, ctx, globalScale) => {
-            // TODO: Move icons to config.ts
             // This section defines the node labels
             let label = visuals!.iconDefault;
             let fontSize = 10 * visuals!.nodeRel;
@@ -305,7 +304,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
       </div>
       <div className={styles.interactionBar}>
         <div className={styles.zoomButtons}>
-          <Legend visuals={visuals} setVisuals={setVisuals} />
+          <ThemeSwitch />
           <button onClick={handleZoomIn}>
             ➕
             </button>

@@ -11,6 +11,7 @@ import ChartJS from "../components/Chart/ChartJS";
 import dynamic from 'next/dynamic';
 import IconSVG from '../components/Static/IconSVG';
 import ThemeSwitch from '../components/Static/ThemeSwitch';
+import Legend from '../components/Static/Legend';
 
 interface HomeProps {
   physics?: typeof initialPhysics;
@@ -323,13 +324,13 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
           <div className={styles.actionButtons}>
             {/* NUTS component toggle */}
             <button onClick={handleToggleNuts}>
-              {nutsVisible ? '🔙' : '📍'}
+              {nutsVisible ? '⬅️' : '📍'}
             </button>
             {/* Chart component toggle */}
             <button onClick={handleToggleChart}>
               📊
             </button>
-            <ThemeSwitch />
+            <Legend visuals={visuals} setVisuals={setVisuals} />
           </div>
         </div>
         {/* Conditionally render the chart based on chartVisible state */}

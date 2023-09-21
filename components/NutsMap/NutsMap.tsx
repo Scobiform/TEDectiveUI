@@ -5,6 +5,7 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
+import ThemeSwitch from '../Static/ThemeSwitch';
 
 export interface NutsMapProps {
   apiPath: string;
@@ -117,6 +118,7 @@ const NutsMap = ({ data, apiPath, setApiPath }: NutsMapProps) => {
         {markers}
         <div className={styles.interactionBar}>
         <div className={styles.zoomButtons}>
+          <ThemeSwitch />
           <ZoomInButton />
           <ZoomOutButton />
         </div>
