@@ -38,7 +38,7 @@
 
 /* Chart stats */
 .gridContainer {
-  display: grid;
+  /*display: grid;*/
   grid-template-columns: 1fr 2fr;
   grid-gap: 7px;
   gap: 7px;
