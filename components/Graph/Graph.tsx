@@ -25,7 +25,7 @@ export interface GraphProps {
   isOpen?: boolean;
   setOpen: any;
   apiPath: string;
-  setApiPath: any; 
+  setApiPath: any;
 }
 
 // Create a component that will render the graph
@@ -149,7 +149,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           graphData={graphData}
           nodeLabel="label"
           nodeCanvasObject={(node, ctx, globalScale) => {
-            // Draw the node as an icon
+            // This section defines the node labels
             let label = visuals!.iconDefault;
             let fontSize = 10 * visuals!.nodeRel;
         
