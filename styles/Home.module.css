@@ -39,10 +39,9 @@
 /* Chart stats */
 .gridContainer {
   display: grid;
-  grid-template-columns: 1.5fr 1.5fr;
+  grid-template-columns: 1fr 2fr;
   grid-gap: 7px;
   gap: 7px;
-  padding-left: 14px;
 }
 
 .gridContainer .label {
