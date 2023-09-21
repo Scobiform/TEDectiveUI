@@ -149,8 +149,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           graphData={graphData}
           nodeLabel="label"
           nodeCanvasObject={(node, ctx, globalScale) => {
-            // TODO: Move icons to config.ts
-            // This section defines the node labels
+            // Draw the node as an icon
             let label = visuals!.iconDefault;
             let fontSize = 10 * visuals!.nodeRel;
         

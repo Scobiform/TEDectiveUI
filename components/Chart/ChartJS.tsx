@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from './charts.module.css'
 import Chart from 'chart.js/auto';
-/* Config */
-import { initialPhysics, initialVisuals } from './../config';
 
 export interface ChartJSProps {
     type: any;
