@@ -337,21 +337,6 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
           <>
             <div className={styles.organizationDetails}>
               <div className={styles.gridContainer}>
-                <div className={styles.label}>Buyer Organization:</div>
-                <div className={styles.value}>{mergedGraphData.nodes[1]?.name || "N/A"}</div>
-
-                <div className={styles.label}>Country:</div>
-                <div className={styles.value}>{mergedGraphData.nodes[1]?.address?.countryCode || "N/A"}</div>
-
-                <div className={styles.label}>City:</div>
-                <div className={styles.value}>{mergedGraphData.nodes[1]?.address?.locality || "N/A"}</div>
-
-                <div className={styles.label}>Postal code:</div>
-                <div className={styles.value}>{mergedGraphData.nodes[1]?.address?.postalCode || "N/A"}</div>
-
-                <div className={styles.label}>Street address:</div>
-                <div className={styles.value}>{mergedGraphData.nodes[1]?.address?.streetAddress || "N/A"}</div>
-
                 <div className={styles.label}>First release:</div>
                 <div className={styles.value}>{firstDate ? formatDate(firstDate) : "No Date"}</div>
                 
