@@ -1,7 +1,6 @@
 'use client';
 import { useCallback, useEffect, useState } from "react";
 import styles from './panels.module.css'
-import IconSVG  from '../Static/IconSVG'
 import { NodeObject } from "react-force-graph-2d";
 
 export interface NodePanelProps {

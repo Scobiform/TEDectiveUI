@@ -8,7 +8,7 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function TEDectiveUI({ Component, pageProps }: AppProps) {
 
   const appName = process.env.NEXT_PUBLIC_SITE_NAME;
   const appDescription = process.env.NEXT_PUBLIC_SITE_DESCRIPTION;
@@ -23,10 +23,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta
           name="viewport"
-          content="width=device-width,initial-scale=1"
+          content="width=device-width, initial-scale=1, viewport-fit=cover"
         />
         <meta name="description" content={appDescription} />
         <meta name="keywords" content={appKeywords} />
+
         <title>{title}</title>
 
         <link rel="manifest" href="/manifest.json" />
