@@ -7,12 +7,12 @@ import styles from './static.module.css';
 export interface LegendProps {
   visuals?: typeof initialVisuals;
   setVisuals?: any;
+  showLegend?: boolean;
+  setShowLegend?: any;
 }
 
-const Legend = ({ visuals = initialVisuals, setVisuals }: LegendProps) => {
+const Legend = ({ visuals = initialVisuals, setVisuals, showLegend, setShowLegend }: LegendProps) => {
 
-  // State variable to store the legend visibility
-  const [showLegend, setShowLegend] = useState(false); 
 
   // Define the icons, labels, and descriptions
   const legendItems = [
