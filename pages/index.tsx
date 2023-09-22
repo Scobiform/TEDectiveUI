@@ -1,5 +1,5 @@
 'use client'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Index.module.css'
 import Header from '../components/Static/Header';
 import GraphWrapper from '../components/Graph/GraphWrapper';
 import Search from '../components/Search/Search';
@@ -10,7 +10,6 @@ import { NodeObject } from 'react-force-graph-2d';
 import ChartJS from "../components/Chart/ChartJS";
 import dynamic from 'next/dynamic';
 import IconSVG from '../components/Static/IconSVG';
-import ThemeSwitch from '../components/Static/ThemeSwitch';
 import Legend from '../components/Static/Legend';
 
 interface HomeProps {
@@ -323,11 +322,11 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
         <div className={styles.interactionBar}>
           <div className={styles.actionButtons}>
             {/* NUTS component toggle */}
-            <button onClick={handleToggleNuts}>
+            <button onClick={handleToggleNuts} tabIndex={0} aria-label='Show organizations on openstreetmap'>
               {nutsVisible ? '⬅️' : '📍'}
             </button>
             {/* Chart component toggle */}
-            <button onClick={handleToggleChart}>
+            <button onClick={handleToggleChart} tabIndex={0} aria-label='Show organization details and statistics'>
               📊
             </button>
             <Legend visuals={visuals} setVisuals={setVisuals} />

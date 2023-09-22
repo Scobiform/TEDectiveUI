@@ -73,7 +73,7 @@ html, body{
 }
 
 a {
-  color: inherit;
+  color: var(--secondary);
   text-decoration: none;
   font-weight: var(--fontWeight);
 }
@@ -277,6 +277,18 @@ display: none;
 .leva-c-dmsJDs-hXSjjU-isRoot-true > .leva-c-PJLV:not(:first-of-type) {
   padding-top: 0 !important;
   margin-top: 0 !important;
+}
+
+.leva-c-ctBOWy-dpRfJK-active-true > svg {
+  fill: var(--secondary) !important;
+}
+
+.leva-c-iLtnIm > svg {
+  fill: var(--secondary) !important;
+}
+
+.leva-c-ctBOWy > svg {
+  fill: var(--secondary) !important;
 }
 
 /* Keyframes for flash animation */
