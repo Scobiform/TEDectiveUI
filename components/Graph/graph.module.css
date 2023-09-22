@@ -35,3 +35,63 @@
   font-size: 1.4rem;
   padding: 0.14rem;
 }
+
+.actionButtons {
+  display: grid;
+  z-index: 1001;
+  position: absolute;
+  bottom: 6.3rem;
+}
+
+.actionButtons button {
+  background-color: transparent;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 1.4rem;
+  padding: 0.14rem;
+}
+
+/* Chart stats */
+.gridContainer {
+  /*display: grid;*/
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 7px;
+  gap: 7px;
+}
+
+.gridContainer .label {
+  font-weight: var(--fontWeight);
+  color: var(--secondary);
+  text-align: end;
+  font-size: 0.7em;
+  margin-bottom: 0.42rem;
+  background: var(--tedectiveBlue);
+  color: var(--tertiary);
+  padding: 0.42em;
+}
+
+.gridContainer .value {
+    font-size: 0.7em;
+    margin-bottom: 0.42em;
+    font-weight: var(--fontWeight);
+    color: var(--primary);
+    text-align: end;
+}
+
+/* OrganizationDetails */
+.organizationDetails {
+  color: var(--secondary);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  max-width: var(--windowWidth);
+  z-index: 1000;
+  opacity: var(--opacity);
+  height: var(--windowHeight);
+  overflow-y: auto;
+  background: var(--tertiary);
+  top: 2.8rem;
+  padding: 0.42rem;
+  margin:4.2px;
+}
