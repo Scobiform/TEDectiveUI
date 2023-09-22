@@ -35,11 +35,15 @@ export interface GraphProps {
   buyerCounts?: any;
   supplierCounts?: any;
   mergedGraphData?: any;
+  showLegend?: boolean;
+  setShowLegend?: any;
 }
 
 // Create a component that will render the graph
 const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
-  previewNode, setPreviewNode, isOpen, setOpen, apiPath, setApiPath, firstDate, lastDate, statusCounts, buyerCounts, supplierCounts, mergedGraphData }: GraphProps) => {
+  previewNode, setPreviewNode, isOpen, setOpen, apiPath, setApiPath, firstDate, lastDate, 
+  statusCounts, buyerCounts, supplierCounts, mergedGraphData,
+  showLegend, setShowLegend }: GraphProps) => {
 
   // Create a reference to the graph
   const fgRef = useRef();
@@ -67,13 +71,16 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
      setChartVisible(!chartVisible); // Toggle chart visibility
    };
    
-  // Organization details visibility
+  // Openstreetmap visibility
   const [nutsVisible, setNutsVisible] = useState(false);
 
   // Handle the toggle NUTS map button click event
   const handleToggleNuts = () => {
     setNutsVisible(!nutsVisible); // Toggle NUTS map visibility
   };
+
+  // State variable to store wheter legend is visible or not
+  [showLegend, setShowLegend] = useState(false);
 
   // Callback function that will be called when a node is clicked
   const handleClick = useCallback(
@@ -362,7 +369,11 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           enablePointerInteraction={physics.enablePointerInteraction}
           enableNodeDrag={physics.enableNodeDrag}
           enablePanInteraction={physics.enablePanInteraction}
-          onBackgroundClick={() => setOpen(false)}
+          onBackgroundClick={() => {
+            setOpen(false);
+            setChartVisible(false);
+            setShowLegend(false);
+          }}
           onBackgroundRightClick={() => setOpen(false)}
           d3AlphaDecay={physics.alphaDecay}
           d3AlphaMin={physics.alphaMin}
@@ -382,7 +393,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
             <button onClick={handleToggleChart} tabIndex={0} aria-label='Show organization details and statistics'>
               📊
             </button>
-            <Legend visuals={visuals} setVisuals={setVisuals} />
+            <Legend visuals={visuals} setVisuals={setVisuals} showLegend={showLegend} setShowLegend={setShowLegend} />
           </div>
           <div className={styles.zoomButtons}>
             <ThemeSwitch />
