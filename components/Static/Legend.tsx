@@ -35,7 +35,7 @@ const Legend = ({ visuals = initialVisuals, setVisuals, showLegend, setShowLegen
 
   return (
     <>
-      <button onClick={toggleLegend} tabIndex={0} aria-label='Show general information and legend'>
+      <button onClick={toggleLegend} tabIndex={0} aria-label='Show general information and legend (I)' accessKey='I'>
         {showLegend ? 'ℹ️' : 'ℹ️'}
       </button>
       {showLegend && (

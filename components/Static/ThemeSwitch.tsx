@@ -26,7 +26,7 @@ const ThemeSwitch = () => {
   }, []);
 
   return (
-    <button onClick={toggleTheme}>
+    <button onClick={toggleTheme} aria-label='Light/Dark mode toggle (L)' accessKey='L'>
       {isDarkMode ? '🌞' : '🌚'}
     </button>
   );
