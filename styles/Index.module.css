@@ -6,15 +6,6 @@
   min-height: 100vh;
 }
 
-/* Stats Bar -- make own component */
-.statsBar {
-  display: grid;
-  position: fixed;
-  bottom: 2.1rem;
-  right: 0;
-  color: var(--primary);
-}
-
 /* interactionBar */
 .interactionBar {
   position: absolute;
