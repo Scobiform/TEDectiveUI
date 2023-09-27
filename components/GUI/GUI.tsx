@@ -26,7 +26,7 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     const toggleCachedObjects = () => {
         setShowCachedObjects(!showCachedObjects);
     };
-    
+
     // Callback to set physics
     const setPhysicsCallback = useCallback((val: any) => setPhysics(val), [setPhysics])
 
@@ -84,10 +84,18 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
             iconOrganization: { value: visuals.iconOrganization, onChange: (v) => setVisualsCallback({ ...visuals, iconOrganization: v }) },
             iconOrganizationSupplier: { value: visuals.iconOrganizationSupplier, onChange: (v) => setVisualsCallback({ ...visuals, iconOrganizationSupplier: v }) },
         }),
-        CachedObjects: button((get) => toggleCachedObjects()),
         },
         { collapsed: true},
-        [visuals, visualsStore, showCachedObjects]
+        [visuals, visualsStore]
+    );
+
+    // Cache store
+    const cacheStore = useCreateStore();
+    const cacheData = useControls('Cache', {
+        showCachedObjects: button(() => toggleCachedObjects()),
+        },
+        { collapsed: true},
+        [showCachedObjects, cacheStore]
     );
 
     // **************************************************************************** //
@@ -269,10 +277,14 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
                 hidden={false} // default = false, when true the GUI is hidden
                 titleBar={true} // default = true, when false the title bar is hidden
                 />
-                <LevaPanel store={visualsStore} fill={true} titleBar={true} />
+                {/* Render the CachedObjects component if showCachedObjects is true */}      
+                {showCachedObjects &&
+                    <>
+                    <LevaPanel store={cacheStore} fill={true} titleBar={true} />  
+                    <CachedObjects />
+                    </>
+                }
             </div>
-            {/* Render the CachedObjects component if showCachedObjects is true */}
-            {showCachedObjects && <CachedObjects />}
         </>
     )
 }

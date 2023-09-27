@@ -1,17 +1,15 @@
 .cachedObjects {
-    display: flex;
-    flex-direction: column;
-    width: 42vw;
-    height: 70vh;
-    margin: 0 auto;
-    background: var(--tertiary);
-    color: var(--primary);
-    z-index: 1001;
-    position: absolute;
-    overflow-y: auto;
-    bottom: 2.8rem;
-    overflow-x: hidden;
-    padding: 0.42rem;
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  margin: 0 auto;
+  background: var(--tertiary);
+  color: var(--primary);
+  overflow-y: auto;
+  bottom: 2.8rem;
+  overflow-x: hidden;
+  padding: 0.42rem;
+  min-width: 175px;
 }
 
 .cachedObjects ul {
