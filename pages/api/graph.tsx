@@ -3,7 +3,7 @@ import fs from 'fs/promises'; // Import the promises-based file system module
 import path from 'path'; // Import the path module
 
 // Define the directory for cached data
-const cacheDirectory = path.join(process.cwd(), './public/cache');
+const cacheDirectory = path.join(process.cwd(), './public/cache/graph');
 
 // Function to ensure the cache directory exists
 async function ensureCacheDirectoryExists() {
