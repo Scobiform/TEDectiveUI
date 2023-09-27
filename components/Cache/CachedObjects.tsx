@@ -29,8 +29,6 @@ function CachedObjects() {
         {cachedData.map((data, index) => (
           <li key={index}>
             <p>{JSON.stringify(data, null, 2)}</p>
-
-            (/* Show display)
           </li>
         ))}
       </ul>
