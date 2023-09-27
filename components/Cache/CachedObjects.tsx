@@ -6,11 +6,24 @@ interface CachedObject {
   type: string;
 }
 
+function Accordion({ title, content, isOpen, toggleAccordion }: any) {
+  return (
+    <div className={styles.accordion}>
+      <div className={styles.accordionTitle} onClick={toggleAccordion}>
+        <h3>{title}</h3>
+        <span className={isOpen ? styles.arrowOpen : styles.arrowClose}></span>
+      </div>
+      {isOpen && <div className={styles.accordionContent}>{content}</div>}
+    </div>
+  );
+}
+
 function CachedObjects() {
   const [cachedData, setCachedData] = useState<CachedObject[]>([]);
   const [searchCache, setSearchCache] = useState<CachedObject[]>([]);
   const [graphCache, setGraphCache] = useState<CachedObject[]>([]);
   const [geocodeCache, setGeocodeCache] = useState<CachedObject[]>([]);
+  const [openSection, setOpenSection] = useState<string[]>(['search', 'graph', 'geocode']);
 
   useEffect(() => {
     async function fetchCachedData() {
@@ -57,33 +70,58 @@ function CachedObjects() {
     fetchCachedData();
   }, []);
 
+  const toggleAccordion = (sectionName: string) => {
+    if (openSection.includes(sectionName)) {
+      setOpenSection(openSection.filter((name) => name !== sectionName));
+    } else {
+      setOpenSection([...openSection, sectionName]);
+    }
+  };
+
   return (
     <div className={styles.cachedObjects}>
-      <h3>Search Cache</h3>
-      <ul>
-        {searchCache.map((data, index) => (
-          <li key={index}>
-            <p>{data.filename.replace(".json", "")}</p>
-          </li>
-        ))}
-      </ul>
-      <h3>Graph Cache</h3>
-      <ul>
-        {graphCache.map((data, index) => (
-          <li key={index}>
-            <p>{data.filename.replace(".json", "")}</p>
-          </li>
-        ))}
-      </ul>
-
-      <h3>Geocode Cache</h3>
-      <ul>
-        {geocodeCache.map((data, index) => (
-          <li key={index}>
-            <p>{data.filename.replace(".json", "")}</p>
-          </li>
-        ))}
-      </ul>
+      <Accordion
+        title="Search Cache"
+        content={
+          <ul>
+            {searchCache.map((data, index) => (
+              <li key={index}>
+                <p>{data.filename.replace('.json', '')}</p>
+              </li>
+            ))}
+          </ul>
+        }
+        isOpen={openSection.includes('search')}
+        toggleAccordion={() => toggleAccordion('search')}
+      />
+      <Accordion
+        title="Graph Cache"
+        content={
+          <ul>
+            {graphCache.map((data, index) => (
+              <li key={index}>
+                <p>{data.filename.replace('.json', '')}</p>
+              </li>
+            ))}
+          </ul>
+        }
+        isOpen={openSection.includes('graph')}
+        toggleAccordion={() => toggleAccordion('graph')}
+      />
+      <Accordion
+        title="Geocode Cache"
+        content={
+          <ul>
+            {geocodeCache.map((data, index) => (
+              <li key={index}>
+                <p>{data.filename.replace('.json', '')}</p>
+              </li>
+            ))}
+          </ul>
+        }
+        isOpen={openSection.includes('geocode')}
+        toggleAccordion={() => toggleAccordion('geocode')}
+      />
     </div>
   );
 }
