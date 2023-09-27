@@ -34,6 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // If cached data is not available or there's an error reading it, fetch and cache new data.
   }
 
+  // Make a fetch request to an external API using the query parameter
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
   const buyerGraphPath = apiURL + 'graph/releases/buyer/';
   const supplierGraphPath = apiURL + 'graph/releases/supplier/';
