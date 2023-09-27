@@ -8,10 +8,11 @@ export interface NodePanelProps {
   isOpen: boolean;
   setOpen: any;
   apiPath: string;
-  setApiPath: any; 
+  setApiPath: any;
+  iconMappings: any;
 }
 
-const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath}: NodePanelProps) => {
+const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath, iconMappings}: NodePanelProps) => {
  
   // Toggle menu
   const toggleMenu = () => setOpen(!isOpen);
@@ -46,7 +47,7 @@ const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath}: NodePane
               <div className={styles.panelView}>
                 <div className={styles.nodePanelContent}>
                   {/* Switch case for node type */} 
-                  {renderContentBasedOnNodeType(previewNode)}
+                  {renderContentBasedOnNodeType(previewNode, iconMappings)}
                   
                   {previewNode.name !== undefined && (
                     <button onClick={() => handleClick(previewNode.id+'')} aria-label="Load organization graph">Load organization graph</button>
@@ -65,7 +66,7 @@ const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath}: NodePane
 export default NodePanel;
 
 // Function to render content based on node type
-function renderContentBasedOnNodeType(previewNode: any) {
+function renderContentBasedOnNodeType(previewNode: any, iconMappings: any) {
 
   // TODO: Build switch case for template display based on node type
   // Make the detail view for each node type a component
@@ -122,24 +123,24 @@ function renderContentBasedOnNodeType(previewNode: any) {
       switch (previewNode.status) {
         case 'active':
           return <div>
-                    <h2>🟢 {previewNode.label}</h2>
+                    <h2>{iconMappings[0]} {previewNode.label}</h2>
                   </div>;
         case 'cancelled':
-          return <div>Content for type 2</div>;
+          return <div>{iconMappings[1]} {previewNode.label}</div>;
         case 'unsuccessful':
           return <div>
-                    <h2>❌ {previewNode.label}</h2>
+                    <h2>{iconMappings[3]} {previewNode.label}</h2>
                 </div>;
         case 'complete':
           return <div>
-                    <h2>✅ {previewNode.label}</h2>
+                    <h2>{iconMappings[2]} {previewNode.label}</h2>
                     <p>{previewNode.description}</p>
                 </div>;
         case 'withdrawn':
-          return <div>Content for type 5</div>;
+          return <div>{iconMappings[4]} {previewNode.label}</div>;
         case 'planned':
           return <div>
-                    <h2>📝 {previewNode.label}</h2>
+                    <h2>{iconMappings[5]} {previewNode.label}</h2>
                     <p>{previewNode.description}</p>
                 </div>;      
         default:

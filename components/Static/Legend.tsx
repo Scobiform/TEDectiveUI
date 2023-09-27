@@ -13,7 +13,6 @@ export interface LegendProps {
 
 const Legend = ({ visuals = initialVisuals, setVisuals, showLegend, setShowLegend }: LegendProps) => {
 
-
   // Define the icons, labels, and descriptions
   const legendItems = [
     { icon: visuals!.iconAward, label: 'Award', description: 'Represents an award in the Open Contracting Data Standard (OCDS), typically associated with the process of awarding a contract to a supplier.'},

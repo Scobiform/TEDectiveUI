@@ -31,21 +31,14 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
               setPreviewNode, isOpen, setOpen 
             }: HomeProps) => {
 
-  // API URL
-  const apiURL = process.env.NEXT_PUBLIC_API_URL;
-
   // Initial graph id
   const initialGraphId = process.env.NEXT_PUBLIC_INITIAL_GPAPH_ID;
-
-  // Graph paths
-  const buyerGraphPath = apiURL+'graph/releases/buyer/';
-  const supplierGraphPath = apiURL+'graph/releases/supplier/';
 
   // API path state
   [apiPath, setApiPath] = useState(initialGraphId+'');
 
   // Loading state
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   // State for counts
   const [supplierCounts, setSupplierCounts] = useState({ contracts: 0, tenders: 0, awards: 0, value: 0 });
@@ -73,162 +66,167 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
 
     setIsLoading(true); // Set loading to true before the fetch call
 
-    try{
-      // Fetch buyer data and supplier data in parallel
-      Promise.all([
-        fetch(buyerGraphPath + apiPath).then((response) => response.json()),
-        fetch(supplierGraphPath + apiPath).then((response) => response.json()),
-      ])
-        .then(([buyerData, supplierData]) => {
+    const fetchData = async () => {
+      try{
+        // Fetch buyer data and supplier data in parallel
+        const [graphResponse] = await Promise.all([
+          fetch('/api/graph/?q=' + apiPath)
+        ]);
 
-          // Add the 'type' property to buyer nodes
-          buyerData.nodes.forEach((node: { type: string }, index: number) => {
-            if (index === 1) {
-              node.type = 'baseOrganization';
-            } else {
-              node.type = 'buyer';
-            }
-          });
+        let graph = await graphResponse.json();
 
-          // Add the 'type' property to supplier nodes
-          supplierData.nodes.forEach((node: { type: string }, index: number) => {
-            if (index === 1) {
-              node.type = 'baseOrganization';
-            } else {
-              node.type = 'supplier';
-            }
-          });
+        let buyerData = graph.buyerData;
+        let supplierData = graph.supplierData;
 
-          // Extract dates from both buyer and supplier nodes
-          const allNodes = [...buyerData.nodes, ...supplierData.nodes];
-          const allDates = allNodes.map((node) => node.date).filter(Boolean); // Filter out null or undefined dates
-
-          // Find the first and last dates
-          const sortedDates = allDates.sort();
-          const first = sortedDates[0];
-          const last = sortedDates[sortedDates.length - 1];
-
-          // Set the firstDate and lastDate state variables
-          setFirstDate(first);
-          setLastDate(last);
-
-          // Merge the nodes and links arrays from both graphs
-          const mergedData = {
-            nodes: [...buyerData.nodes, ...supplierData.nodes],
-            links: [...buyerData.links, ...supplierData.links],
-          };
-
-          // Count contracts, tenders, and awards
-          const supplierCounts = {
-            contracts: 0,
-            tenders: 0,
-            awards: 0,
-            value: 0,
-          };
-
-          const buyerCounts = {
-            contracts: 0,
-            tenders: 0,
-            awards: 0,
-            value: 0,
-          };
-
-          const statusCounts = {
-            active: 0,
-            cancelled: 0,
-            complete: 0,
-            unsuccessful: 0,
-            withdrawn: 0,
-            planned: 0,
-          };
-
-          supplierData.nodes.forEach((node: any) => {
-            if (node.tag) {
-              if (node.tag.includes('contract')) {
-                supplierCounts.contracts++;
-              }
-              if (node.tag.includes('tender')) {
-                supplierCounts.tenders++;
-              }
-              if (node.tag.includes('award')) {
-                supplierCounts.awards++;
-              }
-            }
-            if (node.value !== undefined && node.value !== null) {
-              supplierCounts.value += node.value.amount;
-            }
-            if(node.status) {
-              if(node.status.includes('active')) {
-                statusCounts.active++;
-              }
-              if(node.status.includes('cancelled')) {
-                statusCounts.cancelled++;
-              }
-              if(node.status.includes('complete')) {
-                statusCounts.complete++;
-              }
-              if(node.status.includes('unsuccessful')) {
-                statusCounts.unsuccessful++;
-              }
-              if(node.status.includes('withdrawn')) {
-                statusCounts.withdrawn++;
-              }
-              if(node.status.includes('planned')) {
-                statusCounts.planned++;
-              }
-            }
-          });
-
-          buyerData.nodes.forEach((node: any) => {
-            if (node.tag) {
-              if (node.tag.includes('contract')) {
-                buyerCounts.contracts++;
-              }
-              if (node.tag.includes('tender')) {
-                buyerCounts.tenders++;
-              }
-              if (node.tag.includes('award')) {
-                buyerCounts.awards++;
-              }
-            }
-            if (node.value !== undefined && node.value !== null) {
-              buyerCounts.value += node.value.amount;
-            }
-            if(node.status) {
-              if(node.status.includes('active')) {
-                statusCounts.active++;
-              }
-              if(node.status.includes('cancelled')) {
-                statusCounts.cancelled++;
-              }
-              if(node.status.includes('complete')) {
-                statusCounts.complete++;
-              }
-              if(node.status.includes('unsuccessful')) {
-                statusCounts.unsuccessful++;
-              }
-              if(node.status.includes('withdrawn')) {
-                statusCounts.withdrawn++;
-              }
-              if(node.status.includes('planned')) {
-                statusCounts.planned++;
-              }
-            }
-          });
-
-          setBuyerCounts(buyerCounts);
-          setSupplierCounts(supplierCounts);
-          setStatusCounts(statusCounts);
-
-          setMergedGraphData(mergedData);
-          setIsLoading(false);
+        // Add the 'type' property to buyer nodes
+        buyerData.nodes.forEach((node: { type: string }, index: number) => {
+          if (index === 1) {
+            node.type = 'baseOrganization';
+          } else {
+            node.type = 'buyer';
+          }
         });
-      }
-      catch(error)
-      {
-        //
-      }
-  },[apiPath, buyerGraphPath, supplierGraphPath]);
+
+        // Add the 'type' property to supplier nodes
+        supplierData.nodes.forEach((node: { type: string }, index: number) => {
+          if (index === 1) {
+            node.type = 'baseOrganization';
+          } else {
+            node.type = 'supplier';
+          }
+        });
+
+        // Extract dates from both buyer and supplier nodes
+        const allNodes = [...buyerData.nodes, ...supplierData.nodes];
+        const allDates = allNodes.map((node) => node.date).filter(Boolean); // Filter out null or undefined dates
+
+        // Find the first and last dates
+        const sortedDates = allDates.sort();
+        const first = sortedDates[0];
+        const last = sortedDates[sortedDates.length - 1];
+
+        // Set the firstDate and lastDate state variables
+        setFirstDate(first);
+        setLastDate(last);
+
+        // Merge the nodes and links arrays from both graphs
+        const mergedData = {
+          nodes: [...buyerData.nodes, ...supplierData.nodes],
+          links: [...buyerData.links, ...supplierData.links],
+        };
+
+        // Count contracts, tenders, and awards
+        const supplierCounts = {
+          contracts: 0,
+          tenders: 0,
+          awards: 0,
+          value: 0,
+        };
+
+        const buyerCounts = {
+          contracts: 0,
+          tenders: 0,
+          awards: 0,
+          value: 0,
+        };
+
+        const statusCounts = {
+          active: 0,
+          cancelled: 0,
+          complete: 0,
+          unsuccessful: 0,
+          withdrawn: 0,
+          planned: 0,
+        };
+
+        supplierData.nodes.forEach((node: any) => {
+          if (node.tag) {
+            if (node.tag.includes('contract')) {
+              supplierCounts.contracts++;
+            }
+            if (node.tag.includes('tender')) {
+              supplierCounts.tenders++;
+            }
+            if (node.tag.includes('award')) {
+              supplierCounts.awards++;
+            }
+          }
+          if (node.value !== undefined && node.value !== null) {
+            supplierCounts.value += node.value.amount;
+          }
+          if(node.status) {
+            if(node.status.includes('active')) {
+              statusCounts.active++;
+            }
+            if(node.status.includes('cancelled')) {
+              statusCounts.cancelled++;
+            }
+            if(node.status.includes('complete')) {
+              statusCounts.complete++;
+            }
+            if(node.status.includes('unsuccessful')) {
+              statusCounts.unsuccessful++;
+            }
+            if(node.status.includes('withdrawn')) {
+              statusCounts.withdrawn++;
+            }
+            if(node.status.includes('planned')) {
+              statusCounts.planned++;
+            }
+          }
+        });
+
+        buyerData.nodes.forEach((node: any) => {
+          if (node.tag) {
+            if (node.tag.includes('contract')) {
+              buyerCounts.contracts++;
+            }
+            if (node.tag.includes('tender')) {
+              buyerCounts.tenders++;
+            }
+            if (node.tag.includes('award')) {
+              buyerCounts.awards++;
+            }
+          }
+          if (node.value !== undefined && node.value !== null) {
+            buyerCounts.value += node.value.amount;
+          }
+          if(node.status) {
+            if(node.status.includes('active')) {
+              statusCounts.active++;
+            }
+            if(node.status.includes('cancelled')) {
+              statusCounts.cancelled++;
+            }
+            if(node.status.includes('complete')) {
+              statusCounts.complete++;
+            }
+            if(node.status.includes('unsuccessful')) {
+              statusCounts.unsuccessful++;
+            }
+            if(node.status.includes('withdrawn')) {
+              statusCounts.withdrawn++;
+            }
+            if(node.status.includes('planned')) {
+              statusCounts.planned++;
+            }
+          }
+        });
+
+        setBuyerCounts(buyerCounts);
+        setSupplierCounts(supplierCounts);
+        setStatusCounts(statusCounts);
+
+        setMergedGraphData(mergedData);
+        setIsLoading(false);
+        }
+        catch(error)
+        {
+          //
+        }
+      };
+      fetchData();
+  },[apiPath]);
 
   return (
     <>
@@ -258,9 +256,9 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
         {isLoading ? <LoadingSpinner /> : null}
         {/* The Search component */}
         <Search apiPath={apiPath} setApiPath={setApiPath}/>
-        <button className={styles.tedectveLogo}>
+        <div className={styles.tedectveLogo}>
               <IconSVG />
-        </button>
+        </div>
       </main>
     </>
   )

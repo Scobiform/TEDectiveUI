@@ -18,9 +18,6 @@ const Search = ({ apiPath, setApiPath }: SearchProps) => {
   // Loading state
   const [loading, setLoading] = useState(false);
 
-  // API URL
-  const apiURL = process.env.NEXT_PUBLIC_API_URL;
-
   // Ref to store the search timeout
   const searchTimeout = useRef<NodeJS.Timeout | null>(null);
 
@@ -52,7 +49,7 @@ const Search = ({ apiPath, setApiPath }: SearchProps) => {
     setLoading(true);
 
     try {
-      const response = await fetch(apiURL + 'entities/organization/search/' + query);
+      const response = await fetch('/api/search/?q=' + query);
       const data: SearchResult[] = await response.json();
       setSearchResults(data);
     } catch (error) {

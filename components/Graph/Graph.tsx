@@ -216,6 +216,15 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     4: visuals.iconWithdrawn + " Withdrawn" || 'Withdrawn',
     5: visuals.iconPlanned + " Planned" || 'Planned',
   };
+
+  const icons = [
+    visuals.iconActive,
+    visuals.iconCancelled,
+    visuals.iconComplete,
+    visuals.iconUnsuccessful,
+    visuals.iconWithdrawn,
+    visuals.iconPlanned,
+  ];
   
   // Return the ForceGraph2D
   return (
@@ -405,7 +414,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
             </button>
         </div>
       </div>
-      <NodePanel previewNode={previewNode} isOpen={isOpen} setOpen={setOpen} apiPath={apiPath} setApiPath={setApiPath}/>
+      <NodePanel previewNode={previewNode} isOpen={isOpen} setOpen={setOpen} apiPath={apiPath} setApiPath={setApiPath} iconMappings={icons} />
       <GUI physics={physics} setPhysics={setPhysics} visuals={visuals} setVisuals={setVisuals}/>
       {/* Conditionally render the chart based on chartVisible state */}
       {chartVisible && (
