@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styles from './cache.module.css';
 
 function CachedObjects() {
   const [cachedData, setCachedData] = useState([]);
@@ -22,12 +23,14 @@ function CachedObjects() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.cachedObjects}>
       <h2>Cached Objects</h2>
       <ul>
         {cachedData.map((data, index) => (
           <li key={index}>
-            <pre>{JSON.stringify(data, null, 2)}</pre>
+            <p>{JSON.stringify(data, null, 2)}</p>
+
+            (/* Show display)
           </li>
         ))}
       </ul>
