@@ -2,37 +2,37 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs/promises';
 import path from 'path';
 
-const cacheDirectories: string[] = [
-  './public/cache/geocode',
-  './public/cache/search',
-  './public/cache/graph',
-];
+const cacheDirectories: { [key: string]: string } = {
+  geocode: './public/cache/geocode',
+  search: './public/cache/search',
+  graph: './public/cache/graph',
+};
 
-interface CachedData {
-  type: string;
-  [key: string]: any;
-}
+type CachedDataType = {
+  type: keyof typeof cacheDirectories; // Use the keys of cacheDirectories as types
+  filename: string; // Add a filename property
+};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const cachedData: CachedData[] = [];
+  const cachedFiles: CachedDataType[] = [];
 
-  for (const cacheDirectory of cacheDirectories) {
+  for (const type of Object.keys(cacheDirectories)) {
+    const cacheDirectory = cacheDirectories[type];
+
     try {
       const files = await fs.readdir(cacheDirectory);
 
       for (const file of files) {
         const filePath = path.join(cacheDirectory, file);
-        const cachedContent = await fs.readFile(filePath, 'utf8');
-        const parsedData = JSON.parse(cachedContent);
+        const filename = path.basename(file); // Get the filename
 
-        // Add the 'type' field to each cached object based on the cacheDirectory
-        const type = cacheDirectory.split('/').pop(); // Get the last segment as 'type'
-        cachedData.push({ type, ...parsedData });
+        // Add the 'type' and 'filename' fields to each cached file object
+        cachedFiles.push({ type, filename });
       }
     } catch (error) {
       console.error('Error reading cached files:', error);
     }
   }
 
-  res.status(200).json(cachedData);
+  res.status(200).json(cachedFiles);
 }

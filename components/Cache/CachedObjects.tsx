@@ -58,7 +58,6 @@ function CachedObjects() {
 
   return (
     <div className={styles.cachedObjects}>
-      <h2>Cached Objects</h2>
       <h3>Search Cache</h3>
       <ul>
         {searchCache.map((data, index) => (
