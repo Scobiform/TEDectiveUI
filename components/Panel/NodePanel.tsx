@@ -52,7 +52,7 @@ const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath, iconMappi
                   {previewNode.name !== undefined && (
                     <button onClick={() => handleClick(previewNode.id+'')} aria-label="Load organization graph">Load organization graph</button>
                   )}
-                  {objectString}
+                  {/*objectString*/}
                 </div>
               </div>
             )
@@ -125,15 +125,16 @@ function renderContentBasedOnNodeType(previewNode: any, iconMappings: any) {
       switch (previewNode.status) {
         case 'active':
           return <div>
-                    <h2>{iconMappings[0]} {previewNode.label}</h2>
-                    {previewNode.submissionMethodDetails !== undefined && (
+                    {previewNode.submissionMethodDetails !== undefined ? (
                       <>
+                        <h2>{iconMappings[0]} {previewNode.label}</h2>
                         <button aria-label="Go to submission details" onClick={() => window.open(previewNode.submissionMethodDetails, '_blank', 'noreferrer')}>
                           Go to submission details
                         </button>
                       </>
+                    ) : (
+                      <h2>{iconMappings[0]} {previewNode.label}</h2>
                     )}
-
                   </div>;
         case 'cancelled':
           return <div>{iconMappings[1]} {previewNode.label}</div>;
