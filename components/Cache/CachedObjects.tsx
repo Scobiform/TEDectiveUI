@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './cache.module.css';
 
 interface CachedObject {
-  name: ReactNode;
-  type: string; // Add 'type' field to CachedObject
-  place_id: undefined;
-  buyerData: undefined;
-  data: any;
+  type: string;
 }
 
 function CachedObjects() {
