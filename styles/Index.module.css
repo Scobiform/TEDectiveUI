@@ -81,7 +81,6 @@
 }
 
 .tedectveLogo{
-	cursor: pointer;
   color: var(--secondary);
   border: none;
   display: flex;

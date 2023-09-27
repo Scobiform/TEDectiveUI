@@ -27,9 +27,9 @@ type GraphData = {
   links: any[];
 };
 
-const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisuals, setVisuals, previewNode, 
-              setPreviewNode, isOpen, setOpen 
-            }: HomeProps) => {
+const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisuals, setVisuals, 
+    previewNode, setPreviewNode, isOpen, setOpen 
+}: HomeProps) => {
 
   // Initial graph id
   const initialGraphId = process.env.NEXT_PUBLIC_INITIAL_GPAPH_ID;

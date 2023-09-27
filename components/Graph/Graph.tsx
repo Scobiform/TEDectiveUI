@@ -217,6 +217,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     5: visuals.iconPlanned + " Planned" || 'Planned',
   };
 
+  // Icons
   const icons = [
     visuals.iconActive,
     visuals.iconCancelled,
@@ -224,6 +225,12 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     visuals.iconUnsuccessful,
     visuals.iconWithdrawn,
     visuals.iconPlanned,
+    visuals.iconTender,
+    visuals.iconPlanning,
+    visuals.iconAward,
+    visuals.iconContract,
+    visuals.iconOrganization,
+    visuals.iconOrganizationSupplier
   ];
   
   // Return the ForceGraph2D
@@ -441,7 +448,6 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
             </div>
           </>
         )}
-
         {/* Conditionally render the NUTS map based on nutsVisible state */}
         {nutsVisible &&
           <NutsMap data={mergedGraphData.nodes} apiPath={apiPath} setApiPath={setApiPath}/>

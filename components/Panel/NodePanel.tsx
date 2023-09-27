@@ -52,7 +52,7 @@ const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath, iconMappi
                   {previewNode.name !== undefined && (
                     <button onClick={() => handleClick(previewNode.id+'')} aria-label="Load organization graph">Load organization graph</button>
                   )}
-                  {/*objectString*/}
+                  {objectString}
                 </div>
               </div>
             )
@@ -75,7 +75,7 @@ function renderContentBasedOnNodeType(previewNode: any, iconMappings: any) {
     // Fetch award
     if(previewNode.awardID !== undefined){
       return <div> {/* FETCH AWARD */}
-                <h2>💰 {previewNode.label}</h2>
+                <h2>{iconMappings[8]} {previewNode.label}</h2>
                 <p>{previewNode.value.amount.toLocaleString()} {previewNode.value.currency}</p>
             </div>;
     }
@@ -83,7 +83,7 @@ function renderContentBasedOnNodeType(previewNode: any, iconMappings: any) {
     // Fetch contract
     if(previewNode.tag !== undefined && previewNode.tag[1] === 'contract') {
       return <div> {/* FETCH CONTRACT */}
-                <h2>📜 {previewNode.label}</h2>
+                <h2>{iconMappings[9]} {previewNode.label}</h2>
             </div>;
     }
 
@@ -93,11 +93,13 @@ function renderContentBasedOnNodeType(previewNode: any, iconMappings: any) {
         case 'tender':
             return <div> 
                       {/* FETCH TENDER*/}
+                      <h2>{iconMappings[6]} {previewNode.label}</h2>
                   </div>;
             break;
         case 'planning':
             return <div> 
                       {/* FETCH PLANNING*/}
+                      <h2>{iconMappings[7]} {previewNode.label}</h2>
                   </div>;
             break;
       }
@@ -106,7 +108,7 @@ function renderContentBasedOnNodeType(previewNode: any, iconMappings: any) {
     // Fetch organization
     if(previewNode.name !== undefined) {
       return <div> {/* FETCH ORGANIZATION*/}
-                <h2>🏢 {previewNode.name}</h2>
+                <h2>{iconMappings[10]} {previewNode.name}</h2>
                 <p>ID: {previewNode.id}</p>
                 <p>Legal Name: {previewNode.identifier.legalName}</p>
                 <p>Country Code: {previewNode.address.countryCode}</p>
@@ -124,6 +126,14 @@ function renderContentBasedOnNodeType(previewNode: any, iconMappings: any) {
         case 'active':
           return <div>
                     <h2>{iconMappings[0]} {previewNode.label}</h2>
+                    {previewNode.submissionMethodDetails !== undefined && (
+                      <>
+                        <button aria-label="Go to submission details" onClick={() => window.open(previewNode.submissionMethodDetails, '_blank', 'noreferrer')}>
+                          Go to submission details
+                        </button>
+                      </>
+                    )}
+
                   </div>;
         case 'cancelled':
           return <div>{iconMappings[1]} {previewNode.label}</div>;
