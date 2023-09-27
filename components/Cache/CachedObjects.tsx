@@ -1,4 +1,3 @@
-// Your client-side React component
 import React, { useState, useEffect } from 'react';
 
 function CachedObjects() {
