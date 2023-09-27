@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './cache.module.css';
 
 interface CachedObject {
+  filename: ReactNode;
   type: string;
 }
 
@@ -62,7 +63,7 @@ function CachedObjects() {
       <ul>
         {searchCache.map((data, index) => (
           <li key={index}>
-            <p>{JSON.stringify(data, null, 2)}</p>
+            <p>{data.filename.replace(".json", "")}</p>
           </li>
         ))}
       </ul>
@@ -70,7 +71,7 @@ function CachedObjects() {
       <ul>
         {graphCache.map((data, index) => (
           <li key={index}>
-            <p>{JSON.stringify(data, null, 2)}</p>
+            <p>{data.filename.replace(".json", "")}</p>
           </li>
         ))}
       </ul>
@@ -79,7 +80,7 @@ function CachedObjects() {
       <ul>
         {geocodeCache.map((data, index) => (
           <li key={index}>
-            <p>{JSON.stringify(data, null, 2)}</p>
+            <p>{data.filename.replace(".json", "")}</p>
           </li>
         ))}
       </ul>
