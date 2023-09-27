@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './cache.module.css';
 
 interface CachedObject {
-  filename: ReactNode;
+  filename: string;
   type: string;
 }
 
