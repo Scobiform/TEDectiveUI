@@ -1,12 +1,11 @@
 .cachedObjects {
   display: flex;
   flex-direction: column;
-  height: 70vh;
+  height: var(--windowHeight);
   margin: 0 auto;
   background: var(--tertiary);
   color: var(--primary);
   overflow-y: auto;
-  bottom: 2.8rem;
   overflow-x: hidden;
   padding: 0.42rem;
   min-width: 175px;
@@ -28,4 +27,26 @@
   background: var(--tedectiveBlue);
   padding: 0.42rem;
   font-size: 0.7em;
+  cursor: pointer;
+}
+
+/* In your CSS file */
+.cachedObjects h3.accordion-header {
+  cursor: pointer;
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin: 0;
+}
+
+.cachedObjects h3.accordion-header:hover {
+  background-color: #e0e0e0;
+}
+
+/* In your CSS file */
+.cachedObjects ul.accordion-content {
+  display: none;
+}
+
+.cachedObjects ul.accordion-content.open {
+  display: block;
 }

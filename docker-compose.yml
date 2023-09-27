@@ -13,3 +13,11 @@ services:
       proxy.host: "app.tedective.org"
       proxy.port: "23484"
       proxy.host_alias: "www.app.tedective.org,app.tedective.eu,www.app.tedective.eu"
+    volumes:
+      - geocode_volume:/app/public/cache/geocode
+      - search_volume:/app/public/cache/search
+      - graph_volume:/app/public/cache/graph
+volumes:
+  geocode_volume:
+  search_volume:
+  graph_volume:
