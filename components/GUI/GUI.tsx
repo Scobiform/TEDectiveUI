@@ -5,6 +5,7 @@ import React from "react";
 import { Leva, useControls, useCreateStore, folder, LevaPanel, monitor, button } from "leva";
 /* Styles */
 import styles from './gui.module.css'
+import CachedObjects from "../Cache/CachedObjects";
 
 export interface GUIProps {
     physics: typeof initialPhysics
@@ -15,7 +16,16 @@ export interface GUIProps {
 
 const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
 
+    // State for window size
     const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+
+    // State to toggle CachedObjects component
+    const [showCachedObjects, setShowCachedObjects] = useState(false); // State to toggle CachedObjects component
+
+    // Function to toggle the CachedObjects component
+    const toggleCachedObjects = () => {
+        setShowCachedObjects(!showCachedObjects);
+    };
     
     // Callback to set physics
     const setPhysicsCallback = useCallback((val: any) => setPhysics(val), [setPhysics])
@@ -74,9 +84,10 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
             iconOrganization: { value: visuals.iconOrganization, onChange: (v) => setVisualsCallback({ ...visuals, iconOrganization: v }) },
             iconOrganizationSupplier: { value: visuals.iconOrganizationSupplier, onChange: (v) => setVisualsCallback({ ...visuals, iconOrganizationSupplier: v }) },
         }),
+        CachedObjects: button((get) => toggleCachedObjects()),
         },
         { collapsed: true},
-        [visuals, visualsStore]
+        [visuals, visualsStore, showCachedObjects]
     );
 
     // **************************************************************************** //
@@ -260,6 +271,8 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
                 />
                 <LevaPanel store={visualsStore} fill={true} titleBar={true} />
             </div>
+            {/* Render the CachedObjects component if showCachedObjects is true */}
+            {showCachedObjects && <CachedObjects />}
         </>
     )
 }
