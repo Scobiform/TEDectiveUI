@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import fs from 'fs/promises'; // Import the promises-based file system module
-import path from 'path'; // Import the path module
+import fs from 'fs/promises';
+import path from 'path';
 
 const cacheDirectories = [
-  './public/cache/geocode', // Change this to the path of your geocode cache
-  './public/cache/search',  // Change this to the path of your search cache
-  './public/cache/graph',   // Change this to the path of your graph cache
+  './public/cache/geocode',
+  './public/cache/search',
+  './public/cache/graph',
 ];
 
 interface CachedData {
