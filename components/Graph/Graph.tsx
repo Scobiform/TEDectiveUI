@@ -216,7 +216,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     4: visuals.iconWithdrawn + " Withdrawn" || 'Withdrawn',
     5: visuals.iconPlanned + " Planned" || 'Planned',
   };
-  
+
   // Return the ForceGraph2D
   return (
     <>
@@ -386,26 +386,26 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
       <div className={styles.interactionBar}>
           <div className={styles.actionButtons}>
             {/* NUTS component toggle */}
-            <button onClick={handleToggleNuts} tabIndex={0} aria-label='Show organizations on openstreetmap'>
+            <button onClick={handleToggleNuts} tabIndex={0} aria-label='Show organizations on openstreetmap (M)' accessKey="M">
               {nutsVisible ? '⬅️' : '📍'}
             </button>
             {/* Chart component toggle */}
-            <button onClick={handleToggleChart} tabIndex={0} aria-label='Show organization details and statistics'>
+            <button onClick={handleToggleChart} tabIndex={0} aria-label='Show organization details and statistics (C)' accessKey="C">
               📊
             </button>
             <Legend visuals={visuals} setVisuals={setVisuals} showLegend={showLegend} setShowLegend={setShowLegend} />
           </div>
           <div className={styles.zoomButtons}>
             <ThemeSwitch />
-            <button onClick={handleZoomIn}>
+            <button onClick={handleZoomIn} aria-label="Zoom in (+)" accessKey="+">
               ➕
               </button>
-            <button onClick={handleZoomOut}>
+            <button onClick={handleZoomOut} aria-label="Zoom out (-)" accessKey="-">
               ➖
             </button>
         </div>
       </div>
-      <NodePanel previewNode={previewNode} isOpen={isOpen} setOpen={setOpen} apiPath={apiPath} setApiPath={setApiPath}/>
+      <NodePanel previewNode={previewNode} isOpen={isOpen} setOpen={setOpen} apiPath={apiPath} setApiPath={setApiPath} visuals={visuals} setVisuals={setVisuals}/>
       <GUI physics={physics} setPhysics={setPhysics} visuals={visuals} setVisuals={setVisuals}/>
       {/* Conditionally render the chart based on chartVisible state */}
       {chartVisible && (
@@ -432,7 +432,6 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
             </div>
           </>
         )}
-
         {/* Conditionally render the NUTS map based on nutsVisible state */}
         {nutsVisible &&
           <NutsMap data={mergedGraphData.nodes} apiPath={apiPath} setApiPath={setApiPath}/>

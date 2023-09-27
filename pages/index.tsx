@@ -27,25 +27,18 @@ type GraphData = {
   links: any[];
 };
 
-const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisuals, setVisuals, previewNode, 
-              setPreviewNode, isOpen, setOpen 
-            }: HomeProps) => {
-
-  // API URL
-  const apiURL = process.env.NEXT_PUBLIC_API_URL;
+const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisuals, setVisuals, 
+    previewNode, setPreviewNode, isOpen, setOpen 
+}: HomeProps) => {
 
   // Initial graph id
   const initialGraphId = process.env.NEXT_PUBLIC_INITIAL_GPAPH_ID;
-
-  // Graph paths
-  const buyerGraphPath = apiURL+'graph/releases/buyer/';
-  const supplierGraphPath = apiURL+'graph/releases/supplier/';
 
   // API path state
   [apiPath, setApiPath] = useState(initialGraphId+'');
 
   // Loading state
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   // State for counts
   const [supplierCounts, setSupplierCounts] = useState({ contracts: 0, tenders: 0, awards: 0, value: 0 });
@@ -73,162 +66,105 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
 
     setIsLoading(true); // Set loading to true before the fetch call
 
-    try{
-      // Fetch buyer data and supplier data in parallel
-      Promise.all([
-        fetch(buyerGraphPath + apiPath).then((response) => response.json()),
-        fetch(supplierGraphPath + apiPath).then((response) => response.json()),
-      ])
-        .then(([buyerData, supplierData]) => {
-
-          // Add the 'type' property to buyer nodes
-          buyerData.nodes.forEach((node: { type: string }, index: number) => {
-            if (index === 1) {
-              node.type = 'baseOrganization';
-            } else {
-              node.type = 'buyer';
-            }
+    const fetchData = async () => {
+      try {
+        // Fetch graph data
+        const [graphResponse] = await Promise.all([fetch(`/api/graph/?q=${apiPath}`)]);
+        const graph = await graphResponse.json();
+        const { buyerData, supplierData } = graph;
+    
+        // Set node types
+        const setNodeTypes = (nodes: any[], type: string) => {
+          nodes.forEach((node, index) => {
+            node.type = index === 1 ? 'baseOrganization' : type;
           });
-
-          // Add the 'type' property to supplier nodes
-          supplierData.nodes.forEach((node: { type: string }, index: number) => {
-            if (index === 1) {
-              node.type = 'baseOrganization';
-            } else {
-              node.type = 'supplier';
-            }
-          });
-
-          // Extract dates from both buyer and supplier nodes
-          const allNodes = [...buyerData.nodes, ...supplierData.nodes];
-          const allDates = allNodes.map((node) => node.date).filter(Boolean); // Filter out null or undefined dates
-
-          // Find the first and last dates
-          const sortedDates = allDates.sort();
-          const first = sortedDates[0];
-          const last = sortedDates[sortedDates.length - 1];
-
-          // Set the firstDate and lastDate state variables
-          setFirstDate(first);
-          setLastDate(last);
-
-          // Merge the nodes and links arrays from both graphs
-          const mergedData = {
-            nodes: [...buyerData.nodes, ...supplierData.nodes],
-            links: [...buyerData.links, ...supplierData.links],
-          };
-
-          // Count contracts, tenders, and awards
-          const supplierCounts = {
-            contracts: 0,
-            tenders: 0,
-            awards: 0,
-            value: 0,
-          };
-
-          const buyerCounts = {
-            contracts: 0,
-            tenders: 0,
-            awards: 0,
-            value: 0,
-          };
-
-          const statusCounts = {
-            active: 0,
-            cancelled: 0,
-            complete: 0,
-            unsuccessful: 0,
-            withdrawn: 0,
-            planned: 0,
-          };
-
-          supplierData.nodes.forEach((node: any) => {
+        };
+    
+        // Add counts
+        const addTagCounts = (nodes: any[], counts: any) => {
+          nodes.forEach((node) => {
             if (node.tag) {
-              if (node.tag.includes('contract')) {
-                supplierCounts.contracts++;
-              }
-              if (node.tag.includes('tender')) {
-                supplierCounts.tenders++;
-              }
-              if (node.tag.includes('award')) {
-                supplierCounts.awards++;
-              }
-            }
-            if (node.value !== undefined && node.value !== null) {
-              supplierCounts.value += node.value.amount;
-            }
-            if(node.status) {
-              if(node.status.includes('active')) {
-                statusCounts.active++;
-              }
-              if(node.status.includes('cancelled')) {
-                statusCounts.cancelled++;
-              }
-              if(node.status.includes('complete')) {
-                statusCounts.complete++;
-              }
-              if(node.status.includes('unsuccessful')) {
-                statusCounts.unsuccessful++;
-              }
-              if(node.status.includes('withdrawn')) {
-                statusCounts.withdrawn++;
-              }
-              if(node.status.includes('planned')) {
-                statusCounts.planned++;
-              }
+              if (node.tag.includes('contract')) counts.contracts++;
+              if (node.tag.includes('tender')) counts.tenders++;
+              if (node.tag.includes('award')) counts.awards++;
             }
           });
-
-          buyerData.nodes.forEach((node: any) => {
-            if (node.tag) {
-              if (node.tag.includes('contract')) {
-                buyerCounts.contracts++;
-              }
-              if (node.tag.includes('tender')) {
-                buyerCounts.tenders++;
-              }
-              if (node.tag.includes('award')) {
-                buyerCounts.awards++;
-              }
-            }
+        };
+    
+        // Add value counts
+        const addValueCounts = (nodes: any[], counts: any) => {
+          nodes.forEach((node) => {
             if (node.value !== undefined && node.value !== null) {
-              buyerCounts.value += node.value.amount;
-            }
-            if(node.status) {
-              if(node.status.includes('active')) {
-                statusCounts.active++;
-              }
-              if(node.status.includes('cancelled')) {
-                statusCounts.cancelled++;
-              }
-              if(node.status.includes('complete')) {
-                statusCounts.complete++;
-              }
-              if(node.status.includes('unsuccessful')) {
-                statusCounts.unsuccessful++;
-              }
-              if(node.status.includes('withdrawn')) {
-                statusCounts.withdrawn++;
-              }
-              if(node.status.includes('planned')) {
-                statusCounts.planned++;
-              }
+              counts.value += node.value.amount;
             }
           });
-
-          setBuyerCounts(buyerCounts);
-          setSupplierCounts(supplierCounts);
-          setStatusCounts(statusCounts);
-
-          setMergedGraphData(mergedData);
-          setIsLoading(false);
-        });
+        };
+    
+        // Add status counts
+        const addStatusCounts = (nodes: any[], counts: any) => {
+          nodes.forEach((node) => {
+            if (node.status) {
+              if (node.status.includes('active')) counts.active++;
+              if (node.status.includes('cancelled')) counts.cancelled++;
+              if (node.status.includes('complete')) counts.complete++;
+              if (node.status.includes('unsuccessful')) counts.unsuccessful++;
+              if (node.status.includes('withdrawn')) counts.withdrawn++;
+              if (node.status.includes('planned')) counts.planned++;
+            }
+          });
+        };
+    
+        // Set node types
+        setNodeTypes(buyerData.nodes, 'buyer');
+        setNodeTypes(supplierData.nodes, 'supplier');
+    
+        // Merge the nodes and links
+        const allNodes = [...buyerData.nodes, ...supplierData.nodes];
+        // Get all the dates
+        const allDates = allNodes.map((node) => node.date).filter(Boolean);
+        // Sort the dates
+        const sortedDates = allDates.sort();
+        // Get the first and last dates
+        const first = sortedDates[0];
+        const last = sortedDates[sortedDates.length - 1];
+    
+        // Set the first and last dates
+        setFirstDate(first);
+        setLastDate(last);
+    
+        // Merge the data
+        const mergedData = {
+          nodes: [...buyerData.nodes, ...supplierData.nodes],
+          links: [...buyerData.links, ...supplierData.links],
+        };
+    
+        // Set the counts
+        const supplierCounts = { contracts: 0, tenders: 0, awards: 0, value: 0 };
+        const buyerCounts = { contracts: 0, tenders: 0, awards: 0, value: 0 };
+        const statusCounts = { active: 0, cancelled: 0, complete: 0, unsuccessful: 0, withdrawn: 0, planned: 0 };
+    
+        // Add counts
+        addTagCounts(supplierData.nodes, supplierCounts);
+        addValueCounts(supplierData.nodes, supplierCounts);
+        addStatusCounts(supplierData.nodes, statusCounts);
+    
+        addTagCounts(buyerData.nodes, buyerCounts);
+        addValueCounts(buyerData.nodes, buyerCounts);
+        addStatusCounts(buyerData.nodes, statusCounts);
+    
+        setBuyerCounts(buyerCounts);
+        setSupplierCounts(supplierCounts);
+        setStatusCounts(statusCounts);
+    
+        // Set the merged data
+        setMergedGraphData(mergedData);
+        setIsLoading(false);
+      } catch (error) {
+        // Handle the error
       }
-      catch(error)
-      {
-        //
-      }
-  },[apiPath, buyerGraphPath, supplierGraphPath]);
+    };
+    fetchData();
+  },[apiPath]);
 
   return (
     <>
@@ -258,9 +194,9 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
         {isLoading ? <LoadingSpinner /> : null}
         {/* The Search component */}
         <Search apiPath={apiPath} setApiPath={setApiPath}/>
-        <button className={styles.tedectveLogo}>
+        <div className={styles.tedectveLogo}>
               <IconSVG />
-        </button>
+        </div>
       </main>
     </>
   )
