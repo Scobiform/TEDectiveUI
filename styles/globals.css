@@ -113,6 +113,8 @@ main {
   z-index: 999;
   width: 100vw;
   height: 2.1rem;
+  background: var(--tertiary);
+  opacity: var(--opacity);
 }
 
 header svg  {
