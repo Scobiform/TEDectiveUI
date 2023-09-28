@@ -118,7 +118,6 @@ const NutsMap = ({ data, apiPath, setApiPath }: NutsMapProps) => {
         {markers}
         <div className={styles.interactionBar}>
         <div className={styles.zoomButtons}>
-          <ThemeSwitch />
           <ZoomInButton />
           <ZoomOutButton />
         </div>

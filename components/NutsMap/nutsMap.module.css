@@ -16,6 +16,7 @@
     bottom: 3.87rem;
     left: 0.14rem;
     z-index: 1002;
+    display: none;
 }
 
 .zoomButtons {

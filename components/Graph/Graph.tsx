@@ -384,25 +384,29 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
         />
       </div>
       <div className={styles.interactionBar}>
-          <div className={styles.actionButtons}>
-            {/* NUTS component toggle */}
-            <button onClick={handleToggleNuts} tabIndex={0} aria-label='Show organizations on openstreetmap (M)' accessKey="M">
-              {nutsVisible ? '⬅️' : '📍'}
-            </button>
-            {/* Chart component toggle */}
-            <button onClick={handleToggleChart} tabIndex={0} aria-label='Show organization details and statistics (C)' accessKey="C">
-              📊
-            </button>
-            <Legend visuals={visuals} setVisuals={setVisuals} showLegend={showLegend} setShowLegend={setShowLegend} />
-          </div>
-          <div className={styles.zoomButtons}>
-            <ThemeSwitch />
-            <button onClick={handleZoomIn} aria-label="Zoom in (+)" accessKey="+">
-              ➕
+        <div className={styles.actionButtons}>
+          {/* NUTS component toggle */}
+          <button onClick={handleToggleNuts} tabIndex={0} aria-label='Show organizations on openstreetmap (M)' accessKey="M">
+            {nutsVisible ? '⬅️' : '📍'}
+          </button>
+          {/* Chart component toggle */}
+          <button onClick={handleToggleChart} tabIndex={0} aria-label='Show organization details and statistics (C)' accessKey="C">
+            📊
+          </button>
+          <Legend visuals={visuals} setVisuals={setVisuals} showLegend={showLegend} setShowLegend={setShowLegend} />
+        </div>
+        <div className={styles.zoomButtons}>
+          <ThemeSwitch />
+          {!nutsVisible && (
+            <>
+              <button onClick={handleZoomIn} aria-label="Zoom in (+)" accessKey="+">
+                ➕
               </button>
-            <button onClick={handleZoomOut} aria-label="Zoom out (-)" accessKey="-">
-              ➖
-            </button>
+              <button onClick={handleZoomOut} aria-label="Zoom out (-)" accessKey="-">
+                ➖
+              </button>
+            </>
+          )}
         </div>
       </div>
       <NodePanel previewNode={previewNode} isOpen={isOpen} setOpen={setOpen} apiPath={apiPath} setApiPath={setApiPath} visuals={visuals} setVisuals={setVisuals}/>
