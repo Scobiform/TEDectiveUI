@@ -19,6 +19,7 @@
   --windowHeight: 100vh;
   --fontWeight: 420;
   --headerHeight: 2.1rem;
+  --menuPosition: 21vh;
 }
 
 :root[data-theme='dark'] {
@@ -256,6 +257,7 @@ display: none;
   margin-bottom: 0.42em;
   color: #000000;
 }
+
 
 /* NutsMap component */
 .leaflet-popup-content-wrapper, .leaflet-popup-tip{

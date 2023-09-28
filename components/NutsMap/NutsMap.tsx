@@ -90,9 +90,11 @@ const NutsMap = ({ data, apiPath, setApiPath }: NutsMapProps) => {
     };
 
     return (
-      <button onClick={handleZoomIn} className={styles.customZoomButton} aria-label="Zoom in (+)" accessKey='+'>
-        ➕
-      </button>
+      <>
+        <button onClick={handleZoomIn} className={styles.customZoomButton} aria-label="Zoom in (+)" accessKey='+'>
+          ➕
+        </button>
+      </>
     );
   };
 
@@ -117,10 +119,10 @@ const NutsMap = ({ data, apiPath, setApiPath }: NutsMapProps) => {
         />
         {markers}
         <div className={styles.interactionBar}>
-        <div className={styles.zoomButtons}>
-          <ZoomInButton />
-          <ZoomOutButton />
-        </div>
+          <div className={styles.zoomButtons}>
+            <ZoomInButton />
+            <ZoomOutButton />
+          </div>
         </div>
       </MapContainer>
     </div>

@@ -394,9 +394,9 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
             📊
           </button>
           <Legend visuals={visuals} setVisuals={setVisuals} showLegend={showLegend} setShowLegend={setShowLegend} />
+          <ThemeSwitch />
         </div>
         <div className={styles.zoomButtons}>
-          <ThemeSwitch />
           {!nutsVisible && (
             <>
               <button onClick={handleZoomIn} aria-label="Zoom in (+)" accessKey="+">

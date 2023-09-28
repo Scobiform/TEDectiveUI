@@ -13,15 +13,16 @@
 
 .interactionBar {
     position: absolute;
-    top: 25vh;
     left: 0.14rem;
     z-index: 1002;
-    margin-top: 8.42rem;
+    top: var(--menuPosition);
 }
 
 .zoomButtons {
-    display: grid;
-  }
+    position: absolute;
+    z-index: 1002;
+    top: 8.4rem;
+}
   
 .zoomButtons button {
     background-color: var(--tertiary);
