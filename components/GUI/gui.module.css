@@ -1,4 +1,3 @@
-/* TODO: Fully integrate Leva*/
 .levaWrapper{
     position: fixed;
     top: 0;
@@ -6,6 +5,8 @@
     z-index: 1001;
     width: 175px;
     opacity: var(--opacity);
+    height: var(--windowHeight);
+    overflow-y: scroll;
   }
   
   @media screen and (max-width: 480px) {
@@ -14,80 +15,3 @@
       display: none;
     }
   }
-  
-  /*
-  .leva-t-cWVTcN {
-      --leva-colors-elevation1: var(--tertiary);
-      --leva-colors-elevation2: none;
-      --leva-colors-elevation3: none;
-      --leva-colors-accent1: var(--secondary);
-      --leva-colors-accent2: var(--secondary);
-      --leva-colors-accent3: var(--primary);
-      --leva-colors-highlight1: var(--primary);
-      --leva-colors-highlight2: var(--primary);
-      --leva-colors-highlight3: var(--primary);
-      --leva-colors-vivid1: #ffcc00;
-      --leva-colors-folderWidgetColor: var(--leva-colors-highlight2);
-      --leva-colors-folderTextColor: var(--leva-colors-highlight3);
-      --leva-colors-toolTipBackground: var(--leva-colors-highlight3);
-      --leva-colors-toolTipText: var(--leva-colors-elevation2);
-      --leva-radii-xs: 1.4px;
-      --leva-radii-sm: 2.1px;
-      --leva-radii-lg: 4.2px;
-      --leva-space-xs: 3px;
-      --leva-space-sm: 4.2px;
-      --leva-space-md: 7px;
-      --leva-space-rowGap: 4.2px;
-      --leva-space-colGap: 4.2px;
-      --leva-fonts-mono: ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace;
-      --leva-fonts-sans: system-ui, sans-serif;
-      --leva-fontSizes-root: 9.1px;
-      --leva-fontSizes-toolTip: var(--leva-fontSizes-root);
-      --leva-sizes-rootWidth: 175px;
-      --leva-sizes-controlWidth: 77px;
-      --leva-sizes-numberInputMinWidth: 38px;
-      --leva-sizes-scrubberWidth: 7px;
-      --leva-sizes-scrubberHeight: 7px;
-      --leva-sizes-rowHeight: 21px;
-      --leva-sizes-folderTitleHeight: 20px;
-      --leva-sizes-checkboxSize: 14px;
-      --leva-sizes-joystickWidth: 70px;
-      --leva-sizes-joystickHeight: 70px;
-      --leva-sizes-colorPickerWidth: 70px;
-      --leva-sizes-colorPickerHeight: 70px;
-      --leva-sizes-imagePreviewWidth: var(--leva-sizes-controlWidth);
-      --leva-sizes-imagePreviewHeight: 100px;
-      --leva-sizes-monitorHeight: 70px;
-      --leva-sizes-titleBarHeight: 39px;
-      --leva-sizes-folderHeight: 14px;
-      --leva-shadows-level1: 0 0 9px 0 #00000088;
-      --leva-shadows-level2: 0 4px 14px #00000033;
-      --leva-borderWidths-root: 0px;
-      --leva-borderWidths-input: 1px;
-      --leva-borderWidths-focus: 1px;
-      --leva-borderWidths-hover: 1px;
-      --leva-borderWidths-active: 1px;
-      --leva-borderWidths-folder: 1px;
-      --leva-fontWeights-label: normal;
-      --leva-fontWeights-folder: normal;
-      --leva-fontWeights-button: normal;
-  }
-  
-
-
-  .leva-c-hBtFDW-lbFLlY-isRoot-false::after {
-    content: "";
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: var(--leva-borderWidths-folder);
-    height: 100%;
-    background-color: var(--leva-colors-folderWidgetColor);
-    opacity: 0.4;
-    transform: translateX(-50%);
-}
-
-
-  */
-  
-  
