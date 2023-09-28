@@ -131,7 +131,8 @@ header p {
   font-size: 1rem;
   left: 2.1rem;
   position: absolute;
-  top: 0.42rem;
+  padding: 0.42rem;
+  top: 0.28rem;
 }
 
 /* Scrollbars */

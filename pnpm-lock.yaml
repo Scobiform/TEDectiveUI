@@ -8,9 +8,6 @@ dependencies:
   '@react-hook/window-size':
     specifier: ^3.1.1
     version: 3.1.1(react@18.2.0)
-  '@types/bingmaps':
-    specifier: ^0.0.1
-    version: 0.0.1
   '@types/node':
     specifier: 20.4.4
     version: 20.4.4
@@ -2037,11 +2034,6 @@ packages:
 
   /@tweenjs/tween.js@21.0.0:
     resolution: {integrity: sha512-qVfOiFh0U8ZSkLgA6tf7kj2MciqRbSCWaJZRwftVO7UbtVDNsZAXpWXqvCDtIefvjC83UJB+vHTDOGm5ibXjEA==}
-    dev: false
-
-  /@types/bingmaps@0.0.1:
-    resolution: {integrity: sha512-jNcii5qVe+CLqhj/IOOaZbjCpWUHUj6YbD9UHttgyQSiL4NbgQ5ERQWjIwuvhz73FCQdF/JuGVTnLswgEIdkow==}
-    deprecated: deprecated
     dev: false
 
   /@types/d3-force@3.0.4:
