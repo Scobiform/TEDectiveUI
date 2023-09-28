@@ -296,6 +296,7 @@ display: none;
 .leva-c-kWgxhW {
   font-family: var(--font-sans) !important;
   overflow-y: scroll !important;
+  background: none !important;
 }
 
 .leva-c-hwBXYF-kbKHjH-mode-drag {
@@ -304,6 +305,13 @@ display: none;
 
 .leva-c-hwBXYF{
   height: var(--headerHeight) !important;
+  opacity: var(--opacity) !important;
+}
+
+.leva-c-PJLV{
+  background: var(--tertiary);
+  color: var(--primary);
+  border-radius: 0 !important;
   opacity: var(--opacity) !important;
 }
 
