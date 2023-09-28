@@ -74,13 +74,11 @@
 .tedectveLogo{
   color: var(--secondary);
   border: none;
-  display: flex;
-  position: fixed;
+  position: absolute;
   z-index: 1000;
-  top: 0;
-  left: 0;
-  padding: 0.42rem;
-  padding-top:0.21rem;
+  top: 0.21rem;
+  left: 0.42rem;
+  padding: 0.21rem 0.42rem 0.42rem;
 }
 
 .tedectveLogo:focus{
