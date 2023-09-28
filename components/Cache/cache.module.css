@@ -1,7 +1,7 @@
 .cachedObjects {
   display: flex;
   flex-direction: column;
-  height: var(--windowHeight);
+  max-height: var(--windowHeight);
   margin: 0 auto;
   background: var(--tertiary);
   color: var(--primary);
