@@ -127,12 +127,10 @@ header svg  {
 }
 
 header p {
-  color: var(--primary);
   font-size: 1rem;
-  left: 2.63rem;
+  left: 2.8rem;
   position: absolute;
-  padding: 0.42rem;
-  top: 0.14rem;
+  top: 0.63rem;
 }
 
 /* Scrollbars */
