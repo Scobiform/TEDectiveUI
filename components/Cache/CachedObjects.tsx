@@ -28,7 +28,7 @@ function CachedObjects() {
   useEffect(() => {
     async function fetchCachedData() {
       try {
-        const response = await fetch('/api/cachedObjects'); // Make a request to the API route
+        const response = await fetch('/api/cache'); // Make a request to the API route
         if (!response.ok) {
           throw new Error(`Failed to fetch data: ${response.status}`);
         }

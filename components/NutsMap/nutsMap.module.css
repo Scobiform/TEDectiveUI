@@ -13,9 +13,10 @@
 
 .interactionBar {
     position: absolute;
-    bottom: 3.87rem;
+    top: 25vh;
     left: 0.14rem;
     z-index: 1002;
+    margin-top: 8.21rem;
 }
 
 .zoomButtons {
@@ -23,12 +24,13 @@
   }
   
 .zoomButtons button {
-background-color: transparent;
-border: none;
-color: var(--primary);
-cursor: pointer;
-font-size: 1.4rem;
-padding: 0.14rem;
+    background-color: var(--tertiary);
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    font-size: 1.4rem;
+    padding: 0.42rem;
+    opacity: var(--opacity);
 }
 
 .popup button{

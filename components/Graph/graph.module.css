@@ -19,8 +19,9 @@
 /* interactionBar */
 .interactionBar {
   position: absolute;
-  bottom: 1.4rem;
+  top: 25vh;
   left: 0.14rem;
+  z-index: 1002;
 }
 
 .zoomButtons {
@@ -28,28 +29,28 @@
 }
 
 .zoomButtons button {
-  background-color: transparent;
+  background-color: var(--tertiary);
   border: none;
   color: var(--primary);
   cursor: pointer;
   font-size: 1.4rem;
-  padding: 0.14rem;
+  padding: 0.42rem;
+  opacity: var(--opacity);
 }
 
 .actionButtons {
   display: grid;
   z-index: 1001;
-  position: absolute;
-  bottom: 6.3rem;
 }
 
 .actionButtons button {
-  background-color: transparent;
+  background-color: var(--tertiary);
   border: none;
   color: var(--primary);
   cursor: pointer;
   font-size: 1.4rem;
-  padding: 0.14rem;
+  padding: 0.42rem;
+  opacity: var(--opacity);
 }
 
 /* Chart stats */
