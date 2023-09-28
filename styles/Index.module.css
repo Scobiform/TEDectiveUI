@@ -77,8 +77,9 @@
   position: absolute;
   z-index: 1000;
   top: 0.21rem;
-  left: 0.42rem;
-  padding: 0.21rem 0.42rem 0.42rem;
+  left: 0.14rem;
+  padding: 0.42rem;
+  padding-top: 0;
 }
 
 .tedectveLogo:focus{
