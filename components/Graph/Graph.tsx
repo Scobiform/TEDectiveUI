@@ -396,18 +396,17 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           <Legend visuals={visuals} setVisuals={setVisuals} showLegend={showLegend} setShowLegend={setShowLegend} />
           <ThemeSwitch />
         </div>
-        <div className={styles.zoomButtons}>
+        
           {!nutsVisible && (
-            <>
+            <div className={styles.zoomButtons}>
               <button onClick={handleZoomIn} aria-label="Zoom in (+)" accessKey="+">
                 ➕
               </button>
               <button onClick={handleZoomOut} aria-label="Zoom out (-)" accessKey="-">
                 ➖
               </button>
-            </>
+            </div>
           )}
-        </div>
       </div>
       <NodePanel previewNode={previewNode} isOpen={isOpen} setOpen={setOpen} apiPath={apiPath} setApiPath={setApiPath} visuals={visuals} setVisuals={setVisuals}/>
       <GUI physics={physics} setPhysics={setPhysics} visuals={visuals} setVisuals={setVisuals}/>
