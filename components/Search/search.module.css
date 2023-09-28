@@ -13,14 +13,13 @@
 .search input[type=search]{
     width: 100%;
     outline: none;
-    background-color: var(--tertiary);
     color: var(--primary);
     text-align: center;
-    height: 2.42rem;
+    height: 2.1rem;
     font-weight: 420;
     border: 0;
-    padding-top: 0.42rem;
     font-family: 'Inter';
+    background: none;
 }
 
 .search input[type=search]:focus{
@@ -28,7 +27,6 @@
     width: 100%;
     color: var(--primary);
     outline: none;
-    background-color: var(--tertiary);
     color: var(--primary);
     border: 1px dashed var(--secondary);
 }
@@ -37,7 +35,6 @@
     border: 1px soild var(--primary);
     width: 100%;
     outline: none;
-    background-color: var(--tertiary);
     color: var(--primary);
 }
 

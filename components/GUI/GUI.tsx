@@ -117,35 +117,7 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
 
     document.documentElement.style.setProperty('--windowWidth', newWidth);
     document.documentElement.style.setProperty('--windowHeight', newHeight);
-
-    // TODO: Make use of css var variables for this region?
-    // leva-c-kWgxhW
-    const guiPanel1 = Array.from(
-        document.getElementsByClassName('leva-c-kWgxhW') as HTMLCollectionOf<HTMLElement>,
-    );
-    // leva-c-hwBXYF
-    const guiPanel2 = Array.from(
-        document.getElementsByClassName('leva-c-hwBXYF leva-c-hwBXYF-kbKHjH-mode-drag') as HTMLCollectionOf<HTMLElement>,
-    );
-
-    const guiTitleBar = Array.from(
-        document.getElementsByClassName('leva-c-hwBXYF') as HTMLCollectionOf<HTMLElement>,
-    );
-
-    guiPanel2.forEach(gui => {
-        gui.style.flexDirection = 'row-reverse';
-    });
-
-    guiTitleBar.forEach(gui => {
-        gui.style.opacity = 'var(--opacity)';
-    });
-
-    guiPanel1.forEach(gui => {
-        gui.style.fontFamily = 'var(--font-sans)';
-        gui.style.overflowY = 'scroll';
-        gui.style.maxHeight = newHeight;
-    });
-    
+ 
     // Set Opacity
     document.documentElement.style.setProperty('--opacity', visuals.opacity.toString());
     

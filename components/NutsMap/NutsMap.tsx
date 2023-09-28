@@ -19,7 +19,7 @@ const NutsMap = ({ data, apiPath, setApiPath }: NutsMapProps) => {
   const mapStyle = {
     width: '100%',
     height: '100%',
-    top: '2.8rem',
+    top: '2.1rem',
   };
 
   const handleClick = useCallback(

@@ -18,6 +18,7 @@
   --windowWidth: 100vw;
   --windowHeight: 100vh;
   --fontWeight: 420;
+  --headerHeight: 2.1rem;
 }
 
 :root[data-theme='dark'] {
@@ -111,7 +112,7 @@ main {
   top: 0;
   z-index: 999;
   width: 100vw;
-  height: 2.52rem;
+  height: 2.1rem;
   background-color: var(--tertiary);
   opacity: var(--opacity);
 }
@@ -127,10 +128,10 @@ header svg  {
 
 header p {
   color: var(--primary);
-  font-size: 1.21rem;
-  left: 2.42rem;
+  font-size: 1rem;
+  left: 2.1rem;
   position: absolute;
-  top: 0.56rem;
+  top: 0.42rem;
 }
 
 /* Scrollbars */
@@ -280,7 +281,7 @@ display: none;
 }
 
 .leva-c-ctBOWy-dpRfJK-active-true > svg {
-  fill: var(--secondary) !important;
+  fill: var(--primary) !important;
 }
 
 .leva-c-iLtnIm > svg {
@@ -288,7 +289,21 @@ display: none;
 }
 
 .leva-c-ctBOWy > svg {
-  fill: var(--secondary) !important;
+  fill: var(--primary) !important;
+}
+
+.leva-c-kWgxhW {
+  font-family: var(--font-sans) !important;
+  overflow-y: scroll !important;
+}
+
+.leva-c-hwBXYF-kbKHjH-mode-drag {
+  flex-direction: row-reverse !important;
+}
+
+.leva-c-hwBXYF{
+  height: var(--headerHeight) !important;
+  opacity: var(--opacity) !important;
 }
 
 /* Keyframes for flash animation */
