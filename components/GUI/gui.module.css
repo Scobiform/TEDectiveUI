@@ -5,7 +5,7 @@
     z-index: 1001;
     width: 175px;
     opacity: var(--opacity);
-    height: var(--windowHeight);
+    max-height: var(--windowHeight);
     overflow-y: auto;
     overflow-x: hidden;
   }
