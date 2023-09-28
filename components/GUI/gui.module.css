@@ -6,7 +6,7 @@
     width: 175px;
     opacity: var(--opacity);
     height: var(--windowHeight);
-    overflow-y: scroll;
+    overflow-y: auto;
   }
   
   @media screen and (max-width: 480px) {
