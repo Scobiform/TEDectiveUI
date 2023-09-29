@@ -5,8 +5,7 @@ const IconSVG = () => {
         <svg
         aria-hidden="true"
         focusable="false"
-        width="28px"
-        height="28px"
+        height="1.4rem"
         viewBox="0 0 3500 3500"
         fill="currentColor"
         version="1.1"
