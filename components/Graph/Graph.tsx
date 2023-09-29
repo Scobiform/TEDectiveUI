@@ -14,7 +14,7 @@ import styles from './graph.module.css';
 import { useWindowSize } from "@react-hook/window-size";
 import ThemeSwitch from "../Static/ThemeSwitch";
 import dynamic from "next/dynamic";
-import Legend from "../Static/Legend";
+import Legend from "../Panel/InfoPanel";
 import ChartJS from "../Chart/ChartJS";
 
 export interface GraphProps {

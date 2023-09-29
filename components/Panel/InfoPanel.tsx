@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 /* Config */
-import { initialPhysics, initialVisuals } from './../config';
+import { initialPhysics, initialVisuals } from '../config';
 /* Styles */
-import styles from './static.module.css';
+import styles from './infoPanel.module.css';
 
 export interface LegendProps {
   visuals?: typeof initialVisuals;
