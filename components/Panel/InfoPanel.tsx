@@ -4,17 +4,17 @@ import { initialPhysics, initialVisuals } from '../config';
 /* Styles */
 import styles from './infoPanel.module.css';
 
-export interface LegendProps {
+export interface InfoPanelProps {
   visuals?: typeof initialVisuals;
   setVisuals?: any;
-  showLegend?: boolean;
-  setShowLegend?: any;
+  showInfoPanel?: boolean;
+  setShowInfoPanel?: any;
 }
 
-const Legend = ({ visuals = initialVisuals, setVisuals, showLegend, setShowLegend }: LegendProps) => {
+const InfoPanel = ({ visuals = initialVisuals, setVisuals, showInfoPanel, setShowInfoPanel }: InfoPanelProps) => {
 
   // Define the icons, labels, and descriptions
-  const legendItems = [
+  const InfoPanelItems = [
     { icon: visuals!.iconAward, label: 'Award', description: 'Represents an award in the Open Contracting Data Standard (OCDS), typically associated with the process of awarding a contract to a supplier.'},
     { icon: visuals!.iconContract, label: 'Contract', description: 'Signifies a contract within OCDS, indicating a formal agreement between an organization (buyer) and a supplier for the provision of goods or services.'},
     { icon: visuals!.iconTender, label: 'Tender', description: 'Denotes a tender process, which is the stage where organizations solicit bids or proposals from potential suppliers for a contract.' },
@@ -29,23 +29,23 @@ const Legend = ({ visuals = initialVisuals, setVisuals, showLegend, setShowLegen
     { icon: visuals!.iconOrganizationSupplier, label: 'Supplier', description: 'Specifically refers to an organization that provides goods or services and participates in procurement processes as a potential contractor or supplier.' },
   ];
 
-  const toggleLegend = () => {
-    setShowLegend(!showLegend);
+  const toggleInfoPanel = () => {
+    setShowInfoPanel(!showInfoPanel);
   };
 
   return (
     <>
-      <button onClick={toggleLegend} tabIndex={0} aria-label='Show general information and legend (I)' accessKey='I'>
-        {showLegend ? 'ℹ️' : 'ℹ️'}
+      <button onClick={toggleInfoPanel} tabIndex={0} aria-label='Show general information and InfoPanel (I)' accessKey='I'>
+        {showInfoPanel ? 'ℹ️' : 'ℹ️'}
       </button>
-      {showLegend && (
-        <div className={styles.legend}>
+      {showInfoPanel && (
+        <div className={styles.InfoPanel}>
           <h2>The Open Contracting Data Standard (OCDS)</h2>
           <p>The Open Contracting Data Standard (OCDS) is a global initiative aimed at increasing transparency and accountability in public procurement processes. It provides a structured framework for governments and organizations to publish procurement data in a consistent and machine-readable format. By adopting OCDS, entities can improve access to information, promote fair competition, and empower citizens and businesses to engage more effectively in the public procurement ecosystem.</p>
           <p>For more details on the OCDS schema, please visit the <a href="https://standard.open-contracting.org/latest/en/schema/release/" target="_blank" rel="noopener noreferrer">OCDS Schema Website</a>.</p>
-          <h3>Legend</h3>
+          <h3>InfoPanel</h3>
           <ul>
-            {legendItems.map((item, index) => (
+            {InfoPanelItems.map((item, index) => (
               <li key={index}>
                 {item.icon} {item.label} <br />
                 {item.description}
@@ -62,4 +62,4 @@ const Legend = ({ visuals = initialVisuals, setVisuals, showLegend, setShowLegen
   );
 };
 
-export default Legend;
+export default InfoPanel;

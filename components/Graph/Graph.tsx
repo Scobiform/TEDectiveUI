@@ -14,7 +14,7 @@ import styles from './graph.module.css';
 import { useWindowSize } from "@react-hook/window-size";
 import ThemeSwitch from "../Static/ThemeSwitch";
 import dynamic from "next/dynamic";
-import Legend from "../Panel/InfoPanel";
+import InfoPanel from "../Panel/InfoPanel";
 import ChartJS from "../Chart/ChartJS";
 
 export interface GraphProps {
@@ -35,15 +35,15 @@ export interface GraphProps {
   buyerCounts?: any;
   supplierCounts?: any;
   mergedGraphData?: any;
-  showLegend?: boolean;
-  setShowLegend?: any;
+  showInfoPanel?: boolean;
+  setShowInfoPanel?: any;
 }
 
 // Create a component that will render the graph
 const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   previewNode, setPreviewNode, isOpen, setOpen, apiPath, setApiPath, firstDate, lastDate, 
   statusCounts, buyerCounts, supplierCounts, mergedGraphData,
-  showLegend, setShowLegend }: GraphProps) => {
+  showInfoPanel, setShowInfoPanel }: GraphProps) => {
 
   // Create a reference to the graph
   const fgRef = useRef();
@@ -79,8 +79,8 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     setNutsVisible(!nutsVisible); // Toggle NUTS map visibility
   };
 
-  // State variable to store wheter legend is visible or not
-  [showLegend, setShowLegend] = useState(false);
+  // State variable to store wheter InfoPanel is visible or not
+  [showInfoPanel, setShowInfoPanel] = useState(false);
 
   // Callback function that will be called when a node is clicked
   const handleClick = useCallback(
@@ -372,7 +372,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           onBackgroundClick={() => {
             setOpen(false);
             setChartVisible(false);
-            setShowLegend(false);
+            setShowInfoPanel(false);
           }}
           onBackgroundRightClick={() => setOpen(false)}
           d3AlphaDecay={physics.alphaDecay}
@@ -393,7 +393,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           <button onClick={handleToggleChart} tabIndex={0} aria-label='Show organization details and statistics (C)' accessKey="C">
             📊
           </button>
-          <Legend visuals={visuals} setVisuals={setVisuals} showLegend={showLegend} setShowLegend={setShowLegend} />
+          <InfoPanel visuals={visuals} setVisuals={setVisuals} showInfoPanel={showInfoPanel} setShowInfoPanel={setShowInfoPanel} />
           <ThemeSwitch />
         </div>
         

@@ -129,8 +129,8 @@ header svg  {
 
 header p {
   color: var(--primary);
-  font-size: 1rem;
-  left: 2.8rem;
+  font-size: 1.042rem;
+  left: 2.21rem;
   position: absolute;
   top: 0.42rem;
 }
