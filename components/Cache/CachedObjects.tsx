@@ -81,20 +81,6 @@ function CachedObjects() {
   return (
     <div className={styles.cachedObjects}>
       <Accordion
-        title="Search Cache"
-        content={
-          <ul>
-            {searchCache.map((data, index) => (
-              <li key={index}>
-                <p>{data.filename.replace('.json', '')}</p>
-              </li>
-            ))}
-          </ul>
-        }
-        isOpen={openSection.includes('search')}
-        toggleAccordion={() => toggleAccordion('search')}
-      />
-      <Accordion
         title="Graph Cache"
         content={
           <ul>
