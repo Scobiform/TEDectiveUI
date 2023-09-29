@@ -100,4 +100,8 @@ export let initialVisuals = {
   iconPlanning: '📅',
   iconOrganization: '🏢',
   iconOrganizationSupplier: '🏢',
+  // InteractionBar
+  menuVisibility: true,
+  menuPositionX: 0.14,
+  headerHeight: 2.1,
 }

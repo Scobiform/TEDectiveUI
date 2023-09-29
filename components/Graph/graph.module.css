@@ -19,14 +19,15 @@
 /* interactionBar */
 .interactionBar {
   position: absolute;
-  left: 0.14rem;
   z-index: 1002;
-  top: var(--menuPosition);
+  left: var(--menuPositionX);
+  top: var(--headerHeight);
 }
 
 .zoomButtons {
   position: absolute;
   z-index: 1002;
+  top: var(--menuHeight);
 }
 
 .zoomButtons button {
