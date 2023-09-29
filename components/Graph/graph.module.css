@@ -27,7 +27,6 @@
 .zoomButtons {
   position: absolute;
   z-index: 1002;
-  top: 10.6rem;
 }
 
 .zoomButtons button {
