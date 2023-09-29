@@ -51,8 +51,14 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   // Create a ref to store whether the zoom has been set
   const zoomHasBeenSet = useRef(false);
 
+  // Create a reference to the interactionBar
+  const interactionBarRef = useRef<HTMLDivElement>(null);
+
   // Get the window size
   const [width, height] = useWindowSize();
+
+  // Use state for interActionBar height
+  const [menuHeight, setMenuHeight] = useState(0);
   
   // State variable to store the physics parameters
   [physics, setPhysics] = useState(initialPhysics);
@@ -140,6 +146,12 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   useEffect(() => {
     // Get the ForceGraph2D instance
     const fgInstance = fgRef.current as unknown as ForceGraphMethods;
+
+    if (interactionBarRef.current) {
+      // Access the clientHeight property and set it in the state
+      console.log(interactionBarRef.current.offsetHeight);
+      setMenuHeight(interactionBarRef.current.offsetHeight);
+    }
   
     if (!physics) {
       return; // Do nothing if physics is undefined
@@ -170,8 +182,9 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     fgInstance.d3Force('link', d3.forceLink().id((d: any) => d.id).distance(visuals.linkDistance));
     fgInstance.d3Force('x', d3.forceX(width / 2).strength(physics.xStrength));
     fgInstance.d3Force('y', d3.forceY(height / 2).strength(physics.yStrength));
-  }, [physics, fgRef, width, height, visuals]);
+  }, [physics, fgRef, width, height, visuals, setMenuHeight]);
 
+  document.documentElement.style.setProperty('--menuHeight', menuHeight-2 + 'px');
 
   // Define an array of background colors corresponding to your icons
   const backgroundColors = ['green', 'red', 'green', 'red', 'black', 'white'];
@@ -383,7 +396,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           height={height}
         />
       </div>
-      <div className={styles.interactionBar}>
+      <div className={styles.interactionBar} ref={interactionBarRef}>
         <div className={styles.actionButtons}>
           {/* NUTS component toggle */}
           <button onClick={handleToggleNuts} tabIndex={0} aria-label='Show organizations on openstreetmap (M)' accessKey="M">

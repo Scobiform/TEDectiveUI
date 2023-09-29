@@ -11,18 +11,13 @@
     color: var(--primary);
 }
 
-.interactionBar {
-    position: absolute;
-    left: 0.14rem;
-    z-index: 1002;
-    top: var(--menuPosition);
-}
-
 .zoomButtons {
     position: absolute;
     z-index: 1002;
-    top: 8.4rem;
-    /**/
+    display: flex;
+    flex-direction: column;
+    top: var(--menuHeight);
+    left: var(--menuPositionX);
 }
   
 .zoomButtons button {

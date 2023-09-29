@@ -118,11 +118,9 @@ const NutsMap = ({ data, apiPath, setApiPath }: NutsMapProps) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {markers}
-        <div className={styles.interactionBar}>
-          <div className={styles.zoomButtons}>
+        <div className={styles.zoomButtons}>
             <ZoomInButton />
             <ZoomOutButton />
-          </div>
         </div>
       </MapContainer>
     </div>

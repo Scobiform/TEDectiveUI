@@ -84,6 +84,10 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
             iconOrganization: { value: visuals.iconOrganization, onChange: (v) => setVisualsCallback({ ...visuals, iconOrganization: v }) },
             iconOrganizationSupplier: { value: visuals.iconOrganizationSupplier, onChange: (v) => setVisualsCallback({ ...visuals, iconOrganizationSupplier: v }) },
         }),
+        menuOptions: folder({
+        menuPositionX: { value: visuals.menuPositionX, onChange: (v) => setVisualsCallback({ ...visuals, menuPositionX: v }) },
+        headerHeight: { value: visuals.headerHeight, onChange: (v) => setVisualsCallback({ ...visuals, headerHeight: v }) },
+        }),
         },
         { collapsed: true},
         [visuals, visualsStore]
@@ -120,6 +124,12 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
  
     // Set Opacity
     document.documentElement.style.setProperty('--opacity', visuals.opacity.toString());
+
+    // Set Menu Position
+    document.documentElement.style.setProperty('--menuPositionX', visuals.menuPositionX + 'rem');
+
+    // Set Header Height
+    document.documentElement.style.setProperty('--headerHeight', visuals.headerHeight + 'rem');
     
     /* GUI Settings ******************************************************************/
     // GUI Theme Store
