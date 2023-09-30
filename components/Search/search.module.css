@@ -1,6 +1,6 @@
 .search{
     z-index: 1002;
-    position: fixed;
+    position: absolute;
     right: 175px;
     opacity: var(--opacity);
     margin: 0 auto;
@@ -8,9 +8,10 @@
     color: var(--primary);
     left: 8.7rem;
     min-width: 175px;
+    top: 0.21rem;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 640px) {
     .search {
       /**/
       bottom: 0;
@@ -20,6 +21,7 @@
       z-index: 1002;
       max-width: 100vw;
       background: var(--tertiary);
+      top: 91vh;
     }
     #SearchResults{
         margin-bottom: 7vh;
