@@ -35,10 +35,10 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
 
     // Physics GUI panel
     const physicsData = useControls('Physics', {
-        alphaDecay: { value: physics.alphaDecay, onChange: (v) => setPhysicsCallback({ ...physics, alphaDecay: v }) },
-        alphaMin: { value: physics.alphaMin, onChange: (v) => setPhysicsCallback({ ...physics, alphaMin: v }) },
-        alphaTarget: { value: physics.alphaTarget, onChange: (v) => setPhysicsCallback({ ...physics, alphaTarget: v }) },
-        velocityDecay: { value: physics.velocityDecay, onChange: (v) => setPhysicsCallback({ ...physics, velocityDecay: v }) },
+        alphaDecay: { value: physics.alphaDecay, min: 0, max: 1, onChange: (v) => setPhysicsCallback({ ...physics, alphaDecay: v }) },
+        alphaMin: { value: physics.alphaMin, min: 0, max: 1, onChange: (v) => setPhysicsCallback({ ...physics, alphaMin: v }) },
+        alphaTarget: { value: physics.alphaTarget, min: 0, max: 1, onChange: (v) => setPhysicsCallback({ ...physics, alphaTarget: v }) },
+        velocityDecay: { value: physics.velocityDecay, min: 0, max: 1, onChange: (v) => setPhysicsCallback({ ...physics, velocityDecay: v }) },
         enableGravity: { value: physics.enableGravity, onChange: (v) => setPhysicsCallback({ ...physics, enableGravity: v }) },
         enableCollision: { value: physics.enableCollision, onChange: (v) => setPhysicsCallback({ ...physics, enableCollision: v }) },
         enableCentering: { value: physics.enableCentering, onChange: (v) => setPhysicsCallback({ ...physics, enableCentering: v }) },
@@ -56,18 +56,18 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     const visualsStore = useCreateStore() ;
     const visualsData = useControls('Visuals', {
         nodeVisibility: { value: visuals.nodeVisibility, onChange: (v) => setVisualsCallback({ ...visuals, nodeVisibility: v }) },
-        nodeRelSize: { value: visuals.nodeRel, onChange: (v) => setVisualsCallback({ ...visuals, nodeRel: v }) },
-        awardSizeMultiplier: { value: visuals.awardNodeSizeMult, onChange: (v) => setVisualsCallback({ ...visuals, awardNodeSizeMult: v }) },
+        nodeRelSize: { value: visuals.nodeRel, min: 0, max: 70, onChange: (v) => setVisualsCallback({ ...visuals, nodeRel: v }) },
+        awardSizeMultiplier: { value: visuals.awardNodeSizeMult, min: 0, max: 70, onChange: (v) => setVisualsCallback({ ...visuals, awardNodeSizeMult: v }) },
         drawAmountValues: { value: visuals.drawAmountValues, onChange: (v) => setVisualsCallback({ ...visuals, drawAmountValues: v }) },
-        nodeDistanceMin: { value: visuals.nodeDistanceMin, onChange: (v) => setVisualsCallback({ ...visuals, nodeDistanceMin: v }) },
-        nodeDistanceMax: { value: visuals.nodeDistanceMax, onChange: (v) => setVisualsCallback({ ...visuals, nodeDistanceMax: v }) },
+        nodeDistanceMin: { value: visuals.nodeDistanceMin, min: 0, max: 420, onChange: (v) => setVisualsCallback({ ...visuals, nodeDistanceMin: v }) },
+        nodeDistanceMax: { value: visuals.nodeDistanceMax, min: 0, max: 420, onChange: (v) => setVisualsCallback({ ...visuals, nodeDistanceMax: v }) },
         linkVisibility: { value: visuals.linkVisibility, onChange: (v) => setVisualsCallback({ ...visuals, linkVisibility: v }) },
         linkColor: { value: visuals.linkColor, onChange: (v) => setVisualsCallback({ ...visuals, linkColor: v }) },
-        linkWitdh: { value: visuals.linkWidth, onChange: (v) => setVisualsCallback({ ...visuals, linkWidth: v }) },
-        linkDistance: { value: visuals.linkDistance, onChange: (v) => setVisualsCallback({ ...visuals, linkDistance: v }) },
-        linkCurvature: { value: visuals.linkCurvature, onChange: (v) => setVisualsCallback({ ...visuals, linkCurvature: v }) },
-        linkDirectionalParticles: { value: visuals.linkDirectionalParticles, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticles: v }) },
-        linkDirectionalParticleWidth: { value: visuals.linkDirectionalParticleWidth, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticleWidth: v }) },
+        linkWitdh: { value: visuals.linkWidth, min: 0, max: 70, onChange: (v) => setVisualsCallback({ ...visuals, linkWidth: v }) },
+        linkDistance: { value: visuals.linkDistance, min: 0, max: 70, onChange: (v) => setVisualsCallback({ ...visuals, linkDistance: v }) },
+        linkCurvature: { value: visuals.linkCurvature, min: 0, max: 70, onChange: (v) => setVisualsCallback({ ...visuals, linkCurvature: v }) },
+        linkDirectionalParticles: { value: visuals.linkDirectionalParticles, min: 0, max: 70, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticles: v }) },
+        linkDirectionalParticleWidth: { value: visuals.linkDirectionalParticleWidth, min: 0, max: 70, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticleWidth: v }) },
         // Icons 
         iconDefault: { value: visuals.iconDefault, onChange: (v) => setVisualsCallback({ ...visuals, iconDefault: v }) },
         iconAward: { value: visuals.iconAward, onChange: (v) => setVisualsCallback({ ...visuals, iconAward: v }) },
@@ -116,16 +116,17 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
         window.addEventListener('resize', handleSize);
     }, [])
 
+    // Set new window width and height
     document.documentElement.style.setProperty('--windowWidth', newWidth);
     document.documentElement.style.setProperty('--windowHeight', newHeight);
  
-    // Set Opacity
+    // Set opacity
     document.documentElement.style.setProperty('--opacity', visuals.opacity.toString());
 
-    // Set Menu Position
+    // Set menu position
     document.documentElement.style.setProperty('--menuPositionX', visuals.menuPositionX + 'rem');
 
-    // Set Header Height
+    // Set header height
     document.documentElement.style.setProperty('--headerHeight', visuals.headerHeight + 'rem');
     
     /* GUI Settings ******************************************************************/
@@ -181,7 +182,7 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     const fontSizes = useControls(
         {
         fontSizes: folder({
-            root: '9.1px',
+            root: '0.7em',
         }),
         },
         { store: fontSizesStore }
@@ -192,16 +193,16 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
         sizes: folder({
             rootWidth: '',
             controlWidth: '',
-            scrubberWidth: '7px',
-            scrubberHeight: '7px',
-            rowHeight: '1rem',
-            folderHeight: '14px',
-            checkboxSize: '14px',
+            scrubberWidth: '1.4rem',
+            scrubberHeight: '1.4rem',
+            rowHeight: '1.4rem',
+            folderHeight: '1.4rem',
+            checkboxSize: '1.4rem',
             joystickWidth: '70px',
             joystickHeight: '70px',
-            colorPickerWidth: '70px',
-            colorPickerHeight: '70px',
-            monitorHeight: '70px',
+            colorPickerWidth: '2.8rem',
+            colorPickerHeight: '2.8rem',
+            monitorHeight: '5.6rem',
         }),
         },
         { store: sizesStore }

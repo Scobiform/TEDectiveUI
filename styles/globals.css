@@ -349,6 +349,10 @@ display: none;
   background: var(--tertiary) !important;
 }
 
+.leva-c-dmsJDs > .leva-c-grzFYX:last-of-type {
+  padding-bottom: 0.42rem !important;
+}
+
 /* Keyframes for flash animation */
 @keyframes flash {
   0%, 100% {
