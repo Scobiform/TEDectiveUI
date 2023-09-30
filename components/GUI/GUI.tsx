@@ -200,9 +200,10 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
             checkboxSize: '1.4rem',
             joystickWidth: '70px',
             joystickHeight: '70px',
-            colorPickerWidth: '2.8rem',
-            colorPickerHeight: '2.8rem',
+            colorPickerWidth: '100%',
+            colorPickerHeight: '42%',
             monitorHeight: '5.6rem',
+            numberInputMinWidth: '4.2rem',
         }),
         },
         { store: sizesStore }
