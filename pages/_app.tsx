@@ -22,7 +22,7 @@ export default function TEDectiveUI({ Component, pageProps }: AppProps) {
         <meta charSet="utf-8" />
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1 shrink-to-fit=no, viewport-fit=cover"
+          content="width=device-width, initial-scale=1"
         />
         <meta name="description" content={appDescription} />
         <meta name="keywords" content={appKeywords} />
@@ -46,7 +46,7 @@ export default function TEDectiveUI({ Component, pageProps }: AppProps) {
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         <meta name="theme-color" content="#00A535" />
       </Head>
-      <Component {...pageProps} />
+        <Component {...pageProps} />
     </>
   )
 }
