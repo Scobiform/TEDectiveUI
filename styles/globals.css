@@ -294,6 +294,8 @@ display: none;
 
 .leva-c-ctBOWy > svg {
   fill: var(--primary) !important;
+  opacity: 0 !important;
+  height: 1.4rem !important;
 }
 
 .leva-c-kWgxhW {
@@ -302,8 +304,17 @@ display: none;
   background: none !important;
 }
 
+.leva-c-dosbYs {
+  background: var(--tertiary) !important;
+  color: var(--primary) !important;
+  border-radius: 0 !important;
+  opacity: var(--opacity) !important;
+  left: var(--menuPositionX) !important;
+}
+
 .leva-c-hwBXYF-kbKHjH-mode-drag {
   flex-direction: row-reverse !important;
+  cursor: none;
 }
 
 .leva-c-hwBXYF{
@@ -311,11 +322,31 @@ display: none;
   opacity: var(--opacity) !important;
 }
 
-.leva-c-PJLV{
-  background: var(--tertiary);
-  color: var(--primary);
+.leva-t-cWVTc {
+  font-size: 0.7em !important;
+  font-weight: var(--fontWeight) !important;
+  color: var(--primary) !important;
+  opacity: var(--opacity) !important;
+}
+
+.leva-c-fxiFTg-fbRMjr-toggled-true {
   border-radius: 0 !important;
   opacity: var(--opacity) !important;
+  width: var(--windowHWidth) !important;
+  background: var(--tertiary) !important;
+}
+
+.leva-c-kWgxhW-bSMcqW-fill-true {
+  overflow-x: hidden !important;
+}
+
+.leva-c-iLtnIm {
+  display: none !important;
+}
+
+.leva-c-dmsJDs-hXSjjU-isRoot-true > div {
+  padding-right: 0 !important;
+  background: var(--tertiary) !important;
 }
 
 /* Keyframes for flash animation */

@@ -19,8 +19,8 @@
 /* interactionBar */
 .interactionBar {
   position: absolute;
-  z-index: 1002;
-  left: var(--menuPositionX);
+  z-index: 1003;
+  left: 0.14rem;
   top: var(--headerHeight);
 }
 

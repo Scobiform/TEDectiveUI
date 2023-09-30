@@ -80,6 +80,7 @@
   left: 0.14rem;
   padding: 0.42rem;
   padding-top: 0.14rem;
+  pointer-events: none;
 }
 
 .tedectveLogo:focus{

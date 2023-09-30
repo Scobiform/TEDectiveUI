@@ -68,26 +68,23 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
         linkCurvature: { value: visuals.linkCurvature, onChange: (v) => setVisualsCallback({ ...visuals, linkCurvature: v }) },
         linkDirectionalParticles: { value: visuals.linkDirectionalParticles, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticles: v }) },
         linkDirectionalParticleWidth: { value: visuals.linkDirectionalParticleWidth, onChange: (v) => setVisualsCallback({ ...visuals, linkDirectionalParticleWidth: v }) },
-        // Folder for Icons
-        icons: folder({
-            iconDefault: { value: visuals.iconDefault, onChange: (v) => setVisualsCallback({ ...visuals, iconDefault: v }) },
-            iconAward: { value: visuals.iconAward, onChange: (v) => setVisualsCallback({ ...visuals, iconAward: v }) },
-            iconContract: { value: visuals.iconContract, onChange: (v) => setVisualsCallback({ ...visuals, iconContract: v }) },
-            iconActive: { value: visuals.iconActive, onChange: (v) => setVisualsCallback({ ...visuals, iconActive: v }) },
-            iconCancelled: { value: visuals.iconCancelled, onChange: (v) => setVisualsCallback({ ...visuals, iconCancelled: v }) },
-            iconUnsuccessful: { value: visuals.iconUnsuccessful, onChange: (v) => setVisualsCallback({ ...visuals, iconUnsuccessful: v }) },
-            iconComplete: { value: visuals.iconComplete, onChange: (v) => setVisualsCallback({ ...visuals, iconComplete: v }) },
-            iconWithdrawn: { value: visuals.iconWithdrawn, onChange: (v) => setVisualsCallback({ ...visuals, iconWithdrawn: v }) },
-            iconPlanned: { value: visuals.iconPlanned, onChange: (v) => setVisualsCallback({ ...visuals, iconPlanned: v }) },
-            iconTender: { value: visuals.iconTender, onChange: (v) => setVisualsCallback({ ...visuals, iconTender: v }) },
-            iconPlanning: { value: visuals.iconPlanning, onChange: (v) => setVisualsCallback({ ...visuals, iconPlanning: v }) },
-            iconOrganization: { value: visuals.iconOrganization, onChange: (v) => setVisualsCallback({ ...visuals, iconOrganization: v }) },
-            iconOrganizationSupplier: { value: visuals.iconOrganizationSupplier, onChange: (v) => setVisualsCallback({ ...visuals, iconOrganizationSupplier: v }) },
-        }),
-        menuOptions: folder({
+        // Icons 
+        iconDefault: { value: visuals.iconDefault, onChange: (v) => setVisualsCallback({ ...visuals, iconDefault: v }) },
+        iconAward: { value: visuals.iconAward, onChange: (v) => setVisualsCallback({ ...visuals, iconAward: v }) },
+        iconContract: { value: visuals.iconContract, onChange: (v) => setVisualsCallback({ ...visuals, iconContract: v }) },
+        iconActive: { value: visuals.iconActive, onChange: (v) => setVisualsCallback({ ...visuals, iconActive: v }) },
+        iconCancelled: { value: visuals.iconCancelled, onChange: (v) => setVisualsCallback({ ...visuals, iconCancelled: v }) },
+        iconUnsuccessful: { value: visuals.iconUnsuccessful, onChange: (v) => setVisualsCallback({ ...visuals, iconUnsuccessful: v }) },
+        iconComplete: { value: visuals.iconComplete, onChange: (v) => setVisualsCallback({ ...visuals, iconComplete: v }) },
+        iconWithdrawn: { value: visuals.iconWithdrawn, onChange: (v) => setVisualsCallback({ ...visuals, iconWithdrawn: v }) },
+        iconPlanned: { value: visuals.iconPlanned, onChange: (v) => setVisualsCallback({ ...visuals, iconPlanned: v }) },
+        iconTender: { value: visuals.iconTender, onChange: (v) => setVisualsCallback({ ...visuals, iconTender: v }) },
+        iconPlanning: { value: visuals.iconPlanning, onChange: (v) => setVisualsCallback({ ...visuals, iconPlanning: v }) },
+        iconOrganization: { value: visuals.iconOrganization, onChange: (v) => setVisualsCallback({ ...visuals, iconOrganization: v }) },
+        iconOrganizationSupplier: { value: visuals.iconOrganizationSupplier, onChange: (v) => setVisualsCallback({ ...visuals, iconOrganizationSupplier: v }) },
+        // Menu
         menuPositionX: { value: visuals.menuPositionX, onChange: (v) => setVisualsCallback({ ...visuals, menuPositionX: v }) },
         headerHeight: { value: visuals.headerHeight, onChange: (v) => setVisualsCallback({ ...visuals, headerHeight: v }) },
-        }),
         },
         { collapsed: true},
         [visuals, visualsStore]
@@ -172,10 +169,10 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     const space = useControls(
         {
         space: folder({
-            sm: '4.2px',
-            md: '7px',
-            rowGap: '4.2px',
-            colGap: '4.2px',
+            sm: '0',
+            md: '2.8rem',
+            rowGap: '0',
+            colGap: '0.42rem',
         }),
         },
         { store: spaceStore }
@@ -193,11 +190,11 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     const sizes = useControls(
         {
         sizes: folder({
-            rootWidth: '175px',
-            controlWidth: '77px',
+            rootWidth: '',
+            controlWidth: '',
             scrubberWidth: '7px',
             scrubberHeight: '7px',
-            rowHeight: '21px',
+            rowHeight: '1rem',
             folderHeight: '14px',
             checkboxSize: '14px',
             joystickWidth: '70px',
@@ -250,11 +247,12 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     return (
         <>
             <div className={styles.levaWrapper}>
+
                 <Leva
                 theme={theme}
                 fill={true}  // default = false,  true makes the pane fill the parent dom node it's rendered in
                 flat={true}// default = false,  true removes border radius and shadow
-                oneLineLabels={false} // default = false, alternative layout for labels, with labels and fields on separate rows
+                oneLineLabels={true} // default = false, alternative layout for labels, with labels and fields on separate rows
                 collapsed={true} // default = false, when true the GUI is collpased
                 hidden={false} // default = false, when true the GUI is hidden
                 titleBar={true} // default = true, when false the title bar is hidden
@@ -266,6 +264,9 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
                     <CachedObjects />
                     </>
                 }
+            </div>
+            <div className={styles.settingsIcon}>
+                ⚙️
             </div>
         </>
     )
