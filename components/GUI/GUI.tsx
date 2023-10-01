@@ -39,6 +39,7 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
         alphaMin: { value: physics.alphaMin, min: 0, max: 1, onChange: (v) => setPhysicsCallback({ ...physics, alphaMin: v }) },
         alphaTarget: { value: physics.alphaTarget, min: 0, max: 1, onChange: (v) => setPhysicsCallback({ ...physics, alphaTarget: v }) },
         velocityDecay: { value: physics.velocityDecay, min: 0, max: 1, onChange: (v) => setPhysicsCallback({ ...physics, velocityDecay: v }) },
+        chargeStrength: { value: physics.chargeStrength, min: -1000, max: 1000, onChange: (v) => setPhysicsCallback({ ...physics, chargeStrength: v }) },
         enableGravity: { value: physics.enableGravity, onChange: (v) => setPhysicsCallback({ ...physics, enableGravity: v }) },
         enableCollision: { value: physics.enableCollision, onChange: (v) => setPhysicsCallback({ ...physics, enableCollision: v }) },
         enableCentering: { value: physics.enableCentering, onChange: (v) => setPhysicsCallback({ ...physics, enableCentering: v }) },
