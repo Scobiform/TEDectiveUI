@@ -22,7 +22,7 @@ export default function TEDectiveUI({ Component, pageProps }: AppProps) {
         <meta charSet="utf-8" />
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1 shrink-to-fit=yes viewport-fit=cover"
+          content="width=device-width, initial-scale=1 shrink-to-fit=no"
         />
         <meta name="description" content={appDescription} />
         <meta name="keywords" content={appKeywords} />
