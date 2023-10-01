@@ -46,6 +46,10 @@
     word-wrap: break-word;
     max-height: 280px;
 	max-height: var(--windowHeight);
+	margin-bottom: var(--headerHeight);
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: var(--tedectiveBlue) var(--tertiary);
 }
 
 .nodePanelContent{
