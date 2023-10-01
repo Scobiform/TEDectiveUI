@@ -107,8 +107,8 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
         });
     };
 
-    let newWidth = windowSize.width * 0.91 + 'px';
-    let newHeight = windowSize.height  * 0.91 + 'px';
+    let newWidth = windowSize.width * 0.84 + 'px';
+    let newHeight = windowSize.height  * 0.84 + 'px';
 
     useLayoutEffect(() => {
         handleSize()
