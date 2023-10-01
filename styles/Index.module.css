@@ -67,7 +67,7 @@
   color: var(--secondary);
   border: none;
   position: absolute;
-  z-index: 1000;
+  z-index: 1004;
   top: 0.21rem;
   left: 0.14rem;
   padding: 0.42rem;

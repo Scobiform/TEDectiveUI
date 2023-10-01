@@ -74,6 +74,15 @@ html, body{
   background-color: var(--backgroundColor);
   width: 100vw;
   height: 100vh;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+@media (max-width: 767px) {
+  html, body {
+      overflow: hidden;
+  }
 }
 
 a {
@@ -107,15 +116,24 @@ main {
   min-height: 100vh;
 }
 
+/* Graoh component */
+.force-graph-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
  /* Header component*/
  header {
   position: absolute;
   top: 0;
-  z-index: 999;
-  width: 100vw;
+  z-index: 1004;
+  width: 100%;
   height: 2.1rem;
   background: var(--tertiary);
   opacity: var(--opacity);
+  pointer-events: none;
+  cursor: default;
 }
 
 header svg  {
@@ -311,7 +329,7 @@ display: none;
 }
 
 .leva-c-hwBXYF-kbKHjH-mode-drag {
-    cursor: none !important;
+    cursor: default !important;
 }
 
 .leva-c-hwBXYF{
