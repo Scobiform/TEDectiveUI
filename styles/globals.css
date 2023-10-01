@@ -74,6 +74,8 @@ html, body{
   background-color: var(--backgroundColor);
   width: 100vw;
   height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
   padding: 0;
   margin: 0;
   border: 0;
@@ -292,7 +294,7 @@ display: none;
 }
 
 .leva-c-hBtFDW-lbFLlY-isRoot-false{
-  padding: 0.07rem !important;
+  padding: 0 !important;
 }
 
 .leva-c-dmsJDs-hXSjjU-isRoot-true > .leva-c-PJLV:not(:first-of-type) {
