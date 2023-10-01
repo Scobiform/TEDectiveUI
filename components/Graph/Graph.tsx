@@ -182,7 +182,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     fgInstance.d3Force('link', d3.forceLink().id((d: any) => d.id).distance(visuals.linkDistance));
     fgInstance.d3Force('x', d3.forceX(width / 2).strength(physics.xStrength));
     fgInstance.d3Force('y', d3.forceY(height / 2).strength(physics.yStrength));
-  }, [physics, fgRef, width, height, visuals, setMenuHeight]);
+  }, [physics, fgRef, width, height, visuals, setMenuHeight, interactionBarRef]);
 
   document.documentElement.style.setProperty('--menuHeight', menuHeight-2 + 'px');
 
@@ -392,8 +392,8 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           d3AlphaMin={physics.alphaMin}
           d3VelocityDecay={physics.velocityDecay}
           cooldownTime={Infinity}
-          width={width}
           height={height}
+          width={width}
         />
       </div>
       <div className={styles.interactionBar} ref={interactionBarRef}>

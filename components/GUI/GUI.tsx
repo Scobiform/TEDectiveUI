@@ -118,6 +118,10 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     // Set new window width and height
     document.documentElement.style.setProperty('--windowWidth', newWidth);
     document.documentElement.style.setProperty('--windowHeight', newHeight);
+
+    // Set extra window width and height
+    document.documentElement.style.setProperty('--windowWidthExtra', windowSize.width + 'px');
+    document.documentElement.style.setProperty('--windowHeightExtra', windowSize.height + 'px');
  
     // Set opacity
     document.documentElement.style.setProperty('--opacity', visuals.opacity.toString());
@@ -265,9 +269,6 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
                     <CachedObjects />
                     </>
                 }
-            </div>
-            <div className={styles.settingsIcon}>
-                ⚙️
             </div>
         </>
     )

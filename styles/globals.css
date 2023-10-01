@@ -72,6 +72,8 @@ html, body{
   font-family: 'Inter', sans-serif;
   color: rgb(var(--primary));
   background-color: var(--backgroundColor);
+  width: 100vw;
+  height: 100vh;
 }
 
 a {
@@ -100,12 +102,14 @@ ul{
 
 /* Main */
 main {
+  overflow: hidden;
+  min-width: 100vw;
   min-height: 100vh;
 }
 
  /* Header component*/
  header {
-  position: fixed;
+  position: absolute;
   top: 0;
   z-index: 999;
   width: 100vw;
@@ -307,8 +311,7 @@ display: none;
 }
 
 .leva-c-hwBXYF-kbKHjH-mode-drag {
-  flex-direction: row-reverse !important;
-  cursor: none;
+    cursor: none !important;
 }
 
 .leva-c-hwBXYF{
