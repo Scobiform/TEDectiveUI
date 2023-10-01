@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from './search.module.css';
+import LoadingSpinner from "../Static/LoadingSpinner";
 
 interface SearchResult {
   id: string;
@@ -78,7 +79,7 @@ const Search = ({ apiPath, setApiPath }: SearchProps) => {
           accessKey="S"
         />
         {loading ? (
-          <p>Loading...</p>
+          <LoadingSpinner />
         ) : searchResults.length > 0 && (
           <>
             <ul id={styles.SearchResults}>
