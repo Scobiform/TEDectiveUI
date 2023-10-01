@@ -103,5 +103,5 @@ export let initialVisuals = {
   // InteractionBar
   menuVisibility: true,
   menuPositionX: 0.14,
-  headerHeight: 2.1,
+  menuPositionY: 2.1,
 }

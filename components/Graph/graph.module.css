@@ -21,7 +21,8 @@
   position: absolute;
   z-index: 1003;
   left: 0.21rem;
-  top: var(--headerHeight);
+  top: var(--menuPositionY);
+  left: var(--menuPositionX);
 }
 
 .zoomButtons {

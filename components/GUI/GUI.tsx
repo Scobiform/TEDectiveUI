@@ -6,6 +6,7 @@ import { Leva, useControls, useCreateStore, folder, LevaPanel, monitor, button }
 /* Styles */
 import styles from './gui.module.css'
 import CachedObjects from "../Cache/CachedObjects";
+import { useWindowHeight } from "@react-hook/window-size";
 
 export interface GUIProps {
     physics: typeof initialPhysics
@@ -83,9 +84,6 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
         iconPlanning: { value: visuals.iconPlanning, onChange: (v) => setVisualsCallback({ ...visuals, iconPlanning: v }) },
         iconOrganization: { value: visuals.iconOrganization, onChange: (v) => setVisualsCallback({ ...visuals, iconOrganization: v }) },
         iconOrganizationSupplier: { value: visuals.iconOrganizationSupplier, onChange: (v) => setVisualsCallback({ ...visuals, iconOrganizationSupplier: v }) },
-        // Menu
-        menuPositionX: { value: visuals.menuPositionX, onChange: (v) => setVisualsCallback({ ...visuals, menuPositionX: v }) },
-        headerHeight: { value: visuals.headerHeight, onChange: (v) => setVisualsCallback({ ...visuals, headerHeight: v }) },
         },
         { collapsed: true},
         [visuals, visualsStore]
@@ -128,7 +126,7 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     document.documentElement.style.setProperty('--menuPositionX', visuals.menuPositionX + 'rem');
 
     // Set header height
-    document.documentElement.style.setProperty('--headerHeight', visuals.headerHeight + 'rem');
+    document.documentElement.style.setProperty('--menuPositionY', visuals.menuPositionY + 'rem');
     
     /* GUI Settings ******************************************************************/
     // GUI Theme Store
