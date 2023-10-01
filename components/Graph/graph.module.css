@@ -83,7 +83,7 @@
   height: var(--windowHeight);
   overflow-y: auto;
   background: var(--tertiary);
-  top: 2.8rem;
+  top: var(--headerHeight);
   padding: 0.42rem;
   margin:4.2px;
 }
