@@ -148,8 +148,8 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     const fgInstance = fgRef.current as unknown as ForceGraphMethods;
 
     if (interactionBarRef.current) {
-      // Access the clientHeight property and set it in the state
-      console.log(interactionBarRef.current.offsetHeight);
+      // Access the offsetHeight property and set it in the state
+      //console.log(interactionBarRef.current.offsetHeight);
       setMenuHeight(interactionBarRef.current.offsetHeight);
     }
   
