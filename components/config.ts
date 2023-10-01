@@ -102,6 +102,6 @@ export let initialVisuals = {
   iconOrganizationSupplier: '🏢',
   // InteractionBar
   menuVisibility: true,
-  menuPositionX: 0.14,
+  menuPositionX: 0.21,
   menuPositionY: 2.1,
 }

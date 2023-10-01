@@ -19,7 +19,7 @@
   --headerHeight: 2.1rem;
   --menuHeight: 123px;
   --menuPositionY: 14vh;
-  --menuPositionX: 14vh;
+  --menuPositionX: 0.28rem;
 }
 
 :root[data-theme='dark'] {
