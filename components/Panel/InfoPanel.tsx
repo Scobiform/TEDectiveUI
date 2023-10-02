@@ -43,7 +43,7 @@ const InfoPanel = ({ visuals = initialVisuals, setVisuals, showInfoPanel, setSho
           <h2>The Open Contracting Data Standard (OCDS)</h2>
           <p>The Open Contracting Data Standard (OCDS) is a global initiative aimed at increasing transparency and accountability in public procurement processes. It provides a structured framework for governments and organizations to publish procurement data in a consistent and machine-readable format. By adopting OCDS, entities can improve access to information, promote fair competition, and empower citizens and businesses to engage more effectively in the public procurement ecosystem.</p>
           <p>For more details on the OCDS schema, please visit the <a href="https://standard.open-contracting.org/latest/en/schema/release/" target="_blank" rel="noopener noreferrer">OCDS Schema Website</a>.</p>
-          <h3>InfoPanel</h3>
+          <h3>Legend</h3>
           <ul>
             {InfoPanelItems.map((item, index) => (
               <li key={index}>

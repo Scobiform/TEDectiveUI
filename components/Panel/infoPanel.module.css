@@ -10,6 +10,7 @@
     background: var(--tertiary);
     opacity: var(--opacity);
     max-height: var(--windowHeight);
+    z-index: 1001;
 }
 
 .InfoPanel ul {
@@ -26,10 +27,19 @@
     font-size: 0.7em;
 }
 
-.InfoPanel h2, .InfoPanel h3 {
+
+.InfoPanel  h2 {
+    font-weight: var(--fontWeight);
+    color: var(--primary);
+    background: none;
+    font-size: 1.61em;
+
+}
+
+.InfoPanel h3 {
     font-weight: var(--fontWeight);
     color: var(--tertiary);
-    background: var(--tedectiveBlue);
+    background: var(--secondary);
     padding: 0.42rem;
-    font-size: 0.7em;
+    font-size: 1em;
 }

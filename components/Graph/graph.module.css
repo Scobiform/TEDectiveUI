@@ -58,7 +58,7 @@
   text-align: end;
   font-size: 0.7em;
   margin-bottom: 0.42rem;
-  background: var(--tedectiveBlue);
+  background: var(--secondary);
   color: var(--tertiary);
   padding: 0.42em;
 }
