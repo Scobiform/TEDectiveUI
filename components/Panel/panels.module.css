@@ -81,7 +81,7 @@
 [data-theme='dark'] .nodePanelContent h2 {
     font-size: 0.84em;
     margin-bottom: 0.42rem;
-    background: var(--tedectiveBlue);
+    background: var(--secondary);
     color: var(--primary);
     padding: 0.42em;
 }
@@ -89,7 +89,7 @@
 [data-theme='light'] .nodePanelContent h2 {
     font-size: 0.84em;
     margin-bottom: 0.42rem;
-    background: var(--tedectiveBlue);
+    background: var(--secondary);
     color: var(--tertiary);
     padding: 0.42em;
 }
