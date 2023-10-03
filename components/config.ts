@@ -96,10 +96,10 @@ export let initialVisuals = {
   iconComplete: '✅',
   iconWithdrawn: '✖️',
   iconPlanned: '📝',
-  iconTender: '🗂',
+  iconTender: '📁',
   iconPlanning: '📅',
-  iconOrganization: '🏢',
-  iconOrganizationSupplier: '🏢',
+  iconOrganization: '🏦',
+  iconOrganizationSupplier: '🏭',
   // InteractionBar
   menuVisibility: true,
   menuPositionX: 0.21,

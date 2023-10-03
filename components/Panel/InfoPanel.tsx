@@ -17,7 +17,7 @@ const InfoPanel = ({ visuals = initialVisuals, setVisuals, showInfoPanel, setSho
   const InfoPanelItems = [
     { icon: visuals!.iconAward, label: 'Award', description: 'Represents an award in the Open Contracting Data Standard (OCDS), typically associated with the process of awarding a contract to a supplier.'},
     { icon: visuals!.iconContract, label: 'Contract', description: 'Signifies a contract within OCDS, indicating a formal agreement between an organization (buyer) and a supplier for the provision of goods or services.'},
-    { icon: visuals!.iconTender, label: 'Tender', description: 'Denotes a tender process, which is the stage where organizations solicit bids or proposals from potential suppliers for a contract.' },
+    { icon: visuals!.iconTender, label: 'Release', description: 'Denotes a tender process, which is the stage where organizations solicit bids or proposals from potential suppliers for a contract.' },
     { icon: visuals!.iconActive, label: 'Active', description: 'Refers to the status of a procurement process or contract that is currently ongoing or in progress.'},
     { icon: visuals!.iconCancelled, label: 'Cancelled', description: 'Indicates that a procurement process or contract has been terminated or canceled before reaching its intended conclusion.'},
     { icon: visuals!.iconUnsuccessful, label: 'Unsuccessful', description: 'Represents a procurement process that did not result in the awarding of a contract to any supplier.'},
@@ -47,8 +47,14 @@ const InfoPanel = ({ visuals = initialVisuals, setVisuals, showInfoPanel, setSho
           <ul>
             {InfoPanelItems.map((item, index) => (
               <li key={index}>
-                {item.icon} {item.label} <br />
-                {item.description}
+                <h4>{item.icon}</h4>
+                <p>
+                  <b>
+                    {item.label}
+                  </b>
+                  <br />
+                  {item.description}
+                </p>
               </li>
             ))}
           </ul>
