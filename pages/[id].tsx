@@ -189,7 +189,7 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
       }
     };
     fetchData();
-  },[apiPath, setApiPath]);
+  },[apiPath, setApiPath, id]);
 
   return (
     <>
