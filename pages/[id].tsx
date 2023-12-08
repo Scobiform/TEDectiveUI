@@ -76,6 +76,10 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
       return;
     }
 
+    if( id === undefined) {
+      return;
+    }
+
     // Change route to the apiPath
     window.history.pushState({}, '', apiPath);
 
