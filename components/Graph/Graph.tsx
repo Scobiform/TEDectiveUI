@@ -16,6 +16,7 @@ import ThemeSwitch from "../Static/ThemeSwitch";
 import dynamic from "next/dynamic";
 import InfoPanel from "../Panel/InfoPanel";
 import ChartJS from "../Chart/ChartJS";
+import Intro from '../Intro/Intro';
 
 export interface GraphProps {
   graphData: GraphData | undefined; 
@@ -40,6 +41,8 @@ export interface GraphProps {
 }
 
 // Create a component that will render the graph
+// The component will receive the graphData as a prop
+// ToDo: Refatcor
 const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   previewNode, setPreviewNode, isOpen, setOpen, apiPath, setApiPath, firstDate, lastDate, 
   statusCounts, buyerCounts, supplierCounts, mergedGraphData,
@@ -211,7 +214,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     }
   ), [])
 
-    // Function to format a date as "yyyy-mm-dd"
+  // Function to format a date as "yyyy-mm-dd"
   function formatDate(date: Date) {
     const d = new Date(date);
     const year = d.getFullYear();
@@ -233,7 +236,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   // Return the ForceGraph2D
   return (
     <>
-      <div className={styles.graphWrapper}>
+      <div className={`introStepGraph ${styles.graphWrapper}`}>
         <ForceGraph2D
           ref={fgRef}
           graphData={graphData}
@@ -399,11 +402,21 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
       <div className={styles.interactionBar} ref={interactionBarRef}>
         <div className={styles.actionButtons}>
           {/* NUTS component toggle */}
-          <button onClick={handleToggleNuts} tabIndex={0} aria-label='Show organizations on openstreetmap (M)' accessKey="M">
+          <button 
+            onClick={handleToggleNuts} 
+            tabIndex={0} 
+            aria-label='Show organizations on openstreetmap (M)' 
+            accessKey="M" 
+            className='introStepMap'>
             {nutsVisible ? '⬅️' : '📍'}
           </button>
           {/* Chart component toggle */}
-          <button onClick={handleToggleChart} tabIndex={0} aria-label='Show organization details and statistics (C)' accessKey="C">
+          <button onClick={handleToggleChart} 
+                  tabIndex={0} 
+                  aria-label='Show organization details and statistics (C)' 
+                  accessKey="C"
+                  className='introStepStats'
+          >
             📊
           </button>
           <InfoPanel visuals={visuals} setVisuals={setVisuals} showInfoPanel={showInfoPanel} setShowInfoPanel={setShowInfoPanel} />
@@ -412,7 +425,11 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
         
           {!nutsVisible && (
             <div className={styles.zoomButtons}>
-              <button onClick={handleZoomIn} aria-label="Zoom in (+)" accessKey="+">
+              <button onClick={handleZoomIn} 
+                      aria-label="Zoom in (+)" 
+                      accessKey="+"
+                      className='introStepZoom'
+              >
                 ➕
               </button>
               <button onClick={handleZoomOut} aria-label="Zoom out (-)" accessKey="-">
@@ -452,6 +469,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
         {nutsVisible &&
           <NutsMap data={mergedGraphData.nodes} apiPath={apiPath} setApiPath={setApiPath}/>
         }
+        <Intro />
     </>
   );
 };

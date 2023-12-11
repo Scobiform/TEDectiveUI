@@ -35,14 +35,25 @@ const InfoPanel = ({ visuals = initialVisuals, setVisuals, showInfoPanel, setSho
 
   return (
     <>
-      <button onClick={toggleInfoPanel} tabIndex={0} aria-label='Show general information and InfoPanel (I)' accessKey='I'>
+      <button 
+          onClick={toggleInfoPanel} 
+          tabIndex={0} 
+          aria-label='Show general information and InfoPanel (I)' 
+          accessKey='I' 
+          className='introStepInfo'>
         {showInfoPanel ? 'ℹ️' : 'ℹ️'}
       </button>
       {showInfoPanel && (
         <div className={styles.InfoPanel}>
           <h2>The Open Contracting Data Standard (OCDS)</h2>
           <p>The Open Contracting Data Standard (OCDS) is a global initiative aimed at increasing transparency and accountability in public procurement processes. It provides a structured framework for governments and organizations to publish procurement data in a consistent and machine-readable format. By adopting OCDS, entities can improve access to information, promote fair competition, and empower citizens and businesses to engage more effectively in the public procurement ecosystem.</p>
-          <p>For more details on the OCDS schema, please visit the <a href="https://standard.open-contracting.org/latest/en/schema/release/" target="_blank" rel="noopener noreferrer">OCDS Schema Website</a>.</p>
+          <p>For more details, visit <a href="https://standard.open-contracting.org/latest/en/primer/what/" target="_blank" rel="noopener noreferrer">What is the OCDS and why use it?¶</a>.</p>
+          <iframe 
+            width="100%" 
+            src="https://www.youtube.com/embed/ucPEID4DsyI" 
+            title="Introduction to OCDS" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"> 
+          </iframe>
           <h3>Legend</h3>
           <ul>
             {InfoPanelItems.map((item, index) => (

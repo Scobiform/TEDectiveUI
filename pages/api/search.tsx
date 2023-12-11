@@ -24,8 +24,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Get the query parameter from the request
   const { q } = req.query as { q: string };
 
-  if (!q) {
-    return res.status(400).json({ error: 'Missing query parameter' });
+  if (!q || q === 'undefined' || q === '' || q === null) {
+    return;
   }
 
   // Ensure that the cache directory exists

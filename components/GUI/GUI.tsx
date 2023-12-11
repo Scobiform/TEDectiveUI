@@ -6,7 +6,6 @@ import { Leva, useControls, useCreateStore, folder, LevaPanel, monitor, button }
 /* Styles */
 import styles from './gui.module.css'
 import CachedObjects from "../Cache/CachedObjects";
-import { useWindowHeight } from "@react-hook/window-size";
 
 export interface GUIProps {
     physics: typeof initialPhysics
@@ -251,7 +250,7 @@ const GUI = ({physics, setPhysics, visuals, setVisuals}: GUIProps) => {
     // Return the GUI
     return (
         <>
-            <div className={styles.levaWrapper}>
+            <div className={`introStepSettings ${styles.levaWrapper}`}>
 
                 <Leva
                 theme={theme}

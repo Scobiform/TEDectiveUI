@@ -8,6 +8,7 @@ export interface ChartJSProps {
     iconMappings: any;
 }
 
+// Generic ChartJS component
 const ChartJS = ({data, type, iconMappings}: ChartJSProps) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 

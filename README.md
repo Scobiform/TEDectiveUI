@@ -45,6 +45,8 @@ The TEDective UI boasts the following features:
 - Incorporates [Chart.js](https://github.com/chartjs/Chart.js) for generating
   data-driven charts
 - Includes [Leaflet](https://leafletjs.com/) for interactive maps
+- Is guided by a Intro.js tour [Intro.js](https://introjs.com/)
+- Test-driven by jest 
 
 ## Background
 
@@ -78,7 +80,7 @@ documentation](https://docs.tedective.org/self-host/ui/).
 
 ## Usage
 
-:construction: TODO: (probably put the reference to documentation)
+You can find more information in [the user documentation](https://docs.tedective.org/).
 
 ## Maintainers
 
@@ -86,7 +88,7 @@ documentation](https://docs.tedective.org/self-host/ui/).
 
 ## Contributing
 
-PRs are accepted.
+PRs are accepted and very much welcomed.
 
 Small note: If editing the README, please conform to the
 [standard-readme](https://github.com/RichardLitt/standard-readme)

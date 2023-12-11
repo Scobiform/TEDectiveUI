@@ -14,8 +14,14 @@ export interface NodePanelProps {
   setVisuals: any
 }
 
+// Node panel component
+// This component renders the node panel on the right side of the screen
+// based on the currently selected node type in the graph.
 const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath,  visuals, setVisuals}: NodePanelProps) => {
  
+  // Copy to clipboard state
+  const [copySuccess, setCopySuccess] = useState(String);
+
   // Toggle menu
   const toggleMenu = () => setOpen(!isOpen);
 
@@ -27,6 +33,24 @@ const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath,  visuals,
       setApiPath(apiPath);
     }
   , [setApiPath]);
+
+  const handleCopyClick = (previewNode: any) => {
+
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+    const urlToCopy = `${baseUrl}/${previewNode.id}`;
+    
+    navigator.clipboard.writeText(urlToCopy)
+      .then(() => {
+        setCopySuccess('Copied to clipboard!');
+        setTimeout(() => {
+          setCopySuccess('');
+        }, 1000);
+      })
+      .catch((err) => {
+        console.error('Unable to copy to clipboard', err);
+        setCopySuccess('Copy failed');
+      });
+  };
 
   // Icons
   const icons = [
@@ -68,8 +92,17 @@ const NodePanel = ({previewNode, isOpen, setOpen, apiPath, setApiPath,  visuals,
                   {renderContentBasedOnNodeType(previewNode, icons)}
                   
                   {previewNode.name !== undefined && (
-                    <button onClick={() => handleClick(previewNode.id+'')} aria-label="Load organization graph">Load organization graph</button>
+                    <>
+                      <button onClick={() => handleClick(previewNode.id+'')} 
+                              aria-label="Load organization graph">Load organization graph
+                      </button>
+                      <button onClick={() => handleCopyClick(previewNode)} 
+                              aria-label="Copy URL to clipboard">Copy to clipboard
+                      </button>
+                      {copySuccess && <div>{copySuccess}</div>}
+                    </>
                   )}
+                  {/* Uncomment this to get json object debug in the panel. Might move to app settings. */}
                   {/*objectString*/}
                 </div>
               </div>
