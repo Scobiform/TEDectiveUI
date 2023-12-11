@@ -37,10 +37,10 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
     const { id } = router.query
 
     // Set the initialGraphId to the id from the url
-    const initialGraphId = id as string;
+    const [organizationId, setOrganizationId] = useState(id as string);
 
     // API path state
-    [apiPath, setApiPath] = useState(initialGraphId+'');
+    [apiPath, setApiPath] = useState(organizationId+'');
 
     // Loading state
     const [isLoading, setIsLoading] = useState(false);
@@ -62,21 +62,18 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
         links: [] 
     });
 
-    // Set the apiPath to the id from the url
-    useEffect(() => {
-        if (id) {
-            setApiPath(id as string);
-        }
-    }, [id, setApiPath]);
+  // Set the apiPath to the id from the url
+  useEffect(() => {
+      if (id) {
+          setApiPath(id as string);
+      }
+  }, [id, setApiPath]);
 
   // Fetch graph data
   useEffect(() => {
 
-    if(apiPath === undefined) {
-      return;
-    }
-
-    if( id === undefined) {
+    if (apiPath === 'undefined') {
+      console.log('apiPath is undefined');
       return;
     }
 
@@ -92,6 +89,11 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
         // Fetch graph data
         const [graphResponse] = await Promise.all([fetch(`/api/graph/?q=${apiPath}`)]);
         const graph = await graphResponse.json();
+
+        // ---------------------------------------------
+        // ToDo: All this should be done in the backend
+
+        // Set the graph data
         const { buyerData, supplierData } = graph;
     
         // Set node types
@@ -179,6 +181,10 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
     
         // Set the merged data
         setMergedGraphData(mergedData);
+
+        // ---------------------------------------------
+
+        // Set loading to false after the fetch call to hide the loading spinner
         setIsLoading(false);
 
         // Set the apiPath in Home component
@@ -189,7 +195,7 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
       }
     };
     fetchData();
-  },[apiPath, setApiPath, id]);
+  },[apiPath, setApiPath, organizationId, setOrganizationId]);
 
   return (
     <>

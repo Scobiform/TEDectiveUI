@@ -13,6 +13,8 @@ interface SearchProps {
   setApiPath: any;
 }
 
+// Search component
+// This component renders the search input field and the search results
 const Search = ({ apiPath, setApiPath }: SearchProps) => {
   // Search results state
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
@@ -77,6 +79,7 @@ const Search = ({ apiPath, setApiPath }: SearchProps) => {
           aria-label="Search for an organization (S)"
           tabIndex={0}
           accessKey="S"
+          className="introStepSearch"
         />
         {loading ? (
           <LoadingSpinner />
