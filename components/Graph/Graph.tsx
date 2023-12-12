@@ -1,22 +1,22 @@
 'use client';
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useReducer, useRef, useState } from "react";
+import { useWindowSize } from "@react-hook/window-size";
 import { GraphData, NodeObject, LinkObject,  } from 'force-graph'
 import * as d3 from 'd3-force';
 /* Use 2d graph */
 import ForceGraph2D, { ForceGraphMethods, ForceGraphProps } from "react-force-graph-2d";
+/* Config */
+import { initialPhysics, initialVisuals } from './../config';
 /* Components */
 import NodePanel from '../../components/Panel/NodePanel';
 import GUI from '../GUI/GUI';
-/* Config */
-import { initialPhysics, initialVisuals } from './../config';
-/* Component styles */
-import styles from './graph.module.css';
-import { useWindowSize } from "@react-hook/window-size";
 import ThemeSwitch from "../Static/ThemeSwitch";
 import dynamic from "next/dynamic";
 import InfoPanel from "../Panel/InfoPanel";
-import ChartJS from "../Chart/ChartJS";
 import Intro from '../Intro/Intro';
+/* Component styles */
+import styles from './graph.module.css';
+import OrganizationDetails from "../Organization/OrganizationDetails";
 
 export interface GraphProps {
   graphData: GraphData | undefined; 
@@ -72,13 +72,13 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   // State variable to store whether the node panel is open or not
   [isOpen, setOpen] = useState(false);
 
-   // Chart visibility
-   const [chartVisible, setChartVisible] = useState(false);
+  // Chart visibility
+  const [chartVisible, setChartVisible] = useState(false);
 
-   // Handle the toggle chart button click event
-   const handleToggleChart = () => {
-     setChartVisible(!chartVisible); // Toggle chart visibility
-   };
+  // Handle the toggle chart button click event
+  const handleToggleChart = () => {
+    setChartVisible(!chartVisible); // Toggle chart visibility
+  };
    
   // Openstreetmap visibility
   const [nutsVisible, setNutsVisible] = useState(false);
@@ -126,6 +126,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     }
   ,[setOpen]);
 
+  // Handle the zoom in button click event
   const handleZoomIn = () => {
     const fgInstance = fgRef.current as unknown as ForceGraphMethods;
     if (fgInstance) {
@@ -136,6 +137,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     }
   };
 
+  // Handle the zoom out button click event
   const handleZoomOut = () => {
     const fgInstance = fgRef.current as unknown as ForceGraphMethods;
     if (fgInstance) {
@@ -146,6 +148,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     }
   };
 
+  {/* D3 force simulation */}
   useEffect(() => {
     // Get the ForceGraph2D instance
     const fgInstance = fgRef.current as unknown as ForceGraphMethods;
@@ -187,51 +190,19 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     fgInstance.d3Force('y', d3.forceY(height / 2).strength(physics.yStrength));
   }, [physics, fgRef, width, height, visuals, setMenuHeight, interactionBarRef]);
 
+  // Set the menuHeight CSS variable
   document.documentElement.style.setProperty('--menuHeight', menuHeight-2 + 'px');
 
-  // Define an array of background colors corresponding to your icons
-  const backgroundColors = ['green', 'red', 'green', 'red', 'black', 'white'];
-
-  const getStatusChart = (statusCounts: any) => {
-    return {
-      labels: Object.keys(statusCounts),
-      datasets: [
-        {
-          label: 'Status Data',
-          data: Object.values(statusCounts),
-          backgroundColor: backgroundColors,
-          borderWidth: 0,
-        },
-      ],
-    };
-  };
-
-  const NutsMap = useMemo(() => dynamic(
-    () => import('../NutsMap/NutsMap'),
+  // ---------------------------------------------
+  /* Dynamically import the NutsMap component   */
+  const Map = useMemo(() => dynamic(
+    () => import('../Map/Map'),
     { 
       loading: () => <p>A map is loading</p>,
       ssr: false
     }
   ), [])
-
-  // Function to format a date as "yyyy-mm-dd"
-  function formatDate(date: Date) {
-    const d = new Date(date);
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0'); // Add leading zero if needed
-    const day = String(d.getDate()).padStart(2, '0'); // Add leading zero if needed
-    return `${year}-${month}-${day}`;
-  }
-
-  // Define an object of icon mappings for the chart
-  const iconMappings: Record<number, string> = {
-    0: visuals.iconActive + " Active" || 'Active',
-    1: visuals.iconCancelled + " Cancelled" || 'Cancelled',
-    2: visuals.iconComplete + " Complete" || 'Complete',
-    3: visuals.iconUnsuccessful + " Unsuccessful" || 'Unsuccessful',
-    4: visuals.iconWithdrawn + " Withdrawn" || 'Withdrawn',
-    5: visuals.iconPlanned + " Planned" || 'Planned',
-  };
+  // ---------------------------------------------
 
   // Return the ForceGraph2D
   return (
@@ -402,16 +373,16 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
       <div className={styles.interactionBar} ref={interactionBarRef}>
         <div className={styles.actionButtons}>
           {/* NUTS component toggle */}
-          <button 
-            onClick={handleToggleNuts} 
-            tabIndex={0} 
-            aria-label='Show organizations on openstreetmap (M)' 
-            accessKey="M" 
-            className='introStepMap'>
+          <button onClick={handleToggleNuts} 
+                  tabIndex={0} 
+                  aria-label='Show organizations on openstreetmap (M)' 
+                  accessKey="M" 
+                  className='introStepMap'>
             {nutsVisible ? '⬅️' : '📍'}
           </button>
           {/* Chart component toggle */}
-          <button onClick={handleToggleChart} 
+          <button 
+          onClick={handleToggleChart} 
                   tabIndex={0} 
                   aria-label='Show organization details and statistics (C)' 
                   accessKey="C"
@@ -419,10 +390,12 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           >
             📊
           </button>
-          <InfoPanel visuals={visuals} setVisuals={setVisuals} showInfoPanel={showInfoPanel} setShowInfoPanel={setShowInfoPanel} />
+          <InfoPanel visuals={visuals} 
+                     setVisuals={setVisuals} 
+                     showInfoPanel={showInfoPanel} 
+                     setShowInfoPanel={setShowInfoPanel} />
           <ThemeSwitch />
-        </div>
-        
+        </div>     
           {!nutsVisible && (
             <div className={styles.zoomButtons}>
               <button onClick={handleZoomIn} 
@@ -438,38 +411,41 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
             </div>
           )}
       </div>
-      <NodePanel previewNode={previewNode} isOpen={isOpen} setOpen={setOpen} apiPath={apiPath} setApiPath={setApiPath} visuals={visuals} setVisuals={setVisuals}/>
-      <GUI physics={physics} setPhysics={setPhysics} visuals={visuals} setVisuals={setVisuals}/>
+      <NodePanel 
+        previewNode={previewNode} 
+        isOpen={isOpen} 
+        setOpen={setOpen} 
+        apiPath={apiPath} 
+        setApiPath={setApiPath} 
+        visuals={visuals} 
+        setVisuals={setVisuals}
+      />
+      <GUI 
+        physics={physics} 
+        setPhysics={setPhysics} 
+        visuals={visuals} 
+        setVisuals={setVisuals}
+      />
       {/* Conditionally render the chart based on chartVisible state */}
       {chartVisible && (
-          <>
-            <div className={styles.organizationDetails}>
-              <div className={styles.gridContainer}>
-                <div className={styles.label}>First release:</div>
-                <div className={styles.value}>{firstDate ? formatDate(firstDate) : "No Date"}</div>
-                
-                <div className={styles.label}>Last release:</div>
-                <div className={styles.value}>{lastDate ? formatDate(lastDate) : "No Date"}</div>
-                
-                <div className={styles.label}>Overall spent:</div>
-                <div className={styles.value}>{buyerCounts.value.toLocaleString()}</div>
-                
-                <div className={styles.label}>Overall earned:</div>
-                <div className={styles.value}>{supplierCounts.value.toLocaleString()}</div>
-              
-                <div className={styles.label}>Tender status:</div>
-                <div className={styles.value}>
-                  <ChartJS data={getStatusChart(statusCounts)} type="bar" iconMappings={iconMappings} />
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-        {/* Conditionally render the NUTS map based on nutsVisible state */}
-        {nutsVisible &&
-          <NutsMap data={mergedGraphData.nodes} apiPath={apiPath} setApiPath={setApiPath}/>
-        }
-        <Intro />
+        <OrganizationDetails 
+          visuals={visuals} 
+          firstDate={firstDate} 
+          lastDate={lastDate} 
+          statusCounts={statusCounts} 
+          buyerCounts={buyerCounts} 
+          supplierCounts={supplierCounts} 
+          mergedGraphData={mergedGraphData} 
+        />
+      )}
+      {/* Conditionally render the map based on nutsVisible state */}
+      {nutsVisible &&
+        <Map data={mergedGraphData.nodes} 
+              apiPath={apiPath} 
+              setApiPath={setApiPath}/>
+      }
+      {/* Guided tour */}
+      <Intro />
     </>
   );
 };
