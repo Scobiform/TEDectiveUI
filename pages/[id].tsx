@@ -73,11 +73,11 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
   useEffect(() => {
 
     if (apiPath === 'undefined') {
-      console.log('apiPath is undefined');
+      //console.log('apiPath is undefined');
       return;
     }
 
-    // Change route to the apiPath
+    // Push apiPath to browser history
     window.history.pushState({}, '', apiPath);
 
     // Set loading to true before the fetch call to show the loading spinner
@@ -90,7 +90,7 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
         const [graphResponse] = await Promise.all([fetch(`/api/graph/?q=${apiPath}`)]);
         const graph = await graphResponse.json();
 
-        // ---------------------------------------------
+        // -----------------------------------------------------------------------------
         // ToDo: All this should be done in the backend
 
         // Set the graph data
@@ -182,7 +182,7 @@ const Home = ({apiPath, setApiPath, physics, setPhysics, visuals = initialVisual
         // Set the merged data
         setMergedGraphData(mergedData);
 
-        // ---------------------------------------------
+        // -----------------------------------------------------------------------------
 
         // Set loading to false after the fetch call to hide the loading spinner
         setIsLoading(false);
