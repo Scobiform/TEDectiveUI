@@ -3,14 +3,13 @@ import dynamic from 'next/dynamic';
 import 'intro.js/introjs.css'
 import { Steps, Hints } from 'intro.js-react';
 
+// Intro.js steps - https://introjs.com/docs/
+// Intro.js-react - React wrapper for Intro.js - https://github.com/HiDeoo/intro.js-react
 const Intro = () => {
 
   const [enabled, setEnabled] = useState(false);
 
   const [firstTime, setFirstTime] = useState(true);
-
-  // Intro.js steps - https://introjs.com/docs/
-  // Intro.js-react - React wrapper for Intro.js - https://github.com/HiDeoo/intro.js-react
 
   const steps = [
     {
@@ -70,7 +69,7 @@ const Intro = () => {
   ];
 
   useEffect(() => {   
-    // Wait 1 second before starting the intro
+    // Wait 1.4 seconds before starting the intro
     if (firstTime){
       setTimeout(() => {
         setEnabled(true);

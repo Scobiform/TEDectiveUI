@@ -1,6 +1,6 @@
+/* eslint-disable react/display-name */
 import { render, screen } from '@testing-library/react'
 import Home from '../pages/index'
-import GraphWrapper from '../components/Graph/GraphWrapper';
 import '@testing-library/jest-dom'
  
 describe('Home', () => {

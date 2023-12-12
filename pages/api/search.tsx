@@ -18,6 +18,7 @@ async function ensureCacheDirectoryExists() {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+
   // API URL
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -36,28 +37,44 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const cachedData = await fs.readFile(cacheFilePath, 'utf8');
     const parsedCachedData = JSON.parse(cachedData);
-    return res.status(200).json(parsedCachedData);
-  } catch (cacheReadError) {
-    // If cached data is not available or there's an error reading it, fetch and cache new data.
-  }
 
-  // Make a request to your FastAPI backend to perform the search
-  try {
-    const response = await fetch(apiURL + 'entities/organization/search/' + q);
+    // If the file is older than 7 days, continue with the fetch request
+    const fileStat = await fs.stat(cacheFilePath);
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    //console.log(fileStat.mtime, sevenDaysAgo);
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch data: ${response.status}`);
+    if (fileStat.mtime < sevenDaysAgo) {
+      // If the file is older than seven days, fetch and cache new data.
+      throw new Error('Cache is outdated');
     }
 
-    const data = await response.json();
+    // If the cache file exists, return the cached data with 200 status code
+    if(parsedCachedData) {
+      return res.status(200).json(parsedCachedData);
+    }
+    else {
+      throw new Error('Cache is empty');
+    }
+  } catch (cacheReadError) {
+    // Make a request to your FastAPI backend to perform the search
+    try {
+      const response = await fetch(apiURL + 'entities/organization/search/' + q);
 
-    // Cache the response by writing it to a file
-    await fs.writeFile(cacheFilePath, JSON.stringify(data), 'utf8');
+      if (!response.ok) {
+        throw new Error(`Failed to fetch data: ${response.status}`);
+      }
 
-    // Respond with the fetched data
-    res.status(200).json(data);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    res.status(500).json({ error: 'Internal server error' });
+      const data = await response.json();
+
+      // Cache the response by writing it to a file
+      await fs.writeFile(cacheFilePath, JSON.stringify(data), 'utf8');
+
+      // Respond with the fetched data
+      res.status(200).json(data);
+    } catch (error) {
+      //console.error('Error fetching data:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
   }
 }

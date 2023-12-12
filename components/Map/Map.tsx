@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { LatLngTuple } from 'leaflet';
-import styles from './nutsMap.module.css';
+import styles from './map.module.css';
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
-import ThemeSwitch from '../Static/ThemeSwitch';
 
 export interface NutsMapProps {
   apiPath: string;
@@ -13,7 +12,7 @@ export interface NutsMapProps {
   data: any;
 }
 
-const NutsMap = ({ data, apiPath, setApiPath }: NutsMapProps) => {
+const Map = ({ data, apiPath, setApiPath }: NutsMapProps) => {
   const europeCenter: LatLngTuple = [51.505, 10.09]; // Centered on Europe
 
   const mapStyle = {
@@ -127,4 +126,4 @@ const NutsMap = ({ data, apiPath, setApiPath }: NutsMapProps) => {
   );
 };
 
-export default NutsMap;
+export default Map;

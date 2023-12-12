@@ -14,11 +14,12 @@ async function ensureCacheDirectoryExists() {
   }
 }
 
+// Define the handler function
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Get the query parameter from the request
   const { q } = req.query as { q: string };
 
-  if (!q) {
+  if (!q || q === 'undefined' || q === '' || q === null) {
     return res.status(400).json({ error: 'Missing query parameter' });
   }
 
@@ -30,30 +31,37 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const cachedData = await fs.readFile(cacheFilePath, 'utf8');
     const parsedCachedData = JSON.parse(cachedData);
-    return res.status(200).json(parsedCachedData);
-  } catch (cacheReadError) {
-    // If cached data is not available or there's an error reading it, fetch and cache new data.
-  }
 
-  // Make a fetch request to an external API using the query parameter
-  try {
-    const response = await fetch(`https://geocode.maps.co/search?q=${q}`);
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch data: ${response.status}`);
+    // If file is existing return the cached data with 200 status code
+    if(parsedCachedData) {
+      return res.status(200).json(parsedCachedData);
+    }
+    else {
+      throw new Error('Cache is empty');
     }
 
-    const data = await response.json();
+  } catch (cacheReadError) {
+    // If the cache file does not exist, continue with the fetch request
+    try {
+      // Getting geocode data from geocode.maps.co API
+      const response = await fetch(`https://geocode.maps.co/search?q=${q}`);
 
-    // Cache the response by writing it to a file
-    await fs.writeFile(cacheFilePath, JSON.stringify(data), 'utf8');
+      if (!response.ok) {
+        throw new Error(`Failed to fetch data: ${response.status}`);
+      }
 
-    // Respond with the fetched data
-    res.status(200).json(data);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
+      const data = await response.json();
+
+      // Cache the response by writing it to a file
+      await fs.writeFile(cacheFilePath, JSON.stringify(data), 'utf8');
+
+      // Respond with the fetched data
+      res.status(200).json(data);
+    } catch (error) {
+      //console.error('Error fetching data:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  } 
 };
 
 export default handler;

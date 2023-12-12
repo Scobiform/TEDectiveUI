@@ -35,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const fileStat = await fs.stat(cacheFilePath);
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-    //console.log(fileStat.mtime, thirtyDaysAgo);
+    //console.log(fileStat.mtime, sevenDaysAgo);
 
     if (fileStat.mtime < sevenDaysAgo) {
       // If the file is older than seven days, fetch and cache new data.
@@ -45,6 +45,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // If the cache file exists, return the cached data
     if(parsedCachedData) {
       return res.status(200).json(parsedCachedData);
+    }
+    else {
+      throw new Error('Cache is empty');
     }
   } catch (cacheReadError) {
     // If the cache file does not exist, continue with the fetch request
@@ -73,7 +76,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       res.status(200).json({ buyerData, supplierData });
     } catch (error) {
       //console.error('Error fetching data:', error);
-      //res.status(500).json({ error: 'Undefined' });
+      res.status(500).json({ error: 'Internal server error' });
     }
   }
 }
