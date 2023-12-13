@@ -25,6 +25,9 @@ This project is implemented using [Next.js](https://github.com/vercel/next.js),
   - [Getting Started](#getting-started)
     - [Installation](#installation)
     - [Install with Docker](#install-with-docker)
+    - [Environment configuration](#environment-configuration)
+    - [Component configuration](#component-configuration)
+    - [Component Overview](#component-overview)
   - [Usage](#usage)
   - [Maintainers](#maintainers)
   - [Contributing](#contributing)
@@ -45,8 +48,8 @@ The TEDective UI boasts the following features:
 - Incorporates [Chart.js](https://github.com/chartjs/Chart.js) for generating
   data-driven charts
 - Includes [Leaflet](https://leafletjs.com/) for interactive maps
-- Is guided by a Intro.js tour [Intro.js](https://introjs.com/)
-- Test-driven by jest 
+- Is guided by a [Intro.js](https://introjs.com/) tour
+- Test-driven by jest [Jest.js](https://jestjs.io)
 
 ## Background
 
@@ -77,6 +80,22 @@ To run the TEDective UI using Docker, use the following commands:
 
 For detailed installation instructions please refer to the [TEDective
 documentation](https://docs.tedective.org/self-host/ui/).
+
+### Environment configuration
+
+The .env file is commonly used to store environment variables for your application. Environment variables are key-value pairs that configure how your application behaves in different environments. You will find this file in the root directory of the project.
+
+### Component configuration
+
+Inside the dedicated components folder, you'll discover a config.ts file serving as a hub for essential constants. These constants, once imported, become readily accessible across the entire TEDective UI codebase. Acting as default values, they seamlessly synchronize with the application settings. Should the need arise, feel free to dynamically adjust these values while navigating through the app, ensuring a tailored and personalized experience.
+
+### Component Overview
+
+To enhance your understanding of the system's components, interfaces, and data-flow, take a look at the accompanying component diagram below:
+
+[Component Diagram](https://app.tedective.org/docs/Components.drawio.html)
+
+This diagram provides a visual representation of how various components interact with each other, the interfaces they utilize, and the flow of data within the system. Examining the diagram can offer valuable insights into the overall architecture and relationships between different elements in the TEDective UI.
 
 ## Usage
 
