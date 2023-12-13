@@ -10,9 +10,10 @@ const inter = Inter({
 
 export default function TEDectiveUI({ Component, pageProps }: AppProps) {
 
-  const appName = process.env.NEXT_PUBLIC_SITE_NAME;
-  const appDescription = process.env.NEXT_PUBLIC_SITE_DESCRIPTION;
-  const appKeywords = process.env.NEXT_PUBLIC_SITE_KEYWORDS;
+  const appName = process.env.NEXT_PUBLIC_NAME;
+  const appDescription = process.env.NEXT_PUBLIC_DESCRIPTION;
+  const appKeywords = process.env.NEXT_PUBLIC_KEYWORDS;
+  const ogImage = process.env.NEXT_PUBLIC_OG_IMAGE;
 
   const title = `${appName} - ${appDescription}`;
 
@@ -26,6 +27,7 @@ export default function TEDectiveUI({ Component, pageProps }: AppProps) {
         />
         <meta name="description" content={appDescription} />
         <meta name="keywords" content={appKeywords} />
+        <meta property="og:image" content={ogImage} />
 
         <title>{title}</title>
 
