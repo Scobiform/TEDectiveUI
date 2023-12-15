@@ -4,6 +4,7 @@ interface LoadingSpinnerProps {
   size?: number;
 }
 
+// The LoadingSpinner component displays a rotating SVG if loading.
 const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size = 42 }) => {
   return (
     <div className="loading-spinner" style={{ width: size, height: size }}>

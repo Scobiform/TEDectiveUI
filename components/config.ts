@@ -54,14 +54,14 @@ export const initialPhysics = {
   collideRadius: 10,
   enableCentering: true,
   centeringStrength: 0.2,
-  radialRadius: 140,
+  radialRadius: 210,
   linkStrength: 0.3,
   linkIts: 1,
   xStrength: 0.1,
   yStrength: 0.1,
 }
 
-export let initialVisuals = {
+export const initialVisuals = {
   // Node size
   nodeRel: 4.2,
   awardNodeSizeMult: 0.63,
@@ -73,11 +73,11 @@ export let initialVisuals = {
   // Link config
   linkVisibility: true,
   linkCurvature: 0,
-  linkWidth: 0.14,
+  linkWidth: 0.42,
   linkDistance: 42,
   linkColor: '#3fa535',
-  linkDirectionalParticles: 0,
-  linkDirectionalParticleWidth: 0,
+  linkDirectionalParticles: 0.1,
+  linkDirectionalParticleWidth: 0.1,
   // Extras
   drawAmountValues: false,
   // Viewport config
@@ -96,12 +96,13 @@ export let initialVisuals = {
   iconComplete: '✅',
   iconWithdrawn: '✖️',
   iconPlanned: '📝',
-  iconTender: '📁',
+  iconTender: '',
   iconPlanning: '📅',
-  iconOrganization: '🏦',
+  iconOrganization: '🏢',
   iconOrganizationSupplier: '🏭',
   // InteractionBar
   menuVisibility: true,
   menuPositionX: 0.21,
   menuPositionY: 2.1,
 }
+

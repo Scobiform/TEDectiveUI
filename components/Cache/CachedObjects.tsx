@@ -18,9 +18,13 @@ function Accordion({ title, content, isOpen, toggleAccordion }: any) {
   );
 }
 
+/* The CachedObjects component displays a list of cached objects from the TEDective API. */
 function CachedObjects() {
+
+  // app url from .env
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL;
+  // State variables
   const [cachedData, setCachedData] = useState<CachedObject[]>([]);
-  const [searchCache, setSearchCache] = useState<CachedObject[]>([]);
   const [graphCache, setGraphCache] = useState<CachedObject[]>([]);
   const [geocodeCache, setGeocodeCache] = useState<CachedObject[]>([]);
   const [openSection, setOpenSection] = useState<string[]>(['search', 'graph', 'geocode']);
@@ -57,7 +61,6 @@ function CachedObjects() {
           }
         });
 
-        setSearchCache(searchList);
         setGraphCache(graphList);
         setGeocodeCache(geocodeList);
         setCachedData(data);
@@ -86,7 +89,7 @@ function CachedObjects() {
           <ul>
             {graphCache.map((data, index) => (
               <li key={index}>
-                <p>{data.filename.replace('.json', '')}</p>
+                <a href={appUrl+'/'+data.filename.replace('.json', '')}>{data.filename.replace('.json', '')}</a>
               </li>
             ))}
           </ul>

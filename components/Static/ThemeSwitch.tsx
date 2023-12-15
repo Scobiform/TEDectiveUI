@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+// This component displays a toggle button for switching between light and dark mode.
+// The user's preference is stored in localStorage.
+// If no preference is stored, the browser's default color scheme is used.
+// You can use [data-theme='dark'] or [data-theme='light'] in css.
 const ThemeSwitch = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 

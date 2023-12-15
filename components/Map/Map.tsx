@@ -12,6 +12,9 @@ export interface NutsMapProps {
   data: any;
 }
 
+// The Map component displays a Europe-centered OpenStreetmap with markers for each organization in the dataset.
+// https://leafletjs.com/
+// https://react-leaflet.js.org/
 const Map = ({ data, apiPath, setApiPath }: NutsMapProps) => {
   const europeCenter: LatLngTuple = [51.505, 10.09]; // Centered on Europe
 

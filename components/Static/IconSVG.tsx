@@ -1,5 +1,6 @@
 import React from 'react';
 
+// The IconSVG component displays the site icon.
 const IconSVG = () => {
     return (        
         <svg

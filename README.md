@@ -49,7 +49,7 @@ The TEDective UI boasts the following features:
   data-driven charts
 - Includes [Leaflet](https://leafletjs.com/) for interactive maps
 - Is guided by a [Intro.js](https://introjs.com/) tour
-- Test-driven by jest [Jest.js](https://jestjs.io)
+- Test-driven by [Jest.js](https://jestjs.io)
 
 ## Background
 
@@ -93,13 +93,13 @@ Inside the dedicated components folder, you'll discover a config.ts file serving
 
 To enhance your understanding of the system's components, interfaces, and data-flow, take a look at the accompanying component diagram below:
 
-[Component Diagram](https://app.tedective.org/docs/Components.drawio.html)
+![Component Diagram](https://app.tedective.org/docs/Components.drawio.html)
 
 This diagram provides a visual representation of how various components interact with each other, the interfaces they utilize, and the flow of data within the system. Examining the diagram can offer valuable insights into the overall architecture and relationships between different elements in the TEDective UI.
 
 ## Usage
 
-You can find more information in [the user documentation](https://docs.tedective.org/).
+You can find more information in the [user documentation](https://tedective.org/usage/quickstart).
 
 ## Maintainers
 
