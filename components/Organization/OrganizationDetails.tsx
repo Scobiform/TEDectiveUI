@@ -16,6 +16,7 @@ export interface OrganizationDetailsProps {
     mergedGraphData?: any;
 }
 
+// The OrganizationDetails component displays general information about the currently loaded organization graph data.
 const OrganizationDetails = ({visuals, firstDate, lastDate, statusCounts, buyerCounts, supplierCounts, mergedGraphData}: OrganizationDetailsProps) => {
 
     // Define an array of background colors corresponding to your icons

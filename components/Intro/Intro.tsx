@@ -1,5 +1,4 @@
-import React, { use, useEffect, useRef, useState } from 'react';
-import dynamic from 'next/dynamic';
+import React, { useEffect, useRef, useState } from 'react';
 import 'intro.js/introjs.css'
 import { Steps, Hints } from 'intro.js-react';
 
@@ -11,6 +10,7 @@ const Intro = () => {
 
   const [firstTime, setFirstTime] = useState(true);
 
+  // ToDo: Move array to config and output here in a loop
   const steps = [
     {
       element: ".introStepInfo",
@@ -20,7 +20,7 @@ const Intro = () => {
     },
     {
       element: ".introStepInfo",
-      intro: "For a basic overview, click the info button. There you will get a basic introduction to the Open OCDS and the icons used in this app.",
+      intro: "For a basic overview, click the info button. There you will get a basic introduction to the OCDS and the icons used in this app.",
       position: 'bottom',
       title: 'Open Contracting Data Standard'
     },

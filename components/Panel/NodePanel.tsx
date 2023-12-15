@@ -200,6 +200,17 @@ function renderOrganization(previewNode: any, iconMappings: any) {
   );
 }
 
+function convertSubmissionMethodDetails(submissionMethodDetails: string) {
+  if(submissionMethodDetails.startsWith('https://')) {
+    return submissionMethodDetails;
+  }
+  else
+  {
+    const urlToCopy = `https://${submissionMethodDetails}`;
+    return urlToCopy;
+  }
+}
+
 function renderNodeByStatus(previewNode: any, iconMappings: any) {
   switch (previewNode.status) {
     case 'active':
@@ -208,7 +219,8 @@ function renderNodeByStatus(previewNode: any, iconMappings: any) {
           {previewNode.submissionMethodDetails !== undefined ? (
             <>
               <h2>{iconMappings[0]} {previewNode.label}</h2>
-              <button aria-label="Go to submission details" onClick={() => window.open(previewNode.submissionMethodDetails, '_blank', 'noreferrer')}>
+              <button aria-label="Go to submission details" 
+                      onClick={() => window.open(convertSubmissionMethodDetails(previewNode.submissionMethodDetails), '_blank', 'noreferrer')}>
                 Go to submission details
               </button>
             </>

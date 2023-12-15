@@ -11,6 +11,8 @@ export interface InfoPanelProps {
   setShowInfoPanel?: any;
 }
 
+/* The info panel is a component that displays general information about the Open Contracting Data Standard (OCDS) 
+and the TEDective application. */
 const InfoPanel = ({ visuals = initialVisuals, setVisuals, showInfoPanel, setShowInfoPanel }: InfoPanelProps) => {
 
   // Define the icons, labels, and descriptions

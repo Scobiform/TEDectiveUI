@@ -1,5 +1,6 @@
 import React from 'react';
 
+// The Header component displays the site name.
 const Header = () =>
 {
     // Get the site name from the environment variable

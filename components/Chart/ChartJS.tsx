@@ -9,6 +9,7 @@ export interface ChartJSProps {
 }
 
 // Generic ChartJS component
+// https://www.chartjs.org/docs/latest/
 const ChartJS = ({data, type, iconMappings}: ChartJSProps) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 

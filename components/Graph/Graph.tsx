@@ -14,9 +14,9 @@ import ThemeSwitch from "../Static/ThemeSwitch";
 import dynamic from "next/dynamic";
 import InfoPanel from "../Panel/InfoPanel";
 import Intro from '../Intro/Intro';
+import OrganizationDetails from "../Organization/OrganizationDetails";
 /* Component styles */
 import styles from './graph.module.css';
-import OrganizationDetails from "../Organization/OrganizationDetails";
 
 export interface GraphProps {
   graphData: GraphData | undefined; 
@@ -40,15 +40,15 @@ export interface GraphProps {
   setShowInfoPanel?: any;
 }
 
-// Create a component that will render the graph
-// The component will receive the graphData as a prop
-// ToDo: Refatcor
+// The component will render the graph and runs an endless D3 simulation.
+// It is the main mount-point for other components
 const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
-  previewNode, setPreviewNode, isOpen, setOpen, apiPath, setApiPath, firstDate, lastDate, 
-  statusCounts, buyerCounts, supplierCounts, mergedGraphData,
+  previewNode, setPreviewNode, isOpen, setOpen, apiPath, setApiPath, firstDate, 
+  lastDate, statusCounts, buyerCounts, supplierCounts, mergedGraphData,
   showInfoPanel, setShowInfoPanel }: GraphProps) => {
 
   // Create a reference to the graph
+  // https://react.dev/reference/react/useRef
   const fgRef = useRef();
 
   // Create a ref to store whether the zoom has been set
@@ -81,11 +81,11 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   };
    
   // Openstreetmap visibility
-  const [nutsVisible, setNutsVisible] = useState(false);
+  const [mapVisible, setmapVisible] = useState(false);
 
   // Handle the toggle NUTS map button click event
-  const handleToggleNuts = () => {
-    setNutsVisible(!nutsVisible); // Toggle NUTS map visibility
+  const handleToggleMap = () => {
+    setmapVisible(!mapVisible); // Toggle NUTS map visibility
   };
 
   // State variable to store wheter InfoPanel is visible or not
@@ -148,7 +148,9 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
     }
   };
 
-  {/* D3 force simulation */}
+  // ---------------------------------------------
+  // Here runs the D3 force simulation
+  // https://github.com/vasturiano/d3-force-3d
   useEffect(() => {
     // Get the ForceGraph2D instance
     const fgInstance = fgRef.current as unknown as ForceGraphMethods;
@@ -194,7 +196,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
   document.documentElement.style.setProperty('--menuHeight', menuHeight-2 + 'px');
 
   // ---------------------------------------------
-  /* Dynamically import the NutsMap component   */
+  /* Dynamically import the Map component   */
   const Map = useMemo(() => dynamic(
     () => import('../Map/Map'),
     { 
@@ -202,96 +204,106 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
       ssr: false
     }
   ), [])
-  // ---------------------------------------------
 
   // Return the ForceGraph2D
+  // https://github.com/vasturiano/react-force-graph
+  // ToDo Refactor
+  // => nodeCanvasObject 
+  // => 
   return (
     <>
       <div className={`introStepGraph ${styles.graphWrapper}`}>
+        {/* ForceGraphProps with ForceGraphMethods reference */}
         <ForceGraph2D
           ref={fgRef}
           graphData={graphData}
           nodeLabel="label"
           nodeCanvasObject={(node, ctx, globalScale) => {
+
             // This section defines the node labels
             let label = visuals!.iconDefault;
             let fontSize = 10 * visuals!.nodeRel;
         
             switch (true) {
-                case (node.awardID !== undefined):
-                  if (node.value !== undefined && node.value !== null) {
-                    const amount: any = node.value.amount;
-                    const minFontSize = 14;
-                    const maxFontSize = 210;
-                    const linearThreshold = 100000000; // Values below this threshold will use linear scaling
-                    const minAmount = 1; // Minimum value of amount
-                    const maxAmount = 100000000000; // Maximum value of amount
-                
-                    if (amount < linearThreshold) {
-                        // Linear scaling for values below 1 million
-                        fontSize = minFontSize + ((amount - minAmount) / (linearThreshold - minAmount)) * (maxFontSize - minFontSize);
-                    } else {
-                        // Logarithmic scaling for values above or equal to threshold
-                        fontSize = minFontSize + (Math.log(amount) / Math.log(maxAmount)) * (maxFontSize - minFontSize);
-                    }
-                
-                    fontSize = fontSize * visuals!.nodeRel * visuals!.awardNodeSizeMult;
-                
-                    if (visuals!.drawAmountValues === true) {
-                        label = visuals!.iconAward + ' ' + amount;
-                    } else {
-                        label = visuals!.iconAward;
-                    }
-                }
-                
-                    break;
-        
-                case (node.tag !== undefined && node.tag[1] === 'contract'):
-                    label = visuals!.iconContract;
-                    break;
-        
-                case (node.status !== undefined):
-                    switch (node.status) {
-                        case 'active':
-                            label = visuals!.iconActive;
-                            break;
-                        case 'cancelled':
-                            label = visuals!.iconCancelled;
-                            break;
-                        case 'unsuccessful':
-                            label = visuals!.iconUnsuccessful;
-                            break;
-                        case 'complete':
-                            label = visuals!.iconComplete;
-                            break;
-                        case 'withdrawn':
-                            label = visuals!.iconWithdrawn;
-                            break;
-                        case 'planned':
-                            label = visuals!.iconPlanned;
-                            break;
-                    }
-                    break;
-        
-                case (node.tag !== undefined):
-                    switch (node.tag[0]) {
-                        case 'tender':
-                            label = visuals!.iconTender;
-                            break;
-                        case 'planning':
-                            label = visuals!.iconPlanning;
-                            break;
-                    }
-                    break;
-        
-                case (node.name !== undefined):
-                    if(node.roles !== undefined && node.roles.includes('buyer')){
-                      label = visuals!.iconOrganization;
-                    }
-                    if(node.roles !== undefined && node.roles.includes('supplier')){
-                      label = visuals!.iconOrganizationSupplier;
-                    }
-                    break;
+              // Award node
+              case (node.awardID !== undefined):
+                if (node.value !== undefined && node.value !== null) {
+                  // Start drawing the award emoji (font size)
+                  const amount: any = node.value.amount;
+                  const minFontSize = 14;
+                  const maxFontSize = 210;
+                  // Values below this threshold will use linear scaling
+                  const linearThreshold = 100000000; 
+                  // Minimum value of amount
+                  const minAmount = 1;
+                  // Maximum value of amount
+                  const maxAmount = 100000000000; 
+              
+                  if (amount < linearThreshold) {
+                      // Linear scaling for values below 1 million
+                      fontSize = minFontSize + ((amount - minAmount) / (linearThreshold - minAmount)) * (maxFontSize - minFontSize);
+                  } else {
+                      // Logarithmic scaling for values above or equal to threshold
+                      fontSize = minFontSize + (Math.log(amount) / Math.log(maxAmount)) * (maxFontSize - minFontSize);
+                  }
+              
+                  fontSize = fontSize * visuals!.nodeRel * visuals!.awardNodeSizeMult;
+              
+                  if (visuals!.drawAmountValues === true) {
+                      label = amount.toLocaleString('en-US', { style: 'currency', currency: 'EUR' });
+                  } else {
+                      label = visuals!.iconAward;
+                  }
+              }
+              
+                  break;
+      
+              case (node.tag !== undefined && node.tag[1] === 'contract'):
+                  label = visuals!.iconContract;
+                  break;
+      
+              case (node.status !== undefined):
+                  switch (node.status) {
+                      case 'active':
+                          label = visuals!.iconActive;
+                          break;
+                      case 'cancelled':
+                          label = visuals!.iconCancelled;
+                          break;
+                      case 'unsuccessful':
+                          label = visuals!.iconUnsuccessful;
+                          break;
+                      case 'complete':
+                          label = visuals!.iconComplete;
+                          break;
+                      case 'withdrawn':
+                          label = visuals!.iconWithdrawn;
+                          break;
+                      case 'planned':
+                          label = visuals!.iconPlanned;
+                          break;
+                  }
+                  break;
+      
+              case (node.tag !== undefined):
+                  switch (node.tag[0]) {
+                      case 'tender':
+                          label = visuals!.iconTender;
+                          break;
+                      case 'planning':
+                          label = visuals!.iconPlanning;
+                          break;
+                  }
+                  break;
+      
+              case (node.name !== undefined):
+                  if(node.roles !== undefined && node.roles.includes('buyer')){
+                    label = visuals!.iconOrganization;
+                  }
+                  if(node.roles !== undefined && node.roles.includes('supplier')){
+                    label = visuals!.iconOrganizationSupplier;
+                  }
+                  break;
             }
         
             ctx.font = `${fontSize}px Sans-Serif`;
@@ -318,7 +330,8 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
 
             ctx.fillText(label, textX, textY);
 
-            node.__bckgDimensions = bckgDimensions; // to re-use in nodePointerAreaPaint
+            // to re-use in nodePointerAreaPaint
+            node.__bckgDimensions = bckgDimensions; 
         }}
           nodePointerAreaPaint={(node, color, ctx) => {
             ctx.fillStyle = color;
@@ -330,6 +343,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
               const x = (node.x || 0) - width / 2;
               const y = (node.y || 0) - height / 2;
           
+              // Draw the rectangle
               ctx.fillRect(x, y, width, height);
             }
           }}
@@ -372,17 +386,17 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
       </div>
       <div className={styles.interactionBar} ref={interactionBarRef}>
         <div className={styles.actionButtons}>
-          {/* NUTS component toggle */}
-          <button onClick={handleToggleNuts} 
+          {/* Map component toggle */}
+          <button onClick={handleToggleMap} 
                   tabIndex={0} 
                   aria-label='Show organizations on openstreetmap (M)' 
                   accessKey="M" 
-                  className='introStepMap'>
-            {nutsVisible ? '⬅️' : '📍'}
+                  className='introStepMap'
+          >
+            {mapVisible ? '⬅️' : '📍'}
           </button>
           {/* Chart component toggle */}
-          <button 
-          onClick={handleToggleChart} 
+          <button onClick={handleToggleChart} 
                   tabIndex={0} 
                   aria-label='Show organization details and statistics (C)' 
                   accessKey="C"
@@ -390,13 +404,18 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           >
             📊
           </button>
+          {/* Info component toggle */}
           <InfoPanel visuals={visuals} 
                      setVisuals={setVisuals} 
                      showInfoPanel={showInfoPanel} 
                      setShowInfoPanel={setShowInfoPanel} />
+          {/* ThemeSwitch component toggle */}
           <ThemeSwitch />
         </div>     
-          {!nutsVisible && (
+        {/* Draw map zoom buttons conditionally 
+          // ToDo: Refactor to a separate component | Part of Toolbar component
+        */}
+          {!mapVisible && (
             <div className={styles.zoomButtons}>
               <button onClick={handleZoomIn} 
                       aria-label="Zoom in (+)" 
@@ -405,12 +424,16 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
               >
                 ➕
               </button>
-              <button onClick={handleZoomOut} aria-label="Zoom out (-)" accessKey="-">
+              <button onClick={handleZoomOut} 
+                      aria-label="Zoom out (-)" 
+                      accessKey="-"
+              >
                 ➖
               </button>
             </div>
           )}
       </div>
+      {/* NodePanel component */}
       <NodePanel 
         previewNode={previewNode} 
         isOpen={isOpen} 
@@ -420,6 +443,7 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
         visuals={visuals} 
         setVisuals={setVisuals}
       />
+      {/* GUI component */}
       <GUI 
         physics={physics} 
         setPhysics={setPhysics} 
@@ -438,8 +462,8 @@ const Graph = ({graphData, physics, setPhysics, visuals, setVisuals,
           mergedGraphData={mergedGraphData} 
         />
       )}
-      {/* Conditionally render the map based on nutsVisible state */}
-      {nutsVisible &&
+      {/* Conditionally render the map based on mapVisible state */}
+      {mapVisible &&
         <Map data={mergedGraphData.nodes} 
               apiPath={apiPath} 
               setApiPath={setApiPath}/>
