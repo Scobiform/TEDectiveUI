@@ -103,7 +103,7 @@ You can find more information in the [user documentation](https://tedective.org/
 
 ## Maintainers
 
-@siemer
+@scobiform
 
 ## Contributing
 
